@@ -1,0 +1,86 @@
+Steps to set up Maven EAR project:
+
+1) Select File -> New -> Project -> Java EE -> Enterprise Application Project
+- Enter Project name: PointsEAR
+- Select "Websphere Application Server v8.5" for Target runtime
+- Select EAR version 5.0
+- Select "Minimal Configuration for Websphere Application Server v8.5" for Configuration
+- Leave "Working sets" checkbox unchecked
+<Click "Next" button>
+- Check the "PointSuggestWeb" checkbox
+- Check the "Generate application.xml deployment descriptor" checkbox
+- Enter "lib" (no quotes) for the Content directory
+<Click "Finish" button>
+
+2) Right-click on PointsEAR -> Configure -> Convert to Maven Project
+		Group Id: com.estesexpress.points
+		artifact ID: PointsEAR
+		Version: 1.0-SNAPSHOT
+		packaging: ear
+
+3) Ignore error that maven-ear-plugin:jar:28 could not be resolved.
+
+4) Replace <groupId> and <version> elements in POM (pom.xml) with the following:
+<parent>
+	<groupId>com.estesexpress.points</groupId>
+	<artifactId>Points</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+</parent>
+
+5) Add module for EAR project using snippet below in parent POM of Points project.
+This goes after the <description> element.  The PointSuggestWeb module and other web modules will be there.
+
+<modules>
+	<module>PointsEAR</module>
+	<module>PointsWeb</module>
+</modules>
+
+6) Add web project dependency using snippet below. Place the snippet below the <build> section.
+
+<dependencies>		
+	<dependency>
+		<groupId>com.estesexpress.points</groupId>
+		<artifactId>PointsWeb</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<type>war</type>
+	</dependency>
+</dependencies>
+
+7) Change maven-ear-plugin dependency in POM from version 2.10 to version 2.3.2
+- Change <configuration> as in snippet below
+
+<plugin>
+	<artifactId>maven-ear-plugin</artifactId>
+	<version>2.3.2</version>
+	<configuration>
+		<version>5</version>
+		<defaultLibBundleDir>lib</defaultLibBundleDir>
+		<modules>
+			<webModule>
+				<groupId>com.estesexpress.points</groupId>
+				<artifactId>PointsWeb</artifactId>
+				<bundleFileName>PointsWeb.war</bundleFileName>
+				<contextRoot>api/myestes/Points/v1.0</contextRoot>
+			</webModule>
+		</modules>
+		<displayName>PointsEAR</displayName>
+		<generateApplicationXml>true</generateApplicationXml>
+		<applicationXml>${basedir}/target/application.xml</applicationXml>
+	</configuration>
+</plugin>
+
+8) Ensure context root in application.xml file is set correctly as in snippet below:
+
+<web>
+	<web-uri>PointsWeb.war</web-uri>
+	<context-root>api/myestes/Points/v1.0</context-root>
+</web>
+
+9) Add <properties> element below <modules> element in parent POM as in snippet below:
+
+<properties>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<projectEarName>PointSuggestEAR</projectEarName>
+</properties>
+
+10) If web module(s) not associated with EAR then go to Properties -> Deployment Assembly to add projects.

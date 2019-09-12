@@ -1,0 +1,27 @@
+Steps to set up Maven web project:
+
+1) Select File -> New -> Maven Project
+- Check the "Create a simple project (skip archetype selection)" checkbox
+- Uncheck the "Add project(s) to working set" checkbox
+
+2) Enter new Maven project info
+- Enter group ID (ex.com.estes.myestes.transittimecalculator) and artifact ID (ex. TransitTimeCalculator)
+- Select pom for packaging
+- Enter name (ex. TransitTimeCalculator) and optional description
+
+3) Create web project - see docs/setup.txt in TransitTimeCalculatorWeb project
+
+4) Create EAR project - see docs/setup.txt in TransitTimeCalculatorEAR project
+
+5) Add <properties> section below <modules> section as in snippet below.
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<projectEarName>TransitTimeCalculatorEAR</projectEarName>
+		<spring-version>4.3.14.RELEASE</spring-version>
+		<jackson-databind-version>2.5.5</jackson-databind-version>
+		<org.slf4j-version>1.6.3</org.slf4j-version>
+		<log4j.version>1.2.16</log4j.version>
+		<estesfw.version>1.0.4.0</estesfw.version>
+		<junit.version>4.11</junit.version>
+	</properties>

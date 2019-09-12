@@ -1,0 +1,30 @@
+Steps to set up Maven web project:
+
+1) Select File -> New -> Maven Project
+- Check the "Create a simple project (skip archetype selection)" checkbox
+- Uncheck the "Add project(s) to working set" checkbox
+
+2) Enter new Maven project info
+- Enter group ID (ex. com.estes.myestes.rating) and artifact ID (ex. Rating)
+- Select pom for packaging
+- Enter name (ex. Rating) and optional description
+
+3) Create web project - see docs/setup.txt in RatingWeb project
+
+4) Create EAR project - see docs/setup.txt in RatingEAR project
+
+5) Add <properties> section below <modules> section as in snippet below.
+
+	<properties>
+		<project.version>2.0.0.0</project.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring-version>4.3.14.RELEASE</spring-version>
+		<spring.security.version>4.2.7.RELEASE</spring.security.version>
+		<spring.oauth.version>2.3.3.RELEASE</spring.oauth.version>
+		<jackson-databind-version>2.5.5</jackson-databind-version>
+		<org.slf4j-version>1.6.3</org.slf4j-version>
+		<log4j.version>1.2.16</log4j.version>
+		<estesdto.version>1.2.2.7</estesdto.version>
+		<estesfw.version>1.0.4.0</estesfw.version>
+		<junit.version>4.11</junit.version>
+	</properties>

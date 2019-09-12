@@ -1,0 +1,71 @@
+Steps to set up Maven EAR project:
+
+1) Select File -> New -> Project -> Enterprise Application Project
+- Enter Project name: SolutionCenterEAR
+- Uncheck the "Use default location" checkbox
+- Enter Location: <workspace home>/SolutionCenter/SolutionCenterEAR
+- Select "Websphere Application Server v8.5" for Target runtime
+- Select EAR version 6.0
+- Select "Minimal Configuration for Websphere Application Server v8.5" for Configuration
+- Leave "Working sets" checkbox unchecked
+<Click "Next" button>
+- Check the "SolutionCenterWeb" checkbox
+- Check the "Generate application.xml deployment descriptor" checkbox
+<Click "Finish" button>
+
+2) Right-click on SolutionCenterEAR -> Configure -> Convert to Maven Project
+		Group Id: com.estes.myestes.solutioncenter
+		artifact ID: SolutionCenterEAR
+		Version: 0.0.1-SNAPSHOT
+		packaging: ear
+
+(Ignore error that maven-ear-plugin:jar:28 could not be resolved.)
+
+4) Replace <groupId> and <version> elements in POM (pom.xml) with the following:
+<parent>
+	<groupId>com.estes.myestes.solutioncenter</groupId>
+	<artifactId>SolutionCenter</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+</parent>
+
+4) Add module for EAR project using snippet below in parent POM of SolutionCenter project.
+This goes after the <description> element.  The SolutionCenterWeb module will be there.
+
+<modules>
+	<module>SolutionCenterWeb</module>
+	<module>SolutionCenterEAR</module>
+</modules>
+
+5) Add web project dependency using snippet below. Please the snippet below the <build> section.
+
+<dependencies>		
+	<dependency>
+		<groupId>com.estes.myestes.solutioncenter</groupId>
+		<artifactId>SolutionCenterWeb</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<type>war</type>
+	</dependency>
+</dependencies>
+
+6) Change maven-ear-plugin dependency in POM from version 2.10 to version 2.3.2
+- Change <configuration> as in snippet below
+
+<plugin>
+	<artifactId>maven-ear-plugin</artifactId>
+	<version>2.3.2</version>
+	<configuration>
+		<version>5</version>
+		<defaultLibBundleDir>lib</defaultLibBundleDir>
+		<modules>
+			<webModule>
+				<groupId>com.estes.myestes.solutioncenter</groupId>
+				<artifactId>SolutionCenterWeb</artifactId>
+				<bundleFileName>SolutionCenterWeb.war</bundleFileName>
+				<contextRoot>api/SolutionCenter/v1.0</contextRoot>
+			</webModule>
+		</modules>
+		<displayName>SolutionCenterEAR</displayName>
+		<generateApplicationXml>true</generateApplicationXml>
+		<applicationXml>${basedir}/target/application.xml</applicationXml>
+	</configuration>
+</plugin>

@@ -1,0 +1,1702 @@
+{
+	"info": {
+		"_postman_id": "b7d0169c-a518-4172-93f5-c2dcc4bcf04d",
+		"name": "BillOfLading",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User Default Information",
+			"item": [
+				{
+					"name": "User default accessorial",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/accessorial_information",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"accessorial_information"
+							]
+						},
+						"description": "User default accessorial"
+					},
+					"response": []
+				},
+				{
+					"name": "User default accessorial Save",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\n    {\n        \"code\": \"APT\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"CONST\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"HAZ\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"INS\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"LGATE\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"NCM\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"LONG12\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"LONG20\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"LONG28\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"LONG53\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"HD\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"HPU\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"AKHAZ\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"AKINS\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"AKINPU\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"AKRESP\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"AKSCDL\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"BLIND\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"FAIRDL\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"FAIRPU\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"FARMDL\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"FARMPU\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"INB\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"MINIDL\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"PFF\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"SCHLDL\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"SCHLPU\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"PRISPU\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"SSM\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"STO\",\n        \"description\": \"\"\n    },\n    {\n        \"code\": \"ULFEE\",\n        \"description\": \"\"\n    }\n]"
+						},
+						"url": {
+							"raw": "{{url}}/user/accessorial_information",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"accessorial_information"
+							]
+						},
+						"description": "User default accessorial"
+					},
+					"response": []
+				},
+				{
+					"name": "User Default Billing Information",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/billing_information",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"billing_information"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Default Billing Information Save",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"payor\": \"T\",\n    \"fee\": \"COL\",\n    \"billingAddressInfo\": {\n        \"companyName\": \"BAHAMA BREEZE\",\n        \"firstName\": \"BAHAMA BREEZE\",\n        \"lastName\": \"Hafling\",\n        \"location\": \"JAMAICA\",\n        \"phone\": \"(929) 336 8359\",\n        \"phoneExt\": \"3170\",\n        \"fax\": \"(347) 592 0566\",\n        \"country\": \"US\",\n        \"address1\": \"8740, 165 Street, APT-1K\",\n        \"address2\": \"\",\n        \"city\": \"Richmond\",\n        \"state\": \"VA\",\n        \"zip\": \"23294\",\n        \"email\": \"QATEST@ESTES-EXPRESS.COM\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{url}}/user/billing_information",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"billing_information"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Default Commodity Information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/commodity_information",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"commodity_information"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Default Commodity Information Save",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"commodityList\": [\n        {\n            \"commodityId\": 1,\n            \"hazmat\": true,\n            \"goodsUnit\": \"4\",\n            \"goodsType\": {\n                \"code\": \"TL\",\n                \"description\": null\n            },\n            \"goodsWeight\": \"400\",\n            \"shipmentClass\": {\n                \"code\": \"400\",\n                \"description\": null\n            },\n            \"nmfc\": \"50\",\n            \"nmfcExt\": \"50\",\n            \"numberOfPackage\": \"10\",\n            \"packageType\": \"BG\",\n            \"description\": \"THIS IS A TEST1\",\n            \"height\": \"\",\n            \"weight\": \"\",\n            \"length\": \"\"\n        },\n        {\n            \"commodityId\": 2,\n            \"hazmat\": true,\n            \"goodsUnit\": \"12\",\n            \"goodsType\": {\n                \"code\": \"BL\",\n                \"description\": null\n            },\n            \"goodsWeight\": \"11\",\n            \"shipmentClass\": {\n                \"code\": \"60\",\n                \"description\": null\n            },\n            \"nmfc\": \"20\",\n            \"nmfcExt\": \"20\",\n            \"numberOfPackage\": \"20\",\n            \"packageType\": \"RE\",\n            \"description\": \"THIS IS TEST 2\",\n            \"height\": \"\",\n            \"weight\": \"\",\n            \"length\": \"\"\n        },\n        {\n            \"commodityId\": 3,\n            \"hazmat\": false,\n            \"goodsUnit\": \"20\",\n            \"goodsType\": {\n                \"code\": \"BK\",\n                \"description\": null\n            },\n            \"goodsWeight\": \"45\",\n            \"shipmentClass\": {\n                \"code\": \"65\",\n                \"description\": null\n            },\n            \"nmfc\": \"999\",\n            \"nmfcExt\": \"999\",\n            \"numberOfPackage\": \"30\",\n            \"packageType\": \"PC\",\n            \"description\": \"THIS IS TEST 3\",\n            \"height\": \"\",\n            \"weight\": \"\",\n            \"length\": \"\"\n        }\n    ],\n    \"contactName\": \"9293368359\",\n    \"phone\": \"(929) 336 8359\",\n    \"phoneExt\": \"1111\",\n    \"totalCube\": \"20.50\",\n    \"specialIns\": \"Special Instructions By ATA MAN\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/user/commodity_information",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"commodity_information"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Default Consignee Information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/consignee_information",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"consignee_information"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Default Consignee Information Save",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyName\": \"Estes Express Lines\",\n    \"firstName\": \"Raymond\",\n    \"lastName\": \"Reddington\",\n    \"location\": \"Richmond\",\n    \"phone\": \"(929) 336 8559\",\n    \"phoneExt\": \"1111\",\n    \"fax\": \"(777) 777 5555\",\n    \"country\": \"US\",\n    \"address1\": \"3901 West Board\",\n    \"address2\": \"\",\n    \"city\": \"Richmond\",\n    \"state\": \"VA\",\n    \"zip\": \"23230\",\n    \"email\": \"consignee@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/user/consignee_information",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"consignee_information"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Default Notifications",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/notifications",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"notifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Default Notifications",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"shipperEmail\": \"shipper@ESTES-EXPRESS.COM\",\n    \"shipperEmailBolUpdate\": true,\n    \"shipperEmailTrackingUpdate\": true,\n    \"shipperEmailPickupNotice\": true,\n    \"shipperEmailShippingLabel\": true,\n    \"shipperFaxBolUpdate\": true,\n    \"shipperFax\": \"(999) 999-9999\",\n    \"consigneeEmail\": \"consignee@gmail.com\",\n    \"consigneeEmailBolUpdate\": true,\n    \"consigneeEmailTrackingUpdate\": true,\n    \"consigneeEmailPickupNotice\": false,\n    \"consigneeEmailShippingLabel\": true,\n    \"consigneeFaxBolUpdate\": true,\n    \"consigneeFax\": \"(777) 777-5555\",\n    \"thirdPartyEmail\": \"thirdParty@ESTES-EXPRESS.COM\",\n    \"thirdPartyEmailBolUpdate\": true,\n    \"thirdPartyEmailTrackingUpdate\": true,\n    \"thirdPartyEmailPickupNotice\": false,\n    \"thirdPartyEmailShippingLabel\": true,\n    \"thirdPartyFaxBolUpdate\": true,\n    \"thirdPartyFax\": \"(777) 777-6666\",\n    \"otherEmail\": \"other@gmail.com\",\n    \"otherEmailBolUpdate\": true,\n    \"otherEmailTrackingUpdate\": true,\n    \"otherEmailPickupNotice\": false,\n    \"otherEmailShippingLabel\": true,\n    \"otherFaxBolUpdate\": true,\n    \"otherFax\": \"(777) 777-3333\",\n    \"shipperFaxForDb\": \"9999999999\",\n    \"consigneeFaxForDb\": \"7777775555\",\n    \"thirdPartyFaxForDb\": \"7777776666\",\n    \"otherFaxForDb\": \"7777773333\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/user/notifications",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"notifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Default Pickup Information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/pickup_information",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"pickup_information"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Default Pickup Information",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Test Admin\",\n    \"phone\": \"(235) 777-5745\",\n    \"phoneExt\": \"4456\",\n    \"email\": \"test@email.com\",\n    \"role\": \"SHIPPER\",\n    \"accountCode\": \"5023958\",\n    \"pickupDate\": \"12/30/2019\",\n    \"startTime\": \"09:00 AM\",\n    \"endTime\": \"06:00 PM\",\n    \"specialInstruction\": \"Nothing special\",\n    \"hookOrDrop\": true,\n    \"liftgateRequired\": true,\n    \"noStackPallet\": true,\n    \"freeze\": true,\n    \"oversize\": true,\n    \"food\": true,\n    \"poision\": true,\n    \"accepted\": false,\n    \"completed\": false,\n    \"rejected\": true\n}"
+						},
+						"url": {
+							"raw": "{{url}}/user/pickup_information",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"pickup_information"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Default Shipper Information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/shipper_information",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"shipper_information"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Default Shipper Information",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyName\": \"DIAMOND CRYSTAL BRANDS\",\n    \"firstName\": \"BAHAMA BREEZE\",\n    \"lastName\": \"BREEZE3009\",\n    \"location\": \"KENNESAW\",\n    \"phone\": \"(678) 354 7777\",\n    \"phoneExt\": \"9999\",\n    \"fax\": \"(999) 999 9999\",\n    \"country\": \"US\",\n    \"address1\": \"AVERITT SUPPLY CHAIN\",\n    \"address2\": \"PO BOX 3166\",\n    \"city\": \"COOKEVILLE\",\n    \"state\": \"TN\",\n    \"zip\": \"38502\",\n    \"email\": \"QATEST@ESTES-EXPRESS.COM\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/user/shipper_information",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"shipper_information"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Default Shipping Label Information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/shipping_label_information",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"shipping_label_information"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Default Shipping Label Information",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"labelType\": \"4\",\n    \"startLabel\": \"1\",\n    \"numberOfLabel\": \"10\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/user/shipping_label_information",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"shipping_label_information"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Bill Of Lading",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/bol",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"bol"
+							]
+						},
+						"description": "To create a new BOL or template , BillOfLading object is filled by user default information"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Template",
+			"item": [
+				{
+					"name": "Get list of Template",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/template?size=5&sort=bolDate&page=1&order=desc&bolStartDate=10/12/2018&bolEndDate=02/22/2019",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"template"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "5"
+								},
+								{
+									"key": "sort",
+									"value": "bolDate"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "order",
+									"value": "desc"
+								},
+								{
+									"key": "bolStartDate",
+									"value": "10/12/2018"
+								},
+								{
+									"key": "bolEndDate",
+									"value": "02/22/2019"
+								}
+							]
+						},
+						"description": "Get List of Template, filtering, pagination"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Template",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bolId\": 0,\n    \"documentType\": \"V\",\n    \"generalInfo\": {\n        \"bolNumber\": \"777888\",\n        \"bolDate\": \"02/20/2019\",\n        \"assignProNumber\": false,\n        \"proNumber\": null,\n        \"masterBol\": false,\n        \"masterBolNumber\": \"Md Ataur\",\n        \"guranteed\": false,\n        \"quote\": \"\",\n        \"tosChecked\": false,\n        \"pickupRequest\": false\n    },\n    \"pickupDetailInfo\": {\n\t    \"name\": \"Test Admin\",\n\t    \"phone\": \"(235) 777-5745\",\n\t    \"phoneExt\": \"4456\",\n\t    \"email\": \"test@email.com\",\n\t    \"role\": \"SHIPPER\",\n\t    \"accountCode\": \"5023958\",\n\t    \"pickupDate\": \"12/29/2019\",\n\t    \"startTime\": \"09:00 AM\",\n\t    \"endTime\": \"06:00 PM\",\n\t    \"specialInstruction\": \"Nothing special\",\n\t    \"hookOrDrop\": true,\n\t    \"liftgateRequired\": true,\n\t    \"noStackPallet\": true,\n\t    \"freeze\": true,\n\t    \"oversize\": true,\n\t    \"food\": true,\n\t    \"poision\": true,\n\t    \"accepted\": false,\n\t    \"completed\": false,\n\t    \"rejected\": true\n\t},\n    \"shipperInfo\": {\n        \"companyName\": \"DIAMOND CRYSTAL BRANDS\",\n        \"firstName\": \"Md Ataur\",\n        \"lastName\": \"Rahman\",\n        \"location\": \"Jamaica\",\n        \"phone\": \"(929) 336 8359\",\n        \"phoneExt\": \"8888\",\n        \"fax\": \"\",\n        \"country\": \"US\",\n        \"address1\": \"% AVERITT SUPPLY CHAIN\",\n        \"address2\": \"PO BOX 3166\",\n        \"city\": \"COOKEVILLE\",\n        \"state\": \"TN\",\n        \"zip\": \"38502\",\n        \"email\": \"QATEST@ESTES-EXPRESS.COM\"\n    },\n    \"consigneeInfo\": {\n        \"companyName\": \"DIAMOND CRYSTAL BRANDS\",\n        \"firstName\": \"Md\",\n        \"lastName\": \"Ataur\",\n        \"location\": \"Richmond\",\n        \"phone\": \"(929) 336 8359\",\n        \"phoneExt\": \"1111\",\n        \"fax\": \"(777) 777 5555\",\n        \"country\": \"US\",\n        \"address1\": \"AVERITT SUPPLY CHAIN\",\n        \"address2\": \"P O BOX 3166\",\n        \"city\": \"JAMAICA\",\n        \"state\": \"NY\",\n        \"zip\": \"11432\",\n        \"email\": \"consignee@gmail.com\"\n    },\n    \"commodityInfo\": {\n        \"commodityList\": [\n            {\n                \"commodityId\": 1,\n                \"hazmat\": true,\n                \"goodsUnit\": \"4\",\n                \"goodsType\": {\n                    \"code\": \"TL\",\n                    \"description\": null\n                },\n                \"goodsWeight\": \"400\",\n                \"shipmentClass\": {\n                    \"code\": \"400\",\n                    \"description\": null\n                },\n                \"nmfc\": \"50\",\n                \"nmfcExt\": \"50\",\n                \"numberOfPackage\": \"10\",\n                \"packageType\": \"BG\",\n                \"description\": \"THIS IS A TEST1\",\n                \"height\": \"\",\n                \"weight\": \"\",\n                \"length\": \"\"\n            },\n            {\n                \"commodityId\": 2,\n                \"hazmat\": true,\n                \"goodsUnit\": \"12\",\n                \"goodsType\": {\n                    \"code\": \"BL\",\n                    \"description\": null\n                },\n                \"goodsWeight\": \"11\",\n                \"shipmentClass\": {\n                    \"code\": \"60\",\n                    \"description\": null\n                },\n                \"nmfc\": \"20\",\n                \"nmfcExt\": \"20\",\n                \"numberOfPackage\": \"20\",\n                \"packageType\": \"RE\",\n                \"description\": \"THIS IS TEST 2\",\n                \"height\": \"\",\n                \"weight\": \"\",\n                \"length\": \"\"\n            },\n            {\n                \"commodityId\": 3,\n                \"hazmat\": false,\n                \"goodsUnit\": \"20\",\n                \"goodsType\": {\n                    \"code\": \"BK\",\n                    \"description\": null\n                },\n                \"goodsWeight\": \"45\",\n                \"shipmentClass\": {\n                    \"code\": \"65\",\n                    \"description\": null\n                },\n                \"nmfc\": \"999\",\n                \"nmfcExt\": \"999\",\n                \"numberOfPackage\": \"30\",\n                \"packageType\": \"PC\",\n                \"description\": \"THIS IS TEST 3\",\n                \"height\": \"\",\n                \"weight\": \"\",\n                \"length\": \"\"\n            }\n        ],\n        \"contactName\": \"9293368359\",\n        \"phone\": \"\",\n        \"phoneExt\": \"1111\",\n        \"totalCube\": \"20.50\",\n        \"specialIns\": \"Special Instructions By ATA MAN\"\n    },\n    \"references\": [\n        {\n            \"referenceId\": \"1\",\n            \"referenceNumber\": \"1\",\n            \"referenceType\": \"PO\",\n            \"cartoon\": \"100\",\n            \"weight\": \"110\"\n        },\n        {\n            \"referenceId\": \"2\",\n            \"referenceNumber\": \"2\",\n            \"referenceType\": \"SID\",\n            \"cartoon\": \"200\",\n            \"weight\": \"210\"\n        },\n        {\n            \"referenceId\": \"3\",\n            \"referenceNumber\": \"3\",\n            \"referenceType\": \"CID\",\n            \"cartoon\": \"300\",\n            \"weight\": \"310\"\n        },\n        {\n            \"referenceId\": \"4\",\n            \"referenceNumber\": \"4\",\n            \"referenceType\": \"LN\",\n            \"cartoon\": \"400\",\n            \"weight\": \"410\"\n        }\n    ],\n    \"billingInfo\": {\n        \"billTo\": {\n            \"payor\": \"T\",\n            \"fee\": \"COL\",\n            \"billingAddressInfo\": {\n                \"companyName\": \"BAHAMA BREEZE\",\n                \"firstName\": \"BAHAMA BREEZE\",\n                \"lastName\": \"Hafling\",\n                \"location\": \"Jamaica\",\n                \"phone\": \"(248) 528 1674\",\n                \"phoneExt\": \"3170\",\n                \"fax\": \"(777) 777 6666\",\n                \"country\": \"US\",\n                \"address1\": \"8740, 165 Street, APT-1K\",\n                \"address2\": \"3201 Johnson Street\",\n                \"city\": \"Richmond\",\n                \"state\": \"VA\",\n                \"zip\": \"22332\",\n                \"email\": \"QATEST@ESTES-EXPRESS.COM\"\n            }\n        },\n        \"codRemitTo\": true,\n        \"codRemitToInfo\": {\n            \"amount\": \"100\",\n            \"paymentType\": null,\n            \"fee\": null,\n            \"codAddressInfo\": {\n                \"companyName\": \"BAHAMA BREEZE\",\n                \"firstName\": \"B\",\n                \"lastName\": \"\",\n                \"location\": \"\",\n                \"phone\": \"\",\n                \"phoneExt\": \"\",\n                \"fax\": \"\",\n                \"country\": \"US\",\n                \"address1\": \"8740, 165 Street, APT-1K\",\n                \"address2\": \"\",\n                \"city\": \"\",\n                \"state\": \"\",\n                \"zip\": \"\",\n                \"email\": \"QATEST@ESTES-EXPRESS.COM\"\n            }\n        }\n    },\n    \"accessorials\": [\n        {\n            \"code\": \"AKLGAT\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKPRID\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKRES\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"APT\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"CONST\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"HAZ\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"INS\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"LGATE\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"NCM\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"LONG12\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"LONG20\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"LONG28\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"LONG53\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"HD\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"HPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKHAZ\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKINS\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKINPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKRESP\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKSCDL\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"BLIND\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"FAIRDL\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"FAIRPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"FARMDL\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"FARMPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"INB\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"MINIDL\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"PFF\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"SCHLDL\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"SCHLPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"PRISPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"SSM\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"STO\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"ULFEE\",\n            \"description\": \"\"\n        }\n    ],\n    \"shippingLabel\": {\n        \"labelType\": \"4\",\n        \"startLabel\": \"1\",\n        \"numberOfLabel\": \"20\"\n    },\n    \"emailAndFaxNotification\": {\n        \"shipperEmail\": \"QATEST@ESTES-EXPRESS.COM\",\n        \"shipperEmailBolUpdate\": true,\n        \"shipperEmailTrackingUpdate\": true,\n        \"shipperEmailPickupNotice\": true,\n        \"shipperEmailShippingLabel\": false,\n        \"shipperFaxBolUpdate\": true,\n        \"shipperFax\": \"\",\n        \"consigneeEmail\": \"consignee@gmail.com\",\n        \"consigneeEmailBolUpdate\": true,\n        \"consigneeEmailTrackingUpdate\": true,\n        \"consigneeEmailPickupNotice\": false,\n        \"consigneeEmailShippingLabel\": false,\n        \"consigneeFaxBolUpdate\": true,\n        \"consigneeFax\": \"(777) 777 5555\",\n        \"thirdPartyEmail\": \"QATEST@ESTES-EXPRESS.COM\",\n        \"thirdPartyEmailBolUpdate\": true,\n        \"thirdPartyEmailTrackingUpdate\": true,\n        \"thirdPartyEmailPickupNotice\": false,\n        \"thirdPartyEmailShippingLabel\": false,\n        \"thirdPartyFaxBolUpdate\": true,\n        \"thirdPartyFax\": \"(777) 777 6666\",\n        \"otherEmail\": \"\",\n        \"otherEmailBolUpdate\": false,\n        \"otherEmailTrackingUpdate\": true,\n        \"otherEmailPickupNotice\": false,\n        \"otherEmailShippingLabel\": false,\n        \"otherFaxBolUpdate\": true,\n        \"otherFax\": \"(777) 777 3333\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{url}}/template?template=TEST_BY_ATAUR",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"template"
+							],
+							"query": [
+								{
+									"key": "template",
+									"value": "TEST_BY_ATAUR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Template 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bolId\": null,\n    \"generalInfo\": {\n        \"bolDate\": \"05/02/2019\",\n        \"assignProNumber\": false,\n        \"proNumber\": \"\",\n        \"masterBol\": false,\n        \"masterBolNumber\": \"\",\n        \"bolNumber\": \"\",\n        \"guranteed\": false,\n        \"quote\": \"\",\n        \"tosChecked\": \"\",\n        \"pickupRequest\": true\n    },\n    \"pickupDetailInfo\": {\n        \"accepted\": false,\n        \"accountCode\": \"5068692\",\n        \"completed\": false,\n        \"email\": \"twashington@estes-express.com\",\n        \"food\": false,\n        \"freeze\": false,\n        \"hookOrDrop\": false,\n        \"liftgateRequired\": false,\n        \"name\": \"\",\n        \"noStackPallet\": false,\n        \"oversize\": false,\n        \"phone\": \"(636) 537-6800\",\n        \"phoneExt\": \"\",\n        \"pickupDate\": \"05/03/2019\",\n        \"poision\": false,\n        \"rejected\": true,\n        \"role\": \"SHIPPER\",\n        \"specialInstruction\": \"\",\n        \"startTime\": \"08:00 AM\",\n        \"endTime\": \"05:00 PM\"\n    },\n    \"shipperInfo\": {\n        \"companyName\": \"PREMIER MANUFACTURING\",\n        \"firstName\": \"\",\n        \"lastName\": \"\",\n        \"location\": \"\",\n        \"phone\": \"(636) 537-6800\",\n        \"phoneExt\": \"\",\n        \"fax\": \"\",\n        \"country\": \"US\",\n        \"address1\": \"629 CEPI DR\",\n        \"address2\": \"\",\n        \"city\": \"CHESTERFIELD\",\n        \"state\": \"MO\",\n        \"zip\": \"63005\",\n        \"email\": \"twashington@estes-express.com\"\n    },\n    \"consigneeInfo\": {\n        \"companyName\": \"\",\n        \"firstName\": \"\",\n        \"lastName\": \"\",\n        \"location\": \"\",\n        \"phone\": \"\",\n        \"phoneExt\": \"\",\n        \"fax\": \"\",\n        \"country\": \"US\",\n        \"address1\": \"\",\n        \"address2\": \"\",\n        \"city\": \"\",\n        \"state\": \"\",\n        \"zip\": \"\",\n        \"email\": \"\"\n    },\n    \"commodityInfo\": {\n        \"commodityList\": [\n            {\n                \"commodityId\": null,\n                \"hazmat\": false,\n                \"goodsType\": null,\n                \"goodsUnit\": null,\n                \"goodsWeight\": null,\n                \"shipmentClass\": null,\n                \"numberOfPackage\": null,\n                \"packageType\": null,\n                \"nmfc\": null,\n                \"nmfcExt\": null,\n                \"description\": null\n            }\n        ],\n        \"contactName\": \"\",\n        \"phone\": \"\",\n        \"phoneExt\": \"\",\n        \"totalCube\": \"\",\n        \"specialIns\": \"\"\n    },\n    \"references\": [],\n    \"billingInfo\": {\n        \"billTo\": {\n            \"billingAddressInfo\": null,\n            \"fee\": null,\n            \"payor\": null\n        },\n        \"codRemitToInfo\": null,\n        \"codRemitTo\": false\n    },\n    \"accessorials\": [],\n    \"shippingLabel\": null,\n    \"emailAndFaxNotification\": {\n        \"fax\": \"\",\n        \"consigneeEmail\": \"test@test.test\",\n        \"otherEmail\": \"test@test.test\",\n        \"shipperEmail\": \"test@test.test\",\n        \"thirdPartyEmail\": \"test@test.test\",\n        \"consigneeEmailBolUpdate\": false,\n        \"otherEmailBolUpdate\": false,\n        \"shipperEmailBolUpdate\": false,\n        \"thirdPartyEmailBolUpdate\": false,\n        \"consigneeEmailTrackingUpdate\": false,\n        \"otherEmailTrackingUpdate\": false,\n        \"shipperEmailTrackingUpdate\": false,\n        \"thirdPartyEmailTrackingUpdate\": false,\n        \"consigneeEmailPickupNotice\": true,\n        \"otherEmailPickupNotice\": true,\n        \"shipperEmailPickupNotice\": true,\n        \"thirdPartyEmailPickupNotice\": true,\n        \"consigneeEmailShippingLabel\": false,\n        \"otherEmailShippingLabel\": false,\n        \"shipperEmailShippingLabel\": false,\n        \"thirdPartyEmailShippingLabel\": false,\n        \"consigneeFaxBolUpdate\": false,\n        \"otherFaxBolUpdate\": false,\n        \"shipperFaxBolUpdate\": false,\n        \"thirdPartyFaxBolUpdate\": false,\n        \"consigneeFax\": \"\",\n        \"otherFax\": \"\",\n        \"shipperFax\": \"\",\n        \"thirdPartyFax\": \"\"\n    },\n    \"documentType\": \"E\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/template?template=test555",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"template"
+							],
+							"query": [
+								{
+									"key": "template",
+									"value": "test555"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Template 2 Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bolId\": null,\n    \"generalInfo\": {\n        \"bolDate\": \"05/02/2019\",\n        \"assignProNumber\": false,\n        \"proNumber\": \"\",\n        \"masterBol\": false,\n        \"masterBolNumber\": \"\",\n        \"bolNumber\": \"\",\n        \"guranteed\": false,\n        \"quote\": \"\",\n        \"tosChecked\": \"\",\n        \"pickupRequest\": true\n    },\n    \"pickupDetailInfo\": {\n        \"accepted\": false,\n        \"accountCode\": \"5068692\",\n        \"completed\": false,\n        \"email\": \"twashington@estes-express.com\",\n        \"food\": false,\n        \"freeze\": false,\n        \"hookOrDrop\": false,\n        \"liftgateRequired\": false,\n        \"name\": \"\",\n        \"noStackPallet\": false,\n        \"oversize\": false,\n        \"phone\": \"(636) 537-6800\",\n        \"phoneExt\": \"\",\n        \"pickupDate\": \"05/03/2019\",\n        \"poision\": false,\n        \"rejected\": true,\n        \"role\": \"SHIPPER\",\n        \"specialInstruction\": \"\",\n        \"startTime\": \"08:00 AM\",\n        \"endTime\": \"05:00 PM\"\n    },\n    \"shipperInfo\": {\n        \"companyName\": \"PREMIER MANUFACTURING\",\n        \"firstName\": \"\",\n        \"lastName\": \"\",\n        \"location\": \"\",\n        \"phone\": \"(636) 537-6800\",\n        \"phoneExt\": \"\",\n        \"fax\": \"\",\n        \"country\": \"US\",\n        \"address1\": \"629 CEPI DR\",\n        \"address2\": \"\",\n        \"city\": \"CHESTERFIELD\",\n        \"state\": \"MO\",\n        \"zip\": \"63005\",\n        \"email\": \"twashington@estes-express.com\"\n    },\n    \"consigneeInfo\": {\n        \"companyName\": \"\",\n        \"firstName\": \"\",\n        \"lastName\": \"\",\n        \"location\": \"\",\n        \"phone\": \"\",\n        \"phoneExt\": \"\",\n        \"fax\": \"\",\n        \"country\": \"US\",\n        \"address1\": \"\",\n        \"address2\": \"\",\n        \"city\": \"\",\n        \"state\": \"\",\n        \"zip\": \"\",\n        \"email\": \"\"\n    },\n    \"commodityInfo\": {\n        \"commodityList\": [\n            {\n                \"commodityId\": null,\n                \"hazmat\": false,\n                \"goodsType\": null,\n                \"goodsUnit\": null,\n                \"goodsWeight\": null,\n                \"shipmentClass\": null,\n                \"numberOfPackage\": null,\n                \"packageType\": null,\n                \"nmfc\": null,\n                \"nmfcExt\": null,\n                \"description\": null\n            }\n        ],\n        \"contactName\": \"\",\n        \"phone\": \"\",\n        \"phoneExt\": \"\",\n        \"totalCube\": \"\",\n        \"specialIns\": \"\"\n    },\n    \"references\": [],\n    \"billingInfo\": {\n        \"billTo\": {\n            \"billingAddressInfo\": null,\n            \"fee\": null,\n            \"payor\": null\n        },\n        \"codRemitToInfo\": null,\n        \"codRemitTo\": false\n    },\n    \"accessorials\": [],\n    \"shippingLabel\": null,\n    \"emailAndFaxNotification\": {\n        \"fax\": \"\",\n        \"consigneeEmail\": \"test@test.test\",\n        \"otherEmail\": \"test@test.test\",\n        \"shipperEmail\": \"test@test.test\",\n        \"thirdPartyEmail\": \"test@test.test\",\n        \"consigneeEmailBolUpdate\": false,\n        \"otherEmailBolUpdate\": false,\n        \"shipperEmailBolUpdate\": false,\n        \"thirdPartyEmailBolUpdate\": false,\n        \"consigneeEmailTrackingUpdate\": false,\n        \"otherEmailTrackingUpdate\": false,\n        \"shipperEmailTrackingUpdate\": false,\n        \"thirdPartyEmailTrackingUpdate\": false,\n        \"consigneeEmailPickupNotice\": true,\n        \"otherEmailPickupNotice\": true,\n        \"shipperEmailPickupNotice\": true,\n        \"thirdPartyEmailPickupNotice\": true,\n        \"consigneeEmailShippingLabel\": false,\n        \"otherEmailShippingLabel\": false,\n        \"shipperEmailShippingLabel\": false,\n        \"thirdPartyEmailShippingLabel\": false,\n        \"consigneeFaxBolUpdate\": false,\n        \"otherFaxBolUpdate\": false,\n        \"shipperFaxBolUpdate\": false,\n        \"thirdPartyFaxBolUpdate\": false,\n        \"consigneeFax\": \"\",\n        \"otherFax\": \"\",\n        \"shipperFax\": \"\",\n        \"thirdPartyFax\": \"\"\n    },\n    \"documentType\": \"E\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/template?template=test555",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"template"
+							],
+							"query": [
+								{
+									"key": "template",
+									"value": "test555"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Template",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/template/test5558",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"template",
+								"test5558"
+							]
+						},
+						"description": "Retrieve Template by TemplateName"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Template Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/template/test5558",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"template",
+								"test5558"
+							]
+						},
+						"description": "Retrieve Template by TemplateName"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Template 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/template/test2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"template",
+								"test2"
+							]
+						},
+						"description": "Retrieve Template by TemplateName"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Template 3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/template/patrick%20test%20template%202",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"template",
+								"patrick%20test%20template%202"
+							]
+						},
+						"description": "Retrieve Template by TemplateName"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Template",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/template/TMPL002",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"template",
+								"TMPL002"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Draft",
+			"item": [
+				{
+					"name": " To get draft Listing",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/draft?size=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"draft"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						},
+						"description": "To get draft listing, Pagination, Sorting & Filtering."
+					},
+					"response": []
+				},
+				{
+					"name": "Create & Edit Draft",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bolId\": 0,\n    \"documentType\": \"V\",\n    \"generalInfo\": {\n        \"bolNumber\": \"BOL199999999\",\n        \"bolDate\": \"02/17/2019\",\n        \"assignProNumber\": true,\n        \"proNumber\": null,\n        \"masterBol\": false,\n        \"masterBolNumber\": \"\",\n        \"guranteed\": true,\n        \"quote\": \"\",\n        \"tosChecked\": false,\n        \"pickupRequest\": true\n    },\n    \"pickupDetailInfo\": {\n\t    \"name\": \"Test Admin\",\n\t    \"phone\": \"(235) 777-5745\",\n\t    \"phoneExt\": \"4456\",\n\t    \"email\": \"test@email.com\",\n\t    \"role\": \"SHIPPER\",\n\t    \"accountCode\": \"5023958\",\n\t    \"pickupDate\": \"12/29/2019\",\n\t    \"startTime\": \"09:00 AM\",\n\t    \"endTime\": \"06:00 PM\",\n\t    \"specialInstruction\": \"Nothing special\",\n\t    \"hookOrDrop\": true,\n\t    \"liftgateRequired\": true,\n\t    \"noStackPallet\": true,\n\t    \"freeze\": true,\n\t    \"oversize\": true,\n\t    \"food\": true,\n\t    \"poision\": true,\n\t    \"accepted\": false,\n\t    \"completed\": false,\n\t    \"rejected\": true\n\t},\n    \"shipperInfo\": {\n        \"companyName\": \"DIAMOND CRYSTAL BRAND 4014611\",\n        \"firstName\": \"Md Ataur\",\n        \"lastName\": \"Rahman\",\n        \"location\": \"Jamaica\",\n        \"phone\": \"(929) 336 8359\",\n        \"phoneExt\": \"3170\",\n        \"fax\": \"(888) 888 8888\",\n        \"country\": \"US\",\n        \"address1\": \"http://ataur.me\",\n        \"address2\": \"Ac#  4014611\",\n        \"city\": \"SAVANNAH\",\n        \"state\": \"GA\",\n        \"zip\": \"31405\",\n        \"email\": \"NORA.HIJAZ@ESTES-EXPRESS.COM\"\n    },\n    \"consigneeInfo\": {\n        \"companyName\": \"DIAMOND CRYSTAL BRANDS\",\n        \"firstName\": \"Md\",\n        \"lastName\": \"Ataur\",\n        \"location\": \"Richmond\",\n        \"phone\": \"(929) 336 8359\",\n        \"phoneExt\": \"1111\",\n        \"fax\": \"(777) 777 5555\",\n        \"country\": \"US\",\n        \"address1\": \"% AVERITT SUPPLY CHAIN\",\n        \"address2\": \"P O BOX 3166\",\n        \"city\": \"JAMAICA\",\n        \"state\": \"NY\",\n        \"zip\": \"11432\",\n        \"email\": \"CONSIGNEE@GMAIL.COM\"\n    },\n    \"commodityInfo\": {\n        \"commodityList\": [\n            {\n                \"commodityId\": 1,\n                \"hazmat\": true,\n                \"goodsUnit\": \"4\",\n                \"goodsType\": {\n                    \"code\": \"TL\",\n                    \"description\": null\n                },\n                \"goodsWeight\": \"400\",\n                \"shipmentClass\": {\n                    \"code\": \"400\",\n                    \"description\": null\n                },\n                \"nmfc\": \"50\",\n                \"nmfcExt\": \"50\",\n                \"numberOfPackage\": \"10\",\n                \"packageType\": \"BG\",\n                \"description\": \"THIS IS A TEST1\",\n                \"height\": \"\",\n                \"weight\": \"\",\n                \"length\": \"\"\n            },\n            {\n                \"commodityId\": 2,\n                \"hazmat\": true,\n                \"goodsUnit\": \"12\",\n                \"goodsType\": {\n                    \"code\": \"BL\",\n                    \"description\": null\n                },\n                \"goodsWeight\": \"11\",\n                \"shipmentClass\": {\n                    \"code\": \"60\",\n                    \"description\": null\n                },\n                \"nmfc\": \"20\",\n                \"nmfcExt\": \"20\",\n                \"numberOfPackage\": \"20\",\n                \"packageType\": \"RE\",\n                \"description\": \"THIS IS TEST 2\",\n                \"height\": \"\",\n                \"weight\": \"\",\n                \"length\": \"\"\n            },\n            {\n                \"commodityId\": 3,\n                \"hazmat\": false,\n                \"goodsUnit\": \"20\",\n                \"goodsType\": {\n                    \"code\": \"BK\",\n                    \"description\": null\n                },\n                \"goodsWeight\": \"45\",\n                \"shipmentClass\": {\n                    \"code\": \"65\",\n                    \"description\": null\n                },\n                \"nmfc\": \"999\",\n                \"nmfcExt\": \"999\",\n                \"numberOfPackage\": \"30\",\n                \"packageType\": \"PC\",\n                \"description\": \"THIS IS TEST 3\",\n                \"height\": \"\",\n                \"weight\": \"\",\n                \"length\": \"\"\n            }\n        ],\n        \"contactName\": \"(929) 336-8359\",\n        \"phone\": \"\",\n        \"phoneExt\": \"1111\",\n        \"totalCube\": \"20.50\",\n        \"specialIns\": \"Special Instructions By ATA MAN\"\n    },\n    \"references\": [\n        {\n            \"referenceId\": \"1\",\n            \"referenceNumber\": \"101\",\n            \"referenceType\": \"PO\",\n            \"cartoon\": \"102\",\n            \"weight\": \"103\"\n        },\n        {\n            \"referenceId\": \"2\",\n            \"referenceNumber\": \"111\",\n            \"referenceType\": \"SID\",\n            \"cartoon\": \"112\",\n            \"weight\": \"113\"\n        },\n        {\n            \"referenceId\": \"3\",\n            \"referenceNumber\": \"121\",\n            \"referenceType\": \"CID\",\n            \"cartoon\": \"122\",\n            \"weight\": \"123\"\n        },\n        {\n            \"referenceId\": \"4\",\n            \"referenceNumber\": \"131\",\n            \"referenceType\": \"LN\",\n            \"cartoon\": \"132\",\n            \"weight\": \"133\"\n        }\n    ],\n    \"billingInfo\": {\n        \"billTo\": {\n            \"payor\": \"T\",\n            \"fee\": \"COL\",\n            \"billingAddressInfo\": {\n                \"companyName\": \"BAHAMA BREEZE\",\n                \"firstName\": \"BAHAMA BREEZE\",\n                \"lastName\": \"Hafling\",\n                \"location\": \"Richmond\",\n                \"phone\": \"(205) 664 0511\",\n                \"phoneExt\": \"3170\",\n                \"fax\": \"(777) 777 6666\",\n                \"country\": \"US\",\n                \"address1\": \"8740, 165 STREET, APT-1K\",\n                \"address2\": \"3201 Johnson Street\",\n                \"city\": \"PELHAM\",\n                \"state\": \"AL\",\n                \"zip\": \"35124\",\n                \"email\": \"THIRDPARTY@GMAIL.COM\"\n            }\n        },\n        \"codRemitTo\": false,\n        \"codRemitToInfo\": {\n            \"amount\": \"\",\n            \"paymentType\": null,\n            \"fee\": null,\n            \"codAddressInfo\": {\n                \"companyName\": \"\",\n                \"firstName\": \"\",\n                \"lastName\": \"\",\n                \"location\": \"\",\n                \"phone\": \"\",\n                \"phoneExt\": \"\",\n                \"fax\": \"\",\n                \"country\": null,\n                \"address1\": \"\",\n                \"address2\": \"\",\n                \"city\": \"\",\n                \"state\": \"\",\n                \"zip\": \"\",\n                \"email\": \"THIRDPARTY@GMAIL.COM\"\n            }\n        }\n    },\n    \"accessorials\": [\n        {\n            \"code\": \"AKLGAT\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKPRID\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKRES\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"APT\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"CONST\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"HAZ\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"INS\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"LGATE\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"NCM\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"LONG12\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"LONG20\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"LONG28\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"LONG53\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"HD\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"HPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKHAZ\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKINS\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKINPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKRESP\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKSCDL\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"BLIND\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"FAIRDL\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"FAIRPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"FARMDL\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"FARMPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"INB\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"MINIDL\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"PFF\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"SCHLDL\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"SCHLPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"PRISPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"SSM\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"STO\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"ULFEE\",\n            \"description\": \"\"\n        }\n    ],\n    \"shippingLabel\": {\n        \"labelType\": \"4\",\n        \"startLabel\": \"1\",\n        \"numberOfLabel\": \"20\"\n    },\n    \"emailAndFaxNotification\": {\n        \"shipperEmail\": \"NORA.HIJAZ@ESTES-EXPRESS.COM\",\n        \"shipperEmailBolUpdate\": true,\n        \"shipperEmailTrackingUpdate\": true,\n        \"shipperEmailPickupNotice\": false,\n        \"shipperEmailShippingLabel\": true,\n        \"shipperFaxBolUpdate\": true,\n        \"shipperFax\": \"(888) 888 8888\",\n        \"consigneeEmail\": \"CONSIGNEE@GMAIL.COM\",\n        \"consigneeEmailBolUpdate\": true,\n        \"consigneeEmailTrackingUpdate\": true,\n        \"consigneeEmailPickupNotice\": false,\n        \"consigneeEmailShippingLabel\": true,\n        \"consigneeFaxBolUpdate\": true,\n        \"consigneeFax\": \"(777) 777 5555\",\n        \"thirdPartyEmail\": \"THIRDPARTY@GMAIL.COM\",\n        \"thirdPartyEmailBolUpdate\": true,\n        \"thirdPartyEmailTrackingUpdate\": true,\n        \"thirdPartyEmailPickupNotice\": true,\n        \"thirdPartyEmailShippingLabel\": true,\n        \"thirdPartyFaxBolUpdate\": true,\n        \"thirdPartyFax\": \"(777) 777 6666\",\n        \"otherEmail\": \"OTHER@GMAIL.COM\",\n        \"otherEmailBolUpdate\": true,\n        \"otherEmailTrackingUpdate\": true,\n        \"otherEmailPickupNotice\": false,\n        \"otherEmailShippingLabel\": true,\n        \"otherFaxBolUpdate\": true,\n        \"otherFax\": \"(777) 777 3333\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{url}}/draft",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"draft"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create & Edit Draft 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"bolId\": null,\n  \"generalInfo\": {\n    \"bolDate\": \"02/28/2019\",\n    \"assignProNumber\": false,\n    \"proNumber\": \"\",\n    \"masterBol\": false,\n    \"masterBolNumber\": null,\n    \"bolNumber\": \"TestDraft001\",\n    \"guranteed\": false,\n    \"quote\": \"\",\n    \"tosChecked\": \"\",\n    \"pickupRequest\": false\n  },\n  \"pickupDetailInfo\": null,\n  \"shipperInfo\": {\n    \"companyName\": \"\",\n    \"firstName\": \"\",\n    \"lastName\": \"\",\n    \"location\": \"\",\n    \"phone\": \"\",\n    \"phoneExt\": \"\",\n    \"fax\": \"\",\n    \"country\": \"US\",\n    \"address1\": \"\",\n    \"address2\": \"\",\n    \"city\": \"\",\n    \"state\": \"\",\n    \"zip\": \"\",\n    \"email\": \"\"\n  },\n  \"consigneeInfo\": {\n    \"companyName\": \"\",\n    \"firstName\": \"\",\n    \"lastName\": \"\",\n    \"location\": \"\",\n    \"phone\": \"\",\n    \"phoneExt\": \"\",\n    \"fax\": \"\",\n    \"country\": \"US\",\n    \"address1\": \"\",\n    \"address2\": \"\",\n    \"city\": \"\",\n    \"state\": \"\",\n    \"zip\": \"\",\n    \"email\": \"\"\n  },\n  \"commodityInfo\": {\n    \"commodityList\": [\n      {\n        \"commodityId\": 1,\n        \"hazmat\": false,\n        \"goodsType\": { \"code\": \"\", \"description\": null },\n        \"goodsUnit\": null,\n        \"goodsWeight\": null,\n        \"shipmentClass\": { \"code\": \"\", \"description\": null },\n        \"numberOfPackage\": null,\n        \"packageType\": null,\n        \"nmfc\": null,\n        \"nmfcExt\": null,\n        \"description\": null\n      }\n    ],\n    \"contactName\": \"\",\n    \"phone\": \"\",\n    \"phoneExt\": \"\",\n    \"totalCube\": \"\",\n    \"specialIns\": \"\"\n  },\n  \"references\": [],\n  \"billingInfo\": {\n    \"billTo\": { \"billingAddressInfo\": null, \"fee\": \"PPD\", \"payor\": \"S\" },\n    \"codRemitToInfo\": null,\n    \"codRemitTo\": false\n  },\n  \"accessorials\": [],\n  \"shippingLabel\": null,\n  \"emailAndFaxNotification\": {\n    \"fax\": \"\",\n    \"consigneeEmail\": \"\",\n    \"otherEmail\": \"\",\n    \"shipperEmail\": \"\",\n    \"thirdPartyEmail\": \"\",\n    \"consigneeEmailBolUpdate\": false,\n    \"otherEmailBolUpdate\": false,\n    \"shipperEmailBolUpdate\": false,\n    \"thirdPartyEmailBolUpdate\": false,\n    \"consigneeEmailTrackingUpdate\": false,\n    \"otherEmailTrackingUpdate\": false,\n    \"shipperEmailTrackingUpdate\": false,\n    \"thirdPartyEmailTrackingUpdate\": false,\n    \"consigneeEmailPickupNotice\": false,\n    \"otherEmailPickupNotice\": false,\n    \"shipperEmailPickupNotice\": false,\n    \"thirdPartyEmailPickupNotice\": false,\n    \"consigneeEmailShippingLabel\": false,\n    \"otherEmailShippingLabel\": false,\n    \"shipperEmailShippingLabel\": false,\n    \"thirdPartyEmailShippingLabel\": false,\n    \"consigneeFaxBolUpdate\": false,\n    \"otherFaxBolUpdate\": false,\n    \"shipperFaxBolUpdate\": false,\n    \"thirdPartyFaxBolUpdate\": false,\n    \"consigneeFax\": \"(123) 123-2133\",\n    \"otherFax\": \"(123) 123-1231\",\n    \"shipperFax\": \"(112) 321-3212\",\n    \"thirdPartyFax\": \"(123) 213-2132\"\n  },\n  \"documentType\": \"E\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/draft",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"draft"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create & Edit Draft 2 Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"bolId\": null,\n  \"generalInfo\": {\n    \"bolDate\": \"02/28/2019\",\n    \"assignProNumber\": false,\n    \"proNumber\": \"\",\n    \"masterBol\": false,\n    \"masterBolNumber\": null,\n    \"bolNumber\": \"TestDraft001\",\n    \"guranteed\": false,\n    \"quote\": \"\",\n    \"tosChecked\": \"\",\n    \"pickupRequest\": false\n  },\n  \"pickupDetailInfo\": null,\n  \"shipperInfo\": {\n    \"companyName\": \"\",\n    \"firstName\": \"\",\n    \"lastName\": \"\",\n    \"location\": \"\",\n    \"phone\": \"\",\n    \"phoneExt\": \"\",\n    \"fax\": \"\",\n    \"country\": \"US\",\n    \"address1\": \"\",\n    \"address2\": \"\",\n    \"city\": \"\",\n    \"state\": \"\",\n    \"zip\": \"\",\n    \"email\": \"\"\n  },\n  \"consigneeInfo\": {\n    \"companyName\": \"\",\n    \"firstName\": \"\",\n    \"lastName\": \"\",\n    \"location\": \"\",\n    \"phone\": \"\",\n    \"phoneExt\": \"\",\n    \"fax\": \"\",\n    \"country\": \"US\",\n    \"address1\": \"\",\n    \"address2\": \"\",\n    \"city\": \"\",\n    \"state\": \"\",\n    \"zip\": \"\",\n    \"email\": \"\"\n  },\n  \"commodityInfo\": {\n    \"commodityList\": [\n      {\n        \"commodityId\": 1,\n        \"hazmat\": false,\n        \"goodsType\": { \"code\": \"\", \"description\": null },\n        \"goodsUnit\": null,\n        \"goodsWeight\": null,\n        \"shipmentClass\": { \"code\": \"\", \"description\": null },\n        \"numberOfPackage\": null,\n        \"packageType\": null,\n        \"nmfc\": null,\n        \"nmfcExt\": null,\n        \"description\": null\n      }\n    ],\n    \"contactName\": \"\",\n    \"phone\": \"\",\n    \"phoneExt\": \"\",\n    \"totalCube\": \"\",\n    \"specialIns\": \"\"\n  },\n  \"references\": [],\n  \"billingInfo\": {\n    \"billTo\": { \"billingAddressInfo\": null, \"fee\": \"PPD\", \"payor\": \"S\" },\n    \"codRemitToInfo\": null,\n    \"codRemitTo\": false\n  },\n  \"accessorials\": [],\n  \"shippingLabel\": null,\n  \"emailAndFaxNotification\": {\n    \"fax\": \"\",\n    \"consigneeEmail\": \"\",\n    \"otherEmail\": \"\",\n    \"shipperEmail\": \"\",\n    \"thirdPartyEmail\": \"\",\n    \"consigneeEmailBolUpdate\": false,\n    \"otherEmailBolUpdate\": false,\n    \"shipperEmailBolUpdate\": false,\n    \"thirdPartyEmailBolUpdate\": false,\n    \"consigneeEmailTrackingUpdate\": false,\n    \"otherEmailTrackingUpdate\": false,\n    \"shipperEmailTrackingUpdate\": false,\n    \"thirdPartyEmailTrackingUpdate\": false,\n    \"consigneeEmailPickupNotice\": false,\n    \"otherEmailPickupNotice\": false,\n    \"shipperEmailPickupNotice\": false,\n    \"thirdPartyEmailPickupNotice\": false,\n    \"consigneeEmailShippingLabel\": false,\n    \"otherEmailShippingLabel\": false,\n    \"shipperEmailShippingLabel\": false,\n    \"thirdPartyEmailShippingLabel\": false,\n    \"consigneeFaxBolUpdate\": false,\n    \"otherFaxBolUpdate\": false,\n    \"shipperFaxBolUpdate\": false,\n    \"thirdPartyFaxBolUpdate\": false,\n    \"consigneeFax\": \"(123) 123-2133\",\n    \"otherFax\": \"(123) 123-1231\",\n    \"shipperFax\": \"(112) 321-3212\",\n    \"thirdPartyFax\": \"(123) 213-2132\"\n  },\n  \"documentType\": \"E\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/draft",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"draft"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create & Edit Draft 2 Copy Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bolId\": null,\n    \"generalInfo\": {\n        \"bolDate\": \"05/02/2019\",\n        \"assignProNumber\": false,\n        \"proNumber\": \"\",\n        \"masterBol\": false,\n        \"masterBolNumber\": \"\",\n        \"bolNumber\": \"TEST_TEST\",\n        \"guranteed\": false,\n        \"quote\": \"\",\n        \"tosChecked\": \"\",\n        \"pickupRequest\": true\n    },\n    \"pickupDetailInfo\": {\n        \"accepted\": false,\n        \"accountCode\": \"5068692\",\n        \"completed\": false,\n        \"email\": \"twashington@estes-express.com\",\n        \"food\": false,\n        \"freeze\": false,\n        \"hookOrDrop\": false,\n        \"liftgateRequired\": false,\n        \"name\": \"\",\n        \"noStackPallet\": false,\n        \"oversize\": false,\n        \"phone\": \"(636) 537-6800\",\n        \"phoneExt\": \"\",\n        \"pickupDate\": \"05/03/2019\",\n        \"poision\": false,\n        \"rejected\": true,\n        \"role\": \"SHIPPER\",\n        \"specialInstruction\": \"\",\n        \"startTime\": \"08:00 AM\",\n        \"endTime\": \"05:00 PM\"\n    },\n    \"shipperInfo\": {\n        \"companyName\": \"PREMIER MANUFACTURING\",\n        \"firstName\": \"\",\n        \"lastName\": \"\",\n        \"location\": \"\",\n        \"phone\": \"(636) 537-6800\",\n        \"phoneExt\": \"\",\n        \"fax\": \"\",\n        \"country\": \"US\",\n        \"address1\": \"629 CEPI DR\",\n        \"address2\": \"\",\n        \"city\": \"CHESTERFIELD\",\n        \"state\": \"MO\",\n        \"zip\": \"63005\",\n        \"email\": \"twashington@estes-express.com\"\n    },\n    \"consigneeInfo\": {\n        \"companyName\": \"\",\n        \"firstName\": \"\",\n        \"lastName\": \"\",\n        \"location\": \"\",\n        \"phone\": \"\",\n        \"phoneExt\": \"\",\n        \"fax\": \"\",\n        \"country\": \"US\",\n        \"address1\": \"\",\n        \"address2\": \"\",\n        \"city\": \"\",\n        \"state\": \"\",\n        \"zip\": \"\",\n        \"email\": \"\"\n    },\n    \"commodityInfo\": {\n        \"commodityList\": [\n            {\n                \"commodityId\": null,\n                \"hazmat\": false,\n                \"goodsType\": null,\n                \"goodsUnit\": null,\n                \"goodsWeight\": null,\n                \"shipmentClass\": null,\n                \"numberOfPackage\": null,\n                \"packageType\": null,\n                \"nmfc\": null,\n                \"nmfcExt\": null,\n                \"description\": null\n            }\n        ],\n        \"contactName\": \"\",\n        \"phone\": \"\",\n        \"phoneExt\": \"\",\n        \"totalCube\": \"\",\n        \"specialIns\": \"\"\n    },\n    \"references\": [],\n    \"billingInfo\": {\n        \"billTo\": {\n            \"billingAddressInfo\": null,\n            \"fee\": null,\n            \"payor\": null\n        },\n        \"codRemitToInfo\": null,\n        \"codRemitTo\": false\n    },\n    \"accessorials\": [],\n    \"shippingLabel\": null,\n    \"emailAndFaxNotification\": {\n        \"fax\": \"\",\n        \"consigneeEmail\": \"test@test.test\",\n        \"otherEmail\": \"test@test.test\",\n        \"shipperEmail\": \"test@test.test\",\n        \"thirdPartyEmail\": \"test@test.test\",\n        \"consigneeEmailBolUpdate\": false,\n        \"otherEmailBolUpdate\": false,\n        \"shipperEmailBolUpdate\": false,\n        \"thirdPartyEmailBolUpdate\": false,\n        \"consigneeEmailTrackingUpdate\": false,\n        \"otherEmailTrackingUpdate\": false,\n        \"shipperEmailTrackingUpdate\": false,\n        \"thirdPartyEmailTrackingUpdate\": false,\n        \"consigneeEmailPickupNotice\": true,\n        \"otherEmailPickupNotice\": true,\n        \"shipperEmailPickupNotice\": true,\n        \"thirdPartyEmailPickupNotice\": true,\n        \"consigneeEmailShippingLabel\": false,\n        \"otherEmailShippingLabel\": false,\n        \"shipperEmailShippingLabel\": false,\n        \"thirdPartyEmailShippingLabel\": false,\n        \"consigneeFaxBolUpdate\": false,\n        \"otherFaxBolUpdate\": false,\n        \"shipperFaxBolUpdate\": false,\n        \"thirdPartyFaxBolUpdate\": false,\n        \"consigneeFax\": \"\",\n        \"otherFax\": \"\",\n        \"shipperFax\": \"\",\n        \"thirdPartyFax\": \"\"\n    },\n    \"documentType\": \"E\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/draft",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"draft"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Draft By Bol Number",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/draft/TestDraft001",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"draft",
+								"TestDraft001"
+							]
+						},
+						"description": "Retrive Draft to edit & complete the bol"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Draft By Bol Number Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/draft/999hey999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"draft",
+								"999hey999"
+							]
+						},
+						"description": "Retrive Draft to edit & complete the bol"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Draft By Bol Number Copy Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/draft/TEST_TEST",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"draft",
+								"TEST_TEST"
+							]
+						},
+						"description": "Retrive Draft to edit & complete the bol"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Draft",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/draft/999hey4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"draft",
+								"999hey4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TEST Save as Draft",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"bolId\": null,\r\n  \"generalInfo\": {\r\n    \"bolDate\": \"02/07/2019\",\r\n    \"assignProNumber\": false,\r\n    \"proNumber\": \"\",\r\n    \"masterBol\": false,\r\n    \"masterBolNumber\": \"\",\r\n    \"bolNumber\": \"\",\r\n    \"guranteed\": false,\r\n    \"quote\": \"\",\r\n    \"tosChecked\": false\r\n  },\r\n  \"pickupDetailInfo\": null,\r\n  \"shipperInfo\": {\r\n    \"companyName\": \"\",\r\n    \"firstName\": \"\",\r\n    \"lastName\": \"\",\r\n    \"location\": \"\",\r\n    \"phone\": \"\",\r\n    \"phoneExt\": \"\",\r\n    \"fax\": \"\",\r\n    \"country\": \"US\",\r\n    \"address1\": \"\",\r\n    \"address2\": \"\",\r\n    \"city\": \"\",\r\n    \"state\": \"\",\r\n    \"zip\": \"\",\r\n    \"email\": \"\"\r\n  },\r\n  \"consigneeInfo\": {\r\n    \"companyName\": \"\",\r\n    \"firstName\": \"\",\r\n    \"lastName\": \"\",\r\n    \"location\": \"\",\r\n    \"phone\": \"\",\r\n    \"phoneExt\": \"\",\r\n    \"fax\": \"\",\r\n    \"country\": \"US\",\r\n    \"address1\": \"\",\r\n    \"address2\": \"\",\r\n    \"city\": \"\",\r\n    \"state\": \"\",\r\n    \"zip\": \"\",\r\n    \"email\": \"\"\r\n  },\r\n  \"commodityInfo\": {\r\n    \"contactName\": \"\",\r\n    \"phone\": \"\",\r\n    \"phoneExt\": \"\",\r\n    \"totalCube\": \"\",\r\n    \"specialIns\": \"\",\r\n    \"commodityList\": []\r\n  },\r\n  \"references\": [],\r\n  \"billingInfo\": {\r\n    \"billTo\": {\r\n      \"billingAddressInfo\": {\r\n        \"companyName\": \"\",\r\n        \"firstName\": \"\",\r\n        \"lastName\": \"\",\r\n        \"location\": \"\",\r\n        \"phone\": \"\",\r\n        \"phoneExt\": \"\",\r\n        \"fax\": \"\",\r\n        \"country\": \"US\",\r\n        \"address1\": \"\",\r\n        \"address2\": \"\",\r\n        \"city\": \"\",\r\n        \"state\": \"\",\r\n        \"zip\": \"\",\r\n        \"email\": \"\"\r\n      },\r\n      \"fee\": null,\r\n      \"payor\": null\r\n    },\r\n    \"codRemitToInfo\": {\r\n      \"codAddressInfo\": {\r\n        \"companyName\": \"\",\r\n        \"firstName\": \"\",\r\n        \"lastName\": \"\",\r\n        \"location\": \"\",\r\n        \"phone\": \"\",\r\n        \"phoneExt\": \"\",\r\n        \"fax\": \"\",\r\n        \"country\": \"US\",\r\n        \"address1\": \"\",\r\n        \"address2\": \"\",\r\n        \"city\": \"\",\r\n        \"state\": \"\",\r\n        \"zip\": \"\",\r\n        \"email\": \"\"\r\n      },\r\n      \"fee\": null,\r\n      \"amount\": \"\",\r\n      \"paymentType\": null\r\n    },\r\n    \"codRemitTo\": false\r\n  },\r\n  \"accessorials\": [],\r\n  \"shippingLabel\": {\r\n    \"labelType\": \"1\",\r\n    \"startLabel\": \"1\",\r\n    \"numberOfLabel\": \"\"\r\n  },\r\n  \"emailAndFaxNotification\": {\r\n    \"fax\": \"\",\r\n    \"consigneeEmail\": \"\",\r\n    \"otherEmail\": \"\",\r\n    \"shipperEmail\": \"\",\r\n    \"thirdPartyEmail\": \"\",\r\n    \"consigneeEmailBolUpdate\": false,\r\n    \"otherEmailBolUpdate\": false,\r\n    \"shipperEmailBolUpdate\": false,\r\n    \"thirdPartyEmailBolUpdate\": false,\r\n    \"consigneeEmailTrackingUpdate\": false,\r\n    \"otherEmailTrackingUpdate\": false,\r\n    \"shipperEmailTrackingUpdate\": false,\r\n    \"thirdPartyEmailTrackingUpdate\": false,\r\n    \"consigneeEmailPickupNotice\": false,\r\n    \"otherEmailPickupNotice\": false,\r\n    \"shipperEmailPickupNotice\": false,\r\n    \"thirdPartyEmailPickupNotice\": false,\r\n    \"consigneeEmailShippingLabel\": false,\r\n    \"otherEmailShippingLabel\": false,\r\n    \"shipperEmailShippingLabel\": false,\r\n    \"thirdPartyEmailShippingLabel\": false,\r\n    \"consigneeFaxBolUpdate\": false,\r\n    \"otherFaxBolUpdate\": false,\r\n    \"shipperFaxBolUpdate\": false,\r\n    \"thirdPartyFaxBolUpdate\": false,\r\n    \"consigneeFax\": \"\",\r\n    \"otherFax\": \"\",\r\n    \"shipperFax\": \"\",\r\n    \"thirdPartyFax\": \"\"\r\n  },\r\n  \"documentType\": \"E\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{url}}/draft",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"draft"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BOL",
+			"item": [
+				{
+					"name": "Get BOL Listing",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bol?size=100&page=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "100"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create and Edit BOL",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bolId\": 0,\n    \"documentType\": \"E\",\n    \"generalInfo\": {\n        \"bolNumber\": \"ATAUR0006\",\n        \"bolDate\": \"05/30/2019\",\n        \"assignProNumber\": true,\n        \"proNumber\": null,\n        \"masterBol\": false,\n        \"masterBolNumber\": null,\n        \"guranteed\": true,\n        \"quote\": null,\n        \"tosChecked\": false,\n        \"pickupRequest\": true\n    },\n    \"pickupDetailInfo\": {\n\t    \"name\": \"Requestor Name\",\n\t    \"phone\": \"(804) 307-5568\",\n\t    \"phoneExt\": null,\n\t    \"email\": \"test@gmail.com\",\n\t    \"role\": \"CONSIGNEE\",\n\t    \"accountCode\": \"5023958\",\n\t    \"pickupDate\": \"06/03/2019\",\n\t    \"startTime\": \"08:30 AM\",\n\t    \"endTime\": \"06:00 PM\",\n\t    \"specialInstruction\": \"Nothing special\",\n\t    \"hookOrDrop\": false,\n\t    \"liftgateRequired\": true,\n\t    \"noStackPallet\": true,\n\t    \"freeze\": true,\n\t    \"oversize\": true,\n\t    \"food\": true,\n\t    \"poision\": true,\n\t    \"accepted\": false,\n\t    \"completed\": false,\n\t    \"rejected\": true\n\t},\n    \"shipperInfo\": {\n        \"companyName\": \"Company Name\",\n        \"firstName\": \"First Name\",\n        \"lastName\": null,\n        \"location\": null,\n        \"phone\": \"(777) 336-8359\",\n        \"phoneExt\": null,\n        \"fax\": \"(888) 336-8359\",\n        \"country\": \"US\",\n        \"address1\": \"2681 Hungary Spring RD\",\n        \"address2\": \"\",\n        \"city\": \"COOKEVILLE\",\n        \"state\": \"TN\",\n        \"zip\": \"38502\",\n        \"email\": \"QATEST@ESTES-EXPRESS.COM\"\n    },\n    \"consigneeInfo\": {\n        \"companyName\": \"Consignee Company\",\n        \"firstName\": \"Md\",\n        \"lastName\": \"Ataur\",\n        \"location\": \"Richmond\",\n        \"phone\": \"(929) 336 8359\",\n        \"phoneExt\": \"1111\",\n        \"fax\": \"(777) 777 5555\",\n        \"country\": \"US\",\n        \"address1\": \"2681 Hungary Spring RD\",\n        \"address2\": \"\",\n        \"city\": \"Richmond\",\n        \"state\": \"VA\",\n        \"zip\": \"23294\",\n        \"email\": \"consignee@gmail.com\"\n    },\n    \"commodityInfo\": {\n        \"commodityList\": [\n            {\n                \"commodityId\": 1,\n                \"hazmat\": true,\n                \"goodsUnit\": \"4\",\n                \"goodsType\": {\n                    \"code\": \"TL\",\n                    \"description\": null\n                },\n                \"goodsWeight\": \"99999\",\n                \"shipmentClass\": {\n                    \"code\": \"400\",\n                    \"description\": null\n                },\n                \"nmfc\": \"50\",\n                \"nmfcExt\": \"50\",\n                \"numberOfPackage\": \"10\",\n                \"packageType\": \"BG\",\n                \"description\": \"THIS IS A TEST1\",\n                \"height\": \"\",\n                \"weight\": \"\",\n                \"length\": \"\"\n            },\n            {\n                \"commodityId\": 2,\n                \"hazmat\": true,\n                \"goodsUnit\": \"12\",\n                \"goodsType\": {\n                    \"code\": \"BL\",\n                    \"description\": null\n                },\n                \"goodsWeight\": \"11\",\n                \"shipmentClass\": {\n                    \"code\": \"60\",\n                    \"description\": null\n                },\n                \"nmfc\": \"20\",\n                \"nmfcExt\": \"20\",\n                \"numberOfPackage\": \"20\",\n                \"packageType\": \"RE\",\n                \"description\": \"THIS IS TEST 2\",\n                \"height\": \"\",\n                \"weight\": \"\",\n                \"length\": \"\"\n            },\n            {\n                \"commodityId\": 3,\n                \"hazmat\": false,\n                \"goodsUnit\": \"20\",\n                \"goodsType\": {\n                    \"code\": \"BK\",\n                    \"description\": null\n                },\n                \"goodsWeight\": \"45\",\n                \"shipmentClass\": {\n                    \"code\": \"65\",\n                    \"description\": null\n                },\n                \"nmfc\": \"999\",\n                \"nmfcExt\": \"999\",\n                \"numberOfPackage\": \"30\",\n                \"packageType\": \"PC\",\n                \"description\": \"THIS IS TEST 3\",\n                \"height\": \"\",\n                \"weight\": \"\",\n                \"length\": \"\"\n            }\n        ],\n        \"contactName\": \"Ataur Rahman\",\n        \"phone\": \"(929) 336 8359\",\n        \"phoneExt\": \"1111\",\n        \"totalCube\": \"20.50\",\n        \"specialIns\": \"Special Instructions By ATA MAN\"\n    },\n    \"references\": [\n        {\n            \"referenceId\": \"1\",\n            \"referenceNumber\": \"po1\",\n            \"referenceType\": \"PO\",\n            \"cartoon\": \"100\",\n            \"weight\": \"110\"\n        },\n        {\n            \"referenceId\": \"2\",\n            \"referenceNumber\": \"2\",\n            \"referenceType\": \"SID\",\n            \"cartoon\": \"200\",\n            \"weight\": \"210\"\n        },\n        {\n            \"referenceId\": \"3\",\n            \"referenceNumber\": \"3\",\n            \"referenceType\": \"CID\",\n            \"cartoon\": \"300\",\n            \"weight\": \"310\"\n        },\n        {\n            \"referenceId\": \"4\",\n            \"referenceNumber\": \"4\",\n            \"referenceType\": \"LN\",\n            \"cartoon\": \"400\",\n            \"weight\": \"410\"\n        }\n    ],\n    \"billingInfo\": {\n        \"billTo\": {\n            \"payor\": \"T\",\n            \"fee\": \"COL\",\n            \"billingAddressInfo\": {\n                \"companyName\": \"BAHAMA BREEZE\",\n                \"firstName\": \"BAHAMA BREEZE\",\n                \"lastName\": \"Hafling\",\n                \"location\": \"Jamaica\",\n                \"phone\": \"(248) 528 1674\",\n                \"phoneExt\": \"3170\",\n                \"fax\": \"(777) 777 6666\",\n                \"country\": \"US\",\n                \"address1\": \"2681 Hungary Spring RD\",\n    \t\t\t\"address2\": \"\",\n                \"city\": \"Richmond\",\n                \"state\": \"VA\",\n                \"zip\": \"23294\",\n                \"email\": \"QATEST@ESTES-EXPRESS.COM\"\n            }\n        },\n        \"codRemitTo\": true,\n        \"codRemitToInfo\": {\n            \"amount\": \"100\",\n            \"paymentType\": \"CC\",\n            \"fee\": \"S\",\n            \"codAddressInfo\": {\n                \"companyName\": \"BAHAMA BREEZE\",\n                \"firstName\": \"B\",\n                \"lastName\": \"\",\n                \"location\": \"\",\n                \"phone\": \"\",\n                \"phoneExt\": \"\",\n                \"fax\": \"\",\n                \"country\": \"US\",\n                \"address1\": \"2681 Hungary Spring RD\",\n        \t\t\"address2\": \"\",\n        \t\t\"city\": \"Richmond\",\n    \t\t\t\"state\": \"VA\",\n                \"zip\": \"23294\",\n                \"email\": \"QATEST@ESTES-EXPRESS.COM\"\n            }\n        }\n    },\n    \"accessorials\": [\n        {\n            \"code\": \"AKLGAT\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKPRID\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKRES\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"APT\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"CONST\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"HAZ\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"INS\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"LGATE\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"NCM\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"LONG12\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"LONG20\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"LONG28\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"LONG53\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"HD\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"HPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKHAZ\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKINS\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKINPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKRESP\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"AKSCDL\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"BLIND\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"FAIRDL\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"FAIRPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"FARMDL\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"FARMPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"INB\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"MINIDL\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"PFF\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"SCHLDL\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"SCHLPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"PRISPU\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"SSM\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"STO\",\n            \"description\": \"\"\n        },\n        {\n            \"code\": \"ULFEE\",\n            \"description\": \"\"\n        }\n    ],\n    \"shippingLabel\": {\n        \"labelType\": \"4\",\n        \"startLabel\": \"1\",\n        \"numberOfLabel\": \"20\"\n    },\n    \"emailAndFaxNotification\": {\n        \"shipperEmail\": \"QATEST@ESTES-EXPRESS.COM\",\n        \"shipperEmailBolUpdate\": true,\n        \"shipperEmailTrackingUpdate\": true,\n        \"shipperEmailPickupNotice\": true,\n        \"shipperEmailShippingLabel\": false,\n        \"shipperFaxBolUpdate\": true,\n        \"shipperFax\": \"(929) 335 8765\",\n        \"consigneeEmail\": \"consignee@gmail.com\",\n        \"consigneeEmailBolUpdate\": true,\n        \"consigneeEmailTrackingUpdate\": true,\n        \"consigneeEmailPickupNotice\": true,\n        \"consigneeEmailShippingLabel\": false,\n        \"consigneeFaxBolUpdate\": true,\n        \"consigneeFax\": \"(777) 777 5555\",\n        \"thirdPartyEmail\": \"QATEST@ESTES-EXPRESS.COM\",\n        \"thirdPartyEmailBolUpdate\": true,\n        \"thirdPartyEmailTrackingUpdate\": true,\n        \"thirdPartyEmailPickupNotice\": true,\n        \"thirdPartyEmailShippingLabel\": false,\n        \"thirdPartyFaxBolUpdate\": true,\n        \"thirdPartyFax\": \"(777) 777 6666\",\n        \"otherEmail\": \"other@gmail.com\",\n        \"otherEmailBolUpdate\": false,\n        \"otherEmailTrackingUpdate\": true,\n        \"otherEmailPickupNotice\": false,\n        \"otherEmailShippingLabel\": false,\n        \"otherFaxBolUpdate\": true,\n        \"otherFax\": \"(777) 777 3333\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{url}}/bol",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create and Edit BOL Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bolId\": null,\n    \"documentType\": \"E\",\n    \"generalInfo\": {\n        \"bolDate\": \"05/12/262019\",\n        \"assignProNumber\": false,\n        \"proNumber\": \"\",\n        \"masterBol\": false,\n        \"masterBolNumber\": null,\n        \"bolNumber\": \"778899\",\n        \"guranteed\": false,\n        \"quote\": \"138bgd9\",\n        \"tosChecked\": \"\",\n        \"pickupRequest\": false\n    },\n    \"pickupDetailInfo\": null,\n    \"shipperInfo\": {\n        \"companyName\": \"Estes My Company\",\n        \"firstName\": \"Donald\",\n        \"lastName\": \"Peachy\",\n        \"location\": \"RIC\",\n        \"phone\": \"(804) 555-1212\",\n        \"phoneExt\": \"\",\n        \"fax\": \"\",\n        \"country\": \"US\",\n        \"address1\": \"325 East 7th street\",\n        \"address2\": \"\",\n        \"city\": \"Richmond\",\n        \"state\": \"VA\",\n        \"zip\": \"23225\",\n        \"email\": \"qatest@estes-express.com\"\n    },\n    \"consigneeInfo\": {\n        \"companyName\": \"my consignee\",\n        \"firstName\": \"Donaldo\",\n        \"lastName\": \"PeAchy\",\n        \"location\": \"001\",\n        \"phone\": \"(804) 555-1313\",\n        \"phoneExt\": \"\",\n        \"fax\": \"\",\n        \"country\": \"US\",\n        \"address1\": \"231 West Broad Street\",\n        \"address2\": \"\",\n        \"city\": \"Richmond\",\n        \"state\": \"VA\",\n        \"zip\": \"23235\",\n        \"email\": \"qatest@estes-express.com\"\n    },\n    \"commodityInfo\": {\n        \"commodityList\": [\n            {\n                \"commodityId\": 1,\n                \"hazmat\": false,\n                \"goodsType\": {\n                    \"code\": \"BG\",\n                    \"description\": null\n                },\n                \"goodsUnit\": 5,\n                \"goodsWeight\": 300,\n                \"shipmentClass\": {\n                    \"code\": \"50\",\n                    \"description\": null\n                },\n                \"numberOfPackage\": null,\n                \"packageType\": null,\n                \"nmfc\": null,\n                \"nmfcExt\": null,\n                \"description\": null\n            },\n            {\n                \"commodityId\": 2,\n                \"hazmat\": false,\n                \"goodsType\": {\n                    \"code\": \"BL\",\n                    \"description\": \"BALES\"\n                },\n                \"goodsUnit\": \"10\",\n                \"goodsWeight\": \"10\",\n                \"shipmentClass\": {\n                    \"code\": \"50\",\n                    \"description\": null\n                },\n                \"numberOfPackage\": null,\n                \"packageType\": null,\n                \"nmfc\": null,\n                \"nmfcExt\": null,\n                \"description\": null\n            }\n        ],\n        \"contactName\": \"\",\n        \"phone\": \"\",\n        \"phoneExt\": \"\",\n        \"totalCube\": \"\",\n        \"specialIns\": \"smokenat - edit successful\"\n    },\n    \"references\": [],\n    \"billingInfo\": {\n        \"billTo\": {\n            \"billingAddressInfo\": null,\n            \"fee\": \"PPD\",\n            \"payor\": \"S\"\n        },\n        \"codRemitToInfo\": null,\n        \"codRemitTo\": false\n    },\n    \"accessorials\": [],\n    \"shippingLabel\": null,\n    \"emailAndFaxNotification\": {\n        \"fax\": \"\",\n        \"consigneeEmail\": \"qatest@estes-express.com\",\n        \"otherEmail\": \"\",\n        \"shipperEmail\": \"qatest@estes-express.com\",\n        \"thirdPartyEmail\": \"\",\n        \"consigneeEmailBolUpdate\": false,\n        \"otherEmailBolUpdate\": false,\n        \"shipperEmailBolUpdate\": false,\n        \"thirdPartyEmailBolUpdate\": false,\n        \"consigneeEmailTrackingUpdate\": false,\n        \"otherEmailTrackingUpdate\": false,\n        \"shipperEmailTrackingUpdate\": false,\n        \"thirdPartyEmailTrackingUpdate\": false,\n        \"consigneeEmailPickupNotice\": false,\n        \"otherEmailPickupNotice\": false,\n        \"shipperEmailPickupNotice\": false,\n        \"thirdPartyEmailPickupNotice\": false,\n        \"consigneeEmailShippingLabel\": false,\n        \"otherEmailShippingLabel\": false,\n        \"shipperEmailShippingLabel\": false,\n        \"thirdPartyEmailShippingLabel\": false,\n        \"consigneeFaxBolUpdate\": false,\n        \"otherFaxBolUpdate\": false,\n        \"shipperFaxBolUpdate\": false,\n        \"thirdPartyFaxBolUpdate\": false,\n        \"consigneeFax\": \"\",\n        \"otherFax\": \"\",\n        \"shipperFax\": \"\",\n        \"thirdPartyFax\": \"\"\n    },\n    \"documentType\": \"E\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/bol",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create and Edit BOL Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "e643f863-29db-439d-a165-ff7b6963c3e5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"bolId\": null,\n  \"generalInfo\": {\n    \"bolDate\": \"02/28/2019\",\n    \"assignProNumber\": false,\n    \"proNumber\": \"\",\n    \"masterBol\": false,\n    \"masterBolNumber\": null,\n    \"bolNumber\": \"999hey7-bol-pickreq\",\n    \"guranteed\": false,\n    \"quote\": \"\",\n    \"tosChecked\": \"\",\n    \"pickupRequest\": true\n  },\n  \"pickupDetailInfo\": {\n    \"accepted\": false,\n    \"accountCode\": \"0211479\",\n    \"completed\": false,\n    \"email\": \"\",\n    \"food\": true,\n    \"freeze\": true,\n    \"hookOrDrop\": false,\n    \"liftgateRequired\": true,\n    \"name\": \"\",\n    \"noStackPallet\": true,\n    \"oversize\": true,\n    \"phone\": \"\",\n    \"phoneExt\": \"\",\n    \"pickupDate\": \"03/30/2019\",\n    \"poision\": true,\n    \"rejected\": false,\n    \"role\": \"SHIPPER\",\n    \"specialInstruction\": \"\",\n    \"startTime\": \"\",\n    \"endTime\": \"\"\n  },\n  \"shipperInfo\": {\n    \"companyName\": \"Test\",\n    \"firstName\": \"Trey\",\n    \"lastName\": \"Ellington\",\n    \"location\": \"\",\n    \"phone\": \"\",\n    \"phoneExt\": \"\",\n    \"fax\": \"\",\n    \"country\": \"US\",\n    \"address1\": \"4510 Leonard\",\n    \"address2\": \"\",\n    \"city\": \"Jamaica\",\n    \"state\": \"NY\",\n    \"zip\": \"11432\",\n    \"email\": \"trey@trey.com\"\n  },\n  \"consigneeInfo\": {\n    \"companyName\": \"Test\",\n    \"firstName\": \"Trey\",\n    \"lastName\": \"Ellington\",\n    \"location\": \"\",\n    \"phone\": \"(804) 353-1900\",\n    \"phoneExt\": \"\",\n    \"fax\": \"\",\n    \"country\": \"US\",\n    \"address1\": \"4510 Leonard\",\n    \"address2\": \"\",\n    \"city\": \"Richmond\",\n    \"state\": \"VA\",\n    \"zip\": \"23221\",\n    \"email\": \"trey@trey.com\"\n  },\n  \"commodityInfo\": {\n    \"commodityList\": [],\n    \"contactName\": \"\",\n    \"phone\": \"\",\n    \"phoneExt\": \"\",\n    \"totalCube\": \"\",\n    \"specialIns\": \"\"\n  },\n  \"references\": [],\n  \"billingInfo\": {\n    \"billTo\": { \"billingAddressInfo\": null, \"fee\": \"PPD\", \"payor\": \"S\" },\n    \"codRemitToInfo\": null,\n    \"codRemitTo\": false\n  },\n  \"accessorials\": [\n    { \"code\": \"APT\", \"description\": \"Appointment Request\", \"display\": true },\n    { \"code\": \"AKLGAT\", \"description\": \"Alaska Lift-Gate Service\", \"display\": true }\n  ],\n  \"shippingLabel\": null,\n  \"emailAndFaxNotification\": {\n    \"fax\": \"\",\n    \"consigneeEmail\": \"\",\n    \"otherEmail\": \"\",\n    \"shipperEmail\": \"\",\n    \"thirdPartyEmail\": \"\",\n    \"consigneeEmailBolUpdate\": false,\n    \"otherEmailBolUpdate\": false,\n    \"shipperEmailBolUpdate\": false,\n    \"thirdPartyEmailBolUpdate\": false,\n    \"consigneeEmailTrackingUpdate\": false,\n    \"otherEmailTrackingUpdate\": false,\n    \"shipperEmailTrackingUpdate\": false,\n    \"thirdPartyEmailTrackingUpdate\": false,\n    \"consigneeEmailPickupNotice\": false,\n    \"otherEmailPickupNotice\": false,\n    \"shipperEmailPickupNotice\": false,\n    \"thirdPartyEmailPickupNotice\": false,\n    \"consigneeEmailShippingLabel\": false,\n    \"otherEmailShippingLabel\": false,\n    \"shipperEmailShippingLabel\": false,\n    \"thirdPartyEmailShippingLabel\": false,\n    \"consigneeFaxBolUpdate\": false,\n    \"otherFaxBolUpdate\": false,\n    \"shipperFaxBolUpdate\": false,\n    \"thirdPartyFaxBolUpdate\": false,\n    \"consigneeFax\": \"\",\n    \"otherFax\": \"\",\n    \"shipperFax\": \"\",\n    \"thirdPartyFax\": \"\"\n  },\n  \"documentType\": \"E\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/bol",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create and Edit BOL Copy Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bolId\": null,\n    \"generalInfo\": {\n        \"bolDate\": \"05/20/2019\",\n        \"assignProNumber\": false,\n        \"proNumber\": \"\",\n        \"masterBol\": false,\n        \"masterBolNumber\": \"\",\n        \"bolNumber\": \"\",\n        \"guranteed\": false,\n        \"quote\": \"\",\n        \"tosChecked\": \"\",\n        \"pickupRequest\": true\n    },\n    \"pickupDetailInfo\": {\n        \"accepted\": false,\n        \"accountCode\": \"5068692\",\n        \"completed\": false,\n        \"email\": \"twashington@estes-express.com\",\n        \"food\": false,\n        \"freeze\": false,\n        \"hookOrDrop\": false,\n        \"liftgateRequired\": false,\n        \"name\": \"\",\n        \"noStackPallet\": false,\n        \"oversize\": false,\n        \"phone\": \"(636) 537-6800\",\n        \"phoneExt\": \"\",\n        \"pickupDate\": \"05/10/2019\",\n        \"poision\": false,\n        \"rejected\": true,\n        \"role\": \"SHIPPER\",\n        \"specialInstruction\": \"\",\n        \"startTime\": \"08:00 AM\",\n        \"endTime\": \"05:00 PM\"\n    },\n    \"shipperInfo\": {\n        \"companyName\": \"PREMIER MANUFACTURING\",\n        \"firstName\": \"\",\n        \"lastName\": \"\",\n        \"location\": \"\",\n        \"phone\": \"(636) 537-6800\",\n        \"phoneExt\": \"\",\n        \"fax\": \"\",\n        \"country\": \"US\",\n        \"address1\": \"629 CEPI DR\",\n        \"address2\": \"\",\n        \"city\": \"CHESTERFIELD\",\n        \"state\": \"MO\",\n        \"zip\": \"63005\",\n        \"email\": \"twashington@estes-express.com\"\n    },\n    \"consigneeInfo\": {\n        \"companyName\": \"\",\n        \"firstName\": \"\",\n        \"lastName\": \"\",\n        \"location\": \"\",\n        \"phone\": \"\",\n        \"phoneExt\": \"\",\n        \"fax\": \"\",\n        \"country\": \"US\",\n        \"address1\": \"\",\n        \"address2\": \"\",\n        \"city\": \"\",\n        \"state\": \"\",\n        \"zip\": \"\",\n        \"email\": \"\"\n    },\n    \"commodityInfo\": {\n        \"commodityList\": [\n            {\n                \"commodityId\": null,\n                \"hazmat\": false,\n                \"goodsType\": null,\n                \"goodsUnit\": null,\n                \"goodsWeight\": null,\n                \"shipmentClass\": null,\n                \"numberOfPackage\": null,\n                \"packageType\": null,\n                \"nmfc\": null,\n                \"nmfcExt\": null,\n                \"description\": null\n            }\n        ],\n        \"contactName\": \"\",\n        \"phone\": \"\",\n        \"phoneExt\": \"\",\n        \"totalCube\": \"\",\n        \"specialIns\": \"\"\n    },\n    \"references\": [],\n    \"billingInfo\": {\n        \"billTo\": {\n            \"billingAddressInfo\": null,\n            \"fee\": null,\n            \"payor\": null\n        },\n        \"codRemitToInfo\": null,\n        \"codRemitTo\": false\n    },\n    \"accessorials\": [],\n    \"shippingLabel\": null,\n    \"emailAndFaxNotification\": {\n        \"fax\": \"\",\n        \"consigneeEmail\": \"test@test.test\",\n        \"otherEmail\": \"test@test.test\",\n        \"shipperEmail\": \"test@test.test\",\n        \"thirdPartyEmail\": \"test@test.test\",\n        \"consigneeEmailBolUpdate\": false,\n        \"otherEmailBolUpdate\": false,\n        \"shipperEmailBolUpdate\": false,\n        \"thirdPartyEmailBolUpdate\": false,\n        \"consigneeEmailTrackingUpdate\": false,\n        \"otherEmailTrackingUpdate\": false,\n        \"shipperEmailTrackingUpdate\": false,\n        \"thirdPartyEmailTrackingUpdate\": false,\n        \"consigneeEmailPickupNotice\": true,\n        \"otherEmailPickupNotice\": true,\n        \"shipperEmailPickupNotice\": true,\n        \"thirdPartyEmailPickupNotice\": true,\n        \"consigneeEmailShippingLabel\": false,\n        \"otherEmailShippingLabel\": false,\n        \"shipperEmailShippingLabel\": false,\n        \"thirdPartyEmailShippingLabel\": false,\n        \"consigneeFaxBolUpdate\": false,\n        \"otherFaxBolUpdate\": false,\n        \"shipperFaxBolUpdate\": false,\n        \"thirdPartyFaxBolUpdate\": false,\n        \"consigneeFax\": \"\",\n        \"otherFax\": \"\",\n        \"shipperFax\": \"\",\n        \"thirdPartyFax\": \"\"\n    },\n    \"documentType\": \"E\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/bol",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create and Edit BOL Copy Copy Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bolId\": null,\n    \"generalInfo\": {\n        \"bolDate\": \"05/06/2019\",\n        \"assignProNumber\": true,\n        \"proNumber\": \"\",\n        \"masterBol\": false,\n        \"masterBolNumber\": \"\",\n        \"bolNumber\": \"testing BOL Ref No.\",\n        \"guranteed\": false,\n        \"quote\": \"\",\n        \"tosChecked\": \"\",\n        \"pickupRequest\": false\n    },\n    \"pickupDetailInfo\": null,\n    \"shipperInfo\": {\n        \"companyName\": \"PREMIER MANUFACTURING\",\n        \"firstName\": \"\",\n        \"lastName\": \"\",\n        \"location\": \"\",\n        \"phone\": \"(636) 537-6800\",\n        \"phoneExt\": \"\",\n        \"fax\": \"\",\n        \"country\": \"US\",\n        \"address1\": \"629 CEPI DR\",\n        \"address2\": \"\",\n        \"city\": \"CHESTERFIELD\",\n        \"state\": \"MO\",\n        \"zip\": \"63005\",\n        \"email\": \"twashington@estes-express.com\"\n    },\n    \"consigneeInfo\": {\n        \"companyName\": \"PREMIER MANUFACTURING\",\n        \"firstName\": \"\",\n        \"lastName\": \"\",\n        \"location\": \"\",\n        \"phone\": \"(636) 537-6800\",\n        \"phoneExt\": \"\",\n        \"fax\": \"\",\n        \"country\": \"US\",\n        \"address1\": \"629 CEPI DR\",\n        \"address2\": \"\",\n        \"city\": \"CHESTERFIELD\",\n        \"state\": \"MO\",\n        \"zip\": \"63005\",\n        \"email\": \"twashington@estes-express.com\"\n    },\n    \"commodityInfo\": {\n        \"commodityList\": [\n            {\n                \"commodityId\": 1,\n                \"hazmat\": false,\n                \"goodsType\": {\n                    \"code\": \"SK\",\n                    \"description\": null\n                },\n                \"goodsUnit\": 6,\n                \"goodsWeight\": 1000,\n                \"shipmentClass\": {\n                    \"code\": \"85\",\n                    \"description\": null\n                },\n                \"numberOfPackage\": null,\n                \"packageType\": null,\n                \"nmfc\": null,\n                \"nmfcExt\": null,\n                \"description\": \"\"\n            }\n        ],\n        \"contactName\": \"\",\n        \"phone\": \"\",\n        \"phoneExt\": \"\",\n        \"totalCube\": \"\",\n        \"specialIns\": \"\"\n    },\n    \"references\": [],\n    \"billingInfo\": {\n        \"billTo\": {\n            \"billingAddressInfo\": {\n                \"companyName\": \"PREMIER MANUFACTURING\",\n                \"firstName\": \"\",\n                \"lastName\": \"\",\n                \"location\": \"\",\n                \"phone\": \"(636) 537-6800\",\n                \"phoneExt\": \"\",\n                \"fax\": \"\",\n                \"country\": \"US\",\n                \"address1\": \"629 CEPI DR\",\n                \"address2\": \"\",\n                \"city\": \"CHESTERFIELD\",\n                \"state\": \"MO\",\n                \"zip\": \"63005\",\n                \"email\": \"twashington@estes-express.com\"\n            },\n            \"fee\": \"PPD\",\n            \"payor\": \"T\"\n        },\n        \"codRemitToInfo\": {\n            \"codAddressInfo\": {\n                \"companyName\": \"PREMIER MANUFACTURING\",\n                \"firstName\": \"\",\n                \"lastName\": \"\",\n                \"location\": \"\",\n                \"phone\": \"(636) 537-6800\",\n                \"phoneExt\": \"\",\n                \"fax\": \"\",\n                \"country\": \"US\",\n                \"address1\": \"629 CEPI DR\",\n                \"address2\": \"\",\n                \"city\": \"CHESTERFIELD\",\n                \"state\": \"MO\",\n                \"zip\": \"63005\",\n                \"email\": \"twashington@estes-express.com\"\n            },\n            \"fee\": \"C\",\n            \"amount\": \"1000\",\n            \"paymentType\": \"CC\"\n        },\n        \"codRemitTo\": true\n    },\n    \"accessorials\": [],\n    \"shippingLabel\": null,\n    \"emailAndFaxNotification\": {\n        \"fax\": \"\",\n        \"consigneeEmail\": \"\",\n        \"otherEmail\": \"\",\n        \"shipperEmail\": \"twashington@estes-express.com\",\n        \"thirdPartyEmail\": \"\",\n        \"consigneeEmailBolUpdate\": false,\n        \"otherEmailBolUpdate\": false,\n        \"shipperEmailBolUpdate\": false,\n        \"thirdPartyEmailBolUpdate\": false,\n        \"consigneeEmailTrackingUpdate\": false,\n        \"otherEmailTrackingUpdate\": false,\n        \"shipperEmailTrackingUpdate\": false,\n        \"thirdPartyEmailTrackingUpdate\": false,\n        \"consigneeEmailPickupNotice\": false,\n        \"otherEmailPickupNotice\": false,\n        \"shipperEmailPickupNotice\": false,\n        \"thirdPartyEmailPickupNotice\": false,\n        \"consigneeEmailShippingLabel\": false,\n        \"otherEmailShippingLabel\": false,\n        \"shipperEmailShippingLabel\": false,\n        \"thirdPartyEmailShippingLabel\": false,\n        \"consigneeFaxBolUpdate\": false,\n        \"otherFaxBolUpdate\": false,\n        \"shipperFaxBolUpdate\": false,\n        \"thirdPartyFaxBolUpdate\": false,\n        \"consigneeFax\": \"\",\n        \"otherFax\": \"\",\n        \"shipperFax\": \"\",\n        \"thirdPartyFax\": \"\"\n    },\n    \"documentType\": \"E\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/bol",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive Existing BOL by Id / Copy BOL Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bol/36402377",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol",
+								"36402377"
+							]
+						},
+						"description": "To Copy BOL & to start new BOL with the existing BOL"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive Existing BOL by Id / Copy BOL Copy Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bol/35144928",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol",
+								"35144928"
+							]
+						},
+						"description": "To Copy BOL & to start new BOL with the existing BOL"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive Existing BOL by Id / Copy BOL SMOKENAT",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer 05b560a6-dd0a-4ad3-9164-31960764fad0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/bol/36402081",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol",
+								"36402081"
+							]
+						},
+						"description": "To Copy BOL & to start new BOL with the existing BOL"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive Existing BOL by Id / Copy BOL Copy Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bol/35145129",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol",
+								"35145129"
+							]
+						},
+						"description": "To Copy BOL & to start new BOL with the existing BOL"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive Existing BOL by Id / Copy BOL Copy Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bol/35144955",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol",
+								"35144955"
+							]
+						},
+						"description": "To Copy BOL & to start new BOL with the existing BOL"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive Existing BOL by Id / Copy BOL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bol/35144926",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol",
+								"35144926"
+							]
+						},
+						"description": "To Copy BOL & to start new BOL with the existing BOL"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive Existing BOL by Id / Copy BOL Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bol/35144953",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol",
+								"35144953"
+							]
+						},
+						"description": "To Copy BOL & to start new BOL with the existing BOL"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive Existing BOL by Id / Copy BOL Copy Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bol/35144954",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol",
+								"35144954"
+							]
+						},
+						"description": "To Copy BOL & to start new BOL with the existing BOL"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive Existing BOL by Id / Copy BOL Copy Copy Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bol/36402180",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol",
+								"36402180"
+							]
+						},
+						"description": "To Copy BOL & to start new BOL with the existing BOL"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete BOL",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bol/33832865",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol",
+								"33832865"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive Existing BOL by Id / Copy BOL Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bol/35144927",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol",
+								"35144927"
+							]
+						},
+						"description": "To Copy BOL & to start new BOL with the existing BOL"
+					},
+					"response": []
+				},
+				{
+					"name": "Shipping Lable PDF",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bol/7712015/shipping_label",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol",
+								"7712015",
+								"shipping_label"
+							]
+						},
+						"description": "Shipping Lable PDF"
+					},
+					"response": []
+				},
+				{
+					"name": "Shipping Lable PDF  2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bol/36402348/shipping_label",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol",
+								"36402348",
+								"shipping_label"
+							]
+						},
+						"description": "Shipping Lable PDF"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Shipping Label",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"labelType\": \"4\",\r\n  \"startLabel\": \"10\",\r\n  \"numberOfLabel\": \"20\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/bol/7712015/shipping_label",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol",
+								"7712015",
+								"shipping_label"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View BOL PDF",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bol/view/7712015",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol",
+								"view",
+								"7712015"
+							]
+						},
+						"description": "To view & download PDF"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Form Utility",
+			"item": [
+				{
+					"name": "GET Accessorials",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/accessorials",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"accessorials"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Goods Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/goods_types",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"goods_types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Shipment Classes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/shipment_classes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"shipment_classes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pickup Dates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/available_pickup_dates",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"available_pickup_dates"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Form Validation",
+			"item": [
+				{
+					"name": "Validate Pro Number",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/validate/pro_number?proNumber=222-9050365",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"validate",
+								"pro_number"
+							],
+							"query": [
+								{
+									"key": "proNumber",
+									"value": "222-9050365"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Pickup Date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/validate/pickup_date?pickupDate=03/28/2019",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"validate",
+								"pickup_date"
+							],
+							"query": [
+								{
+									"key": "pickupDate",
+									"value": "03/28/2019"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate City State Zip",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/validate/city_state_zip?city=Richmond&zip=23230&state=VA",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"validate",
+								"city_state_zip"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "Richmond"
+								},
+								{
+									"key": "zip",
+									"value": "23230"
+								},
+								{
+									"key": "state",
+									"value": "VA"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Issue",
+			"item": [
+				{
+					"name": "Create BOL has shipping label issue",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"bolId\": null,\n  \"generalInfo\": {\n    \"bolDate\": \"02/25/2019\",\n    \"assignProNumber\": true,\n    \"proNumber\": \"\",\n    \"masterBol\": false,\n    \"masterBolNumber\": null,\n    \"bolNumber\": \"bol-pickup-test-ataur-100\",\n    \"guranteed\": true,\n    \"quote\": \"\",\n    \"tosChecked\": \"\",\n    \"pickupRequest\": true\n  },\n  \"pickupDetailInfo\": {\n    \"accepted\": false,\n    \"accountCode\": \"\",\n    \"completed\": false,\n    \"email\": \"twashington@estes-express.com\",\n    \"food\": true,\n    \"freeze\": true,\n    \"hookOrDrop\": false,\n    \"liftgateRequired\": true,\n    \"name\": \"Troy Washington\",\n    \"noStackPallet\": true,\n    \"oversize\": true,\n    \"phone\": \"(804) 353-1900\",\n    \"phoneExt\": \"\",\n    \"pickupDate\": \"02/25/2019\",\n    \"poision\": true,\n    \"rejected\": false,\n    \"role\": \"CONSIGNEE\",\n    \"specialInstruction\": \"testesets\",\n    \"startTime\": \"08:15 AM\",\n    \"endTime\": \"07:00 PM\"\n  },\n  \"shipperInfo\": {\n    \"companyName\": \"Test\",\n    \"firstName\": \"Trey\",\n    \"lastName\": \"Ellington\",\n    \"location\": \"\",\n    \"phone\": \"(122) 123-1123\",\n    \"phoneExt\": \"\",\n    \"fax\": \"\",\n    \"country\": \"US\",\n    \"address1\": \"4510 Leonard\",\n    \"address2\": \"\",\n    \"city\": \"Richmond\",\n    \"state\": \"VA\",\n    \"zip\": \"23221\",\n    \"email\": \"trey@trey.com\"\n  },\n  \"consigneeInfo\": {\n    \"companyName\": \"Test\",\n    \"firstName\": \"Trey\",\n    \"lastName\": \"Ellington\",\n    \"location\": \"\",\n    \"phone\": \"(804) 353-1900\",\n    \"phoneExt\": \"\",\n    \"fax\": \"\",\n    \"country\": \"US\",\n    \"address1\": \"4510 Leonard\",\n    \"address2\": \"\",\n    \"city\": \"Richmond\",\n    \"state\": \"VA\",\n    \"zip\": \"23221\",\n    \"email\": \"trey@trey.com\"\n  },\n  \"commodityInfo\": {\n    \"commodityList\": [],\n    \"contactName\": \"\",\n    \"phone\": \"\",\n    \"phoneExt\": \"\",\n    \"totalCube\": \"\",\n    \"specialIns\": \"\"\n  },\n  \"references\": [],\n  \"billingInfo\": {\n    \"billTo\": { \"billingAddressInfo\": null, \"fee\": \"PPD\", \"payor\": \"S\" },\n    \"codRemitToInfo\": null,\n    \"codRemitTo\": false\n  },\n  \"accessorials\": [\n    { \"code\": \"APT\", \"description\": \"Appointment Request\", \"display\": true },\n    { \"code\": \"AKLGAT\", \"description\": \"Alaska Lift-Gate Service\", \"display\": true }\n  ],\n   \"shippingLabel\": null,\n  \"emailAndFaxNotification\": {\n    \"fax\": \"\",\n    \"consigneeEmail\": \"\",\n    \"otherEmail\": \"\",\n    \"shipperEmail\": \"\",\n    \"thirdPartyEmail\": \"\",\n    \"consigneeEmailBolUpdate\": false,\n    \"otherEmailBolUpdate\": false,\n    \"shipperEmailBolUpdate\": false,\n    \"thirdPartyEmailBolUpdate\": false,\n    \"consigneeEmailTrackingUpdate\": false,\n    \"otherEmailTrackingUpdate\": false,\n    \"shipperEmailTrackingUpdate\": false,\n    \"thirdPartyEmailTrackingUpdate\": false,\n    \"consigneeEmailPickupNotice\": false,\n    \"otherEmailPickupNotice\": false,\n    \"shipperEmailPickupNotice\": false,\n    \"thirdPartyEmailPickupNotice\": false,\n    \"consigneeEmailShippingLabel\": false,\n    \"otherEmailShippingLabel\": false,\n    \"shipperEmailShippingLabel\": false,\n    \"thirdPartyEmailShippingLabel\": false,\n    \"consigneeFaxBolUpdate\": false,\n    \"otherFaxBolUpdate\": false,\n    \"shipperFaxBolUpdate\": false,\n    \"thirdPartyFaxBolUpdate\": false,\n    \"consigneeFax\": \"\",\n    \"otherFax\": \"\",\n    \"shipperFax\": \"\",\n    \"thirdPartyFax\": \"\"\n  },\n  \"documentType\": \"E\"\n}\n"
+						},
+						"url": {
+							"raw": "{{url}}/bol",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create BOL has shipping label issue Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"bolId\": null,\n  \"generalInfo\": {\n    \"bolDate\": \"02/25/2019\",\n    \"assignProNumber\": true,\n    \"proNumber\": \"\",\n    \"masterBol\": false,\n    \"masterBolNumber\": null,\n    \"bolNumber\": \"bol-pickup-test-ataur-100\",\n    \"guranteed\": true,\n    \"quote\": \"\",\n    \"tosChecked\": \"\",\n    \"pickupRequest\": true\n  },\n  \"pickupDetailInfo\": {\n    \"accepted\": false,\n    \"accountCode\": \"\",\n    \"completed\": false,\n    \"email\": \"twashington@estes-express.com\",\n    \"food\": true,\n    \"freeze\": true,\n    \"hookOrDrop\": false,\n    \"liftgateRequired\": true,\n    \"name\": \"Troy Washington\",\n    \"noStackPallet\": true,\n    \"oversize\": true,\n    \"phone\": \"(804) 353-1900\",\n    \"phoneExt\": \"\",\n    \"pickupDate\": \"02/25/2019\",\n    \"poision\": true,\n    \"rejected\": false,\n    \"role\": \"CONSIGNEE\",\n    \"specialInstruction\": \"testesets\",\n    \"startTime\": \"08:15 AM\",\n    \"endTime\": \"07:00 PM\"\n  },\n  \"shipperInfo\": {\n    \"companyName\": \"Test\",\n    \"firstName\": \"Trey\",\n    \"lastName\": \"Ellington\",\n    \"location\": \"\",\n    \"phone\": \"(122) 123-1123\",\n    \"phoneExt\": \"\",\n    \"fax\": \"\",\n    \"country\": \"US\",\n    \"address1\": \"4510 Leonard\",\n    \"address2\": \"\",\n    \"city\": \"Richmond\",\n    \"state\": \"VA\",\n    \"zip\": \"23221\",\n    \"email\": \"trey@trey.com\"\n  },\n  \"consigneeInfo\": {\n    \"companyName\": \"Test\",\n    \"firstName\": \"Trey\",\n    \"lastName\": \"Ellington\",\n    \"location\": \"\",\n    \"phone\": \"(804) 353-1900\",\n    \"phoneExt\": \"\",\n    \"fax\": \"\",\n    \"country\": \"US\",\n    \"address1\": \"4510 Leonard\",\n    \"address2\": \"\",\n    \"city\": \"Richmond\",\n    \"state\": \"VA\",\n    \"zip\": \"23221\",\n    \"email\": \"trey@trey.com\"\n  },\n  \"commodityInfo\": {\n    \"commodityList\": [],\n    \"contactName\": \"\",\n    \"phone\": \"\",\n    \"phoneExt\": \"\",\n    \"totalCube\": \"\",\n    \"specialIns\": \"\"\n  },\n  \"references\": [],\n  \"billingInfo\": {\n    \"billTo\": { \"billingAddressInfo\": null, \"fee\": \"PPD\", \"payor\": \"S\" },\n    \"codRemitToInfo\": null,\n    \"codRemitTo\": false\n  },\n  \"accessorials\": [\n    { \"code\": \"APT\", \"description\": \"Appointment Request\", \"display\": true },\n    { \"code\": \"AKLGAT\", \"description\": \"Alaska Lift-Gate Service\", \"display\": true }\n  ],\n   \"shippingLabel\": null,\n  \"emailAndFaxNotification\": {\n    \"fax\": \"\",\n    \"consigneeEmail\": \"\",\n    \"otherEmail\": \"\",\n    \"shipperEmail\": \"\",\n    \"thirdPartyEmail\": \"\",\n    \"consigneeEmailBolUpdate\": false,\n    \"otherEmailBolUpdate\": false,\n    \"shipperEmailBolUpdate\": false,\n    \"thirdPartyEmailBolUpdate\": false,\n    \"consigneeEmailTrackingUpdate\": false,\n    \"otherEmailTrackingUpdate\": false,\n    \"shipperEmailTrackingUpdate\": false,\n    \"thirdPartyEmailTrackingUpdate\": false,\n    \"consigneeEmailPickupNotice\": false,\n    \"otherEmailPickupNotice\": false,\n    \"shipperEmailPickupNotice\": false,\n    \"thirdPartyEmailPickupNotice\": false,\n    \"consigneeEmailShippingLabel\": false,\n    \"otherEmailShippingLabel\": false,\n    \"shipperEmailShippingLabel\": false,\n    \"thirdPartyEmailShippingLabel\": false,\n    \"consigneeFaxBolUpdate\": false,\n    \"otherFaxBolUpdate\": false,\n    \"shipperFaxBolUpdate\": false,\n    \"thirdPartyFaxBolUpdate\": false,\n    \"consigneeFax\": \"\",\n    \"otherFax\": \"\",\n    \"shipperFax\": \"\",\n    \"thirdPartyFax\": \"\"\n  },\n  \"documentType\": \"E\"\n}\n"
+						},
+						"url": {
+							"raw": "{{url}}/bol",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create DRAFT issue",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"bolId\": null,\n  \"generalInfo\": {\n    \"bolDate\": \"02/18/2019\",\n    \"assignProNumber\": false,\n    \"proNumber\": \"\",\n    \"masterBol\": false,\n    \"masterBolNumber\": null,\n    \"bolNumber\": \"DRAFT_TESTED_BY_ATAUR\",\n    \"guranteed\": false,\n    \"quote\": \"\",\n    \"tosChecked\": \"\"\n  },\n  \"pickupDetailInfo\": null,\n  \"shipperInfo\": {\n    \"companyName\": \"\",\n    \"firstName\": \"\",\n    \"lastName\": \"\",\n    \"location\": \"\",\n    \"phone\": \"\",\n    \"phoneExt\": \"\",\n    \"fax\": \"\",\n    \"country\": \"US\",\n    \"address1\": \"\",\n    \"address2\": \"\",\n    \"city\": \"\",\n    \"state\": \"\",\n    \"zip\": \"\",\n    \"email\": \"\"\n  },\n  \"consigneeInfo\": {\n    \"companyName\": \"\",\n    \"firstName\": \"\",\n    \"lastName\": \"\",\n    \"location\": \"\",\n    \"phone\": \"\",\n    \"phoneExt\": \"\",\n    \"fax\": \"\",\n    \"country\": \"US\",\n    \"address1\": \"\",\n    \"address2\": \"\",\n    \"city\": \"\",\n    \"state\": \"\",\n    \"zip\": \"\",\n    \"email\": \"\"\n  },\n  \"commodityInfo\": {\n    \"commodityList\": [],\n    \"contactName\": \"\",\n    \"phone\": \"(123) 213-1231\",\n    \"phoneExt\": \"\",\n    \"totalCube\": \"\",\n    \"specialIns\": \"\"\n  },\n  \"references\": [],\n  \"billingInfo\": {\n    \"billTo\": { \"billingAddressInfo\": null, \"fee\": \"PPD\", \"payor\": \"S\" },\n    \"codRemitToInfo\": null,\n    \"codRemitTo\": false\n  },\n  \"accessorials\": [],\n  \"shippingLabel\": null,\n  \"emailAndFaxNotification\": {\n    \"fax\": \"\",\n    \"consigneeEmail\": \"\",\n    \"otherEmail\": \"\",\n    \"shipperEmail\": \"\",\n    \"thirdPartyEmail\": \"\",\n    \"consigneeEmailBolUpdate\": false,\n    \"otherEmailBolUpdate\": false,\n    \"shipperEmailBolUpdate\": false,\n    \"thirdPartyEmailBolUpdate\": false,\n    \"consigneeEmailTrackingUpdate\": false,\n    \"otherEmailTrackingUpdate\": false,\n    \"shipperEmailTrackingUpdate\": false,\n    \"thirdPartyEmailTrackingUpdate\": false,\n    \"consigneeEmailPickupNotice\": false,\n    \"otherEmailPickupNotice\": false,\n    \"shipperEmailPickupNotice\": false,\n    \"thirdPartyEmailPickupNotice\": false,\n    \"consigneeEmailShippingLabel\": false,\n    \"otherEmailShippingLabel\": false,\n    \"shipperEmailShippingLabel\": false,\n    \"thirdPartyEmailShippingLabel\": false,\n    \"consigneeFaxBolUpdate\": false,\n    \"otherFaxBolUpdate\": false,\n    \"shipperFaxBolUpdate\": false,\n    \"thirdPartyFaxBolUpdate\": false,\n    \"consigneeFax\": \"\",\n    \"otherFax\": \"\",\n    \"shipperFax\": \"\",\n    \"thirdPartyFax\": \"\"\n  },\n  \"documentType\": \"E\"\n}\n"
+						},
+						"url": {
+							"raw": "{{url}}/draft",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"draft"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Shipping Label",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bol/35144262/shipping_label",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bol",
+								"35144262",
+								"shipping_label"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "eca7513f-7279-4761-aa60-be1c93b5092d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "306f9c73-5a14-4be5-8fc9-f39fdb76f12c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "403af44d-6eaf-47b5-9869-2de0f83a1875",
+			"key": "url",
+			"value": "{{baseUrl}}BillOfLading/v1.0",
+			"type": "string"
+		}
+	]
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<body style="padding-left:0px; padding-top:0px; font-size:8.0pt; font-family:Arial, Helvetica, sans-serif;">
+    <#if operation != "sendEmail">
+    <img align="left" src="${estesLogoPath4Print}" width="120" height="50" />
+    </#if>
+    <#assign pickupStartTime = quote.pickupAvail/>
+    <#assign pickupCloseTime = quote.pickupClose/>
+    <table border="0.5" BORDERCOLOR="#ffffff" width="100%" font-size="8" cellspacing="0" cellpadding="0" >
+        <tr bgcolor="#A6A6A6" style="border-top: 0.5px solid;" valign="top">
+            <td style="text-align: center;font-weight: bold;" width="50%" valign="middle"><font size="2">        Details for ${quote.accountName} - ${quote.accountCode}</font></td>
+            <td style="text-align: center;font-weight: bold;" width="50%" valign="middle"><font size="2">        Service Level: ${quote.service.text}</font></td>
+        </tr>
+        <tr bgcolor="#A6A6A6" style="border-top:0.5px solid;" valign="top">
+            <td style="text-align:center; font-weight:bold; border-bottom:1px solid #000;" width="100%" colspan="2" valign="middle"><font size="2"><b>Contact Information: </b></font> ${quote.contactName}; ${quote.contactPhone}<#if quote.contactPhoneExt!=""> x${quote.contactPhoneExt}</#if>; ${quote.contactEmail}  </td>
+        </tr>
+    </table>
+    <table style="width: 100%;">
+        <tr border="0.5" style="text-align: left;" ALIGN="Left" VALIGN="Top" >
+            <td style="width: 25%; border:1px solid; text-align: left" ALIGN="Left" VALIGN="Top" colspan="2">Rate Quote: ${quote.quoteID} <br/>Shipment Terms: <#if quote.terms=="PPD">Prepaid<#elseif quote.terms=="COL">Collect<#else></#if> <br/>Customer Role: <#if quote.role=="S">Shipper<#elseif quote.role=="C">Consignee<#elseif quote.role=="T">Third Party<#else></#if>
+			</td>
+            <td style="width: 25%; border:1px solid; text-align: left" align="left" colspan="2">From: ${quote.origin.city}, ${quote.origin.state} ${quote.origin.zip}  <br/>To: ${quote.dest.city}, ${quote.dest.state} ${quote.dest.zip}  <br/>Service Standard: <#if quote.service.id == 97>N/A<#else>${quote.lane} day(s)*</#if>
+            </td>
+            <td style="width: 25%; border:1px solid; text-align: left" align="left" colspan="2">Pickup Date: ${(quote.pickupDate?date("yyyy-MM-dd")?string("MMM d, yyyy"))!} <br/>Pickup Ready: ${(pickupStartTime?time("HH:mm:ss"))!} <br/>Declared Value: ${(quote.declaredValue?string.currency)!}<br/><#if quote.linearFeet != 0>Total Linear Feet: ${(quote.linearFeet)!}</#if>
+            </td>
+            <td style="width: 25%; border:1px solid; text-align: left" align="left" colspan="2">Delivery Date: <#if quote.service.id == 94> TBD** <#else> ${(quote.delivery.date?date("yyyy-MM-dd")?string("MMM d, yyyy"))!} </#if> <br/>Closing Time: ${(pickupCloseTime?time("HH:mm:ss"))!}<br/>Food Warehouse: <#if quote.foodWarehouse!="">${(quote.foodWarehouse)!}<#else>No</#if><br/>Stackable: <#if quote.stackable>Yes<#else>No</#if>
+            </td>
+        </tr>
+        <tr>
+        	<td colspan="8" style="text-align:left" align="left">
+                <#if quote.service.id == 94>
+                    <p> **Delivery date for V/TL Basic shipment will be based on standard transit for the service lane plus capacity/ops conditions present at the time of booking. </p>
+                </#if>
+        	</td>
+        </tr>
+        <tr>
+            <td colspan="8" style="text-align:left" align="left">Comments: ${quote.comments}</td>
+        </tr>
+    </table>
+    <table style="width: 100%; border:1px solid; text-align: center">
+        <#if quote.service.id == 99 || app == "LTL">
+        <tr border="0.5" bgcolor="#A6A6A6">
+            <td style="width: 15%; border:1px solid;font-weight: bold;">Class</td>
+            <td style="width: 15%; border:1px solid;font-weight: bold;">Pieces</td>
+            <td style="width: 15%; border:1px solid;font-weight: bold;">Total Weight (lbs)</td>
+            <td style="width: 15%; border:1px solid;font-weight: bold;">Dimensions (L/W/H)</td>
+            <td style="width: 20%; border:1px solid;font-weight: bold;">Description</td>
+            <td style="width: 10%; border:1px solid;font-weight: bold;">Rate<br>(CWT)</td>
+            <td style="width: 10%; border:1px solid;font-weight: bold;">Charge</td>
+        </tr>
+        <#list quote.commodities as comm>
+        <tr border="0.5">
+            <td style="width: 15%; border:1px solid"><#if comm.deficitRate==false>${(comm.commodity.shipClass)!}</#if></td>
+            <td style="width: 15%; border:1px solid"><#if comm.deficitRate==false>${(comm.commodity.pieces)!}</#if></td>
+            <td style="width: 15%; border:1px solid">${(comm.commodity.weight)!}</td>
+            <td style="width: 15%; border:1px solid"><#if comm.deficitRate==false>${(comm.commodity.dimensions.length)!}/${(comm.commodity.dimensions.width)!}/${(comm.commodity.dimensions.height)!}</#if></td>
+            <td style="width: 20%; border:1px solid">${(comm.commodity.description)!}</td>
+            <td style="width: 10%; border:1px solid">${(comm.rate?string.currency)!}</td>
+            <td style="width: 10%; border:1px solid">${(comm.charge?string.currency)!}</td>
+        </tr>
+ 		</#list>
+ 		<#else>
+ 		<tr border="0.5" bgcolor="#A6A6A6">
+            <td style="width: 22%; border:1px solid;font-weight: bold;">Class</td>
+            <td style="width: 15%; border:1px solid;font-weight: bold;">Pieces</td>
+            <td style="width: 15%; border:1px solid;font-weight: bold;">Total Weight (lbs)</td>
+            <td style="width: 23%; border:1px solid;font-weight: bold;">Dimensions (L/W/H)</td>
+            <td style="width: 25%; border:1px solid;font-weight: bold;">Description</td>
+        </tr>
+        <#list quote.commodities as comm>
+        <tr border="0.5">
+            <td style="width: 22%; border:1px solid"><#if comm.deficitRate==false>${(comm.commodity.shipClass)!}</#if></td>
+            <td style="width: 15%; border:1px solid"><#if comm.deficitRate==false>${(comm.commodity.pieces)!}</#if></td>
+            <td style="width: 15%; border:1px solid">${(comm.commodity.weight)!}</td>
+            <td style="width: 23%; border:1px solid"><#if comm.deficitRate==false>${(comm.commodity.dimensions.length)!}/${(comm.commodity.dimensions.width)!}/${(comm.commodity.dimensions.height)!}</#if></td>
+            <td style="width: 25%; border:1px solid">${(comm.commodity.description)!}</td>
+        </tr>
+        </#list>
+        </#if>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+    <table style="width: 100%;">
+        <tr border="0.5" bgcolor="#A6A6A6">
+            <td colspan="13" style="text-align:left; border:1px solid; font-weight:bold;">Description</td>
+            <td colspan="3" style="text-align:right; border:1px solid; font-weight:bold;">Charge</td>
+        </tr>
+        <#list quote.charges as chg>
+        <tr border="0.5">
+            <td colspan="13" style="border:1px solid; text-align:left" >${chg.description}</td>
+            <td colspan="3" style="border:1px solid; text-align:right" >${chg.amount}</td>
+        </tr>
+        </#list>
+        <tr border="0.5">
+            <td colspan="13" style="width: 80%; border:1px solid; text-align: left">Estimated Freight Charges</td>
+            <td colspan="3" style="width: 20%; border:1px solid; text-align: right">${quote.pricing.totalPrice?string.currency}</td>
+        </tr>
+        <tr border="0.5" ALIGN="Center">
+            <td colspan="16" align="center" style="text-align: left;border:1px solid;font-weight: bold;" bgcolor="#A6A6A6">Terminal Information</td>
+        </tr>
+        <tr  border="0.5" style="text-align: left;" ALIGN="Left" VALIGN="Top"> 
+            <td colspan="8" style="width: 50%; border:1px solid;text-align: left;" ALIGN="Left" VALIGN="Top">From: ${origin.address.city}, ${origin.address.state} ${origin.address.zip} <br/>Terminal: ${origin.id} ${origin.name}  <br/>
+				Address: ${origin.address.streetAddress} <br/>
+				                ${origin.address.city}, ${origin.address.state} ${origin.address.zip} <br/>
+				Phone: ${origin.phone} <br/>
+				Fax: ${origin.fax}
+            </td>
+            <td colspan="8" align="left" style="width:50%;border:1px solid; text-align:left">
+				To: ${dest.address.city}, ${dest.address.state} ${dest.address.zip} <br/>
+				Terminal: ${dest.id} ${dest.name} <br/>
+				Address: ${dest.address.streetAddress} <br/>
+				                ${dest.address.city}, ${dest.address.state} ${dest.address.zip} <br/>
+				Phone: ${dest.phone} <br/>
+				Fax: ${dest.fax}
+			</td>
+        </tr>
+    </table>
+    ${disclaimerFooter}
+</body>
+</html>

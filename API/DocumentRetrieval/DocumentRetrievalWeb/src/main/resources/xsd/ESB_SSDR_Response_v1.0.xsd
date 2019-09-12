@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="documentResponse" type="documentResponse"/>
+  <xsd:complexType name="documentResponse">
+    <xsd:sequence>
+      <xsd:element name="code" type="xsd:string"/>
+      <xsd:element name="message" type="xsd:string"/>
+      <xsd:element name="OTPRO" nillable="true" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="OT" nillable="true" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="OTPhone" nillable="true" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="DT" nillable="true" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="DTPhone" nillable="true" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

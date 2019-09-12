@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.estes.myestes.onlinereporting</groupId>
+	<artifactId>OnlineReporting</artifactId>
+	<version>${project.version}</version>
+	<packaging>pom</packaging>
+	<name>Online Reporting</name>
+	<description>Customer Online Reporting</description>
+	<modules>
+		<module>OnlineReportingWeb</module>
+		<module>OnlineReportingEAR</module>
+	</modules>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<projectEarName>OnlineReportingEAR</projectEarName>
+		<spring-version>4.3.14.RELEASE</spring-version>
+		<spring.security.version>4.2.7.RELEASE</spring.security.version>
+		<spring.oauth.version>2.3.3.RELEASE</spring.oauth.version>
+		<jackson-databind-version>2.5.5</jackson-databind-version>
+		<org.slf4j-version>1.6.3</org.slf4j-version>
+		<log4j.version>1.2.16</log4j.version>
+		<estesfw.version>1.0.4.0</estesfw.version>
+		<junit.version>4.11</junit.version>
+		<project.version>2.0.0.0</project.version>
+	</properties>
+</project>

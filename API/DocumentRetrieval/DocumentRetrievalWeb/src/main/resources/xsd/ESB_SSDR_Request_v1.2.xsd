@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="documentRequest" type="documentRequest"/>
+  <xsd:complexType name="documentRequest">
+    <xsd:sequence>
+      <xsd:element name="source">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="W"/>
+            <xsd:enumeration value="T"/>
+            <xsd:whiteSpace value="preserve"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="trackingNumber">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="25"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="zip">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:minLength value="5"/>
+            <xsd:maxLength value="5"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="documentCodes" type="documentCodes"/>
+      <xsd:element name="delivery">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="email"/>
+            <xsd:enumeration value="fax"/>
+            <xsd:maxLength value="5"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="emails" type="emails" minOccurs="0"/>
+      <xsd:element name="faxInfo" type="faxInfo" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="documentCodes">
+    <xsd:sequence>
+      <xsd:element name="documentCode" maxOccurs="unbounded">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="BOL"/>
+            <xsd:enumeration value="DR"/>
+            <xsd:maxLength value="3"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="emails">
+    <xsd:sequence>
+      <xsd:element name="email" type="xsd:string" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="faxInfo">
+    <xsd:sequence>
+      <xsd:element name="attention" minOccurs="0">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:maxLength value="200"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="fax" type="faxNumber"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="faxNumber">
+    <xsd:sequence>
+      <xsd:element name="areaCode">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:maxLength value="3"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="number">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:maxLength value="7"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

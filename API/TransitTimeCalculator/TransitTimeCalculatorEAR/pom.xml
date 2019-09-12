@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.estes.myestes.transittimecalculator</groupId>
+		<artifactId>TransitTimeCalculator</artifactId>
+		<version>${project.version}</version>
+	</parent>
+	<artifactId>TransitTimeCalculatorEAR</artifactId>
+	<packaging>ear</packaging>
+	<description>Estes TransitTimeCalculator</description>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<version>5</version>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<modules>
+						<webModule>
+							<groupId>com.estes.myestes.transittimecalculator</groupId>
+							<artifactId>TransitTimeCalculatorWeb</artifactId>
+							<bundleFileName>TransitTimeCalculatorWeb.war</bundleFileName>
+							<contextRoot>api/myestes/TransitTimeCalculator/v1.0</contextRoot>
+						</webModule>
+					</modules>
+					<displayName>TransitTimeCalculatorEAR</displayName>
+					<generateApplicationXml>true</generateApplicationXml>
+					<applicationXml>${basedir}/target/application.xml</applicationXml>
+				</configuration>
+			</plugin>
+	    </plugins>
+	</build>
+	<dependencies>		
+		<dependency>
+			<groupId>com.estes.myestes.transittimecalculator</groupId>
+			<artifactId>TransitTimeCalculatorWeb</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+</project>

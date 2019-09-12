@@ -1,0 +1,85 @@
+Steps to set up Maven EAR project:
+
+1) Select File -> New -> Project -> Enterprise Application Project
+- Enter Project name: DocumentRetrievalEAR
+- Uncheck the "Use default location" checkbox
+- Enter Location: <workspace home>/DocumentRetrieval/DocumentRetrievalEAR
+- Select "Websphere Application Server v8.0" for Target runtime
+- Select EAR version 5.0
+- Select "Minimal Configuration for Websphere Application Server v8.0" for Configuration
+- Leave "Working sets" checkbox unchecked
+<Click "Next" button>
+- Check the "DocumentRetrievalWeb" checkbox
+- Check the "Generate application.xml deployment descriptor" checkbox
+<Click "Finish" button>
+
+2) Right-click on DocumentRetrievalEAR -> Configure -> Convert to Maven Project
+		Group Id: com.estesexpress.ssdr
+		artifact ID: DocumentRetrievalEAR
+		Version: 1.0-SNAPSHOT
+		packaging: ear
+
+3) Ignore error that maven-ear-plugin:jar:28 could not be resolved.
+
+4) Replace <groupId> and <version> elements in POM (pom.xml) with the following:
+<parent>
+	<groupId>com.estesexpress.ssdr</groupId>
+	<artifactId>DocumentRetrieval</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+</parent>
+
+5) Add module for EAR project using snippet below in parent POM of DocumentRetrieval project.
+This goes after the <description> element.  The DocumentRetrievalWeb module will be there.
+
+<modules>
+	<module>DocumentRetrievalWeb</module>
+	<module>DocumentRetrievalEAR</module>
+</modules>
+
+6) Add web project dependency using snippet below. Please the snippet below before the <build> section.
+
+<dependencies>		
+	<dependency>
+		<groupId>com.estesexpress.ssdr</groupId>
+		<artifactId>DocumentRetrievalWeb</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<type>war</type>
+	</dependency>
+</dependencies>
+
+7) Change maven-ear-plugin dependency in POM from version 2.10 to version 2.3.2
+- Change <configuration> as in snippet below
+
+<plugin>
+	<artifactId>maven-ear-plugin</artifactId>
+	<version>2.3.2</version>
+	<configuration>
+		<version>5</version>
+		<defaultLibBundleDir>lib</defaultLibBundleDir>
+		<modules>
+			<webModule>
+				<groupId>com.estes.myestes.accountrequest</groupId>
+				<artifactId>DocumentRetrievalWeb</artifactId>
+				<bundleFileName>DocumentRetrievalWeb.war</bundleFileName>
+				<contextRoot>ssdr</contextRoot>
+			</webModule>
+		</modules>
+		<displayName>DocumentRetrievalEAR</displayName>
+		<generateApplicationXml>true</generateApplicationXml>
+		<applicationXml>${basedir}/target/application.xml</applicationXml>
+	</configuration>
+</plugin>
+
+8) Set context root in application.xml file as in snippet below:
+
+<web>
+	<web-uri>DocumentRetrievalWeb.war</web-uri>
+	<context-root>api/DocumentRetrieval/v1.0</context-root>
+</web>
+
+9) Add <properties> element below <modules> element in parent POM as in snippet below:
+
+<properties>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<projectEarName>DocumentRetrievalEAR</projectEarName>
+</properties>

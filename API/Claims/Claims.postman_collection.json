@@ -1,0 +1,547 @@
+{
+	"info": {
+		"_postman_id": "c7cf2359-2fb0-4d1f-89ef-1499bbc2185a",
+		"name": "Claims",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Claims Filing",
+			"item": [
+				{
+					"name": "Get infomation based on username in oauth token",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/getClaimantInfo",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"getClaimantInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get infomation based on ot pro passed and if the account is party to shipment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"accountNumber\": \"5023958\",\r\n  \"otpro\": \"040-6767886\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/getProInfo",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"getProInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Claims filing has existing claim #QA# [user = saweaver23]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 9ea1c03f-3ef1-4a8b-8941-5e96e9642c09"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"otpro\":\"007-1286773\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/hasEnteredClaim",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hasEnteredClaim"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Claims filing no existing claim #QA# [user = saweaver23]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 9ea1c03f-3ef1-4a8b-8941-5e96e9642c09"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"otpro\":\"017-9020172\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/hasEnteredClaim",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hasEnteredClaim"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Claims filing PRO info #QA# [user = saweaver23]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 9ea1c03f-3ef1-4a8b-8941-5e96e9642c09"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"otpro\":\"017-9020172\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/getProInfo",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"getProInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Whether a claim has already been entered for this ot pro",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"accountNumber\": \"5023958\",\r\n  \"otpro\": \"040-6767886\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/hasEnteredClaim",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hasEnteredClaim"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "File a claim, File types allowed are doc|docx|jpg|pdf|png|rtf|txt|xls|xlsx",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "otPro",
+									"value": "007-1286773",
+									"type": "text"
+								},
+								{
+									"key": "accountNumber",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "claimType",
+									"value": "Damage",
+									"type": "text"
+								},
+								{
+									"key": "freightType",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "proDate",
+									"value": "10312018",
+									"type": "text"
+								},
+								{
+									"key": "referenceNumber",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "bol",
+									"value": "NS",
+									"type": "text"
+								},
+								{
+									"key": "bolDate",
+									"value": "10312018",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "ADVANCE AUTO PARTS",
+									"type": "text"
+								},
+								{
+									"key": "streetAddress1",
+									"value": "405 E 78TH ST",
+									"type": "text"
+								},
+								{
+									"key": "streetAddress2",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "Bloomington",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "MN",
+									"type": "text"
+								},
+								{
+									"key": "zip",
+									"value": "55420",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ataur.rahman@estes-express.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "(219) 555-1212",
+									"type": "text"
+								},
+								{
+									"key": "fax",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "autoTotal",
+									"value": "5.00",
+									"type": "text"
+								},
+								{
+									"key": "additionalComments",
+									"value": "Test submitclaim service",
+									"type": "text"
+								},
+								{
+									"key": "invoiceFile",
+									"type": "file",
+									"src": ""
+								},
+								{
+									"key": "descriptionDetails1",
+									"value": "Test desc1",
+									"type": "text"
+								},
+								{
+									"key": "qtyDetails1",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "costDetails1",
+									"value": "1.00",
+									"type": "text"
+								},
+								{
+									"key": "remitName",
+									"value": "The Remitter",
+									"type": "text"
+								},
+								{
+									"key": "remitStreetAddress1",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "remitStreetAddress2",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "remitCity",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "remitState",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "remitZip",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "remitEmail",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "remitPhone",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/submitClaim",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"submitClaim"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Claims Inquiry",
+			"item": [
+				{
+					"name": "Email the list of claims based off provided data and user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 4121626f-d10d-466f-8756-18eb3d5f33a4"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"searchBy\":\"Date Range\",\r\n  \"status\":\"ALL\",\r\n  \"startDate\":\"20180501\",\r\n  \"endDate\":\"20181001\",\r\n  \"emailAddresses\":\"ataur.rahman@estes-express.com\",\r\n  \"format\":\"CSV\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{url}}/emailClaims",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"emailClaims"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Claims inquiry email by PRO #QA# [user = saweaver23]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 4121626f-d10d-466f-8756-18eb3d5f33a4"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"searchBy\":\"PRO Number\",\r\n  \"numbers\":[\r\n    \"007-1286773\"\r\n  ],\r\n  \"emailAddresses\":\"ataur.rahman@estes-express.com\",\r\n  \"format\":\"CSV\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/emailClaims",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"emailClaims"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Claims inquiry by PRO #QA# [user = saweaver23]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"searchBy\":\"PRO Number\",\r\n  \"numbers\":[\r\n    \"040-1287601\"\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/getClaims",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"getClaims"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Claims inquiry date range #QA# [user = saweaver23]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 4121626f-d10d-466f-8756-18eb3d5f33a4"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"searchBy\":\"Date Range\",\r\n  \"status\":\"All\",\r\n  \"startDate\":\"20180501\",\r\n  \"endDate\":\"20181002\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/getClaims",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"getClaims"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get the list of claims based off provided data and user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"searchBy\":\"PRO Number\",\r\n  \"numbers\":[\r\n    \"007-1286773\"\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/getClaims",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"getClaims"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "7930b357-7fea-4cf8-b08a-c279cc3e0542",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0ace6470-7af4-4b47-b799-bb39f54b7615",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b03aed21-1216-46ea-bbf8-9525dc5b4a4c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "f6cb129a-93e7-4622-b024-1893507a5606",
+			"key": "url",
+			"value": "{{baseUrl}}Claims/v1.0",
+			"type": "string"
+		}
+	]
+}

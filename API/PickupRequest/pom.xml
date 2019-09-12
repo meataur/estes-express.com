@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.estes.myestes.PickupRequest</groupId>
+	<version>${project.version}</version>
+	<packaging>pom</packaging>
+	<name>My Estes Pickup Request services</name>
+	<modules>
+		<module>PickupRequestWeb</module>
+		<module>PickupRequestApiEAR</module>
+	</modules>
+	<properties>
+		<project.version>2.0.0.3</project.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring-version>4.3.18.RELEASE</spring-version>
+		<jackson-databind-version>2.9.4</jackson-databind-version>
+		<org.slf4j-version>1.6.3</org.slf4j-version>
+		<log4j.version>1.2.16</log4j.version>
+		<estesfw.version>1.0.5.0</estesfw.version>
+		<estes.dto.version>1.2.2.7</estes.dto.version>
+		<junit.version>4.12</junit.version>
+		<!-- Spring Oauth2 Integration -->
+		<oauth.version>2.3.3.RELEASE</oauth.version>
+		<spring.security.version>4.2.7.RELEASE</spring.security.version>
+	</properties>
+	<artifactId>PickupRequest</artifactId>
+</project>

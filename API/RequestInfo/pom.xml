@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.estesexpress.RequestInfo</groupId>
+	<artifactId>RequestInfo</artifactId>
+	<version>${project.version}</version>
+	<packaging>pom</packaging>
+	<name>RequestInfo</name>
+	<description>Self service request info</description>
+	<modules>
+		<module>RequestInfoWeb</module>
+		<module>RequestInfoEAR</module>
+	</modules>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring-version>4.3.14.RELEASE</spring-version>
+		<jackson-databind-version>2.9.4</jackson-databind-version>
+		<org.slf4j-version>1.6.3</org.slf4j-version>
+		<junit.version>4.11</junit.version>
+		<log4j.version>1.2.16</log4j.version>
+		<estesfw.version>1.0.5.0</estesfw.version>
+		<estes.dto.version>1.2.2.0</estes.dto.version>
+		<projectEarName>RequestInfoEAR</projectEarName>
+		<project.version>2.0.0.1</project.version>
+		<!-- Spring Oauth2 Integration -->
+		<oauth.version>2.3.3.RELEASE</oauth.version>
+		<spring.security.version>4.2.7.RELEASE</spring.security.version>
+	</properties>
+</project>

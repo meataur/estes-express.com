@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.estes.myestes.PickupRequest</groupId>
+		<artifactId>PickupRequest</artifactId>
+		<version>${project.version}</version>
+	</parent>
+	<artifactId>PickupRequestApiEAR</artifactId>
+	<packaging>ear</packaging>
+	<description>Pickup Request</description>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<version>5</version>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<modules>
+						<webModule>
+							<groupId>com.estes.myestes.PickupRequest</groupId>
+							<artifactId>PickupRequestWeb</artifactId>
+							<bundleFileName>PickupRequestWeb.war</bundleFileName>
+							<contextRoot>api/myestes/PickupRequest/v1.0</contextRoot>
+						</webModule>
+					</modules>
+					<displayName>PickupRequestEAR</displayName>
+					<generateApplicationXml>true</generateApplicationXml>
+					<applicationXml>${basedir}/target/application.xml</applicationXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>com.estes.myestes.PickupRequest</groupId>
+			<artifactId>PickupRequestWeb</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+</project>

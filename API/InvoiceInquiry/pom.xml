@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.estes.myestes.invoiceinquiry</groupId>
+	<artifactId>InvoiceInquiry</artifactId>
+	<version>${project.version}</version>
+	<packaging>pom</packaging>
+	<name>Invoice Inquiry</name>
+	<description>Estes customer invoice inquiry</description>
+	<modules>
+		<module>InvoiceInquiryWeb</module>
+		<module>InvoiceInquiryEAR</module>
+	</modules>
+
+	<properties>
+		<project.version>2.0.0.1</project.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring-version>4.3.14.RELEASE</spring-version>
+		<spring.security.version>4.2.7.RELEASE</spring.security.version>
+		<spring.oauth.version>2.3.3.RELEASE</spring.oauth.version>
+		<jackson-databind-version>2.5.5</jackson-databind-version>
+		<org.slf4j-version>1.6.3</org.slf4j-version>
+		<log4j.version>1.2.16</log4j.version>
+		<estesdto.version>1.2.2.7</estesdto.version>
+		<estesfw.version>1.0.6.2</estesfw.version>
+		<junit.version>4.11</junit.version>
+	</properties>
+</project>

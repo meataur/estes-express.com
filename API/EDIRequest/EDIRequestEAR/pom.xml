@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.estes.myestes.edirequest</groupId>
+		<artifactId>EDIRequest</artifactId>
+		<version>${project.version}</version>
+	</parent>
+	<artifactId>EDIRequestEAR </artifactId>
+	<packaging>ear</packaging>
+	<description>!!!EAR resources from the root directory need to be moved under src/main/application!!!</description>
+	<dependencies>		
+		<dependency>
+			<groupId>com.estes.myestes.edirequest</groupId>
+			<artifactId>EDIRequestWeb</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<version>5</version>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<modules>
+						<webModule>
+							<groupId>com.estes.myestes.edirequest</groupId>
+							<artifactId>EDIRequestWeb</artifactId>
+							<bundleFileName>EDIRequestWeb.war</bundleFileName>
+							<contextRoot>api/myestes/EDIRequest/v1.0</contextRoot>
+						</webModule>
+					</modules>
+					<displayName>EDIRequestEAR </displayName>
+					<generateApplicationXml>true</generateApplicationXml>
+					<applicationXml>${basedir}/target/application.xml</applicationXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

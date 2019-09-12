@@ -1,0 +1,239 @@
+Steps to set up Maven web project:
+
+1) Select File -> New -> Maven Module
+- Enter PointsWeb as the module name
+- Select Points as the parent project
+- Uncheck the "Add project(s) to working set" checkbox
+- Select the "maven-archetype-webapp" template
+- The group ID (ex. com.estes.myestes.points) and artifact ID (ex. Points) should be pre-filled
+- Leave the package blank
+
+2) Right-click the src/main folder and click New -> Folder
+- Name the folder "java" (no quotes) - a source folder named src/main/java will appear
+(Maven does not not create the src/main/java source folder when the project is created.)
+
+3) Edit the POM file and delete the groupdId and version tags that are *OUTSIDE* the parent tag.
+Those tags should be highlighted in yellow.
+
+4) Right-click the project and select Maven -> Update Project
+
+Additional info:
+http://www.mkyong.com/maven/how-to-create-a-web-application-project-with-maven/
+
+The following command does not seem to work:
+mvn eclipse:eclipse -Dwtpversion=2.0
+See step #2 above that works.
+
+5) Open src/main/webapp/WEB-INF/web.xml.  It should look like the snippet below.
+
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+</web-app>
+
+Replace the contents of the file with the snippet below:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.5"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<display-name>Estes Points Lookup</display-name>
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
+
+6) Set execution environment to JavaSE-1.8 by adding following snippet within the <build> section of the pom.xml build script.
+Paste this above the closing </finalName> element/tag within the build element.
+
+<plugins>
+	<plugin>
+		<artifactId>maven-compiler-plugin</artifactId>
+		<version>2.5</version>
+		<configuration>
+			<source>1.8</source>
+			<target>1.8</target>
+		</configuration>
+	</plugin>
+</plugins>
+
+7) Switch to Navigator view and edit the org.eclipse.wst.common.project.facet.core.xml file in the .settings folder 
+- Set jst.web fact as in the snippet below:
+
+<installed facet="jst.web" version="2.5"/>
+
+This changes the Dynamic Web Module project facet
+
+8) Add JEE dependencies to the pom.xml file as shown in snippet below:
+
+<dependency>
+	<groupId>javax</groupId>
+	<artifactId>javaee-web-api</artifactId>
+	<version>8.0</version>
+	<scope>provided</scope>
+</dependency>
+
+9) Go to web project settings and change context root to "api/myestes/Points/v1.0" (no quotes)
+
+==
+== Add Spring dependencies
+==
+
+10) Add the following code snippet for the Spring dependencies
+
+<!-- SPRING START -->
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-beans</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-context</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-context-support</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-core</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-expression</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-jdbc</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-orm</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-tx</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-web</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-webmvc</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<!-- SPRING END -->
+
+11) Add following dependencies for JSON parsing below the Spring dependencies in prior step
+
+<dependency>
+	<groupId>com.fasterxml.jackson.core</groupId>
+	<artifactId>jackson-databind</artifactId>
+	<version>${jackson-databind-version}</version>
+</dependency>
+<dependency>
+	<groupId>com.fasterxml.jackson.module</groupId>
+	<artifactId>jackson-module-jaxb-annotations</artifactId>
+	<version>2.4.1</version>
+</dependency>
+<dependency>
+	<groupId>org.codehaus.jackson</groupId>
+	<artifactId>jackson-mapper-asl</artifactId>
+	<version>1.9.13</version>
+</dependency>
+<dependency>
+	<groupId>com.sun.xml.bind</groupId>
+	<artifactId>jaxb-impl</artifactId>
+	<version>2.2.7</version>
+</dependency>
+
+12) Add the following code snippet to the POM below JSON dependencies for the Estes framework dependencies
+
+<dependency>
+	<groupId>com.estes.framework</groupId>
+	<artifactId>ESTESFramework</artifactId>
+	<version>${estesfw.version}</version>
+</dependency>
+
+<!-- Logging for Estes toolbox -->
+<dependency>
+	<groupId>log4j</groupId>
+	<artifactId>log4j</artifactId>
+	<version>${log4j.version}</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/commons-digester/commons-digester -->
+<dependency>
+    <groupId>commons-digester</groupId>
+    <artifactId>commons-digester</artifactId>
+    <version>1.8</version>
+</dependency>
+
+13) Create  src/main/webapp/WEB-INF/points-dispatcher.xml Spring context file with contents below:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- Scans the classpath of this application for @Components to deploy as beans -->
+	<context:component-scan base-package="com.estes.myestes.points" />
+
+	<!-- Configures the @Controller programming model -->
+	<mvc:annotation-driven />
+
+	<!-- Swagger UI config -->
+	<mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/" />
+	<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" />
+</beans>
+
+14) Modify WEB-INF/web.xml file by adding the snippet below above the welcome file list:
+
+<context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>
+		/WEB-INF/points-dispatcher.xml
+	</param-value>
+</context-param>
+
+<!-- Handles all requests into the application -->
+<servlet>
+	<servlet-name>points-Dispatcher</servlet-name>
+	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	<load-on-startup>1</load-on-startup>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>points-Dispatcher</servlet-name>
+	<url-pattern>/</url-pattern>
+</servlet-mapping>
+
+<listener>
+	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+
+15) Create controller class(es) with @RestController annotation in the com.estes.myestes.points package
+	- Create method with @RequestMapping and @ResponseBody annotations for the ReST services that communicate from the UI
+
+16) Create appContext.xml file in the WEB-INF folder with JDBC datasource info
+- Update contextConfigLocation in web.xml file to reference appContext.xml file

@@ -1,0 +1,1902 @@
+{
+	"info": {
+		"_postman_id": "d5077959-8635-4d44-9761-6f48504887b8",
+		"name": "RateQuote",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "EmailController",
+			"item": [
+				{
+					"name": "Email Quote 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"addresses\": [\n        \"ataur.rahman1@estes-express.com\"\n    ],\n    \"level\": 99,\n    \"quoteId\": \"3VXHJ58\",\n    \"quoteRefNum\": 6665629,\n    \"action\": \"\",\n    \"app\": \"LTL\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email Quote 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"addresses\":[\"test@test.com\"],\"action\":\"E\",\"quoteId\":\"XB7468W\",\"app\":\"VTL\",\"level\":97,\"quoteRefNum\":6662737}"
+						},
+						"url": {
+							"raw": "{{url}}/email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email Quote 3",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"eitqatest@estes-express.com\"\n    ],\n    \"app\": \"VTL\",\n    \"level\": 95,\n    \"quoteId\": \"38MWGCJ\",\n    \"quoteRefNum\": 6663506\n}"
+						},
+						"url": {
+							"raw": "{{url}}/email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email Quote 4",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"test@test.com\"\n    ],\n    \"app\": \"VTL\",\n    \"level\": 95,\n    \"quoteId\": \"3R5Y6Q6\",\n    \"quoteRefNum\": 6663517\n}"
+						},
+						"url": {
+							"raw": "{{url}}/email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email Quote 5",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"eitqatest@estes-express.com\"\n    ],\n    \"app\": \"VTL\",\n    \"level\": 98,\n    \"quoteId\": \"198PRGT\",\n    \"quoteRefNum\": 6663519\n}"
+						},
+						"url": {
+							"raw": "{{url}}/email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email Quote 6",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"addresses\": [\n        \"test@test.test\"\n    ],\n    \"action\": \"E\",\n    \"quoteId\": \"LB2P7GG\",\n    \"app\": \"LTL\",\n    \"level\": 99,\n    \"quoteRefNum\": 6664384\n}"
+						},
+						"url": {
+							"raw": "{{url}}/email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email Quote 7",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"addresses\": [\n        \"Ataur.Rahman@extes-express.com\",\n        \"Pradeep.Karuturi@estes-express.com\",\n        \"Lakshman.Kandaswamy@estes-express.com\"\n    ],\n    \"action\": \"E\",\n    \"quoteId\": \"LXQMTL7\",\n    \"app\": \"LTL\",\n    \"level\": 99,\n    \"quoteRefNum\": 6665000\n}"
+						},
+						"url": {
+							"raw": "{{url}}/email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email Quote 8",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"addresses\": [\n        \"test@test.com\"\n    ],\n    \"action\": \"E\",\n    \"quoteId\": \"L5GBBSB\",\n    \"app\": \"LTL\",\n    \"level\": 99,\n    \"quoteRefNum\": 6666151\n}"
+						},
+						"url": {
+							"raw": "{{url}}/email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email Quote 9",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"eitqatest@estes-express.com\"\n    ],\n    \"app\": \"VTL\",\n    \"level\": 95,\n    \"quoteId\": \"326SQ8Y\",\n    \"quoteRefNum\": 6666319\n}"
+						},
+						"url": {
+							"raw": "{{url}}/email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact Me Email",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"qatest@estes-express.com\"\n    ],\n    \"app\": \"VTL\",\n    \"level\": 95,\n    \"quoteId\": \"3PVJFZB\",\n    \"quoteRefNum\": 6666141\n}"
+						},
+						"url": {
+							"raw": "{{url}}/email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact Me Email Copy",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"E\",\n    \"addresses\": [\n        \"customer1@example.net\"\n    ],\n    \"app\": \"VTL\",\n    \"level\": 94,\n    \"quoteId\": \"VRNBNPV\",\n    \"quoteRefNum\": 6679092\n}"
+						},
+						"url": {
+							"raw": "{{url}}/email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact Me Email Copy",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"qatest@estes-express.com\"\n    ],\n    \"app\": \"VTL\",\n    \"level\": 95,\n    \"quoteId\": \"3PVJFZB\",\n    \"quoteRefNum\": 6666141\n}"
+						},
+						"url": {
+							"raw": "{{url}}/email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Quote Details",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"addresses\": [\n        \"test@test.com\"\n    ],\n    \"action\": \"E\",\n    \"quoteId\": \"2BPB6PM\",\n    \"app\": \"LTL\",\n    \"level\": 96,\n    \"quoteRefNum\": 6659829\n}"
+						},
+						"url": {
+							"raw": "{{url}}/email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Quote Details Copy",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"E\",\n    \"addresses\": [\n        \"Ataur.Rahman@ESTES-EXPRESS.COM\"\n    ],\n    \"app\": \"TC\",\n    \"level\": 98,\n    \"quoteId\": \"1ZXZSSQ\",\n    \"quoteRefNum\": 6665659\n}"
+						},
+						"url": {
+							"raw": "{{url}}/email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"email"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "QuoteHistoryController",
+			"item": [
+				{
+					"name": "Get Reference 1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "09bdb99e-a7c9-401e-af07-4854db324d7f",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"Ataur.Rahman@ESTES-EXPRESS.COM\"\n    ],\n    \"app\": \"TC\",\n    \"level\": 95,\n    \"quoteId\": \"LPR8BBC\",\n    \"quoteRefNum\": 1494578\n}"
+						},
+						"url": {
+							"raw": "{{url}}/reference/1513222",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reference",
+								"1513222"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Reference 2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"Ataur.Rahman@ESTES-EXPRESS.COM\"\n    ],\n    \"app\": \"TC\",\n    \"level\": 95,\n    \"quoteId\": \"LPR8BBC\",\n    \"quoteRefNum\": 1494578\n}"
+						},
+						"url": {
+							"raw": "{{url}}/reference/6663383",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reference",
+								"6663383"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Rate Quote History",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/search?order=asc&sort=QUOTENUM&size=25&page=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "asc"
+								},
+								{
+									"key": "sort",
+									"value": "QUOTENUM"
+								},
+								{
+									"key": "size",
+									"value": "25"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Rate Quote History Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/search?order=asc&sort=QUOTENUM&size=25&page=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "asc"
+								},
+								{
+									"key": "sort",
+									"value": "QUOTENUM"
+								},
+								{
+									"key": "size",
+									"value": "25"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Print Quote",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"Ataur.Rahman@ESTES-EXPRESS.COM\"\n    ],\n    \"app\": \"TC\",\n    \"level\": 95,\n    \"quoteId\": \"LPR8BBC\",\n    \"quoteRefNum\": 1494578\n}"
+						},
+						"url": {
+							"raw": "{{url}}/print/V9XRH6J",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"print",
+								"V9XRH6J"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RatingController",
+			"item": [
+				{
+					"name": "Request Quote 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": \"\",\n                \"width\": \"\",\n                \"height\": \"\"\n            },\n            \"description\": \"\",\n            \"pieceType\": \"\",\n            \"pieces\": \"\",\n            \"shipClass\": \"55\",\n            \"weight\": \"100\"\n        }\n    ],\n    \"accessorials\": [\n        {\n            \"code\": \"AKINS\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Alaska Inside Delivery\"\n        },\n        {\n            \"code\": \"AKRES\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Alaska Residential Delivery\"\n        }\n    ],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"HENRICO\",\n        \"state\": \"VA\",\n        \"zip\": \"23294\"\n    },\n    \"dest\": {\n        \"country\": \"US\",\n        \"city\": \"JAMAICA\",\n        \"state\": \"NY\",\n        \"zip\": \"11435\"\n    },\n    \"apps\": [\"VTL\"],\n    \"accountCode\": \"7178618\",\n    \"role\": \"C\",\n    \"terms\": \"COL\",\n    \"declaredValue\": \"133\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote 1 Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": \"\",\n                \"width\": \"\",\n                \"height\": \"\"\n            },\n            \"description\": \"\",\n            \"pieceType\": \"\",\n            \"pieces\": \"\",\n            \"shipClass\": \"55\",\n            \"weight\": \"100\"\n        }\n    ],\n    \"accessorials\": [\n        {\n            \"code\": \"AKINS\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Alaska Inside Delivery\"\n        },\n        {\n            \"code\": \"AKRES\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Alaska Residential Delivery\"\n        }\n    ],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"HENRICO\",\n        \"state\": \"VA\",\n        \"zip\": \"23294\"\n    },\n    \"dest\": {\n        \"country\": \"US\",\n        \"city\": \"JAMAICA\",\n        \"state\": \"NY\",\n        \"zip\": \"11435\"\n    },\n    \"apps\": [\"VTL\"],\n    \"accountCode\": \"7178618\",\n    \"role\": \"C\",\n    \"terms\": \"COL\",\n    \"declaredValue\": \"133\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote 1 Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"LTL\"\n    ],\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": \"\",\n                \"width\": \"\",\n                \"height\": \"\"\n            },\n            \"description\": \"\",\n            \"pieceType\": \"\",\n            \"pieces\": \"\",\n            \"shipClass\": \"60\",\n            \"weight\": \"23\"\n        }\n    ],\n    \"accessorials\": [\n        {\n            \"code\": \"NCM\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Notify Request\"\n        },\n        {\n            \"code\": \"LONG12\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Overlength (8.01'-11.99')\"\n        },\n        {\n            \"code\": \"INS\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Inside Delivery\"\n        }\n    ],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"MIDLOTHIAN\",\n        \"state\": \"VA\",\n        \"zip\": \"23113\"\n    },\n    \"dest\": {\n        \"country\": \"US\",\n        \"city\": \"PUEBLO\",\n        \"state\": \"CO\",\n        \"zip\": \"81001\"\n    },\n    \"accountCode\": \"5068692\",\n    \"role\": \"S\",\n    \"terms\": \"COL\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"LTL\"\n    ],\n    \"commodities\": [\n        {\n            \"description\": \"\",\n            \"shipClass\": \"50\",\n            \"weight\": \"23\"\n        }\n    ],\n    \"accessorials\": [],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"HENRICO\",\n        \"state\": \"VA\",\n        \"zip\": \"23233\"\n    },\n    \"dest\": {\n        \"country\": \"MX\",\n        \"city\": \"CANCEN\",\n        \"state\": \"ROO\",\n        \"zip\": \"77507\"\n    },\n    \"terms\": \"\",\n    \"role\": \"\",\n    \"contactName\": \"testy\",\n    \"discount\": 40\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote 3",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"LTL\"\n    ],\n    \"commodities\": [\n        {\n            \"description\": \"\",\n            \"shipClass\": \"50\",\n            \"weight\": \"23\"\n        }\n    ],\n    \"accessorials\": [],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"HENRICO\",\n        \"state\": \"VA\",\n        \"zip\": \"23233\"\n    },\n    \"dest\": {\n        \"country\": \"MX\",\n        \"city\": \"CANCEN\",\n        \"state\": \"ROO\",\n        \"zip\": \"77507\"\n    },\n    \"terms\": \"\",\n    \"role\": \"\",\n    \"contactName\": \"testy\",\n    \"discount\": 40\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote 4",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"VTL\",\n        \"TC\",\n        \"LTL\"\n    ],\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": \"2\",\n                \"width\": \"2\",\n                \"height\": \"2\"\n            },\n            \"description\": \"Commodity Description\",\n            \"pieceType\": \"BX\",\n            \"pieces\": \"10\",\n            \"shipClass\": \"55\",\n            \"weight\": \"10\"\n        },\n        {\n            \"dimensions\": {\n                \"length\": \"3\",\n                \"width\": \"4\",\n                \"height\": \"5\"\n            },\n            \"description\": \"Commodity 2\",\n            \"pieceType\": \"BR\",\n            \"pieces\": \"20\",\n            \"shipClass\": \"55\",\n            \"weight\": \"20\"\n        }\n    ],\n    \"accessorials\": [\n        {\n            \"code\": \"LONG53\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Overlength Freight (28 feet or greater)\"\n        },\n        {\n            \"code\": \"LONG12\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Overlength (8.01'-11.99')\"\n        },\n        {\n            \"code\": \"INS\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Inside Delivery\"\n        },\n        {\n            \"code\": \"LGATE\",\n            \"appID\": \"TC\",\n            \"display\": true,\n            \"description\": \"Lift-Gate Service (Delivery)\"\n        },\n        {\n            \"code\": \"LONG20\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Overlength Freight (12.00' to 19.99')\"\n        },\n        {\n            \"code\": \"FRZ\",\n            \"appID\": \"TC\",\n            \"display\": true,\n            \"description\": \"Protect from Freezing (US only)\"\n        },\n        {\n            \"code\": \"AKINS\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Alaska Inside Delivery\"\n        },\n        {\n            \"code\": \"AKLGAT\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Alaska Lift-Gate Service\"\n        }\n    ],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"HENRICO\",\n        \"state\": \"VA\",\n        \"zip\": \"23294\"\n    },\n    \"dest\": {\n        \"country\": \"US\",\n        \"city\": \"BAGDAD\",\n        \"state\": \"KY\",\n        \"zip\": \"40003\"\n    },\n    \"accountCode\": \"5068692\",\n    \"role\": \"S\",\n    \"terms\": \"COL\",\n    \"contactName\": \"JAMES BROWN\",\n    \"contactEmail\": \"eitqatest@estes-express.com\",\n    \"contactPhone\": \"(804) 353-1900\",\n    \"contactPhoneExt\": \"336\",\n    \"pickupDate\": \"04/30/2019\",\n    \"pickupAvail\": \"08:00 AM\",\n    \"pickupClose\": \"05:00 PM\",\n    \"declaredValue\": \"1000\",\n    \"declaredValueWaived\": false,\n    \"foodWarehouseId\": 5,\n    \"stackable\": true,\n    \"comments\": \"Comments by ata\",\n    \"linearFeet\": \"10\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote 5",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"VTL\",\n        \"TC\",\n        \"LTL\"\n    ],\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": \"60\",\n                \"width\": \"60\",\n                \"height\": \"60\"\n            },\n            \"description\": \"\",\n            \"pieceType\": \"PT\",\n            \"pieces\": \"2\",\n            \"shipClass\": \"50\",\n            \"weight\": \"4700\"\n        },\n        {\n            \"dimensions\": {\n                \"length\": \"61\",\n                \"width\": \"60\",\n                \"height\": \"60\"\n            },\n            \"description\": \"\",\n            \"pieceType\": \"PT\",\n            \"pieces\": \"2\",\n            \"shipClass\": \"60\",\n            \"weight\": \"4700\"\n        }\n    ],\n    \"accessorials\": [],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"GLEN ALLEN\",\n        \"state\": \"VA\",\n        \"zip\": \"23059\"\n    },\n    \"dest\": {\n        \"country\": \"US\",\n        \"city\": \"ZION\",\n        \"state\": \"IL\",\n        \"zip\": \"60099\"\n    },\n    \"accountCode\": \"5068692\",\n    \"role\": \"S\",\n    \"terms\": \"PPD\",\n    \"contactName\": \"EIT Tester\",\n    \"contactEmail\": \"eitqa@estes-express.com\",\n    \"contactPhone\": \"(202) 303-5544\",\n    \"contactPhoneExt\": \"\",\n    \"pickupDate\": \"04/25/2019\",\n    \"pickupAvail\": \"08:00 AM\",\n    \"pickupClose\": \"05:00 PM\",\n    \"declaredValue\": \"\",\n    \"declaredValueWaived\": true,\n    \"foodWarehouseId\": \"\",\n    \"stackable\": false,\n    \"comments\": \"\",\n    \"linearFeet\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote 6",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"VTL\",\n        \"TC\"\n    ],\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": \"23\",\n                \"width\": \"23\",\n                \"height\": \"23\"\n            },\n            \"description\": \"\",\n            \"pieceType\": \"BK\",\n            \"pieces\": \"23\",\n            \"shipClass\": \"65\",\n            \"weight\": \"23\"\n        }\n    ],\n    \"accessorials\": [],\n    \"origin\": {\n        \"country\": \"CN\",\n        \"city\": \"MONTREAL\",\n        \"state\": \"PQ\",\n        \"zip\": \"H1A1E1\"\n    },\n    \"dest\": {\n        \"country\": \"US\",\n        \"city\": \"MIDLOTHIAN\",\n        \"state\": \"VA\",\n        \"zip\": \"23113\"\n    },\n    \"role\": \"S\",\n    \"terms\": \"PPD\",\n    \"contactName\": \"testy\",\n    \"contactEmail\": \"twashington@estes-express.com\",\n    \"contactPhone\": \"(636) 537-6800\",\n    \"contactPhoneExt\": \"\",\n    \"pickupDate\": \"04/30/2019\",\n    \"pickupAvail\": \"08:00 AM\",\n    \"pickupClose\": \"05:00 PM\",\n    \"declaredValue\": \"\",\n    \"declaredValueWaived\": true,\n    \"foodWarehouseId\": \"\",\n    \"stackable\": false,\n    \"comments\": \"\",\n    \"linearFeet\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote DP2 4110",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"LTL\"\n    ],\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": \"\",\n                \"width\": \"\",\n                \"height\": \"\"\n            },\n            \"description\": \"Commodity line 1 and 20 lbs deficit\",\n            \"pieceType\": \"\",\n            \"pieces\": \"\",\n            \"shipClass\": \"60\",\n            \"weight\": 300\n        },\n        {\n            \"dimensions\": {\n                \"length\": \"\",\n                \"width\": \"\",\n                \"height\": \"\"\n            },\n            \"description\": \"Commodity Line 2\",\n            \"pieceType\": \"\",\n            \"pieces\": \"\",\n            \"shipClass\": \"50\",\n            \"weight\": 180\n        }\n    ],\n    \"accessorials\": [],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"HOUSTON\",\n        \"state\": \"TX\",\n        \"zip\": \"77005\"\n    },\n    \"dest\": {\n        \"country\": \"MX\",\n        \"city\": \"LA PAZ\",\n        \"state\": \"BCS\",\n        \"zip\": \"23230\"\n    },\n    \"role\": \"S\",\n    \"terms\": \"PPD\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote LTL only 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"LTL\"\n    ],\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": \"\",\n                \"width\": \"\",\n                \"height\": \"\"\n            },\n            \"description\": \"\",\n            \"pieceType\": \"\",\n            \"pieces\": \"\",\n            \"shipClass\": \"50\",\n            \"weight\": \"9999999\"\n        }\n    ],\n    \"accessorials\": [],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"NEW YORK\",\n        \"state\": \"NY\",\n        \"zip\": \"10003\"\n    },\n    \"dest\": {\n        \"country\": \"US\",\n        \"city\": \"HENRICO\",\n        \"state\": \"VA\",\n        \"zip\": \"23294\"\n    },\n    \"role\": \"S\",\n    \"terms\": \"PPD\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote 6 Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"VTL\",\n        \"TC\",\n        \"LTL\"\n    ],\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": \"10\",\n                \"width\": \"10\",\n                \"height\": \"10\"\n            },\n            \"description\": \"Commodity 1\",\n            \"pieceType\": \"BG\",\n            \"pieces\": \"10\",\n            \"shipClass\": \"50\",\n            \"weight\": \"10\"\n        },\n        {\n            \"dimensions\": {\n                \"length\": \"40\",\n                \"width\": \"60\",\n                \"height\": \"60\"\n            },\n            \"description\": \"test 2\",\n            \"pieceType\": \"BL\",\n            \"pieces\": \"20\",\n            \"shipClass\": \"50\",\n            \"weight\": \"30\"\n        }\n    ],\n    \"accessorials\": [],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"WASHINGTON\",\n        \"state\": \"DC\",\n        \"zip\": \"20001\"\n    },\n    \"dest\": {\n        \"country\": \"US\",\n        \"city\": \"ALPHARETTA\",\n        \"state\": \"GA\",\n        \"zip\": \"30005\"\n    },\n    \"role\": \"S\",\n    \"terms\": \"PPD\",\n    \"contactName\": \"JAMES BROWN\",\n    \"contactEmail\": \"eitqatest@estes-express.com\",\n    \"contactPhone\": \"(804) 353-1900\",\n    \"contactPhoneExt\": \"35319\",\n    \"pickupDate\": \"05/31/2019\",\n    \"pickupAvail\": \"08:00 AM\",\n    \"pickupClose\": \"05:00 PM\",\n    \"declaredValue\": \"100\",\n    \"declaredValueWaived\": false,\n    \"foodWarehouseId\": 2,\n    \"stackable\": true,\n    \"comments\": \"Test\",\n    \"linearFeet\": \"10\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote 7 LTL only",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"LTL\"\n    ],\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": \"\",\n                \"width\": \"\",\n                \"height\": \"\"\n            },\n            \"description\": \"Test\",\n            \"pieceType\": \"\",\n            \"pieces\": \"\",\n            \"shipClass\": \"50\",\n            \"weight\": \"10\"\n        }\n    ],\n    \"accessorials\": [],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"NEW YORK\",\n        \"state\": \"NY\",\n        \"zip\": \"10003\"\n    },\n    \"dest\": {\n        \"country\": \"US\",\n        \"city\": \"HENRICO\",\n        \"state\": \"VA\",\n        \"zip\": \"23294\"\n    },\n    \"role\": \"S\",\n    \"terms\": \"PPD\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote 6 testadmin4",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"VTL\",\n        \"TC\",\n        \"LTL\"\n    ],\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": 68,\n                \"width\": 48,\n                \"height\": 48\n            },\n            \"description\": \"\",\n            \"pieceType\": \"PT\",\n            \"pieces\": 7,\n            \"shipClass\": \"50\",\n            \"weight\": 4700\n        }\n    ],\n    \"accessorials\": [],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"HENRICO\",\n        \"state\": \"VA\",\n        \"zip\": \"23233\"\n    },\n    \"dest\": {\n        \"country\": \"US\",\n        \"city\": \"ATLANTA\",\n        \"state\": \"GA\",\n        \"zip\": \"30307\"\n    },\n    \"accountCode\": \"5023958\",\n    \"role\": \"S\",\n    \"terms\": \"PPD\",\n    \"contactName\": \"DP2-3772 2\",\n    \"contactEmail\": \"twashington@estes-express.com\",\n    \"contactPhone\": \"(636) 537-6800\",\n    \"contactPhoneExt\": \"\",\n    \"pickupDate\": \"04/29/2019\",\n    \"pickupAvail\": \"08:30 AM\",\n    \"pickupClose\": \"05:00 PM\",\n    \"declaredValue\": 0,\n    \"declaredValueWaived\": false,\n    \"foodWarehouseId\": \"\",\n    \"stackable\": false,\n    \"comments\": \"\",\n    \"linearFeet\": 0\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote 4 for Three apps",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"VTL\",\n        \"TC\",\n        \"LTL\"\n    ],\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": \"8\",\n                \"width\": \"8\",\n                \"height\": \"8\"\n            },\n            \"description\": \"\",\n            \"pieceType\": \"BL\",\n            \"pieces\": \"1\",\n            \"shipClass\": \"65\",\n            \"weight\": \"1000\"\n        }\n    ],\n    \"accessorials\": [\n        {\n            \"code\": \"APT\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Appointment Request\"\n        },\n        {\n            \"code\": \"AKRES\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Alaska Residential Delivery\"\n        },\n        {\n            \"code\": \"HAZ\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Hazardous Materials\"\n        },\n        {\n            \"code\": \"NCM\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Notify Request\"\n        },\n        {\n            \"code\": \"INS\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Inside Delivery\"\n        }\n    ],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"RICHMOND\",\n        \"state\": \"VA\",\n        \"zip\": \"23230\"\n    },\n    \"dest\": {\n        \"country\": \"US\",\n        \"city\": \"JAMAICA\",\n        \"state\": \"NY\",\n        \"zip\": \"11435\"\n    },\n    \"role\": \"S\",\n    \"terms\": \"PPD\",\n    \"contactName\": \"Josh Hense\",\n    \"contactEmail\": \"qatest@estes-express.com\",\n    \"contactPhone\": \"(804) 353-1900\",\n    \"contactPhoneExt\": \"1200\",\n    \"pickupDate\": \"04/23/2019\",\n    \"pickupAvail\": \"08:00 AM\",\n    \"pickupClose\": \"05:00 PM\",\n    \"declaredValue\": \"1\",\n    \"declaredValueWaived\": false,\n    \"foodWarehouseId\": \"\",\n    \"stackable\": false,\n    \"comments\": \"\",\n    \"linearFeet\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote 4 for Three apps 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"VTL\",\n        \"TC\",\n        \"LTL\"\n    ],\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": \"12\",\n                \"width\": \"12\",\n                \"height\": \"12\"\n            },\n            \"description\": \"\",\n            \"pieceType\": \"BG\",\n            \"pieces\": \"10\",\n            \"shipClass\": \"50\",\n            \"weight\": \"10\"\n        }\n    ],\n    \"accessorials\": [],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"WASHINGTON\",\n        \"state\": \"DC\",\n        \"zip\": \"20004\"\n    },\n    \"dest\": {\n        \"country\": \"US\",\n        \"city\": \"NEW YORK\",\n        \"state\": \"NY\",\n        \"zip\": \"10005\"\n    },\n    \"accountCode\": \"5068692\",\n    \"role\": \"S\",\n    \"terms\": \"PPD\",\n    \"contactName\": \" TEST\",\n    \"contactEmail\": \"eitqatest@estes-express.com\",\n    \"contactPhone\": \"(804) 353-1900\",\n    \"contactPhoneExt\": \"\",\n    \"pickupDate\": \"05/24/2019\",\n    \"pickupAvail\": \"08:00 AM\",\n    \"pickupClose\": \"05:00 PM\",\n    \"declaredValue\": \"\",\n    \"declaredValueWaived\": true,\n    \"foodWarehouseId\": \"\",\n    \"stackable\": false,\n    \"comments\": \"\",\n    \"linearFeet\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote 4 for LTL & VTL",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"VTL\"\n    ],\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": \"1\",\n                \"width\": \"1\",\n                \"height\": \"1\"\n            },\n            \"description\": \"\",\n            \"pieceType\": \"BX\",\n            \"pieces\": \"1\",\n            \"shipClass\": \"55\",\n            \"weight\": \"1\"\n        }\n    ],\n    \"accessorials\": [\n        {\n            \"code\": \"AKLGAT\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Alaska Lift-Gate Service\"\n        },\n        {\n            \"code\": \"AKINS\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Alaska Inside Delivery\"\n        },\n        {\n            \"code\": \"APT\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Appointment Request\"\n        },\n        {\n            \"code\": \"CONST\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Construction Site Delivery\"\n        }\n    ],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"RICHMOND\",\n        \"state\": \"VA\",\n        \"zip\": \"23230\"\n    },\n    \"dest\": {\n        \"country\": \"US\",\n        \"city\": \"JAMAICA\",\n        \"state\": \"NY\",\n        \"zip\": \"11435\"\n    },\n    \"accountCode\": \"7178618\",\n    \"role\": \"C\",\n    \"terms\": \"COL\",\n    \"contactName\": \"Josh Hense\",\n    \"contactEmail\": \"qatest@estes-express.com\",\n    \"contactPhone\": \"(804) 353-1900\",\n    \"contactPhoneExt\": \"1200\",\n    \"pickupDate\": \"04/27/2019\",\n    \"pickupAvail\": \"08:00 AM\",\n    \"pickupClose\": \"05:00 PM\",\n    \"declaredValue\": \"1\",\n    \"declaredValueWaived\": false,\n    \"foodWarehouseId\": \"\",\n    \"stackable\": false,\n    \"comments\": \"\",\n    \"linearFeet\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote 4 for LTL Only",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"LTL\"\n    ],\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": \"\",\n                \"width\": \"\",\n                \"height\": \"\"\n            },\n            \"description\": \"Commodity 1\",\n            \"pieceType\": \"\",\n            \"pieces\": \"\",\n            \"shipClass\": \"50\",\n            \"weight\": \"10\"\n        }\n    ],\n    \"accessorials\": [\n        {\n            \"code\": \"INS\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Inside Delivery\"\n        },\n        {\n            \"code\": \"LGATE\",\n            \"appID\": \"TC\",\n            \"display\": true,\n            \"description\": \"Lift-Gate Service (Delivery)\"\n        }\n    ],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"NEW YORK\",\n        \"state\": \"NY\",\n        \"zip\": \"10005\"\n    },\n    \"dest\": {\n        \"country\": \"US\",\n        \"city\": \"HENRICO\",\n        \"state\": \"VA\",\n        \"zip\": \"23294\"\n    },\n    \"role\": \"S\",\n    \"terms\": \"PPD\",\n    \"declaredValue\": \"100\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote 4 for LTL & VTL Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"LTL\"\n    ],\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": \"1\",\n                \"width\": \"1\",\n                \"height\": \"1\"\n            },\n            \"description\": \"\",\n            \"pieceType\": \"BL\",\n            \"pieces\": \"1\",\n            \"shipClass\": \"55\",\n            \"weight\": \"1\"\n        }\n    ],\n    \"accessorials\": [\n        {\n            \"code\": \"ULFEE\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Unloading Services Requested By Consignee\"\n        },\n        {\n            \"code\": \"PRISPU\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Secured Locations Pickup - prisons, military bases, airports, etc.\"\n        },\n        {\n            \"code\": \"SCHLPU\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"School Pickup\"\n        },\n        {\n            \"code\": \"SSM\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Single Shipment\"\n        },\n        {\n            \"code\": \"SDS\",\n            \"appID\": \"VTL\",\n            \"display\": false,\n            \"description\": \"Secured Divider Service\"\n        },\n        {\n            \"code\": \"STO\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Stop-off Services\"\n        },\n        {\n            \"code\": \"PRISDL\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Secured Locations Delivery - prisons, military bases, airports, etc.\"\n        },\n        {\n            \"code\": \"SCHLDL\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"School Delivery\"\n        },\n        {\n            \"code\": \"HPU\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Residential Pickup Charge\"\n        },\n        {\n            \"code\": \"HET\",\n            \"appID\": \"TC\",\n            \"display\": false,\n            \"description\": \"Protect From Freezing between US and Canada.\"\n        },\n        {\n            \"code\": \"HD\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Residential Delivery\"\n        },\n        {\n            \"code\": \"WORPU\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Place of Worship Pickup\"\n        },\n        {\n            \"code\": \"FRZ\",\n            \"appID\": \"TC\",\n            \"display\": true,\n            \"description\": \"Protect from Freezing (US only)\"\n        },\n        {\n            \"code\": \"WORDL\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Place of Worship Delivery\"\n        },\n        {\n            \"code\": \"SEAPU\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Pickup from Port on Carrier's Equipment\"\n        },\n        {\n            \"code\": \"LONG53\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Overlength Freight (28 feet or greater)\"\n        },\n        {\n            \"code\": \"LONG12\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Overlength (8.01'-11.99')\"\n        },\n        {\n            \"code\": \"LONG20\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Overlength Freight (12.00' to 19.99')\"\n        },\n        {\n            \"code\": \"LONG28\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Overlength Freight (20.00' to 27.99')\"\n        },\n        {\n            \"code\": \"NCM\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Notify Request\"\n        },\n        {\n            \"code\": \"MINE\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Mine Delivery or Pickup\"\n        },\n        {\n            \"code\": \"LGATEP\",\n            \"appID\": \"TC\",\n            \"display\": false,\n            \"description\": \"Lift-Gate Service (Pickup)\"\n        },\n        {\n            \"code\": \"INSC\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Inside Delivery Charge (Collect)\"\n        },\n        {\n            \"code\": \"INP\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Inside Pickup\"\n        },\n        {\n            \"code\": \"LGATE\",\n            \"appID\": \"TC\",\n            \"display\": true,\n            \"description\": \"Lift-Gate Service (Delivery)\"\n        },\n        {\n            \"code\": \"INS\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Inside Delivery\"\n        },\n        {\n            \"code\": \"MINIPU\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Individual (Mini) Storage Unit Pickup\"\n        },\n        {\n            \"code\": \"MINIDL\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Individual (Mini) Storage Unit Delivery\"\n        },\n        {\n            \"code\": \"FARMPU\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Farm/Country Club/Estate Pickup\"\n        },\n        {\n            \"code\": \"HAZ\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Hazardous Materials\"\n        },\n        {\n            \"code\": \"INB\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"In-Bond Service\"\n        },\n        {\n            \"code\": \"FAIRPU\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Fair/Amusement Park Pickup\"\n        },\n        {\n            \"code\": \"FAIRDL\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Fair/Amusement Park Delivery\"\n        },\n        {\n            \"code\": \"FARMDL\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Farm/Country Club/Estate Delivery\"\n        },\n        {\n            \"code\": \"EXHIB\",\n            \"appID\": \"TC\",\n            \"display\": false,\n            \"description\": \"Exhibition Charge (Call for charges for Las Vegas, Chicago, or NY)\"\n        },\n        {\n            \"code\": \"LADPU\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Dock Pickup of Limited Access Shipment\"\n        },\n        {\n            \"code\": \"SEADL\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Delivery to Port on Carrier's Equipment\"\n        },\n        {\n            \"code\": \"BLIND\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Blind Shipment Coordination\"\n        },\n        {\n            \"code\": \"CONST\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Construction Site Delivery\"\n        },\n        {\n            \"code\": \"SEADOC\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Customs Paperwork for pickup or delivery at Port\"\n        },\n        {\n            \"code\": \"APT\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Appointment Request\"\n        },\n        {\n            \"code\": \"AKRES\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Alaska Residential Delivery\"\n        },\n        {\n            \"code\": \"AKSCDL\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Alaska School Delivery\"\n        },\n        {\n            \"code\": \"AKRESP\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Alaska Residential Pickup\"\n        },\n        {\n            \"code\": \"AKLGAT\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Alaska Lift-Gate Service\"\n        },\n        {\n            \"code\": \"AKINS\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Alaska Inside Delivery\"\n        },\n        {\n            \"code\": \"AKPRID\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Alaska Prison/Military Delivery\"\n        },\n        {\n            \"code\": \"AKHAZ\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Alaska Hazmat\"\n        },\n        {\n            \"code\": \"AKINPU\",\n            \"appID\": \"LTL\",\n            \"display\": false,\n            \"description\": \"Alaska Inside Pickup\"\n        }\n    ],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"RICHMOND\",\n        \"state\": \"VA\",\n        \"zip\": \"23230\"\n    },\n    \"dest\": {\n        \"country\": \"US\",\n        \"city\": \"COOKEVILLE\",\n        \"state\": \"TN\",\n        \"zip\": \"38502\"\n    },\n    \"accountCode\": \"7178618\",\n    \"role\": \"S\",\n    \"terms\": \"PPD\",\n    \"contactName\": \"Josh Hense\",\n    \"contactEmail\": \"qatest@estes-express.com\",\n    \"contactPhone\": \"(804) 353-1900\",\n    \"contactPhoneExt\": \"1200\",\n    \"pickupDate\": \"04/30/2019\",\n    \"pickupAvail\": \"08:00 AM\",\n    \"pickupClose\": \"05:00 PM\",\n    \"declaredValue\": \"100\",\n    \"declaredValueWaived\": false,\n    \"foodWarehouseId\": \"\",\n    \"stackable\": false,\n    \"comments\": \"\",\n    \"linearFeet\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote 4 for LTL & VTL Copy Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"LTL\"\n    ],\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": \"1\",\n                \"width\": \"1\",\n                \"height\": \"1\"\n            },\n            \"description\": \"\",\n            \"pieceType\": \"BX\",\n            \"pieces\": \"1\",\n            \"shipClass\": \"55\",\n            \"weight\": \"1\"\n        }\n    ],\n    \"accessorials\": [\n        {\n            \"code\": \"AKLGAT\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Alaska Lift-Gate Service\"\n        },\n        {\n            \"code\": \"AKINS\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Alaska Inside Delivery\"\n        },\n        {\n            \"code\": \"APT\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Appointment Request\"\n        },\n        {\n            \"code\": \"CONST\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Construction Site Delivery\"\n        }\n    ],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"RICHMOND\",\n        \"state\": \"VA\",\n        \"zip\": \"23230\"\n    },\n    \"dest\": {\n        \"country\": \"US\",\n        \"city\": \"JAMAICA\",\n        \"state\": \"NY\",\n        \"zip\": \"11435\"\n    },\n    \"accountCode\": \"7178618\",\n    \"role\": \"C\",\n    \"terms\": \"COL\",\n    \"contactName\": \"Josh Hense\",\n    \"contactEmail\": \"qatest@estes-express.com\",\n    \"contactPhone\": \"(804) 353-1900\",\n    \"contactPhoneExt\": \"1200\",\n    \"pickupDate\": \"04/27/2019\",\n    \"pickupAvail\": \"08:00 AM\",\n    \"pickupClose\": \"05:00 PM\",\n    \"declaredValue\": \"1\",\n    \"declaredValueWaived\": false,\n    \"foodWarehouseId\": \"\",\n    \"stackable\": false,\n    \"comments\": \"\",\n    \"linearFeet\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Quote 4 for LTL & VTL Copy Copy Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apps\": [\n        \"LTL\"\n    ],\n    \"commodities\": [\n        {\n            \"dimensions\": {\n                \"length\": \"1\",\n                \"width\": \"1\",\n                \"height\": \"1\"\n            },\n            \"description\": \"\",\n            \"pieceType\": \"BX\",\n            \"pieces\": \"1\",\n            \"shipClass\": \"55\",\n            \"weight\": \"1\"\n        }\n    ],\n    \"accessorials\": [\n        {\n            \"code\": \"AKLGAT\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Alaska Lift-Gate Service\"\n        },\n        {\n            \"code\": \"AKINS\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Alaska Inside Delivery\"\n        },\n        {\n            \"code\": \"APT\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Appointment Request\"\n        },\n        {\n            \"code\": \"CONST\",\n            \"appID\": \"LTL\",\n            \"display\": true,\n            \"description\": \"Construction Site Delivery\"\n        }\n    ],\n    \"origin\": {\n        \"country\": \"US\",\n        \"city\": \"RICHMOND\",\n        \"state\": \"VA\",\n        \"zip\": \"23230\"\n    },\n    \"dest\": {\n        \"country\": \"US\",\n        \"city\": \"JAMAICA\",\n        \"state\": \"NY\",\n        \"zip\": \"11435\"\n    },\n    \"accountCode\": \"7178618\",\n    \"role\": \"C\",\n    \"terms\": \"COL\",\n    \"contactName\": \"Josh Hense\",\n    \"contactEmail\": \"qatest@estes-express.com\",\n    \"contactPhone\": \"(804) 353-1900\",\n    \"contactPhoneExt\": \"1200\",\n    \"pickupDate\": \"04/27/2019\",\n    \"pickupAvail\": \"08:00 AM\",\n    \"pickupClose\": \"05:00 PM\",\n    \"declaredValue\": \"1\",\n    \"declaredValueWaived\": false,\n    \"foodWarehouseId\": \"\",\n    \"stackable\": false,\n    \"comments\": \"\",\n    \"linearFeet\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/requestQuote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requestQuote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adjust Rate Quote Service Level 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comments\": \"Description\",\n    \"contactEmail\": \"eitqatest@estes-express.com\",\n    \"contactName\": \"eitqatest@estes-express.com\",\n    \"contactPhone\": \"(804) 353-1900\",\n    \"pickupDate\": \"04/30/2019\",\n    \"pickupAvail\": \"08:00:00\",\n    \"pickupClose\": \"17:00:00\",\n    \"quoteId\": \"3Q43WZ4\",\n    \"quoteRefNum\": 6663545,\n    \"stackable\": true\n}"
+						},
+						"url": {
+							"raw": "{{url}}/adjust",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"adjust"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adjust Rate Quote Service Level 1 Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"commodities\": [\n        {\n            \"commodity\": {\n                \"dimensions\": {\n                    \"height\": \"30\",\n                    \"width\": \"20\",\n                    \"length\": \"10\"\n                },\n                \"description\": \"TEST\",\n                \"pieceType\": \"BG\",\n                \"pieces\": \"10\",\n                \"shipClass\": \"65\",\n                \"weight\": 10\n            },\n            \"charge\": \"\",\n            \"rate\": \"\"\n        }\n    ],\n    \"comments\": \"TEST\",\n    \"contactEmail\": \"customer1@example.net\",\n    \"contactName\": \"Test User\",\n    \"contactPhone\": \"(804) 353-1900\",\n    \"contactPhoneExt\": \"1234\",\n    \"pickupDate\": \"05/31/2019\",\n    \"pickupAvail\": \"08:00 AM\",\n    \"pickupClose\": \"05:00 PM\",\n    \"quoteId\": \"2WP2PN9\",\n    \"quoteRefNum\": 6675804,\n    \"stackable\": true\n}"
+						},
+						"url": {
+							"raw": "{{url}}/adjust",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"adjust"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adjust Rate Quote Service Level 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"app\": \"LTL\",\n  \"comments\": \"Test Comment\",\n  \"commodities\": [\n    {\n      \"commodity\": {\n        \"description\": \"Commodity 1\",\n        \"dimensions\": {\n          \"length\": 10,\n          \"width\": 10,\n          \"height\": 10\n        },\n        \"pieceType\": \"BX\",\n        \"pieces\": 2,\n        \"shipClass\": 55,\n        \"weight\": 10\n      },\n      \"rate\":10,\n      \"charge\": 10\n    }\n  ],\n  \"contactEmail\": \"eitqatest@estes-express.com\",\n  \"contactName\": \"Test User\",\n  \"contactPhone\": \"(804) 353-1900\",\n  \"contactPhoneExt\": \"\",\n  \"pickupAvail\": \"08:00:00\",\n  \"pickupClose\": \"17:00:00\",\n  \"pickupDate\": \"04/30/2019\",\n  \"stackable\": true,\n  \"quoteId\": \"3Q43WZ4\",\n  \"quoteRefNum\": 6663545\n}"
+						},
+						"url": {
+							"raw": "{{url}}/adjust",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"adjust"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adjust Rate Quote Service Level 3",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comments\": \"Comments added by Ataur\",\n    \"contactEmail\": \"htr@hhuj.com\",\n    \"contactName\": \"htr@hhuj.com\",\n    \"contactPhone\": \"(804) 353-1900\",\n    \"pickupDate\": \"04/30/2019\",\n    \"pickupAvail\": \"[object Object]:[object Object] [object Object]\",\n    \"pickupClose\": \"[object Object]:[object Object] [object Object]\",\n    \"quoteId\": \"337M9S4\",\n    \"quoteRefNum\": 6664399,\n    \"stackable\": true\n}"
+						},
+						"url": {
+							"raw": "{{url}}/adjust",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"adjust"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adjust Rate Quote Service Level 4",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"commodities\": [\n        {\n            \"commodity\": {\n                \"dimensions\": {\n                    \"height\": \"23\",\n                    \"width\": \"23\",\n                    \"length\": \"23\"\n                },\n                \"description\": \"test\",\n                \"pieceType\": \"BG\",\n                \"pieces\": \"23\",\n                \"shipClass\": \"50\",\n                \"weight\": 23\n            },\n            \"charge\": \"\",\n            \"rate\": \"\"\n        }\n    ],\n    \"comments\": \"testy\",\n    \"contactEmail\": \"trey@trey.com\",\n    \"contactName\": \"trey@trey.com\",\n    \"contactPhone\": \"(123) 123-2132\",\n    \"pickupDate\": \"05/22/2019\",\n    \"pickupAvail\": \"08:00 AM\",\n    \"pickupClose\": \"05:00 PM\",\n    \"quoteId\": \"3PHYCZM\",\n    \"quoteRefNum\": 6664775,\n    \"stackable\": true\n}"
+						},
+						"url": {
+							"raw": "{{url}}/adjust",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"adjust"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adjust Rate Quote Service Level 5",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"commodities\": [\n        {\n            \"commodity\": {\n                \"dimensions\": {\n                    \"height\": \"10\",\n                    \"width\": \"10\",\n                    \"length\": \"10\"\n                },\n                \"description\": \"Test\",\n                \"pieceType\": \"BG\",\n                \"pieces\": \"10\",\n                \"shipClass\": \"50\",\n                \"weight\": 10\n            },\n            \"charge\": \"\",\n            \"rate\": \"\"\n        }\n    ],\n    \"comments\": \"test\",\n    \"contactEmail\": \"qatest@estes-express.com\",\n    \"contactName\": \"qatest@estes-express.com\",\n    \"contactPhone\": \"(347) 233-4125\",\n    \"pickupDate\": \"05/30/2019\",\n    \"pickupAvail\": \"08:00 AM\",\n    \"pickupClose\": \"05:00 PM\",\n    \"quoteId\": \"3VXHJ58\",\n    \"quoteRefNum\": 6665629,\n    \"stackable\": true\n}"
+						},
+						"url": {
+							"raw": "{{url}}/adjust",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"adjust"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adjust Rate Quote Service Level 6",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"commodities\": [\n        {\n            \"commodity\": {\n                \"dimensions\": {\n                    \"height\": \"23\",\n                    \"width\": \"23\",\n                    \"length\": \"23\"\n                },\n                \"description\": \"test desc 1\",\n                \"pieceType\": \"BR\",\n                \"pieces\": \"23\",\n                \"shipClass\": \"77.5\",\n                \"weight\": 23\n            },\n            \"charge\": \"\",\n            \"rate\": \"\"\n        }\n    ],\n    \"comments\": \"\",\n    \"contactEmail\": \"trey@trey.com\",\n    \"contactName\": \"test\",\n    \"contactPhone\": \"(123) 213-2131\",\n    \"contactPhoneExt\": \"1221\",\n    \"pickupDate\": \"05/30/2019\",\n    \"pickupAvail\": \"08:00 AM\",\n    \"pickupClose\": \"05:00 PM\",\n    \"quoteId\": \"35QYBPP\",\n    \"quoteRefNum\": 6666702,\n    \"stackable\": true\n}"
+						},
+						"url": {
+							"raw": "{{url}}/adjust",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"adjust"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book Rate Quote 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"E\",\n    \"addresses\": [\n        \"qatest@estes-express.com\"\n    ],\n    \"app\": \"VTL\",\n    \"level\": 98,\n    \"quoteId\": \"1F2VZG2\",\n    \"quoteRefNum\": 6662629,\n    \"target\": \"BOL\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/book",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book Rate Quote 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"E\",\n    \"addresses\": [\n        \"qatest@estes-express.com\"\n    ],\n    \"app\": \"VTL\",\n    \"level\": 97,\n    \"quoteId\": \"XB7468W\",\n    \"quoteRefNum\": 6662737,\n    \"target\": \"BOL\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/book",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book Rate Quote 3 LTL",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"E\",\n    \"addresses\": [\n        \"test@tets.com\"\n    ],\n    \"app\": \"LTL\",\n    \"level\": 98,\n    \"quoteId\": \"1Q43WZ4\",\n    \"quoteRefNum\": 6663545,\n    \"target\": \"BOL\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/book",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book Rate Quote 3 LTL Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"E\",\n    \"addresses\": [\n        \"test@test.com\"\n    ],\n    \"app\": \"LTL\",\n    \"level\": 98,\n    \"quoteId\": \"1LGYTY7\",\n    \"quoteRefNum\": 6664232,\n    \"target\": \"BOL\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/book",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Quote 1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"E\",\n    \"addresses\": [\n        \"Ataur.Rahman@ESTES-EXPRESS.COM\"\n    ],\n    \"app\": \"TC\",\n    \"level\": 98,\n    \"quoteId\": \"1ZXZSSQ\",\n    \"quoteRefNum\": 6665659\n}"
+						},
+						"url": {
+							"raw": "{{url}}/quote/L496HCC",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"quote",
+								"L496HCC"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Quote 2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"Ataur.Rahman@ESTES-EXPRESS.COM\"\n    ],\n    \"app\": \"TC\",\n    \"level\": 95,\n    \"quoteId\": \"LPR8BBC\",\n    \"quoteRefNum\": 1494578\n}"
+						},
+						"url": {
+							"raw": "{{url}}/quote/16CJ3F9",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"quote",
+								"16CJ3F9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Quote 3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"Ataur.Rahman@ESTES-EXPRESS.COM\"\n    ],\n    \"app\": \"TC\",\n    \"level\": 95,\n    \"quoteId\": \"LPR8BBC\",\n    \"quoteRefNum\": 1494578\n}"
+						},
+						"url": {
+							"raw": "{{url}}/quote/EV3BVLX",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"quote",
+								"EV3BVLX"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Quote 4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"Ataur.Rahman@ESTES-EXPRESS.COM\"\n    ],\n    \"app\": \"TC\",\n    \"level\": 95,\n    \"quoteId\": \"LPR8BBC\",\n    \"quoteRefNum\": 1494578\n}"
+						},
+						"url": {
+							"raw": "{{url}}/quote/VGWVW7P",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"quote",
+								"VGWVW7P"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Print Quote",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"Ataur.Rahman@ESTES-EXPRESS.COM\"\n    ],\n    \"app\": \"TC\",\n    \"level\": 95,\n    \"quoteId\": \"LPR8BBC\",\n    \"quoteRefNum\": 1494578\n}"
+						},
+						"url": {
+							"raw": "{{url}}/quote/print/VGWVW7P",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"quote",
+								"print",
+								"VGWVW7P"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Quote 5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"Ataur.Rahman@ESTES-EXPRESS.COM\"\n    ],\n    \"app\": \"TC\",\n    \"level\": 95,\n    \"quoteId\": \"LPR8BBC\",\n    \"quoteRefNum\": 1494578\n}"
+						},
+						"url": {
+							"raw": "{{url}}/quote/3JRMQF5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"quote",
+								"3JRMQF5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Accessorials",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"Ataur.Rahman@ESTES-EXPRESS.COM\"\n    ],\n    \"app\": \"TC\",\n    \"level\": 95,\n    \"quoteId\": \"LPR8BBC\",\n    \"quoteRefNum\": 1494578\n}"
+						},
+						"url": {
+							"raw": "{{url}}/accessorials",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"accessorials"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Rate Quote",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"Ataur.Rahman@ESTES-EXPRESS.COM\"\n    ],\n    \"app\": \"TC\",\n    \"level\": 95,\n    \"quoteId\": \"LPR8BBC\",\n    \"quoteRefNum\": 1494578\n}"
+						},
+						"url": {
+							"raw": "{{url}}/select/VPVGN2B",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"select",
+								"VPVGN2B"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Rate Quote Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/select/1WLGCB7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"select",
+								"1WLGCB7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ServiceLevels",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"Ataur.Rahman@ESTES-EXPRESS.COM\"\n    ],\n    \"app\": \"TC\",\n    \"level\": 95,\n    \"quoteId\": \"LPR8BBC\",\n    \"quoteRefNum\": 1494578\n}"
+						},
+						"url": {
+							"raw": "{{url}}/serviceLevels",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"serviceLevels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get food warehouse information",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"C\",\n    \"addresses\": [\n        \"Ataur.Rahman@ESTES-EXPRESS.COM\"\n    ],\n    \"app\": \"TC\",\n    \"level\": 95,\n    \"quoteId\": \"LPR8BBC\",\n    \"quoteRefNum\": 1494578\n}"
+						},
+						"url": {
+							"raw": "{{url}}/foodWarehouses",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"foodWarehouses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "9bac3df8-5e50-4183-bb33-4940bdbe9ee9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "83ef9191-d38a-4934-b228-9c1c5c7d2a6f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "de3bd6c7-f0c1-45f0-8512-072ab4e369d8",
+			"key": "url",
+			"value": "{{baseUrl}}Rating/v4.0",
+			"type": "string"
+		}
+	]
+}

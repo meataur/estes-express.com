@@ -1,0 +1,85 @@
+Steps to set up Maven EAR project:
+
+1) Select File -> New -> Project -> Enterprise Application Project
+- Enter Project name: CurrencyConversionEAR
+- Uncheck the "Use default location" checkbox
+- Enter Location: <workspace home>/CurrencyConversion/CurrencyConversionEAR
+- Select "Websphere Application Server v8.5" for Target runtime
+- Select EAR version 5.0
+- Select "Minimal Configuration for Websphere Application Server v8.5" for Configuration
+- Leave "Working sets" checkbox unchecked
+<Click "Next" button>
+- Check the "CurrencyConversionWeb" checkbox
+- Check the "Generate application.xml deployment descriptor" checkbox
+<Click "Finish" button>
+
+2) Right-click on CurrencyConversionEAR -> Configure -> Convert to Maven Project
+		Group Id: com.estesexpress.currency.convert
+		artifact ID: CurrencyConversionEAR
+		Version: 1.0-SNAPSHOT
+		packaging: ear
+
+3) Ignore error that maven-ear-plugin:jar:28 could not be resolved.
+
+4) Replace <groupId> and <version> elements in POM (pom.xml) with the following:
+<parent>
+	<groupId>com.estesexpress.currency.convert</groupId>
+	<artifactId>CurrencyConversion</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+</parent>
+
+5) Add module for EAR project using snippet below in parent POM of CurrencyConversion project.
+This goes after the <description> element.  The CurrencyConversionWeb module will be there.
+
+<modules>
+	<module>CurrencyConversionWeb</module>
+	<module>CurrencyConversionEAR</module>
+</modules>
+
+6) Add web project dependency using snippet below. Please the snippet below the <build> section.
+
+<dependencies>		
+	<dependency>
+		<groupId>com.estesexpress.currency.convert</groupId>
+		<artifactId>CurrencyConversionWeb</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<type>war</type>
+	</dependency>
+</dependencies>
+
+7) Change maven-ear-plugin dependency in POM from version 2.10 to version 2.3.2
+- Change <configuration> as in snippet below
+
+<plugin>
+	<artifactId>maven-ear-plugin</artifactId>
+	<version>2.3.2</version>
+	<configuration>
+		<version>5</version>
+		<defaultLibBundleDir>lib</defaultLibBundleDir>
+		<modules>
+			<webModule>
+				<groupId>com.estesexpress.currency.convert</groupId>
+				<artifactId>CurrencyConversionWeb</artifactId>
+				<bundleFileName>CurrencyConversionWeb.war</bundleFileName>
+				<contextRoot>WebApp/CurrencyConv</contextRoot>
+			</webModule>
+		</modules>
+		<displayName>CurrencyConversionEAR</displayName>
+		<generateApplicationXml>true</generateApplicationXml>
+		<applicationXml>${basedir}/target/application.xml</applicationXml>
+	</configuration>
+</plugin>
+
+8) Set context root in application.xml file as in snippet below:
+
+<web>
+	<web-uri>CurrencyConversionWeb.war</web-uri>
+	<context-root>WebApp/CurrencyConv</context-root>
+</web>
+
+9) Add <properties> element below <modules> element in parent POM as in snippet below:
+
+<properties>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<projectEarName>CurrencyConversionEAR</projectEarName>
+</properties>

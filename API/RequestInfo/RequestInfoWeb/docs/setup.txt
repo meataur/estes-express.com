@@ -1,0 +1,264 @@
+Steps to set up Maven web project:
+
+1) Select File -> New -> Maven Module
+- Enter DocumentRetrievalWeb as the module name
+- Select DocumentRetrieval as the parent project
+- Uncheck the "Add project(s) to working set" checkbox
+- Select the "maven-archetype-webapp" template
+- The group ID (ex. com.estesexpress.ssdr) and artifact ID (ex. DocumentRetrieval) should be pre-filled
+- Leave the package blank
+
+2) Right-click the src/main folder and click New -> Folder
+- Name the folder "java" (no quotes) - a source folder named src/main/java will appear
+(Maven does not not create the src/main/java source folder when the project is created.)
+
+3) Right-click the project and select Refresh
+
+4) Edit the POM file and delete the groupdId and version tags that are *OUTSIDE* the parent tag.
+Those tags should be highlighted in yellow.
+
+5) Right-click the project and select Maven -> Update Project
+
+Additional info:
+http://www.mkyong.com/maven/how-to-create-a-web-application-project-with-maven/
+
+The following command does not seem to work:
+mvn eclipse:eclipse -Dwtpversion=2.0
+See step #2 above that works.
+
+6) Open src/main/webapp/WEB-INF/web.xml.  It should look like the snippet below.
+
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+</web-app>
+
+Replace the contents of the file with the snippet below:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.5"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<display-name>Estes Customer SSDR</display-name>
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
+
+6) Set execution environment to JavaSE-1.6 by adding following snippet within the <build> section of the pom.xml build script.
+Paste this above the closing </finalName> element/tag within the build element.
+
+<plugins>
+	<plugin>
+		<artifactId>maven-compiler-plugin</artifactId>
+		<version>2.5</version>
+		<configuration>
+			<source>1.6</source>
+			<target>1.6</target>
+		</configuration>
+	</plugin>
+</plugins>
+
+8) Switch to Navigator view and edit the org.eclipse.wst.common.project.facet.core.xml file in the .settings folder 
+- Set jst.web fact as in the snippet below:
+
+<installed facet="jst.web" version="2.5"/>
+
+This changes the Dynamic Web Module project facet
+
+9) Add Websphere dependencies to the pom.xml file as shown in snippet below:
+
+<dependency>
+	<groupId>websphere</groupId>
+	<artifactId>j2ee</artifactId>
+	<version>6.0</version>
+	<scope>provided</scope>
+</dependency>
+<dependency>
+	<groupId>websphere</groupId>
+	<artifactId>com.ibm.ws.runtime</artifactId>
+	<version>8.0</version>
+	<scope>provided</scope>
+</dependency>
+
+10) Go to web project settings and change context root to "ssdr" (no quotes)
+
+**
+** At this point the project can be added to the WAS profile and the "Hello World!" page
+** will be displayed at this URL: localhost:<port>/ssdr/
+**
+
+==
+== Add Spring dependencies
+==
+
+11) Add the following code snippet for the Spring dependencies
+
+<!-- SPRING START -->
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-beans</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-context</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-context-support</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-core</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-expression</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-jdbc</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-orm</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-tx</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-web</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-webmvc</artifactId>
+	<version>${spring-version}</version>
+</dependency>
+<!-- SPRING END -->
+
+12) Create  src/main/webapp/WEB-INF/ssdr-dispatcher.xml Spring context file with contents below:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+
+	<!-- Scans the classpath of this application for @Components to deploy as beans -->
+	<context:component-scan base-package="com.estes.ssdr" />
+
+	<!-- Configures the @Controller programming model -->
+	<mvc:annotation-driven />
+
+	<!-- Forwards requests to the "/" resource to the "index" view -->
+	<mvc:view-controller path="/" view-name="index" />
+
+	<!-- Make webapp/resources directory accessible to web app -->
+	<mvc:resources location="/resources/" mapping="/resources/**" />
+
+	<!-- Resolves view names to protected .jsp resources within the context root directory -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+</beans>
+
+13) Modify WEB-INF/web.xml file by adding the snippet below above the welcome file list:
+
+<context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>
+		/WEB-INF/ssdr-dispatcher-servlet.xml
+	</param-value>
+</context-param>
+
+<!-- Handles all requests into the application -->
+<servlet>
+	<servlet-name>SSDR-Dispatcher</servlet-name>
+	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	<load-on-startup>1</load-on-startup>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>SSDR-Dispatcher</servlet-name>
+	<url-pattern>/</url-pattern>
+</servlet-mapping>
+
+<listener>
+	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+
+14) Create src/main/webapp/WEB-INF/jsp folder and move all JSP files there
+
+15) Create src/main/webapp/resources folder to contain all static artifacts (css, images, js)
+
+16) Create src/test/java folder. This will be automatically to a source folder.
+
+17) Create controller class(es) with @Controller annotation in the com.estes.ssdr package
+	- Create method with @RequestMappimng annotation that returns a string. The string will be the JSP name.
+	- ex: return "index";
+
+18) Create src/main/resources/xsd folder and add schemas here
+
+19) Update Maven POM for web project to generate classes for XSDs. See below:
+
+			<!-- Maven JAXB plugin -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>xjc-ssdr</id>
+						<goals> 
+						<goal>xjc</goal>
+						</goals>
+						<phase>generate-sources</phase>
+						<configuration>  
+						 	<target>2.1</target>
+							<clearOutputDir>false</clearOutputDir>  
+							<outputDirectory>src/main/java</outputDirectory>
+							<schemaDirectory>src/main/resources/xsd</schemaDirectory>
+							<schemaFiles>ESB_SSDR*</schemaFiles>
+							<packageName>com.estes.ssdr.rest.message</packageName>
+						</configuration>
+					</execution>
+				</executions>  
+			</plugin>
+
+20) Create src/main/xjb folder and add new file named jaxb-bindings.xjb. The contents of the file are below:
+
+<jxb:bindings version="2.0" xmlns:jxb="http://java.sun.com/xml/ns/jaxb">
+	<jxb:bindings>
+		<jxb:globalBindings generateElementProperty="false" />
+	</jxb:bindings>
+</jxb:bindings>
+
+This will prevent generated classes from creating JAXBElement fields and using the proper classes (String, etc.)
+See:
+http://stackoverflow.com/questions/12508741/jaxb-generating-jaxbelementstring-instead-of-string
+http://www.mojohaus.org/jaxb2-maven-plugin/Documentation/v2.2/example_xjc_basic.html - #6

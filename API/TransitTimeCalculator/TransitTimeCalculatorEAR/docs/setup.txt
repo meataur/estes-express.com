@@ -1,0 +1,86 @@
+Steps to set up Maven EAR project:
+
+1) Select File -> New -> Project -> Java EE -> Enterprise Application Project
+- Enter Project name: TransitTimeCalculatorEAR
+- Select "Websphere Application Server v8.5" for Target runtime
+- Select EAR version 5.0
+- Select "Minimal Configuration for Websphere Application Server v8.5" for Configuration
+- Leave "Working sets" checkbox unchecked
+<Click "Next" button>
+- Check the "TransitTimeCalculatorSuggestWeb" checkbox
+- Check the "Generate application.xml deployment descriptor" checkbox
+- Enter "lib" (no quotes) for the Content directory
+<Click "Finish" button>
+
+2) Right-click on TransitTimeCalculatorEAR -> Configure -> Convert to Maven Project
+		Group Id:com.estes.myestes.transittimecalculator
+		artifact ID: TransitTimeCalculatorEAR
+		Version: 1.0-SNAPSHOT
+		packaging: ear
+
+3) Ignore error that maven-ear-plugin:jar:28 could not be resolved.
+
+4) Replace <groupId> and <version> elements in POM (pom.xml) with the following:
+<parent>
+	<groupId>com.estes.myestes.transittimecalculator</groupId>
+	<artifactId>TransitTimeCalculator</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+</parent>
+
+5) Add module for EAR project using snippet below in parent POM of TransitTimeCalculator project.
+This goes after the <description> element.  The TransitTimeCalculatorSuggestWeb module and other web modules will be there.
+
+<modules>
+	<module>TransitTimeCalculatorEAR</module>
+	<module>TransitTimeCalculatorWeb</module>
+</modules>
+
+6) Add web project dependency using snippet below. Place the snippet below the <build> section.
+
+<dependencies>		
+	<dependency>
+		<groupId>com.estes.myestes.transittimecalculator</groupId>
+		<artifactId>TransitTimeCalculatorWeb</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<type>war</type>
+	</dependency>
+</dependencies>
+
+7) Change maven-ear-plugin dependency in POM from version 2.10 to version 2.3.2
+- Change <configuration> as in snippet below
+
+<plugin>
+	<artifactId>maven-ear-plugin</artifactId>
+	<version>2.3.2</version>
+	<configuration>
+		<version>5</version>
+		<defaultLibBundleDir>lib</defaultLibBundleDir>
+		<modules>
+			<webModule>
+				<groupId>com.estes.myestes.transittimecalculator</groupId>
+				<artifactId>TransitTimeCalculatorWeb</artifactId>
+				<bundleFileName>TransitTimeCalculatorWeb.war</bundleFileName>
+				<contextRoot>api/myestes/TransitTimeCalculator/v1.0</contextRoot>
+			</webModule>
+		</modules>
+		<displayName>TransitTimeCalculatorEAR</displayName>
+		<generateApplicationXml>true</generateApplicationXml>
+		<applicationXml>${basedir}/target/application.xml</applicationXml>
+	</configuration>
+</plugin>
+
+8) Ensure context root in application.xml file is set correctly as in snippet below:
+
+<web>
+	<web-uri>TransitTimeCalculatorWeb.war</web-uri>
+	<context-root>api/myestes/TransitTimeCalculator/v1.0</context-root>
+</web>
+
+9) Add <properties> element below <modules> element in parent POM as in snippet below:
+
+<properties>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<projectEarName>TransitTimeCalculatorSuggestEAR</projectEarName>
+</properties>
+
+10) If web module(s) not associated with EAR then go to Properties -> Deployment Assembly to add projects.

@@ -1,0 +1,71 @@
+Steps to set up Maven EAR project:
+
+1) Select File -> New -> Project -> Enterprise Application Project
+- Enter Project name: MyEstesServicesEAR
+- Uncheck the "Use default location" checkbox
+- Enter Location: <workspace home>/MyEstesServices/MyEstesServicesEAR
+- Select "Websphere Application Server v8.5" for Target runtime
+- Select EAR version 6.0
+- Select "Minimal Configuration for Websphere Application Server v8.5" for Configuration
+- Leave "Working sets" checkbox unchecked
+<Click "Next" button>
+- Check the "MyEstesServicesWeb" checkbox
+- Check the "Generate application.xml deployment descriptor" checkbox
+<Click "Finish" button>
+
+2) Right-click on MyEstesServicesEAR -> Configure -> Convert to Maven Project
+		Group Id: com.estes.services.myestes
+		artifact ID: MyEstesServicesEAR
+		Version: 1.0-SNAPSHOT
+		packaging: ear
+
+(Ignore error that maven-ear-plugin:jar:28 could not be resolved.)
+
+4) Replace <groupId> and <version> elements in POM (pom.xml) with the following:
+<parent>
+	<groupId>com.estes.services.myestes</groupId>
+	<artifactId>MyEstesServices</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+</parent>
+
+4) Add module for EAR project using snippet below in parent POM of MyEstesServices project.
+This goes after the <description> element.  The MyEstesServicesWeb module will be there.
+
+<modules>
+	<module>MyEstesServicesWeb</module>
+	<module>MyEstesServicesEAR</module>
+</modules>
+
+5) Add web project dependency using snippet below. Please the snippet below the <build> section.
+
+<dependencies>		
+	<dependency>
+		<groupId>com.estes.services.myestes</groupId>
+		<artifactId>MyEstesServicesWeb</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<type>war</type>
+	</dependency>
+</dependencies>
+
+6) Change maven-ear-plugin dependency in POM from version 2.10 to version 2.3.2
+- Change <version> and <configuration> as in snippet below
+
+<plugin>
+	<artifactId>maven-ear-plugin</artifactId>
+	<version>2.3.2</version>
+	<configuration>
+		<version>5</version>
+		<defaultLibBundleDir>lib</defaultLibBundleDir>
+		<modules>
+			<webModule>
+				<groupId>com.estes.services.myestes</groupId>
+				<artifactId>MyEstesServicesWeb</artifactId>
+				<bundleFileName>MyEstesServicesWeb.war</bundleFileName>
+				<contextRoot>api/myestes/common/v1.0</contextRoot>
+			</webModule>
+		</modules>
+		<displayName>MyEstesServicesEAR</displayName>
+		<generateApplicationXml>true</generateApplicationXml>
+		<applicationXml>${basedir}/target/application.xml</applicationXml>
+	</configuration>
+</plugin>

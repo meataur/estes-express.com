@@ -1,0 +1,1473 @@
+{
+	"info": {
+		"_postman_id": "3c596c6a-0f57-43c8-816e-d99062f58250",
+		"name": "PickupRequest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "BOL",
+			"item": [
+				{
+					"name": "HISTORY",
+					"item": [
+						{
+							"name": "Get Pickup Request Information",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/bol/pickup?type=HISTORY&bolId=21370610",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "HISTORY"
+										},
+										{
+											"key": "bolId",
+											"value": "21370610"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Save Pickup Request Information",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"TEST\",\n    \"phone\": \"(804) 353-1900\",\n    \"phoneExt\": \"\",\n    \"email\": \"sam.smith@estes-express.com\",\n    \"role\": \"SHIPPER\",\n    \"accountCode\": \"5023958\",\n    \"pickupDate\": \"05/25/2016\",\n    \"startTime\": \"08:00 AM\",\n    \"endTime\": \"05:00 PM\",\n    \"specialInstruction\": \"Special Instruction\",\n    \"hookOrDrop\": false,\n    \"liftgateRequired\": true,\n    \"noStackPallet\": true,\n    \"freeze\": true,\n    \"oversize\": true,\n    \"food\": true,\n    \"poision\": true,\n    \"accepted\": true,\n    \"completed\": true,\n    \"rejected\": true\n}"
+								},
+								"url": {
+									"raw": "{{url}}/bol/pickup?type=HISTORY&bolId=21370610",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "HISTORY"
+										},
+										{
+											"key": "bolId",
+											"value": "21370610"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Pickup Request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/bol/pickup?type=HISTORY&bolId=21370610",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "HISTORY"
+										},
+										{
+											"key": "bolId",
+											"value": "21370610"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Pickup Notification",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/bol/pickup/notification?type=HISTORY&bolId=21370610",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup",
+										"notification"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "HISTORY"
+										},
+										{
+											"key": "bolId",
+											"value": "21370610"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Save Pickup Notification",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "081c1557-3350-452a-af41-490b37ec75b0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n  \"SHIPPER\",\r\n  \"CONSIGNEE\",\r\n  \"THIRD_PARTY\",\r\n  \"OTHER\"\r\n]\r\n"
+								},
+								"url": {
+									"raw": "{{url}}/bol/pickup/notification?type=HISTORY&bolId=21370610&accepted=true&completed=true&rejected=true",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup",
+										"notification"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "HISTORY"
+										},
+										{
+											"key": "bolId",
+											"value": "21370610"
+										},
+										{
+											"key": "accepted",
+											"value": "true"
+										},
+										{
+											"key": "completed",
+											"value": "true"
+										},
+										{
+											"key": "rejected",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "DRAFT",
+					"item": [
+						{
+							"name": "Get Pickup Request Information",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/bol/pickup?type=DRAFT&bolNo=123",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "DRAFT"
+										},
+										{
+											"key": "bolNo",
+											"value": "123"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Save Pickup Request Information",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Contact Name\",\n    \"phone\": \"(235) 467-5745\",\n    \"phoneExt\": \"1233\",\n    \"email\": \"pickupRequestor@email.com\",\n    \"role\": \"SHIPPER\",\n    \"accountCode\": \"5023958\",\n    \"pickupDate\": \"12/20/2018\",\n    \"startTime\": \"08:00 AM\",\n    \"endTime\": \"03:00 PM\",\n    \"specialInstruction\": \"Special Instructions\",\n    \"hookOrDrop\": false,\n    \"liftgateRequired\": true,\n    \"noStackPallet\": true,\n    \"freeze\": true,\n    \"oversize\": true,\n    \"food\": true,\n    \"poision\": true,\n    \"accepted\": true,\n    \"completed\": true,\n    \"rejected\": true\n}"
+								},
+								"url": {
+									"raw": "{{url}}/bol/pickup?type=DRAFT&bolNo=123",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "DRAFT"
+										},
+										{
+											"key": "bolNo",
+											"value": "123"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Pickup Request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/bol/pickup?type=DRAFT&bolNo=123",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "DRAFT"
+										},
+										{
+											"key": "bolNo",
+											"value": "123"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Pickup Notification",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/bol/pickup/notification?type=DRAFT&bolNo=123",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup",
+										"notification"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "DRAFT"
+										},
+										{
+											"key": "bolNo",
+											"value": "123"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Save Pickup Notification",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n  \"THIRD_PARTY\",\r\n  \"OTHER\"\r\n]\r\n"
+								},
+								"url": {
+									"raw": "{{url}}/bol/pickup/notification?type=DRAFT&bolNo=123&accepted=true&completed=true&rejected=true",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup",
+										"notification"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "DRAFT"
+										},
+										{
+											"key": "bolNo",
+											"value": "123"
+										},
+										{
+											"key": "accepted",
+											"value": "true"
+										},
+										{
+											"key": "completed",
+											"value": "true"
+										},
+										{
+											"key": "rejected",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "TEMPLATE",
+					"item": [
+						{
+							"name": "Get Pickup Request Information",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/bol/pickup?type=TEMPLATE&template=TEST",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "TEMPLATE"
+										},
+										{
+											"key": "template",
+											"value": "TEST"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get Pickup Request Information",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "http://qa.estesinternal.com/api/myestes/PickupRequest/v1.0/bol/pickup?type=TEMPLATE&template=TEST",
+											"protocol": "http",
+											"host": [
+												"qa",
+												"estesinternal",
+												"com"
+											],
+											"path": [
+												"api",
+												"myestes",
+												"PickupRequest",
+												"v1.0",
+												"bol",
+												"pickup"
+											],
+											"query": [
+												{
+													"key": "type",
+													"value": "TEMPLATE"
+												},
+												{
+													"key": "template",
+													"value": "TEST"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 17 Jan 2019 19:03:28 GMT"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Servlet/3.0"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=10, max=58"
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Content-Language",
+											"value": "en-US"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"name\": \"Test Admin\",\n    \"phone\": \"(235) 777-5745\",\n    \"phoneExt\": \"\",\n    \"email\": \"test@email.com\",\n    \"role\": \"SHIPPER\",\n    \"accountCode\": \"5023958\",\n    \"pickupDate\": \"12/30/2019\",\n    \"startTime\": \"09:00 AM\",\n    \"endTime\": \"06:00 PM\",\n    \"specialInstruction\": \"Nothing special\",\n    \"hookOrDrop\": true,\n    \"liftgateRequired\": true,\n    \"noStackPallet\": true,\n    \"freeze\": true,\n    \"oversize\": true,\n    \"food\": true,\n    \"poision\": true,\n    \"accepted\": true,\n    \"completed\": true,\n    \"rejected\": true\n}"
+								}
+							]
+						},
+						{
+							"name": "Save Pickup Request Information",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Test Admin\",\n    \"phone\": \"(235) 777-5745\",\n    \"phoneExt\": \"\",\n    \"email\": \"test@email.com\",\n    \"role\": \"SHIPPER\",\n    \"accountCode\": \"5023958\",\n    \"pickupDate\": \"12/31/2019\",\n    \"startTime\": \"09:00 AM\",\n    \"endTime\": \"06:00 PM\",\n    \"specialInstruction\": \"Nothing special\",\n    \"hookOrDrop\": true,\n    \"liftgateRequired\": true,\n    \"noStackPallet\": true,\n    \"freeze\": true,\n    \"oversize\": true,\n    \"food\": true,\n    \"poision\": true,\n    \"accepted\": true,\n    \"completed\": true,\n    \"rejected\": true\n}"
+								},
+								"url": {
+									"raw": "{{url}}/bol/pickup?type=TEMPLATE&template=TEST",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "TEMPLATE"
+										},
+										{
+											"key": "template",
+											"value": "TEST"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Pickup Request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/bol/pickup?type=TEMPLATE&template=TEST",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "TEMPLATE"
+										},
+										{
+											"key": "template",
+											"value": "TEST"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Pickup Notification",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/bol/pickup/notification?type=TEMPLATE&template=TEST",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup",
+										"notification"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "TEMPLATE"
+										},
+										{
+											"key": "template",
+											"value": "TEST"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Save Pickup Notification",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n  \"SHIPPER\",\r\n  \"THIRD_PARTY\",\r\n  \"OTHER\"\r\n]\r\n"
+								},
+								"url": {
+									"raw": "{{url}}/bol/pickup/notification?type=TEMPLATE&template=TEST&accepted=true&completed=true&rejected=true",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup",
+										"notification"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "TEMPLATE"
+										},
+										{
+											"key": "template",
+											"value": "TEST"
+										},
+										{
+											"key": "accepted",
+											"value": "true"
+										},
+										{
+											"key": "completed",
+											"value": "true"
+										},
+										{
+											"key": "rejected",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Default",
+					"item": [
+						{
+							"name": "Get Pickup Request Information",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/bol/pickup?type=DEFAULT",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "DEFAULT"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get Pickup Request Information",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "http://qa.estesinternal.com/api/myestes/PickupRequest/v1.0/bol/pickup?type=DEFAULT",
+											"protocol": "http",
+											"host": [
+												"qa",
+												"estesinternal",
+												"com"
+											],
+											"path": [
+												"api",
+												"myestes",
+												"PickupRequest",
+												"v1.0",
+												"bol",
+												"pickup"
+											],
+											"query": [
+												{
+													"key": "type",
+													"value": "DEFAULT"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 17 Jan 2019 18:58:19 GMT"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Servlet/3.0"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "JSESSIONID=00005BDqb2JPQrRAzVQcz63GJSD:1c17u2l6j; Path=/; HttpOnly"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=10, max=93"
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Content-Language",
+											"value": "en-US"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"name\": \"Test Admin\",\n    \"phone\": \"(235) 777-5745\",\n    \"phoneExt\": \"\",\n    \"email\": \"test@email.com\",\n    \"role\": \"SHIPPER\",\n    \"accountCode\": \"5023958\",\n    \"pickupDate\": \"12/30/2019\",\n    \"startTime\": \"09:00 AM\",\n    \"endTime\": \"06:00 PM\",\n    \"specialInstruction\": \"Nothing special\",\n    \"hookOrDrop\": true,\n    \"liftgateRequired\": true,\n    \"noStackPallet\": true,\n    \"freeze\": true,\n    \"oversize\": true,\n    \"food\": true,\n    \"poision\": true,\n    \"accepted\": true,\n    \"completed\": true,\n    \"rejected\": true\n}"
+								}
+							]
+						},
+						{
+							"name": "Save Pickup Request Information",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Test Admin\",\n    \"phone\": \"(235) 777-5745\",\n    \"phoneExt\": \"\",\n    \"email\": \"test@email.com\",\n    \"role\": \"SHIPPER\",\n    \"accountCode\": \"5023958\",\n    \"pickupDate\": \"12/31/2019\",\n    \"startTime\": \"09:00 AM\",\n    \"endTime\": \"06:00 PM\",\n    \"specialInstruction\": \"Nothing special\",\n    \"hookOrDrop\": true,\n    \"liftgateRequired\": true,\n    \"noStackPallet\": true,\n    \"freeze\": true,\n    \"oversize\": true,\n    \"food\": true,\n    \"poision\": true,\n    \"accepted\": true,\n    \"completed\": true,\n    \"rejected\": true\n}"
+								},
+								"url": {
+									"raw": "{{url}}/bol/pickup?type=DEFAULT",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "DEFAULT"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Save Pickup Request Information",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Test Admin\",\n    \"phone\": \"(235) 777-5745\",\n    \"phoneExt\": \"\",\n    \"email\": \"test@email.com\",\n    \"role\": \"SHIPPER\",\n    \"accountCode\": \"5023958\",\n    \"pickupDate\": \"12/31/2019\",\n    \"startTime\": \"09:00 AM\",\n    \"endTime\": \"06:00 PM\",\n    \"specialInstruction\": \"Nothing special\",\n    \"hookOrDrop\": true,\n    \"liftgateRequired\": true,\n    \"noStackPallet\": true,\n    \"freeze\": true,\n    \"oversize\": true,\n    \"food\": true,\n    \"poision\": true,\n    \"accepted\": true,\n    \"completed\": true,\n    \"rejected\": true\n}"
+										},
+										"url": {
+											"raw": "http://qa.estesinternal.com/api/myestes/PickupRequest/v1.0/bol/pickup?type=DEFAULT",
+											"protocol": "http",
+											"host": [
+												"qa",
+												"estesinternal",
+												"com"
+											],
+											"path": [
+												"api",
+												"myestes",
+												"PickupRequest",
+												"v1.0",
+												"bol",
+												"pickup"
+											],
+											"query": [
+												{
+													"key": "type",
+													"value": "DEFAULT"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Thu, 17 Jan 2019 18:58:54 GMT"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "Servlet/3.0"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=10, max=74"
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Content-Language",
+											"value": "en-US"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"errorCode\": \"\",\n    \"message\": \"Successfully saved!\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete Pickup Request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/bol/pickup?type=DEFAULT",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "DEFAULT"
+										},
+										{
+											"key": "template",
+											"value": "TEST",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Pickup Notification",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/bol/pickup/notification?type=DEFAULT",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup",
+										"notification"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "DEFAULT"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Save Pickup Notification",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n  \"SHIPPER\",\r\n  \"CONSIGNEE\",\r\n  \"THIRD_PARTY\",\r\n  \"OTHER\"\r\n]\r\n"
+								},
+								"url": {
+									"raw": "{{url}}/bol/pickup/notification?type=DEFAULT&accepted=true&completed=true",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"bol",
+										"pickup",
+										"notification"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "DEFAULT"
+										},
+										{
+											"key": "accepted",
+											"value": "true"
+										},
+										{
+											"key": "completed",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Pickup Form Drop/Down",
+			"item": [
+				{
+					"name": "Get Previous Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users?size=4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Previous Commodities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/commodities?size=7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"commodities"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Previous Shippers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/shippers?size=5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"shippers"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Available Pickup Dates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/available_pickup_dates",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"available_pickup_dates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Pickup Date - Valid Date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/validate/pickup_date?pickupDate=03/01/2019",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"validate",
+								"pickup_date"
+							],
+							"query": [
+								{
+									"key": "pickupDate",
+									"value": "03/01/2019"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Pickup Date - Invalid Date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/validate/pickup_date?pickupDate=03/12/2019",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"validate",
+								"pickup_date"
+							],
+							"query": [
+								{
+									"key": "pickupDate",
+									"value": "03/12/2019"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pickup Request",
+			"item": [
+				{
+					"name": "Create Pickup Request - Shipper",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user\": {\r\n    \"name\": \"User Name\",\r\n    \"phone\": \"(804) 336-8359\",\r\n    \"phoneExt\": \"888\",\r\n    \"email\": \"user@email.com\",\r\n    \"role\": \"SHIPPER\"\r\n  },\r\n  \"shipper\": {\r\n    \"accountCode\": null,\r\n    \"name\": \"Shipper Name\",\r\n    \"company\": \"PELLA VINYL\",\r\n    \"addressLine1\": \"Shipper Address Line 1\",\r\n    \"addressLine2\": \"Shipper Address Line 2\",\r\n    \"city\": \"PORTLAND\",\r\n    \"state\": \"TN\",\r\n    \"zip\": \"38502\",\r\n    \"zipExt\": \"\",\r\n    \"phone\": \"(804) 445-7777\",\r\n    \"phoneExt\": \"888\",\r\n    \"email\": \"shipper@email.com\"\r\n  },\r\n  \"pickupInfo\": {\r\n    \"pickupDate\": \"02/25/2019\",\r\n    \"startTime\": \"08:30 AM\",\r\n    \"endTime\": \"04:00 PM\",\r\n    \"hookOrDrop\": true,\r\n    \"liftgateRequired\": true,\r\n    \"noStackPallets\": true\r\n  },\r\n  \"shipmentInfo\": [\r\n    {\r\n      \"requestNumber\": \"\",\r\n      \"commodity\":  {\r\n        \"destinationZipCode\": \"\",\r\n        \"destinationZipCodeExt\": \"2323\",\r\n        \"totalPieces\": 1,\r\n        \"totalWeight\": 11,\r\n        \"totalSkids\": 0,\r\n        \"hazmat\": false,\r\n        \"specialInstructions\": null,\r\n        \"referenceNumber\": null\r\n    },\r\n      \"shipmentOption\": {\r\n        \"freeze\": true,\r\n        \"oversize\": true,\r\n        \"food\": true,\r\n        \"poision\": true\r\n      },\r\n      \"shipmentService\": null,\r\n      \"notification\": {\r\n        \"accepted\": true,\r\n        \"completed\": true,\r\n        \"rejected\": true\r\n      }\r\n    }\r\n  ],\r\n  \"tos\": true\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/pickup",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pickup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Testing All Errors",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user\": {\r\n    \"name\": \"Test\",\r\n    \"phone\": \"(804) 444-8888\",\r\n    \"phoneExt\": \"\",\r\n    \"email\": \"user\",\r\n    \"role\": \"SHIPPER\"\r\n  },\r\n  \"shipper\": {\r\n    \"accountCode\": null,\r\n    \"name\": \"Shipper Name\",\r\n    \"company\": \"PELLA VINYL\",\r\n    \"addressLine1\": \"Shipper Address Line 1\",\r\n    \"addressLine2\": \"Shipper Address Line 2\",\r\n    \"city\": \"PORTLAND\",\r\n    \"state\": \"TN\",\r\n    \"zip\": \"38502\",\r\n    \"zipExt\": \"\",\r\n    \"phone\": \"(804) 445-7777\",\r\n    \"phoneExt\": \"888\",\r\n    \"email\": \"shipper@email.com\"\r\n  },\r\n  \"pickupInfo\": {\r\n    \"pickupDate\": \"02/25/2019\",\r\n    \"startTime\": \"08:30 AM\",\r\n    \"endTime\": \"04:00 PM\",\r\n    \"hookOrDrop\": true,\r\n    \"liftgateRequired\": true,\r\n    \"noStackPallets\": true\r\n  },\r\n  \"shipmentInfo\": [\r\n    {\r\n      \"requestNumber\": \"\",\r\n      \"commodity\":  {\r\n        \"destinationZipCode\": \"\",\r\n        \"destinationZipCodeExt\": \"2323\",\r\n        \"totalPieces\": 1,\r\n        \"totalWeight\": 11,\r\n        \"totalSkids\": 0,\r\n        \"hazmat\": false,\r\n        \"specialInstructions\": null,\r\n        \"referenceNumber\": null\r\n    },\r\n      \"shipmentOption\": {\r\n        \"freeze\": true,\r\n        \"oversize\": true,\r\n        \"food\": true,\r\n        \"poision\": true\r\n      },\r\n      \"shipmentService\": null,\r\n      \"notification\": {\r\n        \"accepted\": true,\r\n        \"completed\": true,\r\n        \"rejected\": true\r\n      }\r\n    }\r\n  ],\r\n  \"tos\": true\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/pickup",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pickup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Pickup Request - Consignee",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user\": {\r\n    \"name\": \"User Name\",\r\n    \"phone\": \"(804) 336-8359\",\r\n    \"phoneExt\": \"888\",\r\n    \"email\": \"user@email.com\",\r\n    \"role\": \"CONSIGNEE\"\r\n  },\r\n  \"shipper\": {\r\n    \"accountCode\": null,\r\n    \"name\": \"Shipper Name\",\r\n    \"company\": \"PELLA VINYL\",\r\n    \"addressLine1\": \"Shipper Address Line 1\",\r\n    \"addressLine2\": \"Shipper Address Line 2\",\r\n    \"city\": \"PORTLAND\",\r\n    \"state\": \"TN\",\r\n    \"zip\": \"38502\",\r\n    \"zipExt\": \"\",\r\n    \"phone\": \"(804) 445-7777\",\r\n    \"phoneExt\": \"888\",\r\n    \"email\": \"shipper@email.com\"\r\n  },\r\n  \"pickupInfo\": {\r\n    \"pickupDate\": \"04/25/2019\",\r\n    \"startTime\": \"08:30 AM\",\r\n    \"endTime\": \"04:00 PM\",\r\n    \"hookOrDrop\": true,\r\n    \"liftgateRequired\": true,\r\n    \"noStackPallets\": true\r\n  },\r\n  \"shipmentInfo\": [\r\n    {\r\n      \"requestNumber\": \"\",\r\n      \"commodity\":  {\r\n        \"destinationZipCode\": \"23234\",\r\n        \"destinationZipCodeExt\": \"\",\r\n        \"totalPieces\": 1,\r\n        \"totalWeight\": 11,\r\n        \"totalSkids\": 0,\r\n        \"hazmat\": false,\r\n        \"specialInstructions\": null,\r\n        \"referenceNumber\": \"PHREF#\"\r\n    },\r\n      \"shipmentOption\": {\r\n        \"freeze\": true,\r\n        \"oversize\": true,\r\n        \"food\": true,\r\n        \"poision\": true\r\n      },\r\n      \"shipmentService\": \"LTL\",\r\n      \"notification\": {\r\n        \"accepted\": true,\r\n        \"completed\": true,\r\n        \"rejected\": true\r\n      }\r\n    }\r\n  ],\r\n  \"tos\": true\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/pickup",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pickup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Pickup Request - Third Party",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user\": {\r\n    \"name\": \"User Name\",\r\n    \"phone\": \"(804) 336-8359\",\r\n    \"phoneExt\": \"888\",\r\n    \"email\": \"user@email.com\",\r\n    \"role\": \"THIRD_PARTY\"\r\n  },\r\n  \"shipper\": {\r\n    \"accountCode\": null,\r\n    \"name\": \"Shipper Name\",\r\n    \"company\": \"PELLA VINYL\",\r\n    \"addressLine1\": \"Shipper Address Line 1\",\r\n    \"addressLine2\": \"Shipper Address Line 2\",\r\n    \"city\": \"PORTLAND\",\r\n    \"state\": \"TN\",\r\n    \"zip\": \"38502\",\r\n    \"zipExt\": \"\",\r\n    \"phone\": \"(804) 445-7777\",\r\n    \"phoneExt\": \"888\",\r\n    \"email\": \"shipper@email.com\"\r\n  },\r\n  \"pickupInfo\": {\r\n    \"pickupDate\": \"02/25/2019\",\r\n    \"startTime\": \"08:30 AM\",\r\n    \"endTime\": \"04:00 PM\",\r\n    \"hookOrDrop\": true,\r\n    \"liftgateRequired\": true,\r\n    \"noStackPallets\": true\r\n  },\r\n  \"shipmentInfo\": [\r\n    {\r\n      \"requestNumber\": \"\",\r\n      \"commodity\":  {\r\n        \"destinationZipCode\": \"23234\",\r\n        \"destinationZipCodeExt\": \"\",\r\n        \"totalPieces\": 1,\r\n        \"totalWeight\": 11,\r\n        \"totalSkids\": 0,\r\n        \"hazmat\": false,\r\n        \"specialInstructions\": null,\r\n        \"referenceNumber\": \"PHREF#\"\r\n    },\r\n      \"shipmentOption\": {\r\n        \"freeze\": true,\r\n        \"oversize\": true,\r\n        \"food\": true,\r\n        \"poision\": true\r\n      },\r\n      \"shipmentService\": \"LTL\",\r\n      \"notification\": {\r\n        \"accepted\": true,\r\n        \"completed\": true,\r\n        \"rejected\": true\r\n      }\r\n    }\r\n  ],\r\n  \"tos\": true\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/pickup",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pickup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Pickup Request - Other Party",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user\": {\r\n    \"name\": \"User Name\",\r\n    \"phone\": \"(804) 336-8359\",\r\n    \"phoneExt\": \"888\",\r\n    \"email\": \"user@email.com\",\r\n    \"role\": \"OTHER\"\r\n  },\r\n  \"shipper\": {\r\n    \"accountCode\": null,\r\n    \"name\": \"Shipper Name\",\r\n    \"company\": \"PELLA VINYL\",\r\n    \"addressLine1\": \"Shipper Address Line 1\",\r\n    \"addressLine2\": \"Shipper Address Line 2\",\r\n    \"city\": \"PORTLAND\",\r\n    \"state\": \"TN\",\r\n    \"zip\": \"38502\",\r\n    \"zipExt\": \"\",\r\n    \"phone\": \"(804) 445-7777\",\r\n    \"phoneExt\": \"888\",\r\n    \"email\": \"shipper@email.com\"\r\n  },\r\n  \"pickupInfo\": {\r\n    \"pickupDate\": \"02/25/2019\",\r\n    \"startTime\": \"08:30 AM\",\r\n    \"endTime\": \"04:00 PM\",\r\n    \"hookOrDrop\": true,\r\n    \"liftgateRequired\": true,\r\n    \"noStackPallets\": true\r\n  },\r\n  \"shipmentInfo\": [\r\n    {\r\n      \"requestNumber\": \"\",\r\n      \"commodity\":  {\r\n        \"destinationZipCode\": \"23234\",\r\n        \"destinationZipCodeExt\": \"\",\r\n        \"totalPieces\": 1,\r\n        \"totalWeight\": 11,\r\n        \"totalSkids\": 0,\r\n        \"hazmat\": false,\r\n        \"specialInstructions\": null,\r\n        \"referenceNumber\": \"PHREF#\"\r\n    },\r\n      \"shipmentOption\": {\r\n        \"freeze\": true,\r\n        \"oversize\": true,\r\n        \"food\": true,\r\n        \"poision\": true\r\n      },\r\n      \"shipmentService\": \"LTL\",\r\n      \"notification\": {\r\n        \"accepted\": true,\r\n        \"completed\": true,\r\n        \"rejected\": true\r\n      }\r\n    }\r\n  ],\r\n  \"tos\": true\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/pickup",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pickup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Pickup Request - Other Party Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user\": {\r\n    \"name\": \"Mr. User\",\r\n    \"phone\": \"(804) 336-8359\",\r\n    \"phoneExt\": \"888\",\r\n    \"email\": \"user@example.com\",\r\n    \"role\": \"SHIPPER\"\r\n  },\r\n  \"shipper\": {\r\n    \"accountCode\": null,\r\n    \"name\": \"Shipper Name\",\r\n    \"company\": \"PELLA VINYL\",\r\n    \"addressLine1\": \"Shipper Address Line 1\",\r\n    \"addressLine2\": \"Shipper Address Line 2\",\r\n    \"city\": \"Piedmont\",\r\n    \"state\": \"CA\",\r\n    \"zip\": \"38502\",\r\n    \"zipExt\": \"\",\r\n    \"phone\": \"(510) 445-7777\",\r\n    \"phoneExt\": \"888\",\r\n    \"email\": \"shipper@example.com\"\r\n  },\r\n  \"pickupInfo\": {\r\n    \"pickupDate\": \"02/22/2019\",\r\n    \"startTime\": \"08:30 AM\",\r\n    \"endTime\": \"04:00 PM\",\r\n    \"hookOrDrop\": true,\r\n    \"liftgateRequired\": true,\r\n    \"noStackPallets\": true\r\n  },\r\n \"shipmentInfo\": [\r\n    {\r\n      \"requestNumber\": \"\",\r\n      \"commodity\":  {\r\n        \"destinationZipCode\": \"23234\",\r\n        \"destinationZipCodeExt\": \"\",\r\n        \"totalPieces\": 1,\r\n        \"totalWeight\": 11,\r\n        \"totalSkids\": 0,\r\n        \"hazmat\": false,\r\n        \"specialInstructions\": null,\r\n        \"referenceNumber\": \"PHREF#\"\r\n    },\r\n      \"shipmentOption\": {\r\n        \"freeze\": true,\r\n        \"oversize\": true,\r\n        \"food\": true,\r\n        \"poision\": true\r\n      },\r\n      \"shipmentService\": \"LTL\",\r\n      \"notification\": {\r\n        \"accepted\": true,\r\n        \"completed\": true,\r\n        \"rejected\": true\r\n      }\r\n    }\r\n  ],\r\n  \"tos\": true\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/pickup",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pickup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Pickup History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/pickup?size=100&sort=status&order=asc&page=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pickup"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "100"
+								},
+								{
+									"key": "sort",
+									"value": "status"
+								},
+								{
+									"key": "order",
+									"value": "asc"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Pickup Request -Errors",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user\": {\r\n    \"name\": \"User Name\",\r\n    \"phone\": \"(804) 336-8359\",\r\n    \"phoneExt\": \"888\",\r\n    \"email\": \"user@email.com\",\r\n    \"role\": \"SHIPPER\"\r\n  },\r\n  \"shipper\": {\r\n    \"accountCode\": \"5023958\",\r\n    \"name\": \"Shipper Name\",\r\n    \"company\": \"PELLA VINYL\",\r\n    \"addressLine1\": \"Shipper Address Line 1\",\r\n    \"addressLine2\": \"Shipper Address Line 2\",\r\n    \"city\": \"PORTLAND\",\r\n    \"state\": \"TN\",\r\n    \"zip\": \"38502\",\r\n    \"zipExt\": \"\",\r\n    \"phone\": \"(804) 445-7777\",\r\n    \"phoneExt\": \"888\",\r\n    \"email\": \"shipper@email.com\"\r\n  },\r\n  \"pickupInfo\": {\r\n    \"pickupDate\": \"02/12/2019\",\r\n    \"startTime\": \"8:30 AM\",\r\n    \"endTime\": \"04:00 PM\",\r\n    \"hookOrDrop\": true,\r\n    \"liftgateRequired\": true,\r\n    \"noStackPallets\": true\r\n  },\r\n  \"shipmentInfo\": [\r\n    {\r\n      \"requestNumber\": \"\",\r\n      \"commodity\":  {\r\n        \"destinationZipCode\": \"23234\",\r\n        \"destinationZipCodeExt\": \"\",\r\n        \"totalPieces\": 1,\r\n        \"totalWeight\": 11,\r\n        \"totalSkids\": 0,\r\n        \"hazmat\": false,\r\n        \"specialInstructions\": null,\r\n        \"referenceNumber\": \"PHREF#\"\r\n    },\r\n      \"shipmentOption\": {\r\n        \"freeze\": true,\r\n        \"oversize\": true,\r\n        \"food\": true,\r\n        \"poision\": true\r\n      },\r\n      \"shipmentService\": \"LTL\",\r\n      \"notification\": {\r\n        \"accepted\": true,\r\n        \"completed\": true,\r\n        \"rejected\": true\r\n      }\r\n    }\r\n  ],\r\n  \"tos\": true\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/pickup",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pickup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d987ef4a-3b6c-443e-87c9-d2ae83fc5841",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "f7669f33-c78e-4632-afff-535784ea96a5",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "153d2b1d-eefb-4a82-9d16-efb8fdc78d32",
+			"key": "url",
+			"value": "{{baseUrl}}PickupRequest/v1.0",
+			"type": "string"
+		}
+	]
+}
