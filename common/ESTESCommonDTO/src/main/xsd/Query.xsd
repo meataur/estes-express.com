@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="imageDetails">
+    <xsd:sequence>
+      <xsd:element name="query" nillable="true" type="queryRequest" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="documentLocation" nillable="true" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="queryRequest">
+    <xsd:sequence>
+      <xsd:element name="docTypes" form="qualified" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="queryOptions" type="option" minOccurs="0"/>
+      <xsd:element name="terminalNumbers" form="qualified" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="scanStation" form="qualified" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="verificationUser" form="qualified" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="created" type="created" minOccurs="0"/>
+      <xsd:element name="metadata" type="metadata" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="metadataLogicalOperator" nillable="true" form="qualified" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="imageStatus" type="imageStatus" minOccurs="0"/>
+      <xsd:element name="logicalOperator" nillable="true" form="qualified" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="generateSecureURLFlag" nillable="true" form="qualified" type="xsd:boolean" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="option">
+    <xsd:sequence>
+      <xsd:element name="rowLimit" form="qualified" type="xsd:int"/>
+      <xsd:element name="startIndex" form="qualified" type="xsd:int"/>
+      <xsd:element name="sortDirection" form="qualified" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="sortField" form="qualified" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="created">
+    <xsd:sequence>
+      <xsd:element name="operator" nillable="true" type="xsd:string"/>
+      <xsd:element name="date1" nillable="true" form="qualified" type="xsd:date"/>
+      <xsd:element name="date2" form="qualified" type="xsd:date" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="metadata">
+    <xsd:sequence>
+      <xsd:element name="operator" nillable="true" type="xsd:string"/>
+      <xsd:element name="key" form="qualified" type="xsd:string"/>
+      <xsd:element name="value" form="qualified" type="xsd:string"/>
+      <xsd:element name="value2" form="qualified" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="imageStatus">
+    <xsd:sequence>
+      <xsd:element name="operator" nillable="true" type="xsd:string"/>
+      <xsd:element name="value" nillable="true" type="xsd:string" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

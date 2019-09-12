@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2015 rel. 4 sp1 (x64) (http://www.altova.com) by User7 (ESTES EXPRESS LINES) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.estes-express.com/ECM/imaging/queryImage" targetNamespace="http://www.estes-express.com/ECM/imaging/queryImage" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="Query.xsd"/>
+	<xsd:element name="ImageQueryRequest" type="tns:queryRequest"/>
+</xsd:schema>

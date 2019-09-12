@@ -1,0 +1,48 @@
+def artifactoryServer = Artifactory.server('artifactory')
+def rtMaven = Artifactory.newMavenBuild()
+rtMaven.resolver(server: artifactoryServer, releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot')
+rtMaven.deployer(server: artifactoryServer, releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local')
+
+env.MAVEN_HOME='/usr/share/maven'
+
+def buildInfo
+
+pipeline {
+
+    agent {
+        docker {
+            image 'maven:3-alpine'
+        }
+    }
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                	buildInfo = rtMaven.run(pom: 'pom.xml', goals: '-DskipTests clean install')
+                }
+            }
+        }
+        stage('Unit Test') {
+           steps {
+                script {
+                	rtMaven.run(pom: 'pom.xml', goals: 'test')
+                }
+            }
+            post {
+               always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }    
+	    stage ('Publish') {
+		    steps {
+		    	script {
+					results = rtMaven.deployer.deployArtifacts(buildInfo)
+					artifactoryServer.publishBuildInfo(buildInfo)
+                    println buildInfo
+				}
+			}
+		}
+	}
+}
+

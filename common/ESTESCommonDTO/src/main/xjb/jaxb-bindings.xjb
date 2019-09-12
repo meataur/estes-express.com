@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jaxb:bindings>
+
+<jaxb:bindings version="2.1"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
+    	
+	<!-- Prevent wrapping data types into JAXBElements. -->
+    <jaxb:globalBindings generateElementProperty="false">
+    	
+		<!-- Use java.util.Calendar instead of XMLGregorianCalendar. -->
+      	<xjc:javaType name="java.util.Calendar" xmlType="xs:dateTime" 
+			adapter="com.estes.dto.ecm.adapter.CalendarDateTimeAdapter"/>
+        <xjc:javaType name="java.util.Calendar" xmlType="xs:date" 
+			adapter="com.estes.dto.ecm.adapter.CalendarDateAdapter"/>
+        <xjc:javaType name="java.util.Calendar" xmlType="xs:time" 
+			adapter="com.estes.dto.ecm.adapter.CalendarTimeAdapter"/>
+            
+    </jaxb:globalBindings>
+</jaxb:bindings>

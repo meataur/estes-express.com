@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>jar</packaging>
+	
+	<name>ESTESCommonDTO</name>
+	<artifactId>ESTESCommonDTO</artifactId>
+	<groupId>com.estes.dto</groupId>
+	
+	<!-- Increment the version number and remove -SNAPSHOT before running a build for an actual deployment. -->
+	<version>1.2.2.8</version>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			
+			<!-- Plugin used to compile java source code. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			
+			<!-- Plugin used to package JAR files. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<Implementation-Build>${project.version}</Implementation-Build>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			
+			<!-- Plugin used to access external XSD files. -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>1.0.0</version>
+				<executions>
+					<execution>
+						<id>set-additional-system-properties</id>
+						<goals>
+							<goal>set-system-properties</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<properties>
+						<property>
+							<name>javax.xml.accessExternalSchema</name>
+							<value>all</value>
+						</property>
+					</properties>
+				</configuration>
+			</plugin>
+			
+			<!-- Plugin used to replace the JAXB timestamp comment in source files. -->
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>maven-replacer-plugin</artifactId>
+				<version>1.3.8</version>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<includes>
+						<include>src/main/java/**/*.java</include>
+					</includes>
+					<token>^// Generated on.*$</token>
+					<value>// Generated for use by Estes Express Lines Inc.</value>
+					<regexFlags>
+						<regexFlag>MULTILINE</regexFlag>
+					</regexFlags>
+				</configuration>
+			</plugin>
+			
+			<!-- Plugin used to generate source code from XSD files using JAXB. -->
+			<!-- JAXB generates a bunch of extra classes, so only uncomment this plugin when needed. -->
+			<!-- After generating the source code, manually delete the extra classes and change the import clauses. -->
+			<!-- I tried for two days to automate the post-process and I was not successful. -->
+			<!-- <plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>1.6</version>
+				<configuration><extension>true</extension></configuration>
+				<executions>
+				
+					<execution>
+						<id>xjc-common-v1.2</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<target>2.1</target>
+							<clearOutputDir>false</clearOutputDir>
+							<outputDirectory>src/main/java</outputDirectory>
+							<schemaFiles>Common-v1.2.xsd</schemaFiles>
+							<packageName>com.estes.dto.ecm.image.common</packageName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>xjc-queriedImage</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<target>2.1</target>
+							<clearOutputDir>false</clearOutputDir>
+							<outputDirectory>src/main/java</outputDirectory>
+							<schemaFiles>QueriedImage.xsd</schemaFiles>
+							<packageName>com.estes.dto.ecm.image.common</packageName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>xjc-query</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<target>2.1</target>
+							<clearOutputDir>false</clearOutputDir>
+							<outputDirectory>src/main/java</outputDirectory>
+							<schemaFiles>Query.xsd</schemaFiles>
+							<packageName>com.estes.dto.ecm.image.common</packageName>
+						</configuration>
+					</execution>
+					
+					<execution>
+						<id>xjc-imageQueryRequest</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<target>2.1</target>
+							<clearOutputDir>false</clearOutputDir>
+							<outputDirectory>src/main/java</outputDirectory>
+							<schemaFiles>ImageQueryRequest.xsd</schemaFiles>
+							<packageName>com.estes.dto.ecm.image.query.request</packageName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>xjc-imageQueryResponse</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<target>2.1</target>
+							<clearOutputDir>false</clearOutputDir>
+							<outputDirectory>src/main/java</outputDirectory>
+							<schemaFiles>ImageQueryResponse.xsd</schemaFiles>
+							<packageName>com.estes.dto.ecm.image.query.response</packageName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>xjc-imageDeliveryRequest</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<target>2.1</target>
+							<clearOutputDir>false</clearOutputDir>
+							<outputDirectory>src/main/java</outputDirectory>
+							<schemaFiles>ImageDeliveryRequest.xsd</schemaFiles>
+							<packageName>com.estes.dto.ecm.image.delivery.request</packageName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>xjc-imageDeliveryResponse</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<target>2.1</target>
+							<clearOutputDir>false</clearOutputDir>
+							<outputDirectory>src/main/java</outputDirectory>
+							<schemaFiles>ImageDeliveryResponse.xsd</schemaFiles>
+							<packageName>com.estes.dto.ecm.image.delivery.response</packageName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>xjc-imagePrintRequest</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<target>2.1</target>
+							<clearOutputDir>false</clearOutputDir>
+							<outputDirectory>src/main/java</outputDirectory>
+							<schemaFiles>ImagePrintRequest.xsd</schemaFiles>
+							<packageName>com.estes.dto.ecm.image.print.request</packageName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>xjc-imagePrintResponse</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<target>2.1</target>
+							<clearOutputDir>false</clearOutputDir>
+							<outputDirectory>src/main/java</outputDirectory>
+							<schemaFiles>ImagePrintResponse.xsd</schemaFiles>
+							<packageName>com.estes.dto.ecm.image.print.response</packageName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>xjc-imageByDocIdResponse</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<target>2.1</target>
+							<clearOutputDir>false</clearOutputDir>
+							<outputDirectory>src/main/java</outputDirectory>
+							<schemaFiles>ImageByDocIdResponse.xsd</schemaFiles>
+							<packageName>com.estes.dto.ecm.image.lookup.response</packageName>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin> -->
+			
+		</plugins>
+		
+		<pluginManagement>
+			<plugins>
+				<!-- This plugin's configuration is used to store Eclipse m2e settings only. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-antrun-plugin</artifactId>
+										<versionRange>[1.4,)</versionRange>
+										<goals>
+											<goal>run</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.mojo</groupId>
+										<artifactId>properties-maven-plugin</artifactId>
+										<versionRange>[1.0-alpha-2,)</versionRange>
+										<goals>
+											<goal>read-project-properties</goal>
+											<goal>
+												set-system-properties
+											</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

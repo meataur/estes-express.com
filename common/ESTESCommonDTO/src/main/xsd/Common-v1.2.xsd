@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:complexType name="imageMetadata">
+		<xsd:sequence>
+		  <xsd:element name="key" type="xsd:string"/>
+		  <xsd:element name="value" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="error">
+		<xsd:sequence>
+		  <xsd:element name="elementName" type="xsd:string" minOccurs="0"/>
+		  <xsd:element name="code" type="xsd:string" minOccurs="0"/>
+		  <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+		  <xsd:element name="badData" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>	
+</xsd:schema>

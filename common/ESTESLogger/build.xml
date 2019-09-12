@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="BuildNumberGeneration" default="generateBuildNumber" basedir=".">
+	<target name="generateBuildNumber" depends="inputBuildNumberInfo, setintBuildNumber" />
+	
+	<target name="inputBuildNumberInfo">
+	        <echo message="" />
+	        <echo message="The following targets are avaliable in this ant build." />
+	        <echo message="  buildMajor:		This target will generate a major build number" />
+			<echo message="  buildMinor:		This target will generate a minor build number" />
+			<echo message="  buildRevision:		This target will generate a revision build number" />
+			<echo message="  build:    			This target will generate a int/dev build number" />
+	</target>
+	
+	<target name="setintBuildNumber" depends="getAppBuildType, majorNumber, minorNumber, revisionNumber, intBuildNumber">
+	        <!--
+	            Once the build number has been incremented and set in the buildNumber.properties file,
+	            load the properties.
+	        -->
+	        <loadproperties srcFile="${basedir}/${buildNumberFile}.properties"/>
+	        <echo message="Build Number: ${majorVersion}.${minorVersion}.${revisionVersion}.${buildVersion}"/>
+	 </target>
+	
+	<target name="majorNumber" if="major.build">
+	        <propertyfile file="${basedir}/${buildNumberFile}.properties">
+	            <entry key="majorVersion" type="int" operation="+" value="1" default="0"/>
+	            <entry key="minorVersion" type="int" value="0" default="0"/>
+	            <entry key="revisionVersion" type="int" value="0" default="0" />
+	        	<entry key="buildVersion" type="int" value="0" default="0" />
+	        </propertyfile>
+	    </target>
+	
+	 <!-- 
+	        If the build.type is set to minor then leave the major alone, increment the 
+	        minor version number, and then reset the revision to 0. 
+	    -->
+	    <target name="minorNumber" if="minor.build">
+	        <propertyfile file="${basedir}/${buildNumberFile}.properties">
+	            <entry key="minorVersion" type="int" operation="+" value="1" default="0"/>
+	            <entry key="revisionVersion" type="int" value="0" default="0" />
+	        	<entry key="buildVersion" type="int" value="0" default="0" />
+	        </propertyfile>
+	    </target>
+	    
+	    <!-- 
+	        If the build.type is set to revision then leave the major and minor alone then
+	        increment the revision.
+	    -->
+	    <target name="revisionNumber" if="revision.build">
+	    	<propertyfile file="${basedir}/${buildNumberFile}.properties">
+				<entry key="revisionVersion" type="int" operation="+" value="1" default="0" />
+	        	<entry key="buildVersion" type="int" value="0" default="0" />
+	        </propertyfile>
+	    </target>
+	
+		<!-- 
+		        If the build.type is set to build then leave the major and minor and revision alone then
+		        increment the last part(build).
+		    -->
+	  <target name="intBuildNumber" if="build">
+	  	<propertyfile file="${basedir}/${buildNumberFile}.properties">
+	           <entry key="buildVersion" type="int" operation="+" value="1" default="0" />
+	     </propertyfile>
+	   </target>
+	
+		<target name="getAppBuildType">
+	        <input 
+	            message="Build Type?"
+	            validargs="major,minor,revision,"
+	            addproperty="build.type" />
+	        <condition property="major.build" value="true">
+	            <equals arg1="major" arg2="${build.type}" casesensitive="false" />
+	        </condition>
+	        <condition property="minor.build" value="true">
+	            <equals arg1="minor" arg2="${build.type}" casesensitive="false" />
+	        </condition>
+	        <condition property="revision.build" value="true">
+	            <equals arg1="revision" arg2="${build.type}" casesensitive="false" />
+	        </condition>
+			<condition property="build" value="true">
+			  <equals arg1="" arg2="${build.type}" casesensitive="false" />
+			</condition>
+	    </target>
+
+</project>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="commitBuildNumberChange" default="commit" basedir=".">
+	
+	<path id="classpath"> 
+		<pathelement location="${svnAntLib}/ganymed.jar"/>  
+		<pathelement location="${svnAntLib}/jna.jar"/>
+		<pathelement location="${svnAntLib}/svnant.jar"/>
+		<pathelement location="${svnAntLib}/svnClientAdapter.jar"/>
+		<pathelement location="${svnAntLib}/svnjavahl.jar"/>
+		<pathelement location="${svnAntLib}/svnkit.jar"/>
+	</path>
+	
+	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml"
+	 classpathref="classpath"/>
+	
+	<svnSetting id="svn.settings" username="${svnUsername}" password="${svnPassword}" 
+	javahl="false" svnkit="true" failonerror="true"/>
+	
+	<target name="commit">
+		<loadproperties srcFile="${projectRoot}/buildNumber.properties"/>
+	   <svn refid="svn.settings">	  	
+	        <commit file="${projectRoot}/buildNumber.properties"	        	
+	            message="Framework build: ${majorVersion}.${minorVersion}.${revisionVersion}.${buildVersion}${line.separator}Done By:${svnUsername}"
+	        />	       
+	    </svn>
+	</target>
+</project>

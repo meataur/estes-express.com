@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2015 rel. 4 sp1 (x64) (http://www.altova.com) by User7 (ESTES EXPRESS LINES) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.estes-express.com/ECM/imaging/queryImage" targetNamespace="http://www.estes-express.com/ECM/imaging/queryImage" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="Query.xsd"/>
+	<xsd:element name="ImageDeliveryRequest" type="tns:deliveryRequest"/>
+	<xsd:complexType name="deliveryRequest">
+		<xsd:sequence>
+			<xsd:element name="delivery" type="tns:deliveryDetails" nillable="true"/>
+			<xsd:element name="imageDetails" type="tns:imageDetails" nillable="true"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="deliveryDetails">
+		<xsd:sequence>
+			<xsd:element name="fax" type="tns:faxRequest" nillable="true" minOccurs="0"/>
+			<xsd:element name="email" type="tns:emailRequest" nillable="true" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="faxRequest">
+		<xsd:sequence>
+			<xsd:element name="faxNumber" type="xsd:string"/>
+			<xsd:element name="faxCoverSheet" type="tns:faxCoverSheetDetails" nillable="true"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="faxCoverSheetDetails">
+		<xsd:sequence>
+			<xsd:element name="to" type="tns:faxTo" nillable="true"/>
+			<xsd:element name="from" type="tns:faxFrom" nillable="true"/>
+			<xsd:element name="comments" type="xsd:string" nillable="true" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="faxTo">
+		<xsd:sequence>
+			<xsd:element name="company" type="xsd:string" nillable="true"/>
+			<xsd:element name="attn" type="xsd:string" nillable="true"/>
+			<xsd:element name="address" type="xsd:string" nillable="true" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="faxFrom">
+		<xsd:sequence>
+			<xsd:element name="company" type="xsd:string" nillable="true"/>
+			<xsd:element name="user" type="xsd:string" nillable="true"/>
+			<xsd:element name="address" type="xsd:string" nillable="true" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="emailRequest">
+		<xsd:sequence>
+			<xsd:element name="from" type="xsd:string" nillable="true"/>
+			<xsd:element name="to" type="xsd:string" nillable="true" maxOccurs="unbounded"/>
+			<xsd:element name="cc" type="xsd:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="bcc" type="xsd:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="subject" type="xsd:string" nillable="true" minOccurs="0"/>
+			<xsd:element name="body" type="xsd:string" nillable="true" minOccurs="0"/>
+			<xsd:element name="attachmentFormat">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:whiteSpace value="preserve"/>
+						<xsd:enumeration value="TIF"/>
+						<xsd:enumeration value="PDF"/>
+						<xsd:enumeration value="LINK"/>
+						<xsd:enumeration value="LINK-PDF"/>
+						<xsd:enumeration value="LINK-ZIP"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="concat" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="attachmentFileName" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="40"/>
+						<xsd:whiteSpace value="preserve"/>
+						<xsd:pattern value="[a-zA-Z0-9_-]+"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
