@@ -1,0 +1,140 @@
+<lib-routable-component-header>Request Additional Info</lib-routable-component-header>
+<p>Questions about the information you have received? 
+    Fill out this form, and a customer care representative will have an answer for you shortly.</p>
+<mat-card>
+  <mat-card-content [libOverlay]="loading">
+
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" *ngIf="!successMessage">
+      <div>
+        <div class="row">
+          <div class="col-sm-12 col-md-8 col-lg-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input type="text" matInput placeholder="Name" required formControlName="name">
+              <mat-error *ngIf="name.invalid">{{
+                formService.getErrorMessage(name)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div *ngIf="username" class="col-sm-12 col-md-8 col-lg-4">
+            <mat-form-field appearance="outline">
+              <mat-label>My Estes Username</mat-label>
+              <input type="text" matInput readonly [value]="username">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-8 col-lg-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Email Address</mat-label>
+              <input
+                matInput
+                required
+                formControlName="emailAddress"
+                placeholder="Email@example.com"
+              />
+              <mat-error *ngIf="emailAddress.invalid">{{
+                formService.getErrorMessage(emailAddress)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8 col-md-5 col-lg-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Phone Number</mat-label>
+              <input type="text" matInput placeholder="(888) 888-8888" required [textMask]="{mask: phoneMask, guide: false}" formControlName="phoneNumber">
+              <mat-error *ngIf="phoneNumber.invalid">{{
+                formService.getErrorMessage(phoneNumber)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-4 col-md-3 col-lg-2">
+            <mat-form-field appearance="outline">
+              <mat-label>Extension</mat-label>
+              <input type="text" matInput formControlName="phoneNumberExt">
+              <mat-error *ngIf="phoneNumberExt.invalid">{{
+                formService.getErrorMessage(phoneNumberExt)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-8 col-lg-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Fax</mat-label>
+                <input type="text" matInput placeholder="(888) 888-8888" [textMask]="{mask: phoneMask, guide: false}" formControlName="faxNumber">
+                <mat-error *ngIf="faxNumber.invalid">{{
+                  formService.getErrorMessage(faxNumber)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-8 col-lg-4">
+            <mat-form-field appearance="outline">
+              <mat-label>PRO #</mat-label>
+              <input type="text" matInput formControlName="proNumber" [readonly]="paramSet" [textMask]="{mask: proMask, guide: false}">
+              <mat-error *ngIf="proNumber.invalid">{{
+                formService.getErrorMessage(proNumber)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-8 col-lg-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Description of Problem</mat-label>
+              <mat-select focus="true" required formControlName="problem">
+                <mat-option *ngFor="let option of problemTypes"  [value]="option">
+                  {{ problemTypeMappings[option] }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="problem.invalid">{{
+                formService.getErrorMessage(problem)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row form-group" *ngIf="showImageTypes">
+          <div class="col-12 pb-2">
+            <mat-label>Image Types *</mat-label>
+          </div>
+          <div class="col-12">
+            <mat-checkbox color="primary" formControlName="bolSelected" class="pr-3">
+              Bill of Lading
+            </mat-checkbox>
+            <mat-checkbox color="primary" formControlName="drSelected" class="pr-3">
+              Delivery Reciept
+            </mat-checkbox>
+            <mat-checkbox color="primary" formControlName="wrSelected">
+              Weight & Research
+            </mat-checkbox>
+          </div>
+          <div *ngIf="!imageTypeValid"
+            class="validation-error col-12">
+            This field is required.
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-lg-8 col-md-8 col-xl-8">
+            <mat-form-field appearance="outline">
+              <mat-label>Comments/Description</mat-label>
+              <textarea matInput rows="7" [required]="problem.value !== 'imageNotAvailable'" formControlName="description"></textarea>
+              <mat-error *ngIf="description.invalid">{{
+                formService.getErrorMessage(description)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <lib-feedback [message]="errorMessages"></lib-feedback>
+        <div class="row">
+          <div class="col-sm-12">
+            <button type="submit" [disabled]="loading" class="btn btn-primary">
+              Submit <i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+      <lib-feedback [message]="successMessage"></lib-feedback>
+  </mat-card-content>
+</mat-card>

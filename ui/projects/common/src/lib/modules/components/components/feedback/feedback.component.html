@@ -1,0 +1,9 @@
+<div *ngIf="message && !hasMultipleMessages" [ngClass]="getClasses()">
+  <i *ngIf="useIcon" [ngClass]="getIconClasses()"></i><span [innerHTML]="message[1]"></span>
+</div>
+<div *ngIf="message && hasMultipleMessages" [ngClass]="getClasses()">
+  <ul *ngIf="message[1].length > 1">
+    <li *ngFor="let msg of message[1]"><span [innerHTML]="msg"></span></li>
+  </ul>
+  <span *ngIf="message[1].length === 1" [innerHTML]="message[1][0]"></span>
+</div>

@@ -1,0 +1,140 @@
+<lib-routable-component-header>Points Download</lib-routable-component-header>
+<!-- <lib-table>
+  <ng-template let-name="test1">
+    test1
+  </ng-template>
+  <ng-template let-name="test2">
+    test2
+  </ng-template>
+</lib-table> -->
+<p>
+  Our Points Download tool allows you to get a list of serving terminals by ZIP/Postal Code or City in a spreadsheet format. Simply fill out the form, and we’ll email you the file.
+</p>
+<mat-card class="mb-3">
+  <mat-card-content>
+    <div class="row">
+      <div class="col-md-6">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+          <div class="form-row">
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Email Address</mat-label>
+                <input matInput formControlName="email" placeholder="Email@example.com" required/>
+                <mat-error *ngIf="email.invalid">{{
+                  getErrorMessage(email)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Select File Format</mat-label>
+                <mat-select
+                  focus="true"
+                  required
+                  name="fileFormat"
+                  id="fileFormat"
+                  formControlName="fileFormat"
+                >
+                  <mat-option [value]="'XLS'"
+                    >Excel Worksheet File (*.xls)</mat-option
+                  >
+                  <mat-option [value]="'CSV'">Text/CSV File (*.csv)</mat-option>
+                  <mat-option [value]="'TXT'"
+                    >Tab Delimited Text File (*.txt)</mat-option
+                  >
+                </mat-select>
+                <mat-error *ngIf="fileFormat.invalid">{{
+                    getErrorMessage(fileFormat)
+                  }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-12 d-flex">
+              <mat-form-field appearance="outline" class="w-75">
+                <mat-label>Select Points</mat-label>
+                <mat-select
+                  class="estes-mat-select"
+                  focus="true"
+                  required
+                  name="criteria"
+                  id="criteria"
+                  formControlName="criteria"
+                >
+                  <mat-option [value]="'*'">* All</mat-option>
+                  <mat-option [value]="'2'">All Direct Points</mat-option>
+                  <mat-option [value]="'5'">All Non-Direct Points</mat-option>
+                  <mat-option [value]="'3'">All North America</mat-option>
+                  <mat-option [value]="'US'">United States</mat-option>
+                  <mat-option [value]="'CN'">Canada</mat-option>
+                  <mat-option [value]="'MX'">Mexico</mat-option>
+                </mat-select>
+                <mat-error *ngIf="criteria.invalid">{{
+                    getErrorMessage(criteria)
+                  }}</mat-error>
+              </mat-form-field>
+              <lib-tooltip class="pt-3 pl-2" [message]="'Selecting \“All\” will return ZIPs/Postal Codes served by Estes in the U.S., Canada and Puerto Rico/Virgin Islands. Direct Points include all ZIP and Postal Codes that deliver on an Estes freight bill. Non-Direct Points are outlying areas in the U.S. where Estes may need to use an affiliate to deliver your freight.'"></lib-tooltip>
+            </div>
+          </div>
+          <div
+            *ngIf="criteria.value === 'US' || criteria.value === 'CN'"
+            class="form-row"
+          >
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>{{
+                  criteria.value === 'US' ? 'State' : 'Province'
+                }} *</mat-label>
+                <mat-select
+                  focus="true"
+                  name="state"
+                  id="state"
+                  formControlName="state"
+                >
+                  <mat-option
+                    [value]="state"
+                    *ngFor="let state of (states$ | async)"
+                    >{{ state }}</mat-option
+                  >
+                </mat-select>
+                <mat-error *ngIf="state.invalid">{{
+                    getErrorMessage(state)
+                  }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12">
+              <div><label>Sort Order</label></div>
+              <mat-radio-group class="radio-group" formControlName="sort">
+                <mat-radio-button color="primary" [value]="'zip'">Postal Code</mat-radio-button>
+                <mat-radio-button color="primary" [value]="'cty'">City</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <lib-feedback [message]="errorMessage"></lib-feedback>
+          <div class="pb-4">
+            <button type="submit" [disabled]="loading" class="btn btn-primary">
+              Submit <i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6 side-panel">
+        <mat-card>
+          <mat-card-content>
+            <lib-promo></lib-promo>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<div class="row">
+  <div class="col-12">
+    <p>
+      Note: Information applies to standard Estes LTL shipments. Data such as
+      supporting terminal information for specialty services and custom
+      solutions provided by other Estes operating entities may vary based on the
+      services selected.
+    </p>
+  </div>
+</div>

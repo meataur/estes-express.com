@@ -1,0 +1,19 @@
+<div class="action-column__header mb-2">
+  <i class="fa fa-arrow-circle-right mr-2"></i><span class="text-uppercase">Next Steps</span>
+</div>
+<p>
+  The act of shipping freight with Estes implies you have read and agree to our
+  <a (click)="openDisclosuresModal()">Rate Quote Disclosures and Terms of Service</a>.
+</p>
+<button
+  (click)="createBol()"
+  class="w-100 btn btn-default--action d-flex justify-content-between mt-2"
+>
+<span>Create BOL<i class="fal fa-lock-alt ml-1"></i></span>
+</button>
+<button
+  (click)="requestPickup()"
+  class="w-100 btn btn-default--action d-flex justify-content-between mt-2"
+>
+<span>Request Pickup<i class="fal fa-lock-alt ml-1"></i></span>
+</button>

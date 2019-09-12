@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Set Viewing Preference</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group col-12">
+        <div><label>When viewing your recent shipments, see those shipments where you are the:</label></div>
+        <mat-radio-group class="radio-group" formControlName="shipmentType">
+          <mat-radio-button class="shipment-type" color="primary" [value]="'S'"
+            >Shipper</mat-radio-button
+          >
+          <mat-radio-button class="shipment-type" color="primary" [value]="'C'"
+            >Consignee</mat-radio-button
+          >
+          <mat-radio-button class="shipment-type" color="primary" [value]="'T'"
+            >Third Party Payor</mat-radio-button
+          >
+        </mat-radio-group>
+      </div>
+    </div>
+    <lib-feedback [message]="feedback"></lib-feedback>
+    <div mat-dialog-actions>
+      <button type="submit" [disabled]="loading" class="btn btn-primary" (click)="onSubmit()">Confirm <i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i></button>&nbsp;
+      <button type="button" class="btn btn-default" (click)="onNoClick()">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,59 @@
+<mat-card>
+  <mat-card-header><mat-card-title>Accessorials</mat-card-title></mat-card-header>
+  <mat-card-content>
+    <lib-form-header *ngIf="!showAllAccessorials" [color]="'red'"
+      >Popular Accessorials</lib-form-header
+    >
+    <div *ngIf="!showAllAccessorials" class="form-row">
+      <div
+        class="form-group col-md-4 accessorial-block"
+        *ngFor="let a of commonAccessorials; let i = index"
+      >
+        <mat-checkbox
+          id="accessorial{{ i }}"
+          color="primary"
+          (change)="onChecked(a)"
+          [checked]="isChecked(a)"
+        >
+          {{ a.description }}
+        </mat-checkbox>
+      </div>
+    </div>
+    <div class="form-row" *ngIf="showAllAccessorials">
+      <div
+        class="form-group col-md-4 accessorial-block"
+        *ngFor="let a of accessorials; let i = index"
+      >
+        <mat-checkbox
+          id="allAccessorials{{ i }}"
+          color="primary"
+          (change)="onChecked(a)"
+          [checked]="isChecked(a)"
+        >
+          {{ a.description }}
+        </mat-checkbox>
+      </div>
+    </div>
+    <button
+      *ngIf="!hasNonPopularAccessorialsSelected"
+      class="btn btn-default"
+      (click)="toggleAllAccessorials()"
+    >
+      {{ showAllAccessorials ? 'Hide' : 'View' }} All Accessorials
+    </button>
+    <div class="form-row mt-3" *ngIf="selection.selected.length > 0">
+      <div class="col-12">
+        <div><label>Selected Accessorials</label></div>
+        <div class="selected-container">
+          <div class="btn btn-default selected mb-1" *ngFor="let s of selection.selected" (click)="onChecked(s)">
+            <div class="d-flex align-items-center">
+              <mat-icon aria-label="Example icon-button with a heart icon">close</mat-icon>&nbsp;<span class="text-left">{{
+                s.description
+              }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

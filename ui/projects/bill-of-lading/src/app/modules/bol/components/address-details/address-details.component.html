@@ -1,0 +1,154 @@
+<lib-form-header [color]="'red'">{{ headerTitle }}</lib-form-header>
+<p [hidden]="disabled || addressBookSource !== true || hideAddressBook">
+  Use address from
+  <lib-inline-button class="ml-1 font-weight-bold" [faIcon]="'fa fa-address-book'" (click)="openAddressDialog()"
+    >Address Book</lib-inline-button
+  >
+</p>
+<div class="form-row" [hidden]="disabled || hideAddressBook">
+  <div class="col-md-12" *ngFor="let o of formAddressSources; let i = index">
+    <mat-checkbox
+      color="primary"
+      (change)="onAddressSourceChecked($event, o.value)"
+      [checked]="selectedAddressSource === o.value"
+    >
+      {{ o.text
+      }}<i
+        *ngIf="loadingMyEstesAccount && o.value === 'Account'"
+        class="fal fa-sync-alt fa-spin ml-2"
+      ></i>
+    </mat-checkbox>
+  </div>
+</div>
+<form [formGroup]="formGroup">
+  <div class="form-row">
+    <div class="form-group col-12">
+      <mat-form-field appearance="outline">
+        <mat-label>Company Name</mat-label>
+        <input matInput formControlName="companyName" required />
+        <mat-error *ngIf="companyName.invalid">{{
+          formService.getErrorMessage(companyName)
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-12">
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input
+          matInput
+          formControlName="firstName"
+          [required]="formService.hasRequiredField(firstName)"
+        />
+        <mat-error *ngIf="firstName.invalid">{{
+          formService.getErrorMessage(firstName)
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-12">
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" />
+        <mat-error *ngIf="lastName.invalid">{{ formService.getErrorMessage(lastName) }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-12">
+      <mat-form-field appearance="outline">
+        <mat-label>Location #</mat-label>
+        <input matInput formControlName="location" />
+        <mat-error *ngIf="location.invalid">{{ formService.getErrorMessage(location) }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-md-7">
+      <mat-form-field appearance="outline">
+        <mat-label>Phone Number</mat-label>
+        <input
+          matInput
+          formControlName="phone"
+          placeholder="(888) 888-8888"
+          [textMask]="{ mask: phoneMask, guide: false }"
+          [required]="formService.hasRequiredField(phone)"
+        />
+        <mat-error *ngIf="phone.invalid">{{ formService.getErrorMessage(phone) }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-md-5">
+      <mat-form-field appearance="outline">
+        <mat-label>Extension</mat-label>
+        <input matInput formControlName="phoneExt" />
+        <mat-error *ngIf="phoneExt.invalid">{{ formService.getErrorMessage(phoneExt) }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-md-7">
+      <mat-form-field appearance="outline">
+        <mat-label>Fax</mat-label>
+        <input
+          matInput
+          formControlName="fax"
+          placeholder="(888) 888-8888"
+          [textMask]="{ mask: phoneMask, guide: false }"
+        />
+        <mat-error *ngIf="fax.invalid">{{ formService.getErrorMessage(fax) }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-12">
+      <mat-form-field appearance="outline">
+        <mat-label>Email Address</mat-label>
+        <input
+          matInput
+          formControlName="email"
+          placeholder="Email@example.com"
+          [required]="formService.hasRequiredField(email)"
+        />
+        <mat-error *ngIf="email.invalid">{{ formService.getErrorMessage(email) }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-12">
+      <mat-form-field appearance="outline">
+        <mat-label>Select Country</mat-label>
+        <mat-select focus="true" name="country" id="country" formControlName="country" required>
+          <mat-option [value]="c.value" *ngFor="let c of countries">{{ c.text }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="country.invalid">{{ formService.getErrorMessage(country) }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-12">
+      <mat-form-field appearance="outline">
+        <mat-label>Address Line 1</mat-label>
+        <input matInput formControlName="address1" required />
+        <mat-error *ngIf="address1.invalid">{{ formService.getErrorMessage(address1) }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-12">
+      <mat-form-field appearance="outline">
+        <mat-label>Address Line 2</mat-label>
+        <input matInput formControlName="address2" />
+        <mat-error *ngIf="address2.invalid">{{ formService.getErrorMessage(address2) }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-md-8">
+      <mat-form-field appearance="outline">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city" required />
+        <mat-error *ngIf="city.invalid">{{ formService.getErrorMessage(city) }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-md-8 col-lg-4">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ stateLabelText }}</mat-label>
+        <mat-select focus="true" name="state" id="state" formControlName="state" required>
+          <mat-option [value]="state" *ngFor="let state of (states$ | async)">{{
+            state
+          }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="state.invalid">{{ formService.getErrorMessage(state) }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-md-7">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ zipLabelText }}</mat-label>
+        <input matInput formControlName="zip" required />
+        <mat-error *ngIf="zip.invalid">Please enter a valid ZIP Code/Postal Code.</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</form>

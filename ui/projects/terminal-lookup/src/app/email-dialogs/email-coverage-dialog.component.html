@@ -1,0 +1,83 @@
+<!--
+  // To receive a email of next day coverager point, enter one or more e-mail addresses in the form below and select a format.
+-->
+<div class="row">
+  <h1 class="col-10" mat-dialog-title>{{ data.title }}</h1>
+  <div class="col-2">
+    <i class="float-right fa fa-times" (click)="onNoClick()"></i>
+  </div>
+</div>
+<div mat-dialog-content>
+  <p>{{ data.message }}</p>
+  <form [formGroup]="formGroup">
+    <div class="form-row">
+      <div class="form-group col-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Select File Format</mat-label>
+          <mat-select
+            focus="true"
+            name="fileFormat"
+            id="fileFormat"
+            formControlName="fileFormat"
+          >
+            <mat-option [value]="'XLS'"
+              >Excel Worksheet File (*.xls)</mat-option
+            >
+            <mat-option [value]="'CSV'">Text/CSV File (*.csv)</mat-option>
+          </mat-select>
+
+          <mat-error *ngIf="fileFormat.invalid">{{
+            formService.getErrorMessage(fileFormat)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Sort Order</mat-label>
+            <mat-select
+              focus="true"
+              name="fileSort"
+              id="fileSort"
+              formControlName="fileSort"
+            >
+              <mat-option [value]="'CTY'"
+                >City</mat-option
+              >
+              <mat-option [value]="'ZIP'">Zip Code</mat-option>
+            </mat-select>
+  
+            <mat-error *ngIf="fileSort.invalid">{{
+              formService.getErrorMessage(fileSort)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-12">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <textarea
+            matInput
+            placeholder="Email@example.com"
+            rows="10"
+            name="email"
+            id="email"
+            formControlName="email"
+          ></textarea>
+          <mat-error *ngIf="email.invalid">{{
+            formService.getErrorMessage(email)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+  <lib-feedback [message]="errorMessage"></lib-feedback>
+</div>
+<div mat-dialog-actions cdkFocusRegionstart>
+  <button type="submit" (click)="onSubmit()" [disabled]="loading" class="btn btn-primary">
+    Submit <i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i></button
+  >&nbsp;
+  <button type="button" class="btn btn-default" (click)="onNoClick()">
+    Cancel
+  </button>
+</div>

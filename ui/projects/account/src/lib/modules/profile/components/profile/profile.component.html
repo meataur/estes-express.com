@@ -1,0 +1,26 @@
+<lib-routable-component-header>Your My Estes User Profile</lib-routable-component-header>
+<mat-card *ngIf="profile" [libOverlay]="loading">
+  <mat-card-content>
+    <div class="row profile-item" *ngFor="let p of profileItems">
+      <div class="col-lg-6">
+        <lib-form-header [color]="'red'" class="">{{ p.title }}:</lib-form-header>
+      </div>
+      <div class="col-lg-6">
+        {{ p.value }}<br />
+        <span role="button" class="a a-edit a-small" (click)="editProfile(p.action)">
+          {{ p.actionText }}
+        </span>
+      </div>
+    </div>
+    <ng-container *ngIf="isAdmin === true">
+      <div class="row profile-item" *ngFor="let p of adminItems">
+        <div class="col-lg-6">
+          <lib-form-header [color]="'red'" class="">{{ p.title }}:</lib-form-header>
+        </div>
+        <div class="col-lg-6">
+          <a [routerLink]="[p.link]" class="a a-edit a-small"> {{ p.actionText }} </a>
+        </div>
+      </div>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

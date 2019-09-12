@@ -1,0 +1,108 @@
+<lib-routable-component-header>{{ componentHeaderText }}</lib-routable-component-header>
+<p>
+  Fill out the form with details about your product. If you do not know certain information, leave it blank and fill it in at a later time.
+</p>
+<mat-card [formGroup]="formGroup" [libOverlay]="loadingCommodity">
+  <mat-card-content>
+    <div class="form-row">
+      <div class="form-group col-12">
+        <mat-checkbox id="hazmat" name="hazmat" color="primary" formControlName="hazmat">
+          Hazmat
+        </mat-checkbox>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Product ID</mat-label>
+          <input id="id" matInput formControlName="id" required />
+          <mat-error *ngIf="id.invalid">{{ formService.getErrorMessage(id) }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Goods Quantity</mat-label>
+          <input id="goodsQuantity" matInput formControlName="goodsQuantity" />
+          <mat-error *ngIf="goodsQuantity.invalid">{{
+            formService.getErrorMessage(goodsQuantity)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Goods Type</mat-label>
+          <mat-select
+            focus="true"
+            id="goodsType"
+            formControlName="goodsType"
+          >
+            <mat-option [value]="o.code" *ngFor="let o of (packageTypes$ | async)">{{
+              o.description
+            }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="goodsType.invalid">{{
+            formService.getErrorMessage(goodsType)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12">
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            rows="10"
+            name="description"
+            id="description"
+            formControlName="description"
+            required
+          ></textarea>
+          <mat-error *ngIf="description.invalid">{{
+            formService.getErrorMessage(description)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 form-group form-group--tooltip">
+        <mat-form-field appearance="outline" class="form-group--tooltip__form-field">
+          <mat-label>Total Weight</mat-label>
+          <input id="weight" matInput formControlName="weight" />
+          <mat-error *ngIf="weight.invalid">{{ formService.getErrorMessage(weight) }}</mat-error>
+        </mat-form-field>
+        <lib-tooltip class="form-group--tooltip__tooltip" [message]="'Don’t know? Leave blank. Please note that we may also reweigh and dimension your freight to determine density once we’ve picked up your shipment. '"></lib-tooltip>
+      </div>
+      <div class="form-group col-12 form-field-group">
+        <div><label>NMFC</label></div>
+        <mat-form-field appearance="outline" class="wrapper-padding-0">
+          <input id="nmfc" matInput formControlName="nmfc" /> </mat-form-field
+        >&nbsp;-&nbsp;<mat-form-field appearance="outline" class="wrapper-padding-0">
+          <input id="nmfcSub" matInput formControlName="nmfcSub" />
+        </mat-form-field>
+        <div *ngIf="nmfc.invalid && (nmfc.touched || nmfc.dirty)" class="validation-error">
+          {{ formService.getErrorMessage(nmfc) }}
+        </div>
+        <div *ngIf="nmfcSub.invalid && (nmfcSub.touched || nmfcSub.dirty)" class="validation-error">
+          {{ formService.getErrorMessage(nmfcSub) }}
+        </div>
+      </div>
+      <div class="col-md-6 form-group form-group--tooltip">
+        <mat-form-field appearance="outline" class="form-group--tooltip__form-field">
+          <mat-label>Class</mat-label>
+          <mat-select focus="true" id="shipClass" formControlName="shipClass">
+            <mat-option [value]="o" *ngFor="let o of (classes$ | async)">{{ o }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="shipClass.invalid">{{
+            formService.getErrorMessage(shipClass)
+          }}</mat-error>
+        </mat-form-field>
+        <lib-tooltip class="form-group--tooltip__tooltip" [message]="'Class is a rating assigned to products based on value and shipping characteristics, e.g., density and how the freight is packaged. There is a system of 18 classes, from class 50 to 500, which determines the rate. If you do not know your commodity’s class, leave this blank and fill it in later. '"></lib-tooltip>
+
+      </div>
+    </div>
+    <div>
+      <lib-feedback [message]="errorMessages"></lib-feedback>
+      <button type="submit" class="btn btn-primary mr-3" (click)="onSubmit()" [disabled]="loading">
+        Save <i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i>
+      </button>
+      <button type="button" class="btn btn-default" role="link" [routerLink]="['/']">Cancel</button>
+    </div>
+  </mat-card-content>
+</mat-card>

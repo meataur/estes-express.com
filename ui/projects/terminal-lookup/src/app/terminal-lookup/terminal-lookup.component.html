@@ -1,0 +1,437 @@
+<h1><span>Terminal Lookup</span></h1>
+<p>
+    Find supporting terminal information by state or ZIP. You can also view transit maps and get a spreadsheet of next-day destinations for most locations sent right to your inbox. Estes offers direct service throughout all 50 states, Canada, and Puerto Rico with nearly 250 terminals. We also offer door-to-door service to and from Mexico as well as <a href="https://www.efwnow.com/" target="_blank">worldwide freight forwarding</a> options.
+</p>
+<!-- Alert Section -->
+<lib-feedback [message]="errorMessages"></lib-feedback>
+<!-- Lookup Card -->
+<mat-card class="p-0">
+  <mat-card-content>
+    <div class="row">
+      <div class="col-md-12 col-lg-4">
+        <form (ngSubmit)="lookup()" [formGroup]="formGroup">
+          <div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field appearance="outline">
+                  <mat-label>Country *</mat-label>
+                  <mat-select matInput name="country" id="country" formControlName="country" (selectionChange)="countrySelected()">
+                    <mat-option *ngFor="let option of countries" [value]="option.value">
+                      {{ option.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="country.invalid">{{
+                    formService.getErrorMessage(country)
+                  }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field appearance="outline">
+                  <mat-label>Look Up By *</mat-label>
+                  <mat-select matInput name="lookupBy" id="lookupBy" formControlName="lookupBy">
+                    <mat-option *ngFor="let option of lookupByOptions" [value]="option">
+                      {{ option }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="lookupBy.invalid">{{
+                    formService.getErrorMessage(lookupBy)
+                  }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- Lookup By State -->
+            <div class="row" *ngIf="(lookupBy.value === 'State' || lookupBy.value === 'Province') && country.value != 'MX'">
+              <div class="col">
+                <mat-form-field appearance="outline">
+                  <mat-select matInput name="stateSelect" id="stateSelect" formControlName="stateSelect" placeholder="Select {{ lookupBy.value }}">
+                    <mat-option *ngFor="let option of states" [value]="option">
+                      {{ option }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="stateSelect.invalid">{{
+                    formService.getErrorMessage(stateSelect)
+                  }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row" *ngIf="lookupBy.value != 'State' && lookupBy.value != 'Province'">
+              <label class="pl-3 font-weight-bold">Enter {{ lookupByStrings.zip }}</label>
+            </div>
+            <!-- Lookup By Zip -->
+            <div class="row" *ngIf="lookupBy.value != 'State' && lookupBy.value != 'Province'">
+              <div class="col-12">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ lookupByStrings.zip }} *</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    name="zip"
+                    id="zip"
+                    formControlName="zip"
+                    autocomplete="disabled"
+                    [matAutocomplete]="auto"
+                    (ngModelChange)="reloadSuggestions()"
+                  />
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option
+                      *ngFor="let point of (pointSuggestions | async)"
+                      (onSelectionChange)="autofillPoint(point)"
+                      [value]="point.zip"
+                    >
+                      <span>{{ point.city }}, {{ point.state }} {{ point.zip }}</span>
+                    </mat-option>
+                  </mat-autocomplete>
+                  <mat-error *ngIf="zip.invalid">{{
+                    formService.getErrorMessage(zip)
+                  }}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-12">
+                <mat-form-field appearance="outline">
+                  <mat-label>City *</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    name="city"
+                    id="city"
+                    formControlName="city"
+                    autocomplete="disabled"
+                    [matAutocomplete]="auto2"
+                    (ngModelChange)="reloadSuggestions()"
+                  />
+                  <mat-autocomplete #auto2="matAutocomplete">
+                    <mat-option
+                      *ngFor="let point of (pointSuggestions | async)"
+                      (onSelectionChange)="autofillPoint(point)"
+                      [value]="point.city"
+                    >
+                      <span>{{ point.city }}, {{ point.state }} {{ point.zip }}</span>
+                    </mat-option>
+                  </mat-autocomplete>
+                  <mat-error *ngIf="city.invalid">{{
+                    formService.getErrorMessage(city)
+                  }}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-12">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ lookupByStrings.state }} *</mat-label>
+                  <input
+                    type="text"
+                    name="state"
+                    id="state"
+                    matInput
+                    formControlName="state"
+                    autocomplete="disabled"
+                    [matAutocomplete]="auto3"
+                    (ngModelChange)="reloadSuggestions()"
+                  />
+                  <mat-autocomplete #auto3="matAutocomplete">
+                    <mat-option
+                      *ngFor="let point of (pointSuggestions | async)"
+                      (onSelectionChange)="autofillPoint(point)"
+                      [value]="point.state"
+                    >
+                      <span>{{ point.city }}, {{ point.state }} {{ point.zip }}</span>
+                    </mat-option>
+                  </mat-autocomplete>
+                  <mat-error *ngIf="state.invalid">{{
+                    formService.getErrorMessage(state)
+                  }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <mat-card-actions class="mb-1 p-0 clearfix">
+            <div class="row">
+              <div class="col-6">
+                <button
+                  class="btn btn-primary w-100"
+                  type="submit"
+                  [disabled]="loading"
+                >
+                  Look Up<i class="fas fa-sync-alt fa-spin ml-2" *ngIf="loading"></i>
+                </button>
+              </div>
+              <div class="col-6">
+                <button
+                  class="btn btn-default w-100"
+                  (click)="reset()"
+                  type="button"
+                >
+                  Clear
+                </button>
+              </div>
+            </div>
+            <div class="row"><div class="col horizon-line m-3">OR</div></div>
+            <div class="row">
+              <div class="col">
+                <button class="btn btn-default w-100" (click)="lookupAllTerminals()" type="button">
+                  View All Terminals
+                </button>
+              </div>
+            </div>
+          </mat-card-actions>
+        </form>
+      </div>
+      <!-- Google Maps Component -->
+      <div class="col-md-12 col-lg-8 google-maps-column">
+        <div #gmap class="google-maps"></div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<!-- Terminal Listing Card -->
+<mat-card class="terminal-card mat-card--table" *ngIf="terminalListResponse && terminalListResponse.terminalLists.length > 0">
+  <mat-card-header class="d-flex justify-content-between">
+    <mat-card-title
+      >Supporting Terminal(s) for {{ terminalListResponse.searchArea }}</mat-card-title
+    >
+    <div class="d-flex align-items-end">
+      <button *ngIf="showEmailTerminalButton" class="btn btn-default d-flex" (click)="openTerminalEmailDialog()" type="button">
+        <i class="fal fa-envelope mt-1 mr-1">&nbsp;</i>Email Terminal List
+      </button>
+    </div>
+  </mat-card-header>
+  <mat-card-content class="p-0">
+    <div class="mat-elevation-z8 p-3">
+      <div *ngFor="let list of terminalListResponse.terminalLists; index as i">
+        <div *ngIf="list.state" class="row red-label">
+          <div class="col">
+            <div class="">{{ list.state }}</div>
+          </div>
+        </div>
+        <!-- Terminal Table -->
+        <mat-table
+          #table
+          [dataSource]="list.terminals"
+          multiTemplateDataRows
+          [class.isMobile]="isMobile"
+        >
+          <!-- Terminal Column -->
+          <ng-container matColumnDef="terminal">
+            <mat-header-cell class="d-none d-md-flex" *matHeaderCellDef> Terminal </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <!-- <span class="mobile-label">Terminal:</span> -->
+              <div><span *ngIf="element.name">{{ element.name }}&nbsp;-&nbsp;</span>
+                <span *ngIf="element.abbr">{{ element.abbr }}</span
+                >&nbsp;({{ element.id }})
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Address Column -->
+          <ng-container matColumnDef="address">
+            <mat-header-cell class="d-none d-md-flex" *matHeaderCellDef> Address </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="d-none d-md-flex">
+              <!-- <span class="mobile-label">Address:</span> -->
+              <lib-address [address]="element.address"></lib-address>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Phone Column -->
+          <ng-container matColumnDef="phone">
+            <mat-header-cell class="d-none d-md-flex" *matHeaderCellDef> Phone </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="d-none d-md-flex">
+              <!-- <span class="mobile-label">Phone:</span> -->
+              {{ element.phone | phone }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Fax Column -->
+          <ng-container matColumnDef="fax">
+            <mat-header-cell class="d-none d-md-flex" *matHeaderCellDef> Fax </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="d-none d-md-flex">
+              <!-- <span class="mobile-label">Fax:</span> -->
+              {{ element.fax | phone }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Expand Column -->
+          <ng-container matColumnDef="expand">
+            <mat-header-cell *matHeaderCellDef class="expand-cell"> </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="expand-cell">
+              <i *ngIf="element.expanded && !element.loading" class="material-icons">
+                expand_less
+              </i>
+              <i *ngIf="!element.expanded && !element.loading" class="material-icons">
+                expand_more
+              </i>
+              <mat-spinner *ngIf="element.loading" [diameter]="20"></mat-spinner>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="expandedDetail">
+            <mat-cell
+              *matCellDef="let element"
+              [attr.colspan]="displayedColumns.length"
+              class="p-0"
+            >
+              <div
+                class="terminal-detail w-100"
+                [@detailExpand]="element.expanded ? 'expanded' : 'collapsed'"
+              >
+                <div class="row">
+                  <div class="col-md-7 col-lg-8">
+                    <!-- Terminal Details Table -->
+                    <table [class.isMobile]="isMobile" class="terminal-detail-table w-100">
+                      <tr>
+                        <td><label>Terminal</label></td>
+                        <td>
+                          <span *ngIf="element.name">{{ element.name }}&nbsp;-&nbsp;</span>
+                          <span *ngIf="element.abbr">{{ element.abbr }}</span
+                          >&nbsp;({{ element.id }})
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Address</td>
+                        <td>
+                          <div class="w-100">
+                            <lib-address [address]="element.address" class="w-100"></lib-address>
+                            <a
+                              *ngIf="element.address"
+                              href="https://maps.google.com/?q={{
+                                element.address.streetAddress
+                              }} {{ element.address.zip }}"
+                              target="_blank"
+                              class="pt-2"
+                              >Get Directions</a
+                            >
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Phone</td>
+                        <td>
+                          <span *ngIf="element.phone">{{ element.phone | phone }}</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Fax</td>
+                        <td>
+                          <span *ngIf="element.fax">{{ element.fax | phone }}</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Email</td>
+                        <td>
+                          <a
+                            *ngIf="element.email"
+                            href="mailto:{{ element.email }}"
+                            target="_top"
+                            >{{ element.email }}</a
+                          >
+                        </td>
+                      </tr>
+                      <tr *ngIf="element.manager">
+                        <td>Manager</td>
+                        <td>
+                          <span *ngIf="element.manager && !element.managerEmail">{{
+                            element.manager
+                          }}</span
+                          ><a
+                            *ngIf="element.manager && element.managerEmail"
+                            href="mailto:{{ element.managerEmail }}"
+                            target="_top"
+                            >{{ element.manager }}</a
+                          >
+                        </td>
+                      </tr>
+                      <tr *ngIf="element.serviceMap">
+                        <td>Next-Day Coverage</td>
+                        <td>
+                          <a href="{{ element.serviceMap }}" target="_blank">View/Print</a>
+                          <span *ngIf="isLookUpByZip">
+                           | <a  (click)="openCoverageEmailDialog(country.value, state.value,city.value,zip.value)" target="_blank">Email Next-Day Coverage</a>
+                          </span>
+                        </td>
+                      </tr>
+                      <tr *ngIf="element.nationalMap">
+                        <td>National Coverage Map</td>
+                        <td>
+                          <a
+                            href="{{ element.nationalMap }}"
+                            target="_blank"
+                            >View/Print</a
+                          >
+                          <!-- | <a href="" target="_blank">Email Transit Map</a> -->
+                        </td>
+                      </tr>
+                    </table>
+
+                    <p class="p-3">
+                      <small class="text-muted">
+                        All Information, including the servicing terminal, applies to standard Estes
+                        LTL shipments. Because transit times to some outlying areas may vary, this
+                        map is for illustration purposes only. (Transit times for specialty services
+                        and custom solutions provided by other Estes operating entities may differ
+                        based on the services selected.) For specific point-to-point information,
+                        please use our <a href="/myestes/transit-time-calculator">transit-time calculator</a> or call the local
+                        terminal listed above. Transit standards for Canada do not include border
+                        delays.
+                      </small>
+                    </p>
+                  </div>
+                  <div class="col-md-5 col-lg-4">
+                    <div class="p-2 d-flex align-items-center mt-3">
+                      <i class="fa fa-file-invoice-dollar mr-2"></i>
+                      <strong>Get a Rate Quote</strong>
+                    </div>
+                    <div class="p-2 d-flex" *ngIf="!lastSubmittedRequest.zip">
+                      <button class="btn btn-default--action w-100" (click)="navigate('/myestes/rate-quote/estimate')">Calculate Rate</button>
+                    </div>
+                    <div class="p-2 d-flex" *ngIf="lastSubmittedRequest.zip">
+                      <button class="btn btn-default--action w-100" (click)="navigate('/myestes/rate-quote/estimate?ozip=' + lastSubmittedRequest.zip + '&ocity=' + lastSubmittedRequest.city + '&ostate=' + lastSubmittedRequest.state + '&ocountry=' + lastSubmittedRequest.country)">
+                        Calculate from {{ lastSubmittedRequest.zip }}
+                      </button>
+                    </div>
+                    <div class="p-2 d-flex" *ngIf="lastSubmittedRequest.zip">
+                      <button class="btn btn-default--action w-100" (click)="navigate('/myestes/rate-quote/estimate?dzip=' + lastSubmittedRequest.zip + '&dcity=' + lastSubmittedRequest.city + '&dstate=' + lastSubmittedRequest.state + '&dcountry=' + lastSubmittedRequest.country)">
+                        Calculate to {{ lastSubmittedRequest.zip }}
+                      </button>
+                    </div>
+                    <div class="p-2 d-flex align-items-center mt-3">
+                      <i class="fa fa-clock mr-2"></i> <strong>Calculate Transit Time</strong>
+                    </div>
+                    <div class="p-2 d-flex" *ngIf="!lastSubmittedRequest.zip">
+                      <button class="btn btn-default--action w-100" (click)="navigate('/myestes/transit-time-calculator')">Calculate Time</button>
+                    </div>
+                    <div class="p-2 d-flex" *ngIf="lastSubmittedRequest.zip">
+                      <button class="btn btn-default--action w-100" (click)="navigate('/myestes/transit-time-calculator?ozip=' + lastSubmittedRequest.zip)">
+                        Calculate from {{ lastSubmittedRequest.zip }}
+                      </button>
+                    </div>
+                    <div class="p-2 d-flex" *ngIf="lastSubmittedRequest.zip">
+                      <button class="btn btn-default--action w-100" (click)="navigate('/myestes/transit-time-calculator?dzip=' + lastSubmittedRequest.zip)">
+                        Calculate to {{ lastSubmittedRequest.zip }}
+                      </button>
+                    </div>
+                    <div class="p-2 d-flex align-items-center mt-3">
+                      <i class="fa fa-truck mr-2"></i> <strong>LTL Pickup Request</strong>
+                    </div>
+                    <div class="p-2 d-flex">
+                      <button class="btn btn-default--action w-100" (click)="navigate('/myestes/pickup-request')">Request Pickup</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row
+            *matHeaderRowDef="displayedColumns"
+            class="d-none d-md-flex"
+          ></mat-header-row>
+          <mat-row
+            *matRowDef="let element; columns: displayedColumns"
+            class="terminal-row"
+            [ngClass]="{ 'expanded-background': element.expanded }"
+            (click)="expandTerminalRow(element)"
+          ></mat-row>
+          <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="terminal-detail-row p-0"></mat-row>
+        </mat-table>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

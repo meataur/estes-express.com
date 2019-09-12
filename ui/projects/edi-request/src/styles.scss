@@ -1,0 +1,11 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../common/src/assets/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
+.estes-app {
+  .mat-card-header {
+    i {
+      font-size: 26px;
+      padding-top: 0.25rem;
+    }
+  }
+}

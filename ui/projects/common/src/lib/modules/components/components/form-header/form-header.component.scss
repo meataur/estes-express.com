@@ -1,0 +1,19 @@
+@import '~bootstrap/scss/functions';
+@import '../../../../../assets/scss/variables';
+
+.form-header {
+  display: block;
+  color: $black;
+  text-transform: uppercase;
+  border-bottom: 1px solid $gray-300;
+  padding-bottom: .75rem;
+  margin-bottom: 1rem;
+
+  &--red {
+    color: $red;
+  }
+
+  i {
+    color: $red;
+  }
+}

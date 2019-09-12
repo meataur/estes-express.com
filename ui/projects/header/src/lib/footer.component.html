@@ -1,0 +1,93 @@
+<footer id="ft">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 nav-col">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 footer-menu">
+						<nav>
+							<h5>Shipping</h5>
+							<ul class="ftr-nav" *ngIf="shippingMenu.length > 0">
+								<ng-container *ngFor="let item of shippingMenu; let i = index;">
+									<li><a href="{{item.link}}" target="{{item.target}}">{{item.title}}</a></li>
+								</ng-container >
+							</ul>
+						</nav>
+					</div><!-- /.col -->
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 footer-menu">
+						<nav>
+							<h5>Support</h5>
+							<ul class="ftr-nav" *ngIf="supportMenu.length > 0">
+								<ng-container *ngFor="let item of supportMenu; let i = index;">
+									<li><a href="{{item.link}}" target="{{item.target}}">{{item.title}}</a></li>
+								</ng-container >
+							</ul>
+						</nav>
+					</div><!-- /.col -->
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 footer-menu">
+						<nav>
+							<h5>Company</h5>
+							<ul class="ftr-nav" *ngIf="companyMenu.length > 0">
+								<ng-container *ngFor="let item of companyMenu; let i = index;">
+									<li><a href="{{item.link}}" target="{{item.target}}">{{item.title}}</a></li>
+								</ng-container >
+							</ul>
+						</nav>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.col -->
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+				<div class="inner">
+					<h4>We're Here For You!</h4>
+					<ul class="icons">
+						<li><a href="/contact" class="btn btn-primary">Contact Us</a></li>
+						<li><a class="icon" href="https://www.linkedin.com/company/estes-express-lines">
+							<span class="fa-stack fa-2x">
+								<i class="fal fa-square-full fa-stack-2x"></i>
+								<i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+							</span>
+						</a></li>
+						<li><a class="icon" href="https://www.facebook.com/estesexpress/">
+							<span class="fa-stack fa-2x">
+								<i class="fal fa-square-full fa-stack-2x"></i>
+								<i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+							</span>
+						</a></li>
+						<li><a class="icon" href="https://twitter.com/estesexpress">
+							<span class="fa-stack fa-2x">
+								<i class="fal fa-square-full fa-stack-2x"></i>
+								<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+							</span>
+						</a></li>
+						<li><a class="icon" href="https://www.instagram.com/estesexpress/">
+							<span class="fa-stack fa-2x">
+								<i class="fal fa-square-full fa-stack-2x"></i>
+								<i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+							</span>
+						</a></li>
+						<li><a class="icon" href="https://www.youtube.com/user/EstesExpressLines">
+							<span class="fa-stack fa-2x">
+								<i class="fal fa-square-full fa-stack-2x"></i>
+								<i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
+							</span>
+						</a></li>
+					</ul>
+				</div><!-- /.inner -->
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.container -->
+	<div class="bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="inner">
+						<span class="copyright">Copyright © &copy; {{ currentYear }} Estes Express Lines, All Rights Reserved</span>
+						<ul class="piped">
+							<li><a href="/site-map">Site Map</a></li>
+							<li><a href="/privacy-policy">Privacy Policy</a></li>
+						</ul>
+					</div><!-- /.inner -->
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+	</div><!-- /.bottom -->
+</footer>

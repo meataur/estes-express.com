@@ -1,0 +1,114 @@
+<a id="skip-link" href="#content">Skip to main content</a>
+<header id="hd">
+	<div id="navigation" class="navbar navbar-expand-lg fixed-top navbar-toggleable-md navbar-dark bg-dark">
+		<div class="container">
+			<button [ngClass]="collapse == 'closed' ? 'navbar-toggler collapsed' : 'navbar-toggler show'" type="button" data-target="#main-nav" (click)="toggleMainNav()"
+			[attr.aria-expanded]="!mainNavIsCollapsed" aria-label="Toggle main navigation">
+				<span class="fas fa-fw fa-bars"></span>
+				<span class="fas fa-fw fa-times"></span>
+			</button>
+			<a href="/" class="header-logo navbar-brand">
+				<img src="assets/images/estes-logo-yellow.png" srcset="assets/images/estes-logo-yellow@2x.png 2x, assets/images/estes-logo-yellow@3x.png 3x" alt="My Estes: {{ title }}">
+			</a>
+			<button class="navbar-toggler toggle-search" type="button" (click)="toggleSearch()">
+				<span class="fas fa-search"></span>
+			</button>
+			<button [ngClass]="myNavIsCollapsed ? 'navbar-toggler toggle-my-estes' : 'navbar-toggler toggle-my-estes show'" type="button" (click)="toggleMyNav()"
+					aria-label="Toggle My Estes Navigation">
+				<span class="fas fa-user-circle"></span>
+			</button>
+			<div id="main-nav" [@collapse]="collapse" [ngClass]="collapse == 'closed' ? 'navbar-collapse collapsed' : 'navbar-collapse'" [attr.aria-expanded]="!mainNavIsCollapsed" (click)="toggleNav($event)">
+				<ul class="navbar-nav mr-auto" *ngIf="navigation.length > 0">
+					<ng-container *ngFor="let item of navigation; let i = index;">
+						<li *ngIf="item.children.length > 0" #elem class="nav-item dropdown" ngbDropdown (mouseenter)="toggleDropdownHover(true, elem)" (mouseleave)="toggleDropdownHover(false, elem)">
+							<a href="javascript:void(0)" ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown-{{i}}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{item.title}}</a>
+							<div ngbDropdownMenu class="dropdown-menu" [attr.aria-labelledby]="'dropdown-'+i">
+									<a *ngFor="let child of item.children" class="dropdown-item" href="{{child.link}}" target="{{child.target}}">{{child.title}}</a>
+							</div>
+						</li>
+						<li *ngIf="item.children.length == 0" class="nav-item">
+							<a href="{{item.link}}" class="nav-link" target="{{item.target}}">{{item.title}}</a>
+						</li>
+					</ng-container >
+					<li class="nav-item d-none d-lg-inline-block">
+						<a class="nav-link icon toggle-search" href="javascript:void(0)" (click)="showSearch = !showSearch"><i class="fas fa-search"></i></a>
+					</li><!-- /.nav-item -->
+				</ul><!-- /.navbar-nav -->
+				<ul class="navbar-nav ml-auto d-none d-lg-flex">
+					<li class="nav-item dropdown" ngbDropdown>
+						<a href="javascript:void(0)" ngbDropdownToggle class="nav-link dropdown-toggle" id="my-estes-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<span class="fas fa-user-circle"></span> My Estes <span class="fas fa-caret-down"></span>
+						</a>
+						<div *ngIf="!isLoggedIn" class="dropdown-menu dropdown-menu-right" ngbDropdownMenu aria-labelledby="my-estes-dropdown">
+							<a class="dropdown-item" [routerLink]="['/login']"><span class="fal fa-sign-in"></span> Login</a>
+							<a class="dropdown-item" [routerLink]="['/sign-up']"><span class="fal fa-user-circle"></span> Create Account</a>
+							<a class="dropdown-item" [routerLink]="['/request-account-number']"><span class="fal fa-question-circle"></span> Request Account Number</a>
+						</div>
+						<div *ngIf="isLoggedIn" class="dropdown-menu dropdown-menu-right" ngbDropdownMenu aria-labelledby="my-estes-dropdown">
+							<div class="pr-4 pl-4 pt-2"><strong>{{companyName$ | async}}</strong><br><span *ngIf="accountNumber">{{accountNumber}}</span></div>
+							<hr>
+							<a class="dropdown-item" [routerLink]="['/profile']"><span class="fal fa-cog"></span> Edit My Profile</a>
+							<a class="dropdown-item" [routerLink]="['/request-account-number']"><span class="fal fa-question-circle"></span> Request Account Number</a>
+							<a class="dropdown-item" href="/myestes/address-book/"><span class="fal fa-address-book"></span> Address Book</a>
+							<a class="dropdown-item" [href]="commodityLibraryUrl"><span class="fal fa-book-open"></span> Commodity Library</a>
+							<a class="dropdown-item" (click)="logout()"><span class="fal fa-sign-out"></span> Logout</a>
+						</div>
+					</li>
+				</ul>
+			</div><!-- /.nav-collapse -->
+		</div><!-- /.container -->
+	</div><!-- /.navbar -->
+	<div id="my-estes-nav" [ngClass]="myNavIsCollapsed ? 'closed' : 'show'" [attr.aria-expanded]="!myNavIsCollapsed" (click)="toggleMyNavBar($event)">
+		<div class="inner">
+			<div class="container">
+				<div class="row">
+					<div class="col-9 offset-3 col-sm-7 offset-sm-5 col-md-5 offset-md-7">
+						<ul class="navbar-nav">
+							<ng-container *ngIf="!isLoggedIn">
+								<li class="nav-item"><a class="nav-link" (click)="toggleMyNav()" [routerLink]="['/login']"><span class="fal fa-sign-in"></span> Login</a></li>
+								<li class="nav-item"><a class="nav-link" (click)="toggleMyNav()" [routerLink]="['/sign-up']"><span class="fal fa-user-circle"></span> Create Account</a></li>
+								<li class="nav-item"><a class="nav-link" (click)="toggleMyNav()" [routerLink]="['/request-account-number']"><span class="fal fa-question-circle"></span> Request Account Number</a></li>
+								</ng-container>
+								<ng-container *ngIf="isLoggedIn">
+								<li class="nav-item"><a class="nav-link" (click)="toggleMyNav()" [routerLink]="['/profile']"><span class="fal fa-cog"></span> Edit My Profile</a></li>
+								<li class="nav-item"><a class="nav-link" (click)="toggleMyNav()" [routerLink]="['/request-account-number']"><span class="fal fa-question-circle"></span> Request Account Number</a></li>
+								<li class="nav-item"><a class="nav-link" (click)="toggleMyNav()" href="/myestes/address-book/"><span class="fal fa-address-book"></span> Address Book</a></li>
+								<li class="nav-item"><a class="nav-link" (click)="toggleMyNav()" [href]="commodityLibraryUrl"><span class="fal fa-book-open"></span> Commodity Library</a></li>
+								<li class="nav-item"><a class="nav-link" (click)="logout(); toggleMyNav()"><span class="fal fa-sign-out"></span> Logout</a></li>
+							</ng-container>
+							<!-- <li class="nav-item">
+								<a routerLink="/login" class="nav-link"><i class="fal fa-sign-in"></i> Login test</a>
+							</li>
+							<li class="nav-item">
+								<a routerLink="/sign-up" class="nav-link"><i class="fal fa-user-circle"></i> Create Account</a>
+							</li> -->
+						</ul><!-- /.navbar-nav -->
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</div><!-- /.inner -->
+	</div><!-- /#my-estes-nav -->
+	<div id="search" [ngClass]="showSearch ? 'show' : ''" [attr.aria-expanded]="!showSearch" (click)="toggleSearchBar($event)">
+		<div class="inner">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+						<form method="GET" action="/search">
+							<div class="input-group input-group-lg">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="search-addon"><span class="fas fa-search"></span></span>
+								</div>
+								<input type="text" name="query" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+								<input type="hidden" name="page" value="1">
+								<input type="hidden" name="items" value="20">
+								<div class="input-group-append">
+									<span class="input-group-text" id="search-reset" (click)="toggleSearch()"><span class="fas fa-times"></span></span>
+								</div>
+							</div>
+						</form>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</div><!-- /.inner -->
+	</div><!-- /#search -->
+</header>

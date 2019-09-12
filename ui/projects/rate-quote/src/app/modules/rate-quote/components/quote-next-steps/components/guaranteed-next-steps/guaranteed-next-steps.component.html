@@ -1,0 +1,50 @@
+<div class="action-column__header mb-2">
+  <i class="fa fa-arrow-circle-right mr-2"></i><span class="text-uppercase">Next Steps</span>
+</div>
+<p>
+  The act of shipping freight with Estes implies you have read and agree to our
+  <a (click)="openDisclosuresModal()">Rate Quote Disclosures and Terms of Service</a>.
+</p>
+<form *ngIf="!reserved" [formGroup]="formGroup" (ngSubmit)="onSubmit()" novalidate>
+  <div class="form-group">
+    <mat-checkbox color="primary" formControlName="acceptedTC"
+      >I accept the Terms and Conditions
+    </mat-checkbox>
+    <mat-error *ngIf="acceptedTC.touched && acceptedTC.invalid">{{
+      formService.getErrorMessage(acceptedTC)
+    }}</mat-error>
+  </div>
+  <lib-feedback [message]="errorFeedback"></lib-feedback>
+  <button type="submit" class="btn btn-primary" [disabled]="loading">
+    Reserve Shipment<i class="fas fa-sync-alt fa-spin ml-2" *ngIf="loading"></i>
+  </button>
+</form>
+<p class="mt-3" *ngIf="!reserved && showReserveShipmentMessage">
+  *For Guaranteed and Exclusive Use shipments, please select Reserve Shipment. Our time-critical
+  team will then contact you to finalize details and ensure you receive the highest level of
+  personal service.*
+</p>
+<ng-container *ngIf="reserved">
+  <lib-feedback [useIcon]="true" [message]="['success', 'Request Received']"></lib-feedback>
+  <p>
+    <strong
+      >Thank you! We have received your request and will contact you to discuss your
+      shipment.</strong
+    >
+    In the meantime, you can choose one of the options below to continue the shipment process. If
+    you are not using our BOL, be sure to write your quote number on your document to ensure
+    seamless processing. Have questions? Feel free to give us a call at 1-800-645-3952.
+  </p>
+  <button
+    (click)="createBol()"
+    class="w-100 btn btn-default--action d-flex justify-content-between mt-2"
+  >
+    <span>Create BOL<i class="fal fa-lock-alt ml-1"></i></span>
+  </button>
+  <button
+    (click)="requestPickup()"
+    class="w-100 btn btn-default--action d-flex justify-content-between mt-2"
+  >
+    <span>Request Pickup<i class="fal fa-lock-alt ml-1"></i></span>
+  </button>
+</ng-container>

@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Supporting Terminal Information</h1>
+<mat-dialog-content>
+  <!-- {{ point$ | async | json }} -->
+  <div class="d-flex flex-column" *ngIf="point$ | async as p; else loading">
+    <div class="info-item">
+      <label>Terminal</label>
+      {{ p.name }} - {{ p.abbr }} ({{ p.id }})
+    </div>
+    <div class="info-item">
+      <label>Address</label>
+      <lib-address [address]="p.address"></lib-address>
+    </div>
+    <div class="info-item">
+      <label>Phone</label>
+      {{ p.phone }}
+    </div>
+    <div class="info-item">
+      <label>Fax</label>
+      {{ p.fax }}
+    </div>
+    <div class="info-item">
+      <label>Email</label>
+      <a href="mailto:{{ p.email }}">{{ p.email }}</a>
+    </div>
+  </div>
+  <ng-template #loading>
+    <div>Loading ...</div>
+  </ng-template>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-dialog-close class="btn btn-default">Close</button>
+</mat-dialog-actions>

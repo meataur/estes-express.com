@@ -1,0 +1,9 @@
+.cdk-overlay-container .mat-tooltip {
+  font-size: 0.875rem;
+}
+
+.mat-tooltip.fix-position {
+  @include media-breakpoint-down(md) {
+    max-width: 190px !important;
+  }
+}

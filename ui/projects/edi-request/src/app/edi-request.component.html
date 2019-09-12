@@ -1,0 +1,63 @@
+<lib-routable-component-header>EDI</lib-routable-component-header>
+<strong>Electronic Data Interchange (EDI)</strong>
+<p>
+    Our Electronic Data Interchange (EDI) allows you to send and receive shipment and billing information automatically via a secure, direct connection between your computer system and ours.
+</p>
+<strong>Benefits include:</strong>
+<ul>
+  <li>Increased efficiency</li>
+  <li>Reduced administrative costs</li>
+  <li>Reduced paper flow and handling</li>
+  <li>Fewer manual interventions</li>
+  <li>No redundant data entry</li>
+</ul>
+<strong>EDI information for your IT team</strong>
+<p class="m-0">To get started integrating our EDI into your systems, you can either:</p>
+<ul>
+  <li>Contact one of our EDI experts at <a href="tel:8043531900">(804) 353-1900</a>, Ext. 2600 and press 2.</li>
+  <li>Email us at <a href="mailto:edi@estes-express.com">EDI@estes-express.com</a>.</li>
+  <li>Fill out and submit our <a routerLink="/implementation-request">EDI Implementation Request Form</a>.</li>
+</ul>
+<mat-card class="mat-card--table mb-4">
+  <mat-card-header>
+    <mat-card-title>
+      EDI Sets*
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content mat-dialog-content class="m-0 p-0">
+    <div class="table-container mat-elevation-z8">
+      <mat-table #table [dataSource]="ediSets" multiTemplateDataRows>
+        <!-- Set Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Set Name </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span>
+              {{element.name}}<br>
+              <a href="{{element.url}}" target="_blank"><i class="fa fa-file-pdf pr-2"></i></a>
+              <small>(ver. {{element.version}})</small>
+            </span>
+          </mat-cell>
+        </ng-container>
+        <!-- Set Description -->
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span class="pt-2 pb-2" *ngIf="element.description">{{element.description}}</span>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let element; columns: displayedColumns;" class="d-flex"></mat-row>
+      </mat-table>
+    </div>
+  </mat-card-content>
+</mat-card>
+<strong>How the EDI sets work together</strong>
+<p>Sending the 204/211 Bill of Lading to Estes starts the process with an auto-created freight bill containing the shipper-provided data. </p>
+<p>The 214 EDI shipment status set and the 210 EDI invoice set are used after the set is in Estes' system. It will process error free because the data came directly from the shipper. </p>
+<p>The billing process is accelerated when customers receive the 210 EDI invoicing set and send Estes the 820 EDI Remittance Advice set.</p>
+
+
+
+
+
+

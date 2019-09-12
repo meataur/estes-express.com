@@ -1,0 +1,21 @@
+@import "../styles";
+i.red, p.red {
+  color: $red
+}
+
+hr {
+  margin-top: 0.7rem;
+  margin-bottom: 0.7rem;
+  &.dashed {
+    border-top-style: dashed;
+  }
+}
+
+.call-to-action-box {
+  background: $gray-100;
+  padding: 1.5rem;
+  a {
+    color: #000000;
+    text-decoration: none;
+  }
+}

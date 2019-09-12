@@ -1,0 +1,19 @@
+@import "../../../../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../../../common/src/assets/scss/variables";
+@import "../../../../../../../../node_modules/bootstrap/scss/mixins";
+
+label {
+  display: block;
+  margin-bottom: .25rem;
+  font-weight: bold;
+}
+
+.services-container {
+  span {
+    display: block;
+  }
+}
+
+.pickup-subsection {
+  background-color: $gray-100;
+}

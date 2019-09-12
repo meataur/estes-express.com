@@ -1,0 +1,937 @@
+<lib-routable-component-header>Pickup Request</lib-routable-component-header>
+<mat-tab-group [(selectedIndex)]="tabSelectedIndex">
+  <mat-tab *ngIf="hasCreatePickupRequestAccess" label="Create Pickup Request">
+    <div *ngIf="!successMessage">
+      <p class="mt-4 mb-4">
+        Fill out the form below to submit a pickup request for the U.S. or Canada. You can also use our Pickup History feature to check the status of your previous submissions. If you are requesting same-day pickup service, especially after 3:00 p.m. local time, please call your <a href="/myestes/terminal-lookup">local terminal</a> to confirm availability.
+      <!-- <lib-tooltip
+        role="button"
+        [attr.aria-roledescription]="'Clicking this button will open a detailed description for pickup requests'"
+        class="pickup-modal-tooltip"
+        (click)="$event.stopPropagation(); openInfoModal(pickupRequestHtml)"
+      ></lib-tooltip> -->
+      </p>
+      <form id="pickupRequestFormContainer" [formGroup]="formGroup" #myForm (ngSubmit)="onSubmit()">
+        <mat-card>
+          <mat-card-header class="d-flex justify-content-between">
+            <mat-card-title>
+              Enter Requester and Shipper Info
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <div formGroupName="user">
+                  <div class="horizon-line pb-3">Requester Info<lib-tooltip [message]="'The Requester is the individual filling out this form.'"></lib-tooltip></div>
+                  <div class="row pb-3">
+                    <div class="col"><a (click)="openAddressDialogRequestor()" class="font-weight-bold"><i class="fa fa-address-book" aria-hidden="true"></i> Address Book</a></div>
+                  </div>
+                  <div *ngIf="users && users.length > 0" class="row">
+                    <div class="col-12 col-md-11">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Recent Requests</mat-label>
+                        <mat-select
+                          focus="true"
+                          (selectionChange)="setUserInformationFields($event.value)">
+                          <mat-option selected value>Use info from a recent request</mat-option>
+                          <mat-option *ngFor="let user of users" [value]="user">{{user.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 col-md-11">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Contact Name</mat-label>
+                        <input
+                          matInput
+                          focus="true"
+                          type="text"
+                          required
+                          name="name"
+                          id="name"
+                          formControlName="name">
+                        <mat-error *ngIf="formGroup.get('user.name').invalid">{{
+                          formService.getErrorMessage(formGroup.get('user.name'))
+                        }}</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-9 col-md-8">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Phone Number</mat-label>
+                        <input type="text" matInput required placeholder="(888) 888-8888" [textMask]="{mask: phoneMask, guide: false}" formControlName="phone">
+                        <mat-error *ngIf="formGroup.get('user.phone').invalid">{{
+                            formService.getErrorMessage(formGroup.get('user.phone'))
+                        }} </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Extension</mat-label>
+                        <input type="text" matInput formControlName="phoneExt">
+                        <mat-error *ngIf="formGroup.get('user.phoneExt').invalid">{{
+                            formService.getErrorMessage(formGroup.get('user.phoneExt'))
+                        }} </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 col-md-11">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Email Address</mat-label>
+                        <input type="text" matInput required placeholder="Email@example.com" formControlName="email">
+                        <mat-error *ngIf="formGroup.get('user.email').invalid">{{
+                            formService.getErrorMessage(formGroup.get('user.email'))
+                        }} </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 col-md-11">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Role</mat-label>
+                        <mat-select
+                          focus="true"
+                          required
+                          (selectionChange)="updateRole($event.value)"
+                          formControlName="role">
+                          <mat-option value>Select</mat-option>
+                          <mat-option [value]="'SHIPPER'">Shipper</mat-option>
+                          <mat-option [value]="'CONSIGNEE'">Consignee</mat-option>
+                          <mat-option [value]="'THIRD_PARTY'">Third Party</mat-option>
+                          <mat-option [value]="'OTHER'">Other</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="formGroup.get('user.role').invalid">{{
+                            formService.getErrorMessage(formGroup.get('user.role'))
+                        }} </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+
+                <div formGroupName="shipper">
+                  <div class="row" *ngIf="role == 'SHIPPER'">
+                    <div class="col-12">
+                        <lib-account-select
+                        class="form-row"
+                        [fc]="accountNumber"
+                        [label]="'Account Number'"
+                        ></lib-account-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6" formGroupName="shipper">
+                <div class="horizon-line pb-3">Shipper Info<lib-tooltip [message]="'The Shipper is the party responsible for shipping the freight.'"></lib-tooltip></div>
+                <div class="row pb-3">
+                  <!-- <div class="col-4" *ngIf="role != 'SHIPPER'"><a (click)="useProfileInformation(formGroup.get('shipper'))" class="font-weight-bold"><i class="fa fa-user" aria-hidden="true"></i> User Information</a></div> -->
+                  <!-- <div class="col-4"><a (click)="clickUseMyInfo()" class="font-weight-bold"><i class="fa fa-user" aria-hidden="true"></i> Use my info</a></div> -->
+                  <div class="col-6" *ngIf="role != 'SHIPPER'"><a (click)="openAddressDialogShipper()" class="font-weight-bold"><i class="fa fa-address-book" aria-hidden="true"></i> Address Book</a></div>
+                  <div class="col-6"><a href="/myestes/address-book" target="_blank" class="font-weight-bold"><i class="fa fa-address-book" aria-hidden="true"></i> Manage My Address Book</a></div>
+
+                </div>
+                <div class="row" *ngIf="role != 'SHIPPER'">
+                  <div class="col-12">
+                    <mat-checkbox
+                      color="primary"
+                      [checked]="useInfoCheckboxChecked == 'useAccountInfo'"
+                      (change)="useMyInfoCheckboxChange($event.checked)"
+                    >
+                      Use My Estes Account Info<i *ngIf="loading" class="fas fa-sync-alt fa-spin ml-2"></i>
+                    </mat-checkbox>
+                  </div>
+                  <div class="col-12">
+                    <mat-checkbox
+                      id="useRequestorInfo"
+                      color="primary"
+                      [checked]="useInfoCheckboxChecked == 'useRequestorInfo'"
+                      (change)="useRequestorInfoCheckboxChange($event.checked)"
+                    >
+                      Use Requester Info
+                    </mat-checkbox>
+                  </div>
+                </div>
+                <div *ngIf="shippers && shippers.length > 0 && (role != 'SHIPPER')" class="row">
+                  <div class="col-12 col-md-11">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Recent Requests</mat-label>
+                      <mat-select
+                        focus="true"
+                        (selectionChange)="setShipperInformationFields($event.value);">
+                        <mat-option selected value>Use info from a recent request</mat-option>
+                        <mat-option *ngFor="let shipper of shippers" [value]="shipper">{{shipper.name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-11">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Company Name</mat-label>
+                      <input
+                        matInput
+                        focus="true"
+                        type="text"
+                        required
+                        formControlName="company">
+                      <mat-error *ngIf="formGroup.get('shipper.company').invalid">{{
+                        formService.getErrorMessage(formGroup.get('shipper.company'))
+                      }}</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-11">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Contact Name</mat-label>
+                      <input
+                        matInput
+                        focus="true"
+                        type="text"
+                        required
+                        formControlName="name">
+                      <mat-error *ngIf="formGroup.get('shipper.name').invalid">{{
+                        formService.getErrorMessage(formGroup.get('shipper.name'))
+                      }}</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-11">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Address Line 1</mat-label>
+                      <input
+                        matInput
+                        focus="true"
+                        type="text"
+                        required
+                        formControlName="addressLine1">
+                      <mat-error *ngIf="formGroup.get('shipper.addressLine1').invalid">{{
+                        formService.getErrorMessage(formGroup.get('shipper.addressLine1'))
+                      }}</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-11">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Address Line 2</mat-label>
+                      <input
+                        matInput
+                        focus="true"
+                        type="text"
+                        formControlName="addressLine2">
+                      <mat-error *ngIf="formGroup.get('shipper.addressLine2').invalid">{{
+                        formService.getErrorMessage(formGroup.get('shipper.addressLine2'))
+                      }}</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-11">
+                    <mat-form-field appearance="outline">
+                      <mat-label>City</mat-label>
+                      <input
+                        matInput
+                        required
+                        focus="true"
+
+                        type="text"
+                        formControlName="city">
+                      <mat-error *ngIf="formGroup.get('shipper.city').invalid">{{
+                        formService.getErrorMessage(formGroup.get('shipper.city'))
+                      }}</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-11">
+                    <mat-form-field appearance="outline">
+                      <mat-label>State/Province</mat-label>
+                      <mat-select required formControlName="state">
+                        <mat-option *ngFor="let option of statesList" [value]="option">
+                          {{option}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="formGroup.get('shipper.state').invalid">{{
+                        formService.getErrorMessage(formGroup.get('shipper.state'))
+                      }}</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-7">
+                    <mat-form-field appearance="outline">
+                      <mat-label>ZIP/Postal Code</mat-label>
+                      <input
+                      matInput
+                      required
+                      focus="true"
+                      type="text"
+                      formControlName="zip">
+                      <mat-error *ngIf="formGroup.get('shipper.zip').invalid">{{
+                        formService.getErrorMessage(formGroup.get('shipper.zip'))
+                      }}</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <span class="pt-3">-</span>
+                  <div class="col-4">
+                    <mat-form-field appearance="outline">
+                      <input
+                      matInput
+                      focus="true"
+                      type="text"
+                      formControlName="zipExt">
+                      <mat-error *ngIf="formGroup.get('shipper.zipExt').invalid">{{
+                        formService.getErrorMessage(formGroup.get('shipper.zipExt'))
+                      }}</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-9 col-md-7">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Phone Number</mat-label>
+                      <input type="text" matInput required placeholder="(888) 888-8888" [textMask]="{mask: phoneMask, guide: false}" formControlName="phone">
+                      <mat-error *ngIf="formGroup.get('shipper.phone').invalid">{{
+                          formService.getErrorMessage(formGroup.get('shipper.phone'))
+                      }} </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-3 col-md-4">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Extension</mat-label>
+                      <input type="text" matInput formControlName="phoneExt">
+                      <mat-error *ngIf="formGroup.get('shipper.phoneExt').invalid">{{
+                          formService.getErrorMessage(formGroup.get('shipper.phoneExt'))
+                      }} </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-11">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Email Address</mat-label>
+                      <input type="text" matInput required placeholder="Email@example.com"formControlName="email">
+                      <mat-error *ngIf="formGroup.get('shipper.email').invalid">{{
+                          formService.getErrorMessage(formGroup.get('shipper.email'))
+                      }} </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-header class="d-flex justify-content-between">
+            <mat-card-title>
+              Pickup Details
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content formGroupName="pickupInfo">
+            <div class="row">
+              <div class="col-12">
+                <p>Pickups can be entered up to 30 days in advance.</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-lg-6 col-xl-4 pickup-date-padding">
+                <mat-form-field appearance="outline">
+                  <mat-label>Pickup Date</mat-label>
+                  <input
+                    matInput
+                    required
+                    placeholder="MM/DD/YYYY"
+                    [matDatepicker]="pickupDatePicker"
+                    [matDatepickerFilter]="weekendDateFilter"
+                    formControlName="pickupDate"
+                    [max]="maxDate"
+                    [min]="today"/>
+                    <mat-datepicker-toggle
+                    matSuffix
+                    [for]="pickupDatePicker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #pickupDatePicker></mat-datepicker>
+                  <mat-error *ngIf="formGroup.get('pickupInfo.pickupDate').invalid">{{
+                    formService.getErrorMessage(formGroup.get('pickupInfo.pickupDate'))
+                  }}</mat-error>
+                  <mat-error *ngIf="formGroup.get('pickupInfo.pickupDate').invalid && formGroup.get('pickupInfo.pickupDate').errors?.matDatepickerFilter">
+                    Pickup Date cannot be on the weekend.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-lg-6 col-xl-4 time-container">
+                <div><label>Available By *</label></div>
+                <mat-form-field appearance="outline">
+                  <mat-select
+                    focus="true"
+                    name="availableByHour"
+                    id="availableByHour"
+                    formControlName="availableByHour"
+                    required
+                  >
+                    <mat-option [value]="'01'">1</mat-option>
+                    <mat-option [value]="'02'">2</mat-option>
+                    <mat-option [value]="'03'">3</mat-option>
+                    <mat-option [value]="'04'">4</mat-option>
+                    <mat-option [value]="'05'">5</mat-option>
+                    <mat-option [value]="'06'">6</mat-option>
+                    <mat-option [value]="'07'">7</mat-option>
+                    <mat-option [value]="'08'">8</mat-option>
+                    <mat-option [value]="'09'">9</mat-option>
+                    <mat-option [value]="'10'">10</mat-option>
+                    <mat-option [value]="'11'">11</mat-option>
+                    <mat-option [value]="'12'">12</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-select
+                    focus="true"
+                    name="availableByMinutes"
+                    id="availableByMinutes"
+                    formControlName="availableByMinutes"
+                    required
+                  >
+                    <mat-option [value]="'00'">00</mat-option>
+                    <mat-option [value]="'15'">15</mat-option>
+                    <mat-option [value]="'30'">30</mat-option>
+                    <mat-option [value]="'45'">45</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-select
+                    focus="true"
+                    name="availableByAmPm"
+                    id="availableByAmPm"
+                    formControlName="availableByAmPm"
+                    required
+                  >
+                    <mat-option [value]="'AM'">AM</mat-option>
+                    <mat-option [value]="'PM'">PM</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-lg-6 col-xl-4 time-container">
+                <div><label>Closes By *</label></div>
+                <mat-form-field appearance="outline">
+                  <mat-select
+                    focus="true"
+                    name="closesByHour"
+                    id="closesByHour"
+                    formControlName="closesByHour"
+                    required
+                  >
+                    <mat-option [value]="'01'">1</mat-option>
+                    <mat-option [value]="'02'">2</mat-option>
+                    <mat-option [value]="'03'">3</mat-option>
+                    <mat-option [value]="'04'">4</mat-option>
+                    <mat-option [value]="'05'">5</mat-option>
+                    <mat-option [value]="'06'">6</mat-option>
+                    <mat-option [value]="'07'">7</mat-option>
+                    <mat-option [value]="'08'">8</mat-option>
+                    <mat-option [value]="'09'">9</mat-option>
+                    <mat-option [value]="'10'">10</mat-option>
+                    <mat-option [value]="'11'">11</mat-option>
+                    <mat-option [value]="'12'">12</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-select
+                    focus="true"
+                    name="closesByMinutes"
+                    id="closesByMinutes"
+                    formControlName="closesByMinutes"
+                    required
+                  >
+                    <mat-option [value]="'00'">00</mat-option>
+                    <mat-option [value]="'15'">15</mat-option>
+                    <mat-option [value]="'30'">30</mat-option>
+                    <mat-option [value]="'45'">45</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-select
+                    focus="true"
+                    name="closesByAmPm"
+                    id="closesByAmPm"
+                    formControlName="closesByAmPm"
+                    required
+                  >
+                    <mat-option [value]="'AM'">AM</mat-option>
+                    <mat-option [value]="'PM'">PM</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <span class="time-error text-danger" *ngIf="closesByHour.invalid">Closes By time must be after Available By time.</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 checkbox-group d-inline-block">
+                <div>
+                  <div class="d-flex align-items-center">
+                    <mat-checkbox
+                      id="hookOrDrop"
+                      class="mr-1"
+                      color="primary"
+                      (change)="trimShipmentInfoDetails($event.checked);"
+                      formControlName="hookOrDrop"
+                    >
+                      Hook/Drop (Pick up or drop off trailer at location)
+                    </mat-checkbox>
+                    <!-- <lib-tooltip
+                      role="button"
+                      [attr.aria-roledescription]="
+                        'Clicking this button will open a detailed description for the option: Hook or Drop'
+                      "
+                      class="pickup-modal-tooltip"
+                      (click)="$event.stopPropagation(); openInfoModal(hookDropHtml);"
+                    ></lib-tooltip> -->
+                  </div>
+                  <p class="mat-hint" *ngIf="hookOrDrop && hookOrDrop.value">If Hook/Drop is selected, only one line of shipment information is allowed.</p>
+                  <!-- <lib-feedback
+                    *ngIf="freeze.value === true"
+                    [message]="['info', 'Select appropriate Freeze Protection Accessorials below.']"
+                  ></lib-feedback> -->
+                </div>
+                <div>
+                  <div class="d-flex align-items-center">
+                    <mat-checkbox
+                      id="liftgateRequired"
+                      class="mr-1"
+                      color="primary"
+                      formControlName="liftgateRequired"
+                    >
+                     Lift-Gate Service (Pickup)
+                    </mat-checkbox>
+                    <!-- <lib-tooltip
+                      role="button"
+                      [attr.aria-roledescription]="
+                        'Clicking this button will open a detailed description for the option: Lift-Gate Service (Pickup)'
+                      "
+                      class="pickup-modal-tooltip"
+                      (click)="$event.stopPropagation(); openInfoModal(liftgateHtml)"
+                    ></lib-tooltip> -->
+                  </div>
+                </div>
+                <div>
+                  <div class="d-flex align-items-center">
+                    <mat-checkbox
+                      id="noStackPallet"
+                      class="mr-1"
+                      color="primary"
+                      formControlName="noStackPallet"
+                    >
+                      Do not stack pallets
+                    </mat-checkbox>
+                    <!-- <lib-tooltip
+                      role="button"
+                      [attr.aria-roledescription]="
+                        'Clicking this button will open a detailed description for the option: Do not stack pallets'
+                      "
+                      class="pickup-modal-tooltip"
+                      (click)="$event.stopPropagation(); openInfoModal(noStackPalletsHtml)"
+                    ></lib-tooltip> -->
+                  </div>
+                  <p>For terms and conditions regarding the pickup accessorials and services listed, please refer to our <a href="/resources/fees-and-surcharges/rules-tariff">EXLA 105 series tariff</a>.</p>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-header class="d-flex justify-content-between">
+            <mat-card-title>
+              Shipment Information
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div formArrayName="shipmentInfo">
+              <div *ngFor="let shipInfo of shipmentInfo.controls; let i = index" [formGroupName]="i">
+                <div *ngIf="commodities && commodities.length > 0" class="row">
+                  <div class="col-12 col-md-5">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Recent Requests</mat-label>
+                      <mat-select
+                        focus="true"
+                        (selectionChange)="setShipmentInformationFields($event.value, i)">
+                        <mat-option selected value>Use info from a recent request</mat-option>
+                        <mat-option *ngFor="let commodity of commodities" [value]="commodity">Pcs {{commodity.totalPieces}} / Wgt {{commodity.totalWeight}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div formGroupName="commodity">
+                  <div class="row">
+                    <div class="col-7 col-md-6 col-lg-3">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Destination ZIP/Postal Code</mat-label>
+                        <input
+                        matInput
+                        required
+                        focus="true"
+                        type="text"
+                        formControlName="destinationZipCode">
+                        <mat-error *ngIf="shipInfo.get('commodity.destinationZipCode').invalid">{{
+                          formService.getErrorMessage(shipInfo.get('commodity.destinationZipCode'))
+                        }}</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <span class="pt-3">-</span>
+                    <div class="col-4 col-md-3 col-lg-1">
+                      <mat-form-field appearance="outline">
+                        <input
+                        matInput
+                        focus="true"
+                        type="text"
+                        formControlName="destinationZipCodeExt">
+                        <mat-error *ngIf="shipInfo.get('commodity.destinationZipCodeExt').invalid">{{
+                          formService.getErrorMessage(shipInfo.get('commodity.destinationZipCodeExt'))
+                        }}</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-4 col-lg-2">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Total Pieces</mat-label>
+                        <input
+                        matInput
+                        required
+                        min="0"
+                        focus="true"
+                        type="number"
+                        formControlName="totalPieces">
+                        <mat-error *ngIf="shipInfo.get('commodity.totalPieces').invalid">{{
+                          formService.getErrorMessage(shipInfo.get('commodity.totalPieces'))
+                        }}</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-4 col-lg-3">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Total Weight (lbs.)</mat-label>
+                        <input
+                        matInput
+                        focus="true"
+                        required
+                        min="0"
+                        type="number"
+                        formControlName="totalWeight">
+                        <mat-error *ngIf="shipInfo.get('commodity.totalWeight').invalid">{{
+                          formService.getErrorMessage(shipInfo.get('commodity.totalWeight'))
+                        }}</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-4 col-lg-2">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Total Skids</mat-label>
+                        <input
+                        matInput
+                        min="0"
+                        focus="true"
+                        type="number"
+                        formControlName="totalSkids">
+                        <mat-error *ngIf="shipInfo.get('commodity.totalSkids').invalid">{{
+                          formService.getErrorMessage(shipInfo.get('commodity.totalSkids'))
+                        }}</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 mt-3 mb-3">
+                      <mat-checkbox
+                        color="primary"
+                        formControlName="hazmat">
+                        Hazmat
+                      </mat-checkbox>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="shipInfo.get('commodity.hazmat').value">
+                   <div class="col-12 col-md-7">
+                      <p>Please provide the supporting Hazmat shipment details in the following format: UN Number, Shipping Name, Hazard Class and Packing Group.</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 col-md-7">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Special Instructions</mat-label>
+                        <textarea
+                          matInput
+                          [required]="shipInfo.get('commodity.hazmat').value"
+                          rows="5"
+                          formControlName="specialInstructions"
+                        ></textarea>
+                        <mat-error *ngIf="shipInfo.get('commodity.specialInstructions').invalid">{{
+                          formService.getErrorMessage(shipInfo.get('commodity.specialInstructions'))
+                        }}</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Your Reference Number</mat-label>
+                        <input
+                        matInput
+                        focus="true"
+                        type="text"
+                        formControlName="referenceNumber">
+                        <mat-error *ngIf="shipInfo.get('commodity.referenceNumber').invalid">{{
+                          formService.getErrorMessage(shipInfo.get('commodity.referenceNumber'))
+                        }}</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 mt-2 mb-2">
+                    <mat-label>Shipment Type:</mat-label>
+                    <mat-radio-group class="radio-group d-flex flex-column mt-2" formControlName="shipmentService" (change)="shipmentTypeChange()">
+                      <mat-radio-button class="mr-3" color="primary" [value]="'LTL'">Less Than Truckload or Volume/Truckload Pickup
+                      </mat-radio-button>
+                      <mat-radio-button class="mr-3" color="primary" [value]="'GUARANTEED'">Guaranteed/Time Critical
+                        <lib-tooltip
+                        role="button"
+                        [attr.aria-roledescription]="'Clicking this button will open a detailed description for the option: Estes Forwarding Worldwide'"
+                        class="pickup-modal-tooltip"
+                        (click)="$event.preventDefault(); $event.stopPropagation(); openInfoModal(guaranteedHtml)"></lib-tooltip>
+                      </mat-radio-button>
+                      <mat-radio-button class="mr-3" color="primary" [value]="'EFW'">Estes Forwarding Worldwide
+                        <lib-tooltip
+                        role="button"
+                        [attr.aria-roledescription]="'Clicking this button will open a detailed description for the option: Estes Forwarding Worldwide'"
+                        class="pickup-modal-tooltip"
+                        (click)="$event.preventDefault(); $event.stopPropagation(); openInfoModal(efwHtml)"></lib-tooltip>
+                      </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                </div>
+                <div formGroupName="shipmentOption" class="row">
+                  <div class="col-12 mt-3 mb-2"><mat-label>Services: (check all that apply)</mat-label></div>
+                  <div class="col-12 col-lg-2 d-flex align-items-center">
+                    <mat-checkbox
+                      color="primary"
+                      formControlName="freeze">
+                      Freeze
+                    </mat-checkbox>
+                  </div>
+                  <div class="col-12 col-lg-2 d-flex align-items-center">
+                    <mat-checkbox
+                      color="primary"
+                      formControlName="food">
+                      Food
+                    </mat-checkbox>
+                  </div>
+                  <div class="col-12 col-lg-4 d-flex align-items-center">
+                    <mat-checkbox
+                      color="primary"
+                      formControlName="oversize">
+                      Oversize/Extreme Length
+                    </mat-checkbox>
+                  </div>
+                  <div class="col-12 col-lg-2 d-flex align-items-center">
+                    <mat-checkbox
+                      color="primary"
+                      formControlName="poision">
+                      Poison
+                    </mat-checkbox>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <p>For terms and conditions regarding the pickup accessorials and services listed, please refer to our <a href="/resources/fees-and-surcharges/rules-tariff">EXLA 105 series tariff</a>.</p>
+                  </div>
+                </div>
+                <div formGroupName="notification" class="row">
+                  <div class="col-12 mt-3 mb-2"><mat-label>Send email notifications for:</mat-label></div>
+                  <div class="col-12 col-lg-3">
+                    <mat-checkbox
+                      class="mat-checkbox--tooltip"
+                      color="primary"
+                      formControlName="accepted">
+                      Accepted Request
+                    </mat-checkbox>
+                    <lib-tooltip
+                    role="button"
+                    [attr.aria-roledescription]="'Clicking this button will open a detailed description for the option: Accepted Request'"
+                    class="pickup-modal-tooltip"
+                    (click)="$event.stopPropagation(); openInfoModal(acceptedRequestHtml)"></lib-tooltip>
+                  </div>
+                  <div class="col-12 col-lg-3">
+                    <mat-checkbox
+                      class="mat-checkbox--tooltip"
+                      color="primary"
+                      formControlName="completed">
+                      Completed Pickup
+                    </mat-checkbox>
+                    <lib-tooltip
+                    role="button"
+                    [attr.aria-roledescription]="'Clicking this button will open a detailed description for the option: Completed Pickup'"
+                    class="pickup-modal-tooltip"
+                    (click)="$event.stopPropagation(); openInfoModal(completedPickupHtml)"></lib-tooltip>
+                  </div>
+                  <div class="col-12">
+                    <p>Requester will receive any rejected notifications by default.</p>
+                  </div>
+                </div>
+                <div *ngIf="i > 0" class="row">
+                  <div class="col-12">
+                    <button type="button" class="btn btn-default float-right" (click)="deleteShipmentLine(i)">Delete Line</button>
+                  </div>
+                </div>
+                <hr class="mt-4 mb-4">
+              </div>
+            </div>
+            <div *ngIf="shipmentInfo.length < 5 && hookOrDrop && !hookOrDrop.value">
+              <div class="row">
+                <div class="col-12"><button type="button" class="btn btn-default" (click)="addNewShipmentInfo()">Add another line</button></div>
+              </div>
+              <hr class="mt-4 mb-4">
+            </div>
+            <div class="row mt-4" *ngIf="errorMessages">
+              <div class="col-12">
+                <lib-feedback *ngIf="errorMessages" [message]="errorMessages"></lib-feedback>
+              </div>
+            </div>
+            <div class="row" *ngIf="formGroup.controls['tos']">
+              <div class="col-12">
+                <mat-checkbox formControlName="tos" class="mr-2"></mat-checkbox>I have read and agree to the Guaranteed<a class="ml-1" (click)="openInfoModal(guaranteedTermsHtml)">Terms of Service</a>.
+                <mat-error *ngIf="formGroup.controls['tos'].invalid && isSubmitted">{{
+                    formService.getErrorMessage(formGroup.controls['tos'])
+                  }}</mat-error>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-12">
+                <button  id="pickupRequestSubmitButton"  class="btn btn-primary" type="submit">Submit <i class="fas fa-sync-alt fa-spin ml-2" *ngIf="loading"></i></button>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </form>
+    </div>
+    <mat-card *ngIf="successMessage" class="mt-3">
+      <mat-card-content>
+        <div class="row">
+          <div class="col-12">
+            <lib-feedback [message]="successMessage"></lib-feedback>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <p>Please print this document for your records.</p>
+            <p>Please note that pickup requests received after 3 p.m. may not be picked up until the following business day.  Business days are Monday–Friday.</p>
+            <p>For immediate assistance, please contact our Corporate Customer Care Department at (804) 353-1900, Ext: 2500.</p>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-header class="d-flex justify-content-between">
+        <mat-card-title>
+          Requester Info
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-4"><label class="font-weight-bold">Contact Name</label></div>
+          <div class="col-8">{{results.user.name}}</div>
+        </div>
+        <div class="row">
+          <div class="col-4"><label class="font-weight-bold">Phone Number</label></div>
+          <div class="col-8">{{results.user.phone | phone}} <span *ngIf="results.user.phoneExt">&nbsp;Extension: {{results.user.phoneExt}}</span></div>
+        </div>
+        <div class="row">
+          <div class="col-4"><label class="font-weight-bold">Email Address</label></div>
+          <div class="col-8">{{results.user.email}}</div>
+        </div>
+      </mat-card-content>
+      <mat-card-header class="d-flex justify-content-between">
+        <mat-card-title>
+          Shipper Info
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-4"><label class="font-weight-bold">Contact Name</label></div>
+          <div class="col-8">{{results.shipper.name}}</div>
+        </div>
+        <div class="row">
+          <div class="col-4"><label class="font-weight-bold">Company Name</label></div>
+          <div class="col-8">{{results.shipper.company}}</div>
+        </div>
+        <div class="row">
+          <div class="col-4"><label class="font-weight-bold">Address</label></div>
+          <div class="col-8">
+            <div *ngIf="results.shipper.addressLine1">
+              {{ results.shipper.addressLine1 }}
+            </div>
+            <div *ngIf="results.shipper.addressLine2">
+              {{ results.shipper.addressLine2 }}
+            </div>
+            <div
+              *ngIf="
+              results.shipper.city ||
+              results.shipper.state ||
+              results.shipper.zip ||
+              results.shipper.zip4
+              "
+            >
+              <span *ngIf="!results.shipper.state">
+                {{ results.shipper.city }}
+              </span>
+              <span *ngIf="results.shipper.state">
+                {{ results.shipper.city }}, {{ results.shipper.state }}
+              </span>
+              <span *ngIf="!results.shipper.zipExt">
+                {{ results.shipper.zip }}
+              </span>
+              <span *ngIf="results.shipper.zipExt">
+                {{ results.shipper.zip }}-{{ results.shipper.zipExt }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4"><label class="font-weight-bold">Phone Number</label></div>
+          <div class="col-8">{{results.shipper.phone | phone}} <span *ngIf="results.shipper.phoneExt">&nbsp;Extension: {{results.shipper.phoneExt}}</span></div>
+        </div>
+        <div class="row">
+          <div class="col-4"><label class="font-weight-bold">Email Address</label></div>
+          <div class="col-8">{{results.shipper.email}}</div>
+        </div>
+        <div class="row">
+          <div class="col-4"><label class="font-weight-bold">Appt. Date</label></div>
+          <div class="col-8">{{results.pickupInfo.pickupDate}}</div>
+        </div>
+        <div class="row">
+          <div class="col-4"><label class="font-weight-bold">Appt. Start Time</label></div>
+          <div class="col-8">{{results.pickupInfo.startTime}}</div>
+        </div>
+        <div class="row">
+          <div class="col-4"><label class="font-weight-bold">Appt. End Time</label></div>
+          <div class="col-8">{{results.pickupInfo.endTime}}</div>
+        </div>
+      </mat-card-content>
+      <mat-card-header class="d-flex justify-content-between">
+        <mat-card-title>
+          Shipment Information
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngFor="let shipInfo of results.shipmentInfo; let i = index">
+          <div class="row">
+            <div class="col-1 font-weight-bold pb-3">{{i+1}}.</div>
+            <div class="col-4 col-lg-2 pb-3 font-weight-bold"><label>Request Number</label><br>{{shipInfo.requestNumber}}</div>
+            <div class="col-4 col-lg-2 pb-3"><label class="font-weight-bold">Dest. ZIP/Postal Code</label><br>{{shipInfo.commodity.destinationZipCode}}</div>
+            <div class="col-4 col-lg-1 offset-1 offset-lg-0 pb-3"><label class="font-weight-bold">Pieces</label><br>{{shipInfo.commodity.totalPieces}}</div>
+            <div class="col-4 col-lg-1 pb-3"><label class="font-weight-bold">Weight</label><br>{{shipInfo.commodity.totalWeight}}</div>
+            <div class="col-3 col-lg-1 pb-3"><label class="font-weight-bold">Skids</label><br>{{shipInfo.commodity.totalSkids}}</div>
+            <div class="col-4 col-lg-1 offset-1 offset-lg-0 pb-3"><label class="font-weight-bold">Hazmat</label><br><span *ngIf="shipInfo.commodity.hazmat">Y</span><span *ngIf="!shipInfo.commodity.hazmat">N</span></div>
+            <div class="col-4 col-lg-2 pb-3"><label class="font-weight-bold">Your Ref. Number</label><br>{{shipInfo.commodity.referenceNumber}}</div>
+            <div class="col-3 col-lg-1 pb-3"><label class="font-weight-bold">Details</label><br>{{shipInfo.shipmentService}}<span *ngIf="shipInfo.shipmentOption.freeze"><br>Freeze</span><span *ngIf="shipInfo.shipmentOption.oversize"><br>Oversize/ Extreme Length</span><span *ngIf="shipInfo.shipmentOption.food"><br>Food</span><span *ngIf="shipInfo.shipmentOption.poision"><br>Poison</span></div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-12">
+            <button class="btn btn-primary" type="button" (click)="requestAnotherPickupClick()">Request Another Pickup</button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+  <mat-tab *ngIf="hasPickupHistoryAccess" label="View Pickup History">
+    <app-pickup-history></app-pickup-history>
+  </mat-tab>
+</mat-tab-group>

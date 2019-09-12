@@ -1,0 +1,14 @@
+<ng-container *ngIf="leftNav$ | async as nav">
+  <div class="menu widget basic">
+    <h4>
+      <span>{{ nav[0] }}</span>
+    </h4>
+    <ul class="list-group">
+      <ng-container *ngFor="let item of nav[1]; let i = index">
+        <li class="{{ item.classStr }}">
+          <a href="{{ item.link }}" target="{{ item.target }}">{{ item.title }}</a>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</ng-container>

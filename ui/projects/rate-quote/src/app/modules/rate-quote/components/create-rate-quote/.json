@@ -1,0 +1,593 @@
+[
+  {
+    "quoteID": "0BG2WXD",
+    "quoteRefNum": "1494225",
+    "app": "VTL",
+    "accountCode": "5023958",
+    "accountName": "DIAMOND CRYSTAL BRANDS",
+    "contactName": "ENRIQUE CHAVEZ",
+    "contactPhone": "(931) 525-5259",
+    "contactPhoneExt": "",
+    "contactEmail": "TESTADMIN@ESTES-EXPRESS.COM",
+    "role": "S",
+    "terms": "Pre-paid",
+    "lane": 1,
+    "origin": { "country": "US", "city": "HENRICO", "state": "VA", "zip": "23242" },
+    "dest": { "country": "US", "city": "ATLANTA", "state": "GA", "zip": "30307" },
+    "transitMessage": "",
+    "pickupDate": "04/10/19",
+    "pickupAvail": "05:15:00",
+    "pickupClose": "19:30:00",
+    "delivery": { "date": "04/11/19", "time": "15:50:32" },
+    "service": { "id": 0, "text": "" },
+    "declaredValue": 0.0,
+    "declaredValueWaived": false,
+    "foodWarehouseId": 0,
+    "foodWarehouse": "",
+    "stackable": true,
+    "linearFeet": 0,
+    "comments": "",
+    "pricing": { "display": "H", "discount": 0.0, "totalDiscount": 0.0, "totalPrice": 0.0 },
+    "commodities": [
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 7400,
+          "pieces": 4,
+          "pieceType": "BARREL",
+          "dimensions": { "length": 4, "width": 4, "height": 4 },
+          "description": ""
+        },
+        "rate": 0.0,
+        "charge": 0.0
+      },
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 3000,
+          "pieces": 2,
+          "pieceType": "BALE",
+          "dimensions": { "length": 2, "width": 2, "height": 2 },
+          "description": ""
+        },
+        "rate": 0.0,
+        "charge": 0.0
+      }
+    ],
+    "accessorials": [],
+    "info": [],
+    "disclaimers": []
+  },
+  {
+    "quoteID": "LBG2WXD",
+    "quoteRefNum": "1494225",
+    "app": "VTL",
+    "accountCode": "5023958",
+    "accountName": "DIAMOND CRYSTAL BRANDS",
+    "contactName": "ENRIQUE CHAVEZ",
+    "contactPhone": "(931) 525-5259",
+    "contactPhoneExt": "",
+    "contactEmail": "TESTADMIN@ESTES-EXPRESS.COM",
+    "role": "S",
+    "terms": "Pre-paid",
+    "lane": 1,
+    "origin": { "country": "US", "city": "HENRICO", "state": "VA", "zip": "23242" },
+    "dest": { "country": "US", "city": "ATLANTA", "state": "GA", "zip": "30307" },
+    "transitMessage": "",
+    "pickupDate": "04/10/19",
+    "pickupAvail": "05:15:00",
+    "pickupClose": "19:30:00",
+    "delivery": { "date": "04/11/19", "time": "17:00:00" },
+    "service": { "id": 99, "text": "LTL Standard Transit" },
+    "declaredValue": 0.0,
+    "declaredValueWaived": false,
+    "foodWarehouseId": 0,
+    "foodWarehouse": "",
+    "stackable": true,
+    "linearFeet": 0,
+    "comments": "",
+    "pricing": {
+      "display": "H",
+      "discount": 0.542,
+      "totalDiscount": 4294.11,
+      "totalPrice": 4354.33
+    },
+    "commodities": [
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 7400,
+          "pieces": 4,
+          "pieceType": "BARREL",
+          "dimensions": { "length": 4, "width": 4, "height": 4 },
+          "description": ""
+        },
+        "rate": 76.18,
+        "charge": 5637.32
+      },
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 3000,
+          "pieces": 2,
+          "pieceType": "BALE",
+          "dimensions": { "length": 2, "width": 2, "height": 2 },
+          "description": ""
+        },
+        "rate": 76.18,
+        "charge": 2285.4
+      }
+    ],
+    "accessorials": [
+      {
+        "accessorial": {
+          "code": "FSC",
+          "appID": null,
+          "display": false,
+          "description": "Fuel Surcharge"
+        },
+        "charge": 99.0
+      }
+    ],
+    "info": [],
+    "disclaimers": []
+  },
+  {
+    "quoteID": "1BG2WXD",
+    "quoteRefNum": "1494225",
+    "app": "VTL",
+    "accountCode": "5023958",
+    "accountName": "DIAMOND CRYSTAL BRANDS",
+    "contactName": "ENRIQUE CHAVEZ",
+    "contactPhone": "(931) 525-5259",
+    "contactPhoneExt": "",
+    "contactEmail": "TESTADMIN@ESTES-EXPRESS.COM",
+    "role": "S",
+    "terms": "Pre-paid",
+    "lane": 1,
+    "origin": { "country": "US", "city": "HENRICO", "state": "VA", "zip": "23242" },
+    "dest": { "country": "US", "city": "ATLANTA", "state": "GA", "zip": "30307" },
+    "transitMessage": "",
+    "pickupDate": "04/10/19",
+    "pickupAvail": "05:15:00",
+    "pickupClose": "19:30:00",
+    "delivery": { "date": "04/11/19", "time": "17:00:00" },
+    "service": { "id": 98, "text": "Guaranteed LTL Standard Transit: 5PM" },
+    "declaredValue": 0.0,
+    "declaredValueWaived": false,
+    "foodWarehouseId": 0,
+    "foodWarehouse": "",
+    "stackable": true,
+    "linearFeet": 0,
+    "comments": "",
+    "pricing": {
+      "display": "C",
+      "discount": 0.542,
+      "totalDiscount": 4294.11,
+      "totalPrice": 5938.87
+    },
+    "commodities": [
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 7400,
+          "pieces": 4,
+          "pieceType": "BARREL",
+          "dimensions": { "length": 4, "width": 4, "height": 4 },
+          "description": ""
+        },
+        "rate": 76.18,
+        "charge": 5637.32
+      },
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 3000,
+          "pieces": 2,
+          "pieceType": "BALE",
+          "dimensions": { "length": 2, "width": 2, "height": 2 },
+          "description": ""
+        },
+        "rate": 76.18,
+        "charge": 2285.4
+      }
+    ],
+    "accessorials": [
+      {
+        "accessorial": {
+          "code": "FSC",
+          "appID": null,
+          "display": false,
+          "description": "Fuel Surcharge"
+        },
+        "charge": 98.0
+      }
+    ],
+    "info": [],
+    "disclaimers": []
+  },
+  {
+    "quoteID": "2BG2WXD",
+    "quoteRefNum": "1494225",
+    "app": "VTL",
+    "accountCode": "5023958",
+    "accountName": "DIAMOND CRYSTAL BRANDS",
+    "contactName": "ENRIQUE CHAVEZ",
+    "contactPhone": "(931) 525-5259",
+    "contactPhoneExt": "",
+    "contactEmail": "TESTADMIN@ESTES-EXPRESS.COM",
+    "role": "S",
+    "terms": "Pre-paid",
+    "lane": 1,
+    "origin": { "country": "US", "city": "HENRICO", "state": "VA", "zip": "23242" },
+    "dest": { "country": "US", "city": "ATLANTA", "state": "GA", "zip": "30307" },
+    "transitMessage": "",
+    "pickupDate": "04/10/19",
+    "pickupAvail": "05:15:00",
+    "pickupClose": "19:30:00",
+    "delivery": { "date": "04/11/19", "time": "12:00:00" },
+    "service": { "id": 96, "text": "Guaranteed LTL Standard Transit: 12PM" },
+    "declaredValue": 0.0,
+    "declaredValueWaived": false,
+    "foodWarehouseId": 0,
+    "foodWarehouse": "",
+    "stackable": true,
+    "linearFeet": 0,
+    "comments": "",
+    "pricing": {
+      "display": "C",
+      "discount": 0.542,
+      "totalDiscount": 4294.11,
+      "totalPrice": 7523.41
+    },
+    "commodities": [
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 7400,
+          "pieces": 4,
+          "pieceType": "BARREL",
+          "dimensions": { "length": 4, "width": 4, "height": 4 },
+          "description": ""
+        },
+        "rate": 76.18,
+        "charge": 5637.32
+      },
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 3000,
+          "pieces": 2,
+          "pieceType": "BALE",
+          "dimensions": { "length": 2, "width": 2, "height": 2 },
+          "description": ""
+        },
+        "rate": 76.18,
+        "charge": 2285.4
+      }
+    ],
+    "accessorials": [
+      {
+        "accessorial": {
+          "code": "FSC",
+          "appID": null,
+          "display": false,
+          "description": "Fuel Surcharge"
+        },
+        "charge": 96.0
+      }
+    ],
+    "info": [],
+    "disclaimers": []
+  },
+  {
+    "quoteID": "3BG2WXD",
+    "quoteRefNum": "1494225",
+    "app": "VTL",
+    "accountCode": "5023958",
+    "accountName": "DIAMOND CRYSTAL BRANDS",
+    "contactName": "ENRIQUE CHAVEZ",
+    "contactPhone": "(931) 525-5259",
+    "contactPhoneExt": "",
+    "contactEmail": "TESTADMIN@ESTES-EXPRESS.COM",
+    "role": "S",
+    "terms": "Pre-paid",
+    "lane": 1,
+    "origin": { "country": "US", "city": "HENRICO", "state": "VA", "zip": "23242" },
+    "dest": { "country": "US", "city": "ATLANTA", "state": "GA", "zip": "30307" },
+    "transitMessage": "",
+    "pickupDate": "04/10/19",
+    "pickupAvail": "05:15:00",
+    "pickupClose": "19:30:00",
+    "delivery": { "date": "04/11/19", "time": "10:00:00" },
+    "service": { "id": 95, "text": "Guaranteed LTL Standard Transit: 10AM" },
+    "declaredValue": 0.0,
+    "declaredValueWaived": false,
+    "foodWarehouseId": 0,
+    "foodWarehouse": "",
+    "stackable": true,
+    "linearFeet": 0,
+    "comments": "",
+    "pricing": {
+      "display": "C",
+      "discount": 0.542,
+      "totalDiscount": 4294.11,
+      "totalPrice": 9107.96
+    },
+    "commodities": [
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 7400,
+          "pieces": 4,
+          "pieceType": "BARREL",
+          "dimensions": { "length": 4, "width": 4, "height": 4 },
+          "description": ""
+        },
+        "rate": 76.18,
+        "charge": 5637.32
+      },
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 3000,
+          "pieces": 2,
+          "pieceType": "BALE",
+          "dimensions": { "length": 2, "width": 2, "height": 2 },
+          "description": ""
+        },
+        "rate": 76.18,
+        "charge": 2285.4
+      }
+    ],
+    "accessorials": [
+      {
+        "accessorial": {
+          "code": "FSC",
+          "appID": null,
+          "display": false,
+          "description": "Fuel Surcharge"
+        },
+        "charge": 95.0
+      }
+    ],
+    "info": [],
+    "disclaimers": []
+  },
+  {
+    "quoteID": "VBG2WXD",
+    "quoteRefNum": "1494225",
+    "app": "VTL",
+    "accountCode": "5023958",
+    "accountName": "DIAMOND CRYSTAL BRANDS",
+    "contactName": "ENRIQUE CHAVEZ",
+    "contactPhone": "(931) 525-5259",
+    "contactPhoneExt": "",
+    "contactEmail": "TESTADMIN@ESTES-EXPRESS.COM",
+    "role": "S",
+    "terms": "Pre-paid",
+    "lane": 1,
+    "origin": { "country": "US", "city": "HENRICO", "state": "VA", "zip": "23242" },
+    "dest": { "country": "US", "city": "ATLANTA", "state": "GA", "zip": "30307" },
+    "transitMessage": "",
+    "pickupDate": "04/10/19",
+    "pickupAvail": "05:15:00",
+    "pickupClose": "19:30:00",
+    "delivery": { "date": "04/11/19", "time": "17:00:00" },
+    "service": { "id": 94, "text": "Volume and Truckload Basic" },
+    "declaredValue": 0.0,
+    "declaredValueWaived": false,
+    "foodWarehouseId": 0,
+    "foodWarehouse": "",
+    "stackable": true,
+    "linearFeet": 0,
+    "comments": "",
+    "pricing": { "display": "S", "discount": 0.0, "totalDiscount": 0.0, "totalPrice": 437.0 },
+    "commodities": [
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 7400,
+          "pieces": 4,
+          "pieceType": "BARREL",
+          "dimensions": { "length": 4, "width": 4, "height": 4 },
+          "description": ""
+        },
+        "rate": 0.0,
+        "charge": 0.0
+      },
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 3000,
+          "pieces": 2,
+          "pieceType": "BALE",
+          "dimensions": { "length": 2, "width": 2, "height": 2 },
+          "description": ""
+        },
+        "rate": 0.0,
+        "charge": 0.0
+      }
+    ],
+    "accessorials": [],
+    "info": [],
+    "disclaimers": []
+  },
+  {
+    "quoteID": "SBG2WXD",
+    "quoteRefNum": "1494225",
+    "app": "VTL",
+    "accountCode": "5023958",
+    "accountName": "DIAMOND CRYSTAL BRANDS",
+    "contactName": "ENRIQUE CHAVEZ",
+    "contactPhone": "(931) 525-5259",
+    "contactPhoneExt": "",
+    "contactEmail": "TESTADMIN@ESTES-EXPRESS.COM",
+    "role": "S",
+    "terms": "Pre-paid",
+    "lane": 1,
+    "origin": { "country": "US", "city": "HENRICO", "state": "VA", "zip": "23242" },
+    "dest": { "country": "US", "city": "ATLANTA", "state": "GA", "zip": "30307" },
+    "transitMessage": "",
+    "pickupDate": "04/10/19",
+    "pickupAvail": "05:15:00",
+    "pickupClose": "19:30:00",
+    "delivery": { "date": "04/11/19", "time": "17:00:00" },
+    "service": { "id": 92, "text": "Guaranteed Volume and Truckload Standard" },
+    "declaredValue": 0.0,
+    "declaredValueWaived": false,
+    "foodWarehouseId": 0,
+    "foodWarehouse": "",
+    "stackable": true,
+    "linearFeet": 0,
+    "comments": "",
+    "pricing": { "display": "S", "discount": 0.0, "totalDiscount": 0.0, "totalPrice": 677.35 },
+    "commodities": [
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 7400,
+          "pieces": 4,
+          "pieceType": "BARREL",
+          "dimensions": { "length": 4, "width": 4, "height": 4 },
+          "description": ""
+        },
+        "rate": 0.0,
+        "charge": 0.0
+      },
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 3000,
+          "pieces": 2,
+          "pieceType": "BALE",
+          "dimensions": { "length": 2, "width": 2, "height": 2 },
+          "description": ""
+        },
+        "rate": 0.0,
+        "charge": 0.0
+      }
+    ],
+    "accessorials": [],
+    "info": [],
+    "disclaimers": []
+  },
+  {
+    "quoteID": "EBG2WXD",
+    "quoteRefNum": "1494225",
+    "app": "VTL",
+    "accountCode": "5023958",
+    "accountName": "DIAMOND CRYSTAL BRANDS",
+    "contactName": "ENRIQUE CHAVEZ",
+    "contactPhone": "(931) 525-5259",
+    "contactPhoneExt": "",
+    "contactEmail": "TESTADMIN@ESTES-EXPRESS.COM",
+    "role": "S",
+    "terms": "Pre-paid",
+    "lane": 1,
+    "origin": { "country": "US", "city": "HENRICO", "state": "VA", "zip": "23242" },
+    "dest": { "country": "US", "city": "ATLANTA", "state": "GA", "zip": "30307" },
+    "transitMessage": "",
+    "pickupDate": "04/10/19",
+    "pickupAvail": "05:15:00",
+    "pickupClose": "19:30:00",
+    "delivery": { "date": "04/12/19", "time": "17:00:00" },
+    "service": { "id": 93, "text": "Guaranteed Volume and Truckload Economy" },
+    "declaredValue": 0.0,
+    "declaredValueWaived": false,
+    "foodWarehouseId": 0,
+    "foodWarehouse": "",
+    "stackable": true,
+    "linearFeet": 0,
+    "comments": "",
+    "pricing": { "display": "S", "discount": 0.0, "totalDiscount": 0.0, "totalPrice": 633.65 },
+    "commodities": [
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 7400,
+          "pieces": 4,
+          "pieceType": "BARREL",
+          "dimensions": { "length": 4, "width": 4, "height": 4 },
+          "description": ""
+        },
+        "rate": 0.0,
+        "charge": 0.0
+      },
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 3000,
+          "pieces": 2,
+          "pieceType": "BALE",
+          "dimensions": { "length": 2, "width": 2, "height": 2 },
+          "description": ""
+        },
+        "rate": 0.0,
+        "charge": 0.0
+      }
+    ],
+    "accessorials": [],
+    "info": [],
+    "disclaimers": []
+  },
+  {
+    "quoteID": "XBG2WXD",
+    "quoteRefNum": "1494225",
+    "app": "VTL",
+    "accountCode": "5023958",
+    "accountName": "DIAMOND CRYSTAL BRANDS",
+    "contactName": "ENRIQUE CHAVEZ",
+    "contactPhone": "(931) 525-5259",
+    "contactPhoneExt": "",
+    "contactEmail": "TESTADMIN@ESTES-EXPRESS.COM",
+    "role": "S",
+    "terms": "Pre-paid",
+    "lane": 1,
+    "origin": { "country": "US", "city": "HENRICO", "state": "VA", "zip": "23242" },
+    "dest": { "country": "US", "city": "ATLANTA", "state": "GA", "zip": "30307" },
+    "transitMessage": "",
+    "pickupDate": "04/10/19",
+    "pickupAvail": "05:15:00",
+    "pickupClose": "19:30:00",
+    "delivery": { "date": "04/10/19", "time": "18:15:00" },
+    "service": { "id": 97, "text": "Guaranteed Exclusive Use" },
+    "declaredValue": 0.0,
+    "declaredValueWaived": false,
+    "foodWarehouseId": 0,
+    "foodWarehouse": "",
+    "stackable": true,
+    "linearFeet": 0,
+    "comments": "",
+    "pricing": { "display": "S", "discount": 0.0, "totalDiscount": 0.0, "totalPrice": 2843.5 },
+    "commodities": [
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 7400,
+          "pieces": 4,
+          "pieceType": "BARREL",
+          "dimensions": { "length": 4, "width": 4, "height": 4 },
+          "description": ""
+        },
+        "rate": 0.0,
+        "charge": 0.0
+      },
+      {
+        "commodity": {
+          "shipClass": 0.0,
+          "weight": 3000,
+          "pieces": 2,
+          "pieceType": "BALE",
+          "dimensions": { "length": 2, "width": 2, "height": 2 },
+          "description": ""
+        },
+        "rate": 0.0,
+        "charge": 0.0
+      }
+    ],
+    "accessorials": [],
+    "info": [],
+    "disclaimers": []
+  }
+]

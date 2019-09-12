@@ -1,0 +1,139 @@
+h1, h2, h3 {
+	margin: 0 0 1rem 0;
+}
+h1, h2, h3 {
+	z-index: 1;
+	position: relative;
+	&.widget-title {
+    margin-top: 0;
+    padding-top: 0;
+	}
+	span {
+		padding-right: .75rem;
+		background-color: $body-bg;
+		&:after {
+			content: '';
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 10px;
+			border-top: 4px solid $red;
+			z-index: -1;
+		}
+		@media print {
+			&:after {
+				display: none;
+			}
+		}
+	}
+}
+.widget .row.title {
+	@include media-breakpoint-down(sm) {
+		h1, h2, h3 {
+			&.widget-title {
+				padding: 0;
+				margin: 1.5rem 0;
+			}
+		}
+	}
+}
+.news-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	> li {
+		list-style: none;
+		margin: .5em 0;
+		padding: 0;
+		a {
+			> div {
+				color: $body-color;
+			}
+			> time {
+				color: $gray-700;
+				font-size: $font-size-sm;
+			}
+			&:active,
+			&:focus,
+			&:hover {
+				text-decoration: none;
+				h4, div, time {
+					text-decoration: none;
+				}
+			}
+		}
+		&:first-of-type {
+			margin-top: 0;
+		}
+	}
+}
+ul.piped {
+	list-style: none;
+	margin: 0 0 1rem 0;
+	padding: 0;
+	> li {
+		display: inline-block;
+		list-style: none;
+		margin: 0;
+		padding-left: .5em;
+		margin-left: .5em;
+		border-left: 1px solid $gray-300;
+		&:first-of-type {
+			border-left: none;
+			margin-left: 0;
+			padding-left: 0;
+		}
+	}
+}
+
+//Use this class to add a vertically centered full width line to the left and right of your text
+.horizon-line {
+  overflow: hidden;
+  text-align: center;
+  font-weight: bold;
+ }
+ .horizon-line:before,
+ .horizon-line:after {
+  background-color: $gray-300;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+ }
+ .horizon-line:before {
+  right: 0.5em;
+  margin-left: -50%;
+ }
+ .horizon-line:after {
+  left: 0.5em;
+  margin-right: -50%;
+ }
+
+ a, .a {
+   color: $blue;
+   cursor: pointer;
+
+   &.a-small {
+      font-size: .75rem;
+   }
+ }
+
+ a:not([tabindex]):visited { 
+  color: $purple-dark;
+}
+
+ .help-block {
+   display: block;
+   margin-top: 0.25rem;
+   font-size: .75rem;
+   color: $gray-600;
+ }
+
+.red-label {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	color: $red;
+	font-weight: bold;
+}

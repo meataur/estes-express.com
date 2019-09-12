@@ -1,0 +1,9 @@
+.alert-container {
+  background-color: pink;
+  height: 0;
+  transition: height 200ms ease-in-out;
+
+  &.show {
+    height: 65px;
+  }
+}

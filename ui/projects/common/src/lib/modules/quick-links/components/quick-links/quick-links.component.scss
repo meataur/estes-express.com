@@ -1,0 +1,55 @@
+@import '~bootstrap/scss/functions';
+@import '../../../../../assets/scss/variables';
+
+.customize,
+.quick-link {
+  display: block;
+  padding: 10px 10px;
+  font-size: 0.875rem;
+
+  .link-icon {
+    color: $black;
+    margin: 0 8px;
+    min-width: 20px;
+    text-align: center;
+  }
+}
+
+.customize {
+  font-size: 0.75rem;
+  text-align: left;
+  text-decoration: underline;
+  border-top: 1px solid $gray-300;
+}
+
+.quick-link {
+  color: $black;
+  border-bottom: 1px solid $gray-300;
+  text-decoration: none;
+
+  &:last-child {
+    border: 0;
+  }
+
+  &--header {
+    font-weight: bold;
+  }
+
+  a {
+    color: $black;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .quick-link-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    i.fas.fa-chevron-right {
+      color: $gray-400;
+      font-size: 0.75rem;
+    }
+  }
+}

@@ -1,0 +1,133 @@
+<mat-card *ngIf="!ltlOnly">
+  <mat-card-header> <mat-card-title>Freight Information</mat-card-title> </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="formGroup">
+      <div class="form-group d-flex flex-wrap">
+        <div class="">
+          <mat-form-field class="d-inline-block mr-3" appearance="outline">
+            <mat-label>Full Value Coverage</mat-label>
+            <input
+              matInput
+              id="declaredValue"
+              formControlName="declaredValue"
+              [required]="formService.hasRequiredField(declaredValue)"
+            />
+            <mat-error *ngIf="declaredValue.invalid">{{
+              formService.getErrorMessage(declaredValue)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="d-flex align-items-center">
+          <div class="d-inline">
+            <mat-checkbox
+              class="mr-2"
+              *ngIf="!ltlOnly && !isRateEstimate"
+              id="declaredValueWaived"
+              formControlName="declaredValueWaived"
+              color="primary"
+              [disabled]="declaredValueWaived.disabled"
+            ></mat-checkbox
+            ><span class="">
+              I would like
+              <a (click)="openAdditionalLibilityCoverageModal()"
+                >additional cargo liability coverage</a
+              >.</span
+            >
+          </div>
+        </div>
+        <p class="help-block">
+          Please note to obtain coverage you MUST write the amount of Full Value Coverage (FVC)
+          requested on your Bill of Lading in addition to your quote number. At the present time,
+          only Volume and Truckload rates presented include cost of FVC already calculated. Cost is
+          added to other service levels at time of billing. Please refer to
+          <a [href]="rulesTariffUrl" target="_blank"
+            >Estes Rules Tariff EXLA 105</a
+          >, Item 350 for complete details.
+        </p>
+      </div>
+      <div *ngIf="!ltlOnly && !isRateEstimate" class="form-row">
+        <div class="form-group col-12">
+          <div>
+            <label
+              >Are pallets stackable?
+              <lib-tooltip
+                [message]="
+                  'Please indicate if your freight is stackable, meaning the piece, pallet or skid can be stacked vertically in a safe and secure manner.'
+                "
+              ></lib-tooltip
+            ></label>
+          </div>
+          <mat-radio-group id="stackable" formControlName="stackable">
+            <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
+            <mat-radio-button color="primary" [value]="true">Yes</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <div *ngIf="!ltlOnly && !isRateEstimate" class="form-row">
+        <div class="form-group col-12">
+          <div>
+            <label
+              >Does freight pick up or deliver at a food warehouse or distribution center?</label
+            >
+          </div>
+          <mat-radio-group id="deliversAtFoodWarehouse" formControlName="deliversAtFoodWarehouse">
+            <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
+            <mat-radio-button color="primary" [value]="true">Yes</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div *ngIf="deliversAtFoodWarehouse.value === true" class="form-group col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Warehouse / Distribution Center</mat-label>
+            <mat-select
+              id="foodWarehouse"
+              formControlName="foodWarehouse"
+              [required]="formService.hasRequiredField(foodWarehouse)"
+            >
+              <mat-option [value]="o.id" *ngFor="let o of (foodWarehouse$ | async)">{{
+                o.name
+              }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="foodWarehouse.invalid">{{
+              formService.getErrorMessage(foodWarehouse)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div *ngIf="showLinearFeet" class="form-row">
+        <div class="col-12"><label>Total Linear Feet needed for this shipment:</label></div>
+        <div class="form-group col-md-3">
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              id="linearFeet"
+              formControlName="linearFeet"
+              [required]="formService.hasRequiredField(linearFeet)"
+            />
+            <mat-error *ngIf="linearFeet.invalid">{{
+              formService.getErrorMessage(linearFeet)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div *ngIf="!ltlOnly && !isRateEstimate" class="form-row">
+        <div class="form-group col-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Comments</mat-label>
+            <textarea
+              matInput
+              rows="10"
+              name="comments"
+              id="comments"
+              formControlName="comments"
+              [required]="formService.hasRequiredField(comments)"
+            ></textarea>
+            <mat-error *ngIf="comments.invalid">{{
+              formService.getErrorMessage(comments)
+            }}</mat-error>
+            <mat-hint>{{ '(' + (100 - comments.value.length) + ') characters left' }}</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

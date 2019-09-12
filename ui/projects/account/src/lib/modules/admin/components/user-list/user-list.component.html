@@ -1,0 +1,126 @@
+<lib-routable-component-header>Search for User</lib-routable-component-header>
+
+<div class="text-right">
+  <button class="btn btn-default mb-1" [routerLink]="['../create-user']">
+    Create New Profile
+  </button>
+</div>
+<mat-card class="mb-3">
+  <mat-card-content>
+    <lib-form-header [color]="'red'">Search Options</lib-form-header>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username" />
+          </mat-form-field>
+        </div>
+      </div>
+      <lib-feedback [message]="feedback"></lib-feedback>
+      <div>
+        <button type="submit" [disabled]="loading" class="btn btn-primary">
+          Submit <i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i></button
+        >
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+<p>Edit a profile by selecting the username below.</p>
+<mat-card class="mb-3 mat-card--table">
+  <mat-card-header>
+    <div class="row">
+      <div class="col-12"><h3>User Profiles for Account: {{loggedInUsername}}</h3> </div>
+    </div>
+    </mat-card-header>
+  <mat-card-content class="p-0">
+    <div class="table-container mat-elevation-z8">
+      <mat-table #table matSort [dataSource]="dataSource" multiTemplateDataRows>
+        <!-- Username Column -->
+        <ng-container matColumnDef="username">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="d-flex">Username</mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-flex">
+            <a (click)="openEditUserAccessModal(element.username)">{{element.username}}</a>
+          </mat-cell>
+        </ng-container>
+        <!-- First Name Column -->
+        <ng-container matColumnDef="firstName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-md-flex">First Name</mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-md-flex">
+            <span>{{element.firstName}}</span>
+          </mat-cell>
+        </ng-container>
+        <!-- Last Name Column -->
+        <ng-container matColumnDef="lastName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-md-flex">Last Name</mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-md-flex">
+              <span>{{element.lastName}}</span>
+          </mat-cell>
+        </ng-container>
+        <!-- Email Address Column -->
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-xl-flex">Email Address</mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-xl-flex">
+            <span>{{element.email}}</span>
+          </mat-cell>
+        </ng-container>
+        <!-- Date Created Column -->
+        <ng-container matColumnDef="createdDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-lg-flex">Date Created</mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-lg-flex">
+            <span>{{element.createdDate | displayDate}}</span>
+          </mat-cell>
+        </ng-container>
+        <!-- Reset Password Column -->
+        <ng-container matColumnDef="resetPassword">
+          <mat-header-cell *matHeaderCellDef class="d-flex">Reset Password</mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-flex">
+            <a (click)="openResetPasswordModal(element.username)">Reset Password</a>
+          </mat-cell>
+        </ng-container>
+        <!-- Status Column -->
+        <!-- <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="d-flex">Status</mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-flex">
+            <span>{{element.status}}</span>
+          </mat-cell>
+        </ng-container> -->
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef class="d-flex"></mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-flex table-cell-actions">
+            <button *ngIf="element.status === statusDisabled" class="btn btn-default w-100" (click)="changeStatus(element, statusEnabled)">Enable</button>
+            <button *ngIf="element.status === statusEnabled" class="btn btn-default w-100" (click)="changeStatus(element, statusDisabled)">Disable</button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let element; columns: displayedColumns;" class="d-flex">
+        </mat-row>
+      </mat-table>
+      <mat-card *ngIf="!loading && dataSource.data.length == 0" class="table-loading">
+        <mat-card-content>
+            <p>No results found.</p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card *ngIf="loading" class="table-loading">
+        <mat-progress-spinner
+          color="primary"
+          mode="indeterminate">
+        </mat-progress-spinner>
+      </mat-card>
+      <mat-paginator [length]="totalElements" [pageSize]="pageSize" [pageSizeOptions]="[25, 50, 75, 100]"></mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>

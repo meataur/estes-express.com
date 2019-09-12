@@ -1,0 +1,20 @@
+export const classTypes = [
+  { value: '50', text: '50' },
+  { value: '55', text: '55' },
+  { value: '60', text: '60' },
+  { value: '65', text: '65' },
+  { value: '70', text: '70' },
+  { value: '77.5', text: '77.5' },
+  { value: '85', text: '85' },
+  { value: '92.5', text: '92.5' },
+  { value: '100', text: '100' },
+  { value: '110', text: '110' },
+  { value: '125', text: '125' },
+  { value: '150', text: '150' },
+  { value: '175', text: '175' },
+  { value: '200', text: '200' },
+  { value: '250', text: '250' },
+  { value: '300', text: '300' },
+  { value: '400', text: '400' },
+  { value: '500', text: '500' }
+];

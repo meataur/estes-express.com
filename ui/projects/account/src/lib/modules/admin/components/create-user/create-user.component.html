@@ -1,0 +1,105 @@
+<lib-routable-component-header>Create New User</lib-routable-component-header>
+<div class="text-right">
+  <button class="btn btn-default mb-1" [routerLink]="['../users']">Search Profiles</button>
+</div>
+<mat-card class="mb-3">
+  <mat-card-content>
+    <p>Fill out the required information below to create a new user profile.</p>
+    <div class="row">
+      <div class="col-md-12">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName" required />
+                <mat-error *ngIf="firstName.invalid">{{
+                  formService.getErrorMessage(firstName)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName" required />
+                <mat-error *ngIf="lastName.invalid">{{
+                  formService.getErrorMessage(lastName)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Email Address</mat-label>
+                <input matInput formControlName="email" placeholder="Email@example.com" required />
+                <mat-error *ngIf="email.invalid">{{
+                  formService.getErrorMessage(email)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Phone Number</mat-label>
+                <input
+                  matInput
+                  formControlName="phone"
+                  placeholder="(888) 888-8888"
+                  [textMask]="{ mask: phoneMask, guide: false }"
+                  required
+                />
+                <mat-error *ngIf="phone.invalid">{{
+                  formService.getErrorMessage(phone)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Username (between 5 and 10 characters)</mat-label>
+                <input matInput formControlName="username" required />
+                <mat-error *ngIf="username.invalid">{{
+                  formService.getErrorMessage(username)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Password (between 5 and 10 characters)</mat-label>
+                <input matInput formControlName="password" required type="password" />
+                <mat-error *ngIf="password.invalid">{{
+                  formService.getErrorMessage(password)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Confirm Password</mat-label>
+                <input
+                  matInput
+                  formControlName="confirmPassword"
+                  required
+                  type="password"
+                />
+                <mat-error *ngIf="confirmPassword.hasError('passwordMatch')">
+                  Passwords do not match.
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <lib-feedback [message]="errorMessage"></lib-feedback>
+          <div>
+            <button type="submit" [disabled]="loading" class="btn btn-primary">
+              Submit <i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i></button
+            >&nbsp;<button [routerLink]="['/profile']" type="button" class="btn btn-default">
+              Return to User Profile
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

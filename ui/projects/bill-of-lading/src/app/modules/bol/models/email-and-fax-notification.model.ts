@@ -1,0 +1,31 @@
+export class EmailAndFaxNotification {
+  fax: string;
+  consigneeEmail: string;
+  otherEmail: string;
+  shipperEmail: string;
+  thirdPartyEmail: string;
+  consigneeEmailBolUpdate: boolean;
+  otherEmailBolUpdate: boolean;
+  shipperEmailBolUpdate: boolean;
+  thirdPartyEmailBolUpdate: boolean;
+  consigneeEmailTrackingUpdate: boolean;
+  otherEmailTrackingUpdate: boolean;
+  shipperEmailTrackingUpdate: boolean;
+  thirdPartyEmailTrackingUpdate: boolean;
+  consigneeEmailPickupNotice: boolean;
+  otherEmailPickupNotice: boolean;
+  shipperEmailPickupNotice: boolean;
+  thirdPartyEmailPickupNotice: boolean;
+  consigneeEmailShippingLabel: boolean;
+  otherEmailShippingLabel: boolean;
+  shipperEmailShippingLabel: boolean;
+  thirdPartyEmailShippingLabel: boolean;
+  consigneeFaxBolUpdate: boolean;
+  otherFaxBolUpdate: boolean;
+  shipperFaxBolUpdate: boolean;
+  thirdPartyFaxBolUpdate: boolean;
+  consigneeFax: string;
+  otherFax: string;
+  shipperFax: string;
+  thirdPartyFax: string;
+}

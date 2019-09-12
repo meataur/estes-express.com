@@ -1,0 +1,527 @@
+[
+  { "code": "AKHAZ", "appID": "LTL", "display": false, "description": "Alaska Hazmat" },
+  { "code": "AKHAZ", "appID": "TC", "display": false, "description": "Alaska Hazmat" },
+  { "code": "AKHAZ", "appID": "VTL", "display": false, "description": "Alaska Hazmat" },
+  { "code": "AKINPU", "appID": "LTL", "display": false, "description": "Alaska Inside Pickup" },
+  { "code": "AKINPU", "appID": "TC", "display": false, "description": "Alaska Inside Pickup" },
+  { "code": "AKINPU", "appID": "VTL", "display": false, "description": "Alaska Inside Pickup" },
+  {
+    "code": "AKRESP",
+    "appID": "LTL",
+    "display": false,
+    "description": "Alaska Residential Pickup"
+  },
+  { "code": "AKRESP", "appID": "TC", "display": false, "description": "Alaska Residential Pickup" },
+  {
+    "code": "AKRESP",
+    "appID": "VTL",
+    "display": false,
+    "description": "Alaska Residential Pickup"
+  },
+  { "code": "AKSCDL", "appID": "LTL", "display": false, "description": "Alaska School Delivery" },
+  { "code": "AKSCDL", "appID": "TC", "display": false, "description": "Alaska School Delivery" },
+  { "code": "AKSCDL", "appID": "VTL", "display": false, "description": "Alaska School Delivery" },
+  {
+    "code": "BLIND",
+    "appID": "LTL",
+    "display": false,
+    "description": "Blind Shipment Coordination"
+  },
+  {
+    "code": "BLIND",
+    "appID": "TC",
+    "display": false,
+    "description": "Blind Shipment Coordination"
+  },
+  {
+    "code": "BLIND",
+    "appID": "VTL",
+    "display": false,
+    "description": "Blind Shipment Coordination"
+  },
+  {
+    "code": "SEADOC",
+    "appID": "LTL",
+    "display": false,
+    "description": "Customs Paperwork for pickup or delivery at Port"
+  },
+  {
+    "code": "SEADOC",
+    "appID": "TC",
+    "display": false,
+    "description": "Customs Paperwork for pickup or delivery at Port"
+  },
+  {
+    "code": "SEADOC",
+    "appID": "VTL",
+    "display": false,
+    "description": "Customs Paperwork for pickup or delivery at Port"
+  },
+  {
+    "code": "SEADL",
+    "appID": "LTL",
+    "display": false,
+    "description": "Delivery to Port on Carrier's Equipment"
+  },
+  {
+    "code": "SEADL",
+    "appID": "TC",
+    "display": false,
+    "description": "Delivery to Port on Carrier's Equipment"
+  },
+  {
+    "code": "SEADL",
+    "appID": "VTL",
+    "display": false,
+    "description": "Delivery to Port on Carrier's Equipment"
+  },
+  {
+    "code": "LADPU",
+    "appID": "LTL",
+    "display": false,
+    "description": "Dock Pickup of Limited Access Shipment"
+  },
+  {
+    "code": "LADPU",
+    "appID": "TC",
+    "display": false,
+    "description": "Dock Pickup of Limited Access Shipment"
+  },
+  {
+    "code": "LADPU",
+    "appID": "VTL",
+    "display": false,
+    "description": "Dock Pickup of Limited Access Shipment"
+  },
+  {
+    "code": "EXHIB",
+    "appID": "TC",
+    "display": false,
+    "description": "Exhibition Charge (Call for charges for Las Vegas, Chicago, or NY)"
+  },
+  {
+    "code": "EXHIB",
+    "appID": "VTL",
+    "display": false,
+    "description": "Exhibition Charge (Call for charges for Las Vegas, Chicago, or NY)"
+  },
+  {
+    "code": "EXHIB",
+    "appID": "LTL",
+    "display": false,
+    "description": "Exhibition Charge (Call for charges for Las Vegas, Chicago, or NY)"
+  },
+  {
+    "code": "FAIRDL",
+    "appID": "LTL",
+    "display": false,
+    "description": "Fair/Amusement Park Delivery"
+  },
+  {
+    "code": "FAIRDL",
+    "appID": "TC",
+    "display": false,
+    "description": "Fair/Amusement Park Delivery"
+  },
+  {
+    "code": "FAIRDL",
+    "appID": "VTL",
+    "display": false,
+    "description": "Fair/Amusement Park Delivery"
+  },
+  {
+    "code": "FAIRPU",
+    "appID": "LTL",
+    "display": false,
+    "description": "Fair/Amusement Park Pickup"
+  },
+  {
+    "code": "FAIRPU",
+    "appID": "TC",
+    "display": false,
+    "description": "Fair/Amusement Park Pickup"
+  },
+  {
+    "code": "FAIRPU",
+    "appID": "VTL",
+    "display": false,
+    "description": "Fair/Amusement Park Pickup"
+  },
+  {
+    "code": "FARMDL",
+    "appID": "LTL",
+    "display": false,
+    "description": "Farm/Country Club/Estate Delivery"
+  },
+  {
+    "code": "FARMDL",
+    "appID": "TC",
+    "display": false,
+    "description": "Farm/Country Club/Estate Delivery"
+  },
+  {
+    "code": "FARMDL",
+    "appID": "VTL",
+    "display": false,
+    "description": "Farm/Country Club/Estate Delivery"
+  },
+  {
+    "code": "FARMPU",
+    "appID": "LTL",
+    "display": false,
+    "description": "Farm/Country Club/Estate Pickup"
+  },
+  {
+    "code": "FARMPU",
+    "appID": "TC",
+    "display": false,
+    "description": "Farm/Country Club/Estate Pickup"
+  },
+  {
+    "code": "FARMPU",
+    "appID": "VTL",
+    "display": false,
+    "description": "Farm/Country Club/Estate Pickup"
+  },
+  { "code": "INB", "appID": "LTL", "display": false, "description": "In-Bond Service" },
+  { "code": "INB", "appID": "TC", "display": false, "description": "In-Bond Service" },
+  { "code": "INB", "appID": "VTL", "display": false, "description": "In-Bond Service" },
+  {
+    "code": "MINIDL",
+    "appID": "LTL",
+    "display": false,
+    "description": "Individual (Mini) Storage Unit Delivery"
+  },
+  {
+    "code": "MINIDL",
+    "appID": "TC",
+    "display": false,
+    "description": "Individual (Mini) Storage Unit Delivery"
+  },
+  {
+    "code": "MINIDL",
+    "appID": "VTL",
+    "display": false,
+    "description": "Individual (Mini) Storage Unit Delivery"
+  },
+  {
+    "code": "MINIPU",
+    "appID": "LTL",
+    "display": false,
+    "description": "Individual (Mini) Storage Unit Pickup"
+  },
+  {
+    "code": "MINIPU",
+    "appID": "TC",
+    "display": false,
+    "description": "Individual (Mini) Storage Unit Pickup"
+  },
+  {
+    "code": "MINIPU",
+    "appID": "VTL",
+    "display": false,
+    "description": "Individual (Mini) Storage Unit Pickup"
+  },
+  {
+    "code": "INSC",
+    "appID": "LTL",
+    "display": false,
+    "description": "Inside Delivery Charge (Collect)"
+  },
+  {
+    "code": "INSC",
+    "appID": "TC",
+    "display": false,
+    "description": "Inside Delivery Charge (Collect)"
+  },
+  {
+    "code": "INSC",
+    "appID": "VTL",
+    "display": false,
+    "description": "Inside Delivery Charge (Collect)"
+  },
+  { "code": "INP", "appID": "LTL", "display": false, "description": "Inside Pickup" },
+  { "code": "INP", "appID": "TC", "display": false, "description": "Inside Pickup" },
+  { "code": "INP", "appID": "VTL", "display": false, "description": "Inside Pickup" },
+  {
+    "code": "LGATEP",
+    "appID": "TC",
+    "display": false,
+    "description": "Lift-Gate Service (Pickup)"
+  },
+  {
+    "code": "LGATEP",
+    "appID": "LTL",
+    "display": false,
+    "description": "Lift-Gate Service (Pickup)"
+  },
+  {
+    "code": "LGATEP",
+    "appID": "VTL",
+    "display": false,
+    "description": "Lift-Gate Service (Pickup)"
+  },
+  { "code": "MINE", "appID": "LTL", "display": false, "description": "Mine Delivery or Pickup" },
+  { "code": "MINE", "appID": "TC", "display": false, "description": "Mine Delivery or Pickup" },
+  { "code": "MINE", "appID": "VTL", "display": false, "description": "Mine Delivery or Pickup" },
+  {
+    "code": "SEAPU",
+    "appID": "LTL",
+    "display": false,
+    "description": "Pickup from Port on Carrier's Equipment"
+  },
+  {
+    "code": "SEAPU",
+    "appID": "TC",
+    "display": false,
+    "description": "Pickup from Port on Carrier's Equipment"
+  },
+  {
+    "code": "SEAPU",
+    "appID": "VTL",
+    "display": false,
+    "description": "Pickup from Port on Carrier's Equipment"
+  },
+  { "code": "WORDL", "appID": "LTL", "display": false, "description": "Place of Worship Delivery" },
+  { "code": "WORDL", "appID": "TC", "display": false, "description": "Place of Worship Delivery" },
+  { "code": "WORDL", "appID": "VTL", "display": false, "description": "Place of Worship Delivery" },
+  { "code": "WORPU", "appID": "LTL", "display": false, "description": "Place of Worship Pickup" },
+  { "code": "WORPU", "appID": "TC", "display": false, "description": "Place of Worship Pickup" },
+  { "code": "WORPU", "appID": "VTL", "display": false, "description": "Place of Worship Pickup" },
+  {
+    "code": "HET",
+    "appID": "TC",
+    "display": false,
+    "description": "Protect From Freezing between US and Canada."
+  },
+  {
+    "code": "HET",
+    "appID": "LTL",
+    "display": false,
+    "description": "Protect From Freezing between US and Canada."
+  },
+  {
+    "code": "HET",
+    "appID": "VTL",
+    "display": false,
+    "description": "Protect From Freezing between US and Canada."
+  },
+  { "code": "SCHLDL", "appID": "LTL", "display": false, "description": "School Delivery" },
+  { "code": "SCHLDL", "appID": "TC", "display": false, "description": "School Delivery" },
+  { "code": "SCHLDL", "appID": "VTL", "display": false, "description": "School Delivery" },
+  { "code": "SCHLPU", "appID": "LTL", "display": false, "description": "School Pickup" },
+  { "code": "SCHLPU", "appID": "TC", "display": false, "description": "School Pickup" },
+  { "code": "SCHLPU", "appID": "VTL", "display": false, "description": "School Pickup" },
+  { "code": "SDS", "appID": "VTL", "display": false, "description": "Secured Divider Service" },
+  {
+    "code": "PRISDL",
+    "appID": "LTL",
+    "display": false,
+    "description": "Secured Locations Delivery - prisons, military bases, airports, etc."
+  },
+  {
+    "code": "PRISDL",
+    "appID": "TC",
+    "display": false,
+    "description": "Secured Locations Delivery - prisons, military bases, airports, etc."
+  },
+  {
+    "code": "PRISDL",
+    "appID": "VTL",
+    "display": false,
+    "description": "Secured Locations Delivery - prisons, military bases, airports, etc."
+  },
+  {
+    "code": "PRISPU",
+    "appID": "LTL",
+    "display": false,
+    "description": "Secured Locations Pickup - prisons, military bases, airports, etc."
+  },
+  {
+    "code": "PRISPU",
+    "appID": "TC",
+    "display": false,
+    "description": "Secured Locations Pickup - prisons, military bases, airports, etc."
+  },
+  {
+    "code": "PRISPU",
+    "appID": "VTL",
+    "display": false,
+    "description": "Secured Locations Pickup - prisons, military bases, airports, etc."
+  },
+  { "code": "SSM", "appID": "LTL", "display": false, "description": "Single Shipment" },
+  { "code": "SSM", "appID": "TC", "display": false, "description": "Single Shipment" },
+  { "code": "SSM", "appID": "VTL", "display": false, "description": "Single Shipment" },
+  { "code": "STO", "appID": "LTL", "display": false, "description": "Stop-off Services" },
+  { "code": "STO", "appID": "TC", "display": false, "description": "Stop-off Services" },
+  { "code": "STO", "appID": "VTL", "display": false, "description": "Stop-off Services" },
+  {
+    "code": "ULFEE",
+    "appID": "LTL",
+    "display": false,
+    "description": "Unloading Services Requested By Consignee"
+  },
+  {
+    "code": "ULFEE",
+    "appID": "TC",
+    "display": false,
+    "description": "Unloading Services Requested By Consignee"
+  },
+  {
+    "code": "ULFEE",
+    "appID": "VTL",
+    "display": false,
+    "description": "Unloading Services Requested By Consignee"
+  },
+  { "code": "AKINS", "appID": "LTL", "display": true, "description": "Alaska Inside Delivery" },
+  { "code": "AKINS", "appID": "TC", "display": true, "description": "Alaska Inside Delivery" },
+  { "code": "AKINS", "appID": "VTL", "display": true, "description": "Alaska Inside Delivery" },
+  { "code": "AKLGAT", "appID": "LTL", "display": true, "description": "Alaska Lift-Gate Service" },
+  { "code": "AKLGAT", "appID": "TC", "display": true, "description": "Alaska Lift-Gate Service" },
+  { "code": "AKLGAT", "appID": "VTL", "display": true, "description": "Alaska Lift-Gate Service" },
+  {
+    "code": "AKPRID",
+    "appID": "LTL",
+    "display": true,
+    "description": "Alaska Prison/Military Delivery"
+  },
+  {
+    "code": "AKPRID",
+    "appID": "TC",
+    "display": true,
+    "description": "Alaska Prison/Military Delivery"
+  },
+  {
+    "code": "AKPRID",
+    "appID": "VTL",
+    "display": true,
+    "description": "Alaska Prison/Military Delivery"
+  },
+  {
+    "code": "AKRES",
+    "appID": "LTL",
+    "display": true,
+    "description": "Alaska Residential Delivery"
+  },
+  { "code": "AKRES", "appID": "TC", "display": true, "description": "Alaska Residential Delivery" },
+  {
+    "code": "AKRES",
+    "appID": "VTL",
+    "display": true,
+    "description": "Alaska Residential Delivery"
+  },
+  { "code": "APT", "appID": "LTL", "display": true, "description": "Appointment Request" },
+  { "code": "APT", "appID": "TC", "display": true, "description": "Appointment Request" },
+  { "code": "APT", "appID": "VTL", "display": true, "description": "Appointment Request" },
+  { "code": "CONST", "appID": "LTL", "display": true, "description": "Construction Site Delivery" },
+  { "code": "CONST", "appID": "TC", "display": true, "description": "Construction Site Delivery" },
+  { "code": "CONST", "appID": "VTL", "display": true, "description": "Construction Site Delivery" },
+  { "code": "HAZ", "appID": "LTL", "display": true, "description": "Hazardous Materials" },
+  { "code": "HAZ", "appID": "TC", "display": true, "description": "Hazardous Materials" },
+  { "code": "HAZ", "appID": "VTL", "display": true, "description": "Hazardous Materials" },
+  { "code": "INS", "appID": "LTL", "display": true, "description": "Inside Delivery" },
+  { "code": "INS", "appID": "TC", "display": true, "description": "Inside Delivery" },
+  { "code": "INS", "appID": "VTL", "display": true, "description": "Inside Delivery" },
+  {
+    "code": "LGATE",
+    "appID": "TC",
+    "display": true,
+    "description": "Lift-Gate Service (Delivery)"
+  },
+  {
+    "code": "LGATE",
+    "appID": "LTL",
+    "display": true,
+    "description": "Lift-Gate Service (Delivery)"
+  },
+  {
+    "code": "LGATE",
+    "appID": "VTL",
+    "display": true,
+    "description": "Lift-Gate Service (Delivery)"
+  },
+  { "code": "NCM", "appID": "LTL", "display": true, "description": "Notify Request" },
+  { "code": "NCM", "appID": "TC", "display": true, "description": "Notify Request" },
+  { "code": "NCM", "appID": "VTL", "display": true, "description": "Notify Request" },
+  { "code": "LONG12", "appID": "LTL", "display": true, "description": "Overlength (8.01'-11.99')" },
+  { "code": "LONG12", "appID": "TC", "display": true, "description": "Overlength (8.01'-11.99')" },
+  { "code": "LONG12", "appID": "VTL", "display": true, "description": "Overlength (8.01'-11.99')" },
+  {
+    "code": "LONG20",
+    "appID": "LTL",
+    "display": true,
+    "description": "Overlength Freight (12.00' to 19.99')"
+  },
+  {
+    "code": "LONG20",
+    "appID": "TC",
+    "display": true,
+    "description": "Overlength Freight (12.00' to 19.99')"
+  },
+  {
+    "code": "LONG20",
+    "appID": "VTL",
+    "display": true,
+    "description": "Overlength Freight (12.00' to 19.99')"
+  },
+  {
+    "code": "LONG28",
+    "appID": "LTL",
+    "display": true,
+    "description": "Overlength Freight (20.00' to 27.99')"
+  },
+  {
+    "code": "LONG28",
+    "appID": "TC",
+    "display": true,
+    "description": "Overlength Freight (20.00' to 27.99')"
+  },
+  {
+    "code": "LONG28",
+    "appID": "VTL",
+    "display": true,
+    "description": "Overlength Freight (20.00' to 27.99')"
+  },
+  {
+    "code": "LONG53",
+    "appID": "LTL",
+    "display": true,
+    "description": "Overlength Freight (28 feet or greater)"
+  },
+  {
+    "code": "LONG53",
+    "appID": "TC",
+    "display": true,
+    "description": "Overlength Freight (28 feet or greater)"
+  },
+  {
+    "code": "LONG53",
+    "appID": "VTL",
+    "display": true,
+    "description": "Overlength Freight (28 feet or greater)"
+  },
+  {
+    "code": "FRZ",
+    "appID": "TC",
+    "display": true,
+    "description": "Protect from Freezing (US only)"
+  },
+  {
+    "code": "FRZ",
+    "appID": "LTL",
+    "display": true,
+    "description": "Protect from Freezing (US only)"
+  },
+  {
+    "code": "FRZ",
+    "appID": "VTL",
+    "display": true,
+    "description": "Protect from Freezing (US only)"
+  },
+  { "code": "HD", "appID": "LTL", "display": true, "description": "Residential Delivery" },
+  { "code": "HD", "appID": "TC", "display": true, "description": "Residential Delivery" },
+  { "code": "HD", "appID": "VTL", "display": true, "description": "Residential Delivery" },
+  { "code": "HPU", "appID": "LTL", "display": true, "description": "Residential Pickup Charge" },
+  { "code": "HPU", "appID": "TC", "display": true, "description": "Residential Pickup Charge" },
+  { "code": "HPU", "appID": "VTL", "display": true, "description": "Residential Pickup Charge" }
+]

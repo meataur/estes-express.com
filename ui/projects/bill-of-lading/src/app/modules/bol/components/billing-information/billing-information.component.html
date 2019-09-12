@@ -1,0 +1,126 @@
+<mat-card>
+  <mat-card-header><mat-card-title>Billing Information</mat-card-title></mat-card-header>
+  <mat-card-content [formGroup]="formGroup">
+    <!-- Form valid: {{ formGroup.valid }}<br />
+    errors: {{ getFormValidationErrors(formGroup) | json }}<br><br>
+
+    paymentType valid: {{ paymentType.valid }}<br />
+    codRemitToFee valid: {{ codRemitToFee.valid }}<br />
+    amount valid: {{ amount.valid }}<br />
+    status: {{ codRemitToInfo.status }}
+    valid: {{ codRemitToInfo.valid }} -->
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Bill To</mat-label>
+          <mat-select focus="true" name="billTo" id="billTo" formControlName="billTo" required>
+            <mat-option [value]="o.value" *ngFor="let o of billToOptions">{{ o.text }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="billTo.invalid">{{ formService.getErrorMessage(billTo) }}</mat-error>
+        </mat-form-field>
+        <!-- Value: {{ billTo.value }}<br />
+        Valid: {{ billTo.valid }}<br />
+        Status: {{ billTo.status }}<br />
+        Errors: {{ billTo.errors | json }} -->
+      </div>
+      <div class="form-group col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Terms</mat-label>
+          <mat-select focus="true" name="fee" id="fee" formControlName="fee" required>
+            <mat-option [value]="o.value" *ngFor="let o of feeOptions">{{ o.text }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="fee.invalid">{{ formService.getErrorMessage(fee) }}</mat-error>
+        </mat-form-field>
+        <!-- Value: {{ fee.value }}<br />
+        Valid: {{ fee.valid }}<br />
+        Status: {{ fee.status }}<br />
+        Errors: {{ fee.errors | json }} -->
+      </div>
+    </div>
+    <div class="form-row">
+      <!-- Valid: {{ billingAddressInfo.valid }}<br />
+      Status: {{ billingAddressInfo.status }}<br />
+      Errors: {{ billingAddressInfo.errors | json }} -->
+      <div class="col-md-6">
+        <app-address-details
+          [hidden]="billingAddressInfo.disabled"
+          [headerTitle]="'Bill To Info'"
+          [formGroupRef]="billingAddressInfo"
+          [myestesAddressSource]="true"
+          [addressBookSource]="true"
+        ></app-address-details>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-12">
+        <mat-slide-toggle color="primary" formControlName="codRemitTo">
+          COD Remit-To
+        </mat-slide-toggle>
+      </div>
+    </div>
+    <div class="mt-3" [hidden]="codRemitTo.value === false">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Payment Type</mat-label>
+            <mat-select
+              focus="true"
+              name="paymentType"
+              id="paymentType"
+              formControlName="paymentType"
+              [required]="formService.hasRequiredField(paymentType)"
+            >
+              <mat-option [value]="o.value" *ngFor="let o of paymentTypes">{{ o.text }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="paymentType.invalid">{{
+              formService.getErrorMessage(paymentType)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Fee to be paid by</mat-label>
+            <mat-select
+              focus="true"
+              name="codRemitToFee"
+              id="codRemitToFee"
+              formControlName="codRemitToFee"
+              [required]="formService.hasRequiredField(codRemitToFee)"
+            >
+              <mat-option [value]="o.value" *ngFor="let o of codRemitToFeeOptions">{{
+                o.text
+              }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="codRemitToFee.invalid">{{
+              formService.getErrorMessage(codRemitToFee)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Amount to be paid</mat-label>
+            <input
+              matInput
+              formControlName="amount"
+              [required]="formService.hasRequiredField(amount)"
+            />
+            <mat-error *ngIf="amount.invalid">{{ formService.getErrorMessage(amount) }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <app-address-details
+            [formGroupRef]="codRemitToInfo"
+            [headerTitle]="'Remit To Info'"
+            [myestesAddressSource]="true"
+            [shipperAddressSource]="true"
+            [consigneeAddressSource]="true"
+            [shipperObs]="shipperConsigneeFormService.shipperInfo$"
+            [consigneeObs]="shipperConsigneeFormService.consigneeInfo$"
+          ></app-address-details>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

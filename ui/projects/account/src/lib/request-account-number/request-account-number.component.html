@@ -1,0 +1,162 @@
+<h1><span>Request Account Number</span></h1>
+<p>
+  My Estes uses your company's account number to determine what information you can access. Fill out
+  this form, and we will send your account number to you.
+</p>
+<mat-card>
+  <mat-card-content>
+    <form name="accountForm" [formGroup]="formGroup" (ngSubmit)="onSubmit()" novalidate>
+      <div *ngIf="!feedback">
+        <h4 class="mb-3">Your Information</h4>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Name"
+                required
+                id="inputUserName"
+                name="inputUserName"
+                formControlName="name"
+              />
+              <mat-error *ngIf="name.invalid">{{ formService.getErrorMessage(name) }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6 form-group--tooltip">
+            <mat-form-field appearance="outline" class="form-group--tooltip__form-field">
+              <mat-label>Company Name</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Company Name"
+                required
+                id="inputCompany"
+                name="inputCompany"
+                formControlName="company"
+              />
+              <mat-error *ngIf="company.invalid">{{
+                formService.getErrorMessage(company)
+              }}</mat-error>
+            </mat-form-field>
+            <lib-tooltip
+              class="form-group--tooltip__tooltip"
+              [message]="
+                'The name of the company you work for.  In some cases, this will not be the same as the name of the company whose account number you are requesting.'
+              "
+            ></lib-tooltip>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Email Address</mat-label>
+              <input
+                matInput
+                type="email"
+                email="true"
+                placeholder="Email@example.com"
+                required
+                id="inputEmail"
+                name="inputEmail"
+                formControlName="email"
+              />
+              <mat-error *ngIf="email.invalid">{{ formService.getErrorMessage(email) }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Phone Number</mat-label>
+              <input
+                placeholder="(888) 888-8888"
+                matInput
+                required
+                id="inputPhone"
+                name="inputPhone"
+                [textMask]="{ mask: phoneMask, guide: false }"
+                formControlName="phone"
+              />
+              <mat-error *ngIf="phone.invalid">{{ formService.getErrorMessage(phone) }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <h4>Requested Company Information</h4>
+        <p>
+          Please provide the company information for the account(s) you are requesting. If you need
+          to see information for more than one location, please include those additional addresses
+          below.
+        </p>
+        <div class="row">
+          <div class="form-group col-md-6 form-group--tooltip">
+            <mat-form-field appearance="outline" class="form-group--tooltip__form-field">
+              <mat-label>Requested Company Name</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Requested Company Name"
+                required
+                id="inputRequestedCompany"
+                name="inputRequestedCompany"
+                formControlName="parentCompany"
+              />
+              <mat-error *ngIf="parentCompany.invalid">{{
+                formService.getErrorMessage(parentCompany)
+              }}</mat-error>
+            </mat-form-field>
+            <lib-tooltip
+              class="form-group--tooltip__tooltip"
+              [message]="'The name of the company whose account number you are requesting.'"
+            ></lib-tooltip>
+          </div>
+          <div class="form-group col-12 form-group--tooltip">
+            <mat-form-field appearance="outline" class="form-group--tooltip__form-field">
+              <mat-label
+                >Location Address(es) (one per line; include city, state and ZIP)</mat-label
+              >
+              <textarea
+                class="form-control"
+                matInput
+                rows="4"
+                name="inputAddresses"
+                [required]="true"
+                id="inputAddresses"
+                formControlName="addresses"
+              >
+              </textarea>
+              <mat-error *ngIf="addresses.invalid"
+                >{{ formService.getErrorMessage(addresses) }}
+              </mat-error>
+            </mat-form-field>
+            <lib-tooltip
+              class="form-group--tooltip__tooltip"
+              [message]="
+                'The street address of the requested company helps us identify the proper account number in our system.'
+              "
+            ></lib-tooltip>
+          </div>
+        </div>
+        <lib-feedback [message]="errorMessages"></lib-feedback>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <button type="submit" class="btn btn-primary">
+            Submit<i class="fas fa-sync-alt fa-spin ml-2" *ngIf="loading"></i>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="feedback">
+        <lib-feedback [message]="feedback"></lib-feedback>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <button type="button" class="btn btn-primary" (click)="resetForm()">
+            Request another Account Number
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+<div id="request-account-number-component" class="account request-account-number card"></div>
+<!-- /#request-account-number-component -->

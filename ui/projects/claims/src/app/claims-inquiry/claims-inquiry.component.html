@@ -1,0 +1,281 @@
+<p class="mt-3">
+  Review the status of your claims. Search by date range, PRO number, reference number, or claims number.
+</p>
+<mat-card *ngIf="!loading" class="p-3">
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <div class="row" *ngIf="showAccountDropdown">
+          <div class="col-12">
+            <lib-account-select
+            class="form-row"
+            [fc]="accountNumber"
+            [label]="'Account Number'"
+            ></lib-account-select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <mat-form-field appearance="outline">
+              <mat-label>Search By</mat-label>
+              <mat-select
+                focus="true"
+                required
+                (selectionChange)="updateFormValidity()"
+                name="searchBy"
+                id="searchBy"
+                formControlName="searchBy">
+                <mat-option
+                  [value]="option"
+                  *ngFor="let option of searchByOptions">{{ option }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="searchBy.invalid">{{
+                formService.getErrorMessage(searchBy)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div *ngIf="searchBy.value == 'Date Range'" class="row">
+          <div class="col-12">
+            <mat-form-field appearance="outline">
+              <mat-label>Filed Date Range</mat-label>
+              <mat-select
+                focus="true"
+                name="filedDateRange"
+                id="filedDateRange"
+                formControlName="filedDateRange">
+                <mat-option value="30">Last 30 Days</mat-option>
+                <mat-option value="60">Last 60 Days</mat-option>
+                <mat-option value="90">Last 90 Days</mat-option>
+                <mat-option value="Custom">Custom</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div *ngIf="searchBy.value == 'Date Range'" class="row">
+          <div class="col-12">
+            <mat-form-field appearance="outline">
+              <mat-label>Status</mat-label>
+              <mat-select
+                focus="true"
+                required="searchBy.value == 'Date Range'"
+                name="status"
+                id="status"
+                formControlName="status">
+                <mat-option
+                  [value]="option"
+                  *ngFor="let option of statusOptions">{{ option }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="status.invalid">{{
+                formService.getErrorMessage(status)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div *ngIf="searchBy.value == 'Date Range' && filedDateRange.value == 'Custom'" class="row">
+          <div class="col-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Start Date</mat-label>
+              <input
+                matInput
+                required="searchBy.value == 'Date Range' && filedDateRange.value == 'Custom'"
+                [matDatepicker]="startDatePicker"
+                formControlName="startDate"
+                placeholder="MM/DD/YYYY"
+                [max]="endDate.value || today"
+                [min]="minDate"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="startDatePicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #startDatePicker></mat-datepicker>
+              <mat-error *ngIf="startDate.invalid">{{
+                formService.getErrorMessage(startDate)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field appearance="outline">
+              <mat-label>End Date</mat-label>
+              <input
+                matInput
+                required="searchBy.value == 'Date Range' && filedDateRange.value == 'Custom'"
+                [matDatepicker]="endDatePicker"
+                formControlName="endDate"
+                placeholder="MM/DD/YYYY"
+                [max]="today"
+                [min]="minDate"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="endDatePicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #endDatePicker></mat-datepicker>
+              <mat-error *ngIf="endDate.invalid">{{
+                formService.getErrorMessage(endDate)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div *ngIf="searchBy.value != 'Date Range'" class="row">
+          <div class="col-12">
+            <mat-form-field appearance="outline">
+              <mat-label>{{searchBy.value}}s (one per line)</mat-label>
+              <textarea
+                matInput
+                rows="10"
+                name="numbers"
+                id="numbers"
+                formControlName="numbers"
+                required="searchBy.value != 'Date Range'"
+              ></textarea>
+              <mat-error *ngIf="numbers.invalid">{{
+                formService.getErrorMessage(numbers)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row pt-1" *ngIf="errorMessages">
+          <div class="col-12">
+            <lib-feedback *ngIf="errorMessages" [message]="errorMessages"></lib-feedback>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col pb-3">
+            <button class="btn btn-primary" type="submit"><span>Look Up</span><i class="fas fa-sync-alt fa-spin ml-2" *ngIf="loadingClaims"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="p-3 quick-views">
+        <h5 class="mb-3">Quick Views:</h5>
+
+        <div class="mb-3"><a (click)="searchClaimsDateRange(30, 'Paid')">Paid Claims for the Last 30 Days</a></div>
+        <div class="mb-3"><a (click)="searchClaimsDateRange(30, 'Declined')">Declined Claims for the Last 30 Days</a></div>
+        <div class="mb-3"><a (click)="searchClaimsDateRange(30, 'Open')">Open Claims for the Last 30 Days</a></div>
+        <div class="mb-3"><a (click)="searchClaimsDateRange(30, 'All')">All Claims for the Last 30 Days</a></div>
+      </div>
+    </div>
+  </div>
+</mat-card>
+<mat-card class="mat-card--table" [hidden]="!(claimResults && claimResults.data && claimResults.data.length > 0)">
+  <mat-card-header class="row">
+    <div class="col-12 col-lg-4 pt-1 pb-1 mat-card-title">Claims Results</div>
+    <div class="col-12 col-md-6 col-lg-4 pt-1 pb-1">
+      <input matInput class="table-search mr-3" (keyup)="applyFilter($event.target.value)" placeholder="&#xf002;">
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 pt-1 pb-1">
+        <button class="btn btn-default w-100" (click)="openEmailDialog()"><i class="fas fa-envelope"></i> Email Options</button>
+      </div>
+  </mat-card-header>
+  <mat-card-content class="p-0">
+    <div class="table-container mat-elevation-z8">
+      <mat-table #table matSort [dataSource]="claimResults" multiTemplateDataRows>
+        <!-- Claim Number Column -->
+        <ng-container matColumnDef="claimNumber">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Claim Number </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="element.claimNumber">{{element.claimNumber}}</span>
+          </mat-cell>
+        </ng-container>
+        <!-- PRO Number Column -->
+        <ng-container matColumnDef="proNumber">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> PRO Number </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="element.proNumber">{{element.proNumber}}</span>
+          </mat-cell>
+        </ng-container>
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="element.status">{{element.status}}</span>
+          </mat-cell>
+        </ng-container>
+        <!-- Date Filed Column -->
+        <ng-container matColumnDef="dateFiled">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Date Filed </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="element.dateFiled" class="text-nowrap">{{element.dateFiled | displayDate}}</span>
+          </mat-cell>
+        </ng-container>
+        <!-- Ref Number Column -->
+        <ng-container matColumnDef="refNumber">
+          <mat-header-cell *matHeaderCellDef class="d-none d-lg-flex" mat-sort-header> Ref. Number </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-lg-flex">
+            <span *ngIf="element.refNumber">{{element.refNumber}}</span>
+          </mat-cell>
+        </ng-container>
+        <!-- Claim Amount Column -->
+        <ng-container matColumnDef="claimAmount">
+          <mat-header-cell *matHeaderCellDef class="d-none d-md-flex" mat-sort-header> Claim Amount </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-md-flex">
+            <span *ngIf="element.claimAmount">{{element.claimAmount | currency }}</span>
+          </mat-cell>
+        </ng-container>
+        <!-- Remit to Amount Column -->
+        <ng-container matColumnDef="remitTo">
+          <mat-header-cell *matHeaderCellDef class="d-none d-lg-flex" mat-sort-header> Remit to </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-lg-flex">
+            <span *ngIf="element.remitTo">{{element.remitTo}}</span>
+          </mat-cell>
+        </ng-container>
+        <!-- Expand Column -->
+        <ng-container matColumnDef="expand">
+          <mat-header-cell *matHeaderCellDef class="expand-cell">
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="expand-cell">
+            <div *ngIf="element.status == 'Paid'" (click)="element.expanded = !element.expanded">
+              <i *ngIf="element.expanded" class="material-icons">
+                  expand_less
+              </i>
+              <i *ngIf="!element.expanded" class="material-icons">
+                  expand_more
+              </i>
+            </div>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="expandedDetail">
+          <mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length" class="p-0">
+            <div [@detailExpand]="element.expanded ? 'expanded' : 'collapsed'" class="w-100">
+              <table class="table table-bordered table-striped table-hover table-sm detail">
+                <tbody>
+                  <tr>
+                    <td><label>Claimant</label></td>
+                    <td><span *ngIf="element.claiment">{{element.claiment}}</span></td>
+                  </tr>
+                  <tr>
+                    <td><label>Remit to</label></td>
+                    <td><span *ngIf="element.remitTo">{{element.remitTo}}</span></td>
+                  </tr>
+                  <tr>
+                    <td><label>Check Number</label></td>
+                    <td><span *ngIf="element.checkNumber">{{element.checkNumber}}</span></td>
+                  </tr>
+                  <tr>
+                    <td><label>Check Date</label></td>
+                    <td><span *ngIf="element.checkDate">{{element.checkDate | displayDate}}</span></td>
+                  </tr>
+                  <tr>
+                    <td><label>Check Amount</label></td>
+                    <td><span *ngIf="element.checkAmount">{{element.checkAmount}}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let element; columns: displayedColumns;" [ngClass]="{ 'expanded-background': element.expanded }" class="main-row d-flex">
+        </mat-row>
+        <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row p-0"></mat-row>
+
+      </mat-table>
+    </div>
+    <mat-paginator *ngIf="claimResults && claimResults.data" [length]="claimResults.data.length" [pageSize]="25" [pageSizeOptions]="[25, 50, 75, 100]"></mat-paginator>
+  </mat-card-content>
+</mat-card>
+<br>
+

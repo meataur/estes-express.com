@@ -1,0 +1,42 @@
+<div id="rateQuoteFormContainer" [hidden]="step !== 1">
+  <app-rate-quote-intro></app-rate-quote-intro>
+  <div #rateQuoteType><app-rate-quote-type [quote]="rateQuote"></app-rate-quote-type></div>
+  <div #requestor><app-requestor [quote]="rateQuote"></app-requestor></div>
+  <div #pickupDetails><app-pickup-details [quote]="rateQuote"></app-pickup-details></div>
+  <div #routingInfo><app-routing-information [quote]="rateQuote"></app-routing-information></div>
+  <div #commmodityList><app-commodity-list [quote]="rateQuote"></app-commodity-list></div>
+  <div #freightInfo><app-freight-information [quote]="rateQuote"></app-freight-information></div>
+  <div #accessorials><app-accessorials [quote]="rateQuote"></app-accessorials></div>
+  <lib-feedback [message]="feedback"></lib-feedback>
+  <div class="mt-3">
+    <button id="rateQuoteSubmitButton" class="btn btn-primary" type="submit" (click)="onSubmit()" [disabled]="loadingStep1">
+      Submit Request<i class="fas fa-sync-alt fa-spin ml-2" *ngIf="loadingStep1"></i>
+    </button>
+  </div>
+</div>
+<ng-container *ngIf="step === 2">
+  <div class="row d-flex align-items-baseline mt-3">
+    <div class="col flex-grow-1 flex-wrap order-last order-sm-first">
+      <p class="mt-3">
+        Select “Get Quote #” to view additional details and the quote number for a particular
+        service level. Please note that selecting this option automatically saves the quote to your
+        Rate Quote History so you can access it later.
+      </p>
+      <p>
+        If you are interested in booking any selection faster than by 5 p.m. on the standard transit
+        date, please contact the Estes Solution Center (<a href="mailto:solutions@estes-express.com"
+          >solutions@estes-express.com</a
+        >
+        or 1-800-645-3952) to receive personal assistance and confirm availability.
+      </p>
+    </div>
+    <app-need-service-help
+      class="d-flex justify-content-start justify-content-sm-end col-12 col-sm-auto mb-3 order-first order-sm-last"
+    ></app-need-service-help>
+  </div>
+  <app-rate-request-results
+    (reviseQuote)="reviseQuote()"
+    (startNewQuote)="startNewQuote()"
+    [quotes]="ratesQuotes"
+  ></app-rate-request-results>
+</ng-container>

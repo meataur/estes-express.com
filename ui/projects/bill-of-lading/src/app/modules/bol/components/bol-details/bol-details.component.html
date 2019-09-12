@@ -1,0 +1,94 @@
+<mat-card>
+  <mat-card-header> <mat-card-title>BOL Details</mat-card-title> </mat-card-header>
+  <mat-card-content>
+    <!-- autoAssignPro valid: {{ autoAssignPro.valid }}<br />
+    reservedPro valid: {{ reservedPro.valid }}<br />
+    reservedPro errors: {{ reservedPro.errors | json }}<br /> -->
+    <!-- masterBol valid: {{ masterBol.valid }}<br />
+    masterBolNumber valid: {{ masterBolNumber.valid }}<br /> -->
+    <form [formGroup]="formGroup">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>BOL Reference #</mat-label>
+            <input matInput formControlName="bolReferenceNumber" required />
+            <mat-error *ngIf="bolReferenceNumber.invalid">{{
+              formService.getErrorMessage(bolReferenceNumber)
+            }}</mat-error>
+          </mat-form-field>
+          <p>
+            *Your company’s unique number for the shipment. This field accepts numeric or
+            alpha-numeric data, 25 characters or less. If you do not have a number, simply list N/A.
+          </p>
+        </div>
+        <div class="form-group col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>BOL Date</mat-label>
+            <input
+              matInput
+              placeholder="MM/DD/YYYY"
+              [matDatepicker]="bolDatePicker"
+              formControlName="bolDate"
+              [min]="today"
+            />
+            <mat-datepicker-toggle matSuffix [for]="bolDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #bolDatePicker></mat-datepicker>
+            <mat-error *ngIf="bolDate.invalid">{{
+              formService.getErrorMessage(bolDate)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-lg-6 d-flex align-items-center">
+          <mat-slide-toggle color="primary" formControlName="autoAssignPro">
+            Auto-assign PRO Number
+          </mat-slide-toggle>
+          <lib-tooltip
+            [message]="
+              'If you do not already have a PRO number, turn on this toggle to generate one with your Bill of Lading.'
+            "
+          ></lib-tooltip>
+        </div>
+        <div *ngIf="autoAssignPro.value === false" class="form-group col-lg-6 form-group--tooltip">
+          <mat-form-field appearance="outline" class="form-group--tooltip__form-field">
+            <mat-label>Enter Reserved PRO Number</mat-label>
+            <input
+              matInput
+              formControlName="reservedPro"
+              [required]="formService.hasRequiredField(reservedPro)"
+              [textMask]="{ mask: proNumberMask, guide: false }"
+            />
+            <mat-error *ngIf="reservedPro.invalid">{{
+              formService.getErrorMessage(reservedPro)
+            }}</mat-error>
+          </mat-form-field>
+          <lib-tooltip
+            class="form-group--tooltip__tooltip"
+            [message]="
+              'If you already have an Estes PRO number for this shipment, enter it here. If you have questions on how to obtain PROs, please call your local terminal.'
+            "
+          ></lib-tooltip>
+        </div>
+      </div>
+      <div [hidden]="vicsBol === false" class="form-row">
+        <div class="form-group col-md-6 d-flex align-items-center">
+          <mat-slide-toggle color="primary" formControlName="masterBol">
+            Master BOL
+          </mat-slide-toggle>
+        </div>
+        <div class="form-group col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Master BOL #</mat-label>
+            <input
+              matInput
+              formControlName="masterBolNumber"
+              [required]="masterBolNumber.errors && masterBolNumber.errors['required'] === true"
+            />
+            <mat-error *ngIf="masterBolNumber.invalid">{{
+              formService.getErrorMessage(masterBolNumber)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

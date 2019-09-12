@@ -1,0 +1,13 @@
+.checkbox-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+.pickup-modal-tooltip {
+  height: 2.2rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.pickup-date-padding {
+  padding-top: 1.8rem;
+}

@@ -1,0 +1,367 @@
+<p class="pt-3">Customize your report by selecting the options below. Once saved, your report will appear in the "My Reports" tab, where you can modify or cancel it at any time.</p>
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <mat-card class="mat-card--table">
+    <mat-card-header class="d-flex justify-content-between">
+      <mat-card-title>
+        Report Title and Type
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="m-0">
+      <div *ngIf="!editMode" class="row pb-3">
+        <div class="col-12">
+          <label>Select a Report Type*</label>
+        </div>
+        <div class="col-12">
+          <mat-radio-group *ngIf="reportTypes && reportTypes.length > 0" class="radio-group d-flex flex-column" formControlName="reportId">
+            <div *ngFor="let reportType of reportTypes; let i = index">
+              <mat-radio-button class="pt-2" color="primary" [value]="reportType.reportId" [checked]="reportType.reportId === reportId.value">{{reportType.reportName | titlecase}}
+              </mat-radio-button>
+              <!-- <a class="ml-3" (click)="openDataDetailsModal(reportType)">View Data Details</a> -->
+              <lib-tooltip
+              role="button"
+              [attr.aria-roledescription]="'Clicking this button will open a detailed description for the option: ' + reportType.reportName"
+              class="pickup-modal-tooltip"
+              (click)="$event.stopPropagation(); openDataDetailsModal(reportType)"
+            ></lib-tooltip>
+            </div>
+          </mat-radio-group>
+          <mat-error *ngIf="reportId.invalid">{{
+            formService.getErrorMessage(reportId)
+          }}</mat-error>
+        </div>
+      </div>
+      <div *ngIf="editMode" class="row pb-3">
+        <div class="col-12">
+          Report Type:
+        </div>
+        <div *ngFor="let reportType of reportTypes; let i = index" class="col-12">
+          <span [hidden]="reportId.value !== reportType.reportId">{{reportType.reportName}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <lib-account-select
+          class="form-row"
+          [fc]="accountNumber"
+          [label]="'Account Number'"
+          ></lib-account-select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Report Name</mat-label>
+            <textarea matInput id="reportName" name="reportName" formControlName="reportName" required></textarea>
+            <mat-error *ngIf="reportName.invalid">{{
+              formService.getErrorMessage(reportName)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Your Role</mat-label>
+            <mat-select
+              focus="true"
+              name="userRole"
+              id="userRole"
+              formControlName="userRole"
+              required
+            >
+              <mat-option [value]="'S'">Shipper</mat-option>
+              <mat-option [value]="'C'">Consignee</mat-option>
+              <mat-option [value]="'T'">Third Party</mat-option>
+              <mat-option [value]="'A'">All</mat-option>
+            </mat-select>
+            <mat-error *ngIf="userRole.invalid">{{
+              formService.getErrorMessage(userRole)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- TODO Account Number -->
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Date Type</mat-label>
+            <mat-select
+              focus="true"
+              name="dateType"
+              id="dateType"
+              formControlName="dateType"
+              required
+            >
+              <mat-option [value]="'D'">Delivery</mat-option>
+              <mat-option [value]="'P'">Pickup</mat-option>
+            </mat-select>
+            <mat-error *ngIf="dateType.invalid">{{
+              formService.getErrorMessage(dateType)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row" *ngIf="reportId.value === 3">
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Claim Status</mat-label>
+            <mat-select
+              focus="true"
+              name="reportStatus"
+              id="reportStatus"
+              formControlName="reportStatus"
+              required
+            >
+              <mat-option [value]="'A'">All</mat-option>
+              <mat-option [value]="'P'">Paid</mat-option>
+              <mat-option [value]="'D'">Declined</mat-option>
+              <mat-option [value]="'O'">Open</mat-option>
+
+            </mat-select>
+            <mat-error *ngIf="reportStatus.invalid">{{
+              formService.getErrorMessage(reportStatus)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-header>
+      <mat-card-title>
+        Report Details
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row pt-3">
+        <div class="col-12 d-flex">
+          <span class="pt-4 pr-2">Send report on a</span>
+          <mat-form-field class="w-25" appearance="outline">
+            <mat-select
+              focus="true"
+              name="frequency"
+              id="frequency"
+              formControlName="frequency"
+              (selectionChange)="onFrequencyChange()"
+              required
+            >
+              <mat-option [value]="'D'">Daily</mat-option>
+              <mat-option [value]="'W'">Weekly</mat-option>
+              <mat-option [value]="'M'">Monthly</mat-option>
+
+            </mat-select>
+            <mat-error *ngIf="frequency.invalid">{{
+              formService.getErrorMessage(frequency)
+            }}</mat-error>
+          </mat-form-field>
+          <span class="pt-4 pl-2">basis.</span>
+        </div>
+      </div>
+      <div class="row pt-3" *ngIf="frequency.value === 'D'">
+        <div class="col-12 d-flex">
+          <span class="pt-4 pr-2">Send report showing data for the previous</span>
+          <mat-form-field class="w-25" appearance="outline">
+            <mat-select
+              focus="true"
+              name="runOnPrevious"
+              id="runOnPrevious"
+              formControlName="runOnPrevious"
+            >
+              <mat-option *ngFor="let n of [].constructor(31); let i = index" value="{{i+1}}">{{i+1}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="runOnPrevious.invalid">{{
+              formService.getErrorMessage(runOnPrevious)
+            }}</mat-error>
+          </mat-form-field>
+          <span class="pt-4 pl-2">day(s).</span>
+        </div>
+      </div>
+      <div class="row pt-3" *ngIf="frequency.value === 'W'">
+        <div class="col-12 d-flex">
+          <span class="pt-4 pr-2">Send report every</span>
+          <mat-form-field class="w-25" appearance="outline">
+            <mat-select
+              focus="true"
+              name="dayToRun"
+              id="dayToRun"
+              formControlName="dayToRun"
+              required
+            >
+              <mat-option *ngFor="let day of week; let i = index;" value="{{i+1}}" >{{day}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="dayToRun.invalid">{{
+              formService.getErrorMessage(dayToRun)
+            }}</mat-error>
+          </mat-form-field>
+          <span class="pt-4 pl-2">showing data for the previous week.</span>
+        </div>
+      </div>
+      <div class="row pt-3" *ngIf="frequency.value === 'M'">
+        <div class="col-12 d-flex">
+          <span class="pt-4 pr-2">Send Report on the</span>
+          <mat-form-field class="w-25" appearance="outline">
+            <mat-select
+              focus="true"
+              name="dayOfMonth"
+              id="dayOfMonth"
+              formControlName="dayOfMonth"
+              required
+            >
+            <mat-option *ngFor="let n of [].constructor(31); let i = index" value="{{i+1}}">{{i+1}}</mat-option>
+  
+            </mat-select>
+            <mat-error *ngIf="dayOfMonth.invalid">{{
+              formService.getErrorMessage(dayOfMonth)
+            }}</mat-error>
+          </mat-form-field>
+          <span class="pt-4 pl-2">of the month showing data for the previous 31 days.</span>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-header>
+      <mat-card-title>
+        Report Duration
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-12 pb-3">
+          <mat-radio-group class="radio-group" formControlName="oneTime">
+            <mat-radio-button class="mr-3" color="primary" [value]="true" (click)="updateDurationSelection('oneTime')"><span>Send once</span></mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="col-12 pb-3">
+          <mat-radio-group class="radio-group" formControlName="manually">
+            <mat-radio-button class="mr-3" color="primary" [value]="true" (click)="updateDurationSelection('manually')"><span>Send indefinitely (Active reports must be manually cancelled under the “My Reports” tab above.)</span></mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="col-12 d-flex pb-3" *ngIf="frequency.value === 'W'">
+          <mat-radio-group class="radio-group" formControlName="numberOfWeeks">
+            <mat-radio-button class="mr-2 pt-4" color="primary" [value]="true" (click)="updateDurationSelection('numberOfWeeks')"><span>Send for the next</span></mat-radio-button>
+          </mat-radio-group>
+          <mat-form-field class="w-25" appearance="outline">
+            <mat-select
+              focus="true"
+              name="requestedWeeks"
+              id="requestedWeeks"
+              formControlName="requestedWeeks"
+            >
+            <mat-option *ngFor="let n of [].constructor(52); let i = index" value="{{i+1}}">{{i+1}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="requestedWeeks.invalid">{{
+              formService.getErrorMessage(requestedWeeks)
+            }}</mat-error>
+          </mat-form-field>
+          <span class="pt-4 pl-2">weeks</span>
+        </div>
+        <div class="col-12 d-flex pb-3" *ngIf="frequency.value === 'M'">
+          <mat-radio-group class="radio-group" formControlName="numberOfMonths">
+            <mat-radio-button class="mr-2 pt-4" color="primary" [value]="true" (click)="updateDurationSelection('numberOfMonths')">Send for the next</mat-radio-button>
+          </mat-radio-group>
+          <mat-form-field class="w-25" appearance="outline">
+            <mat-select
+              focus="true"
+              name="requestedMonths"
+              id="requestedMonths"
+              formControlName="requestedMonths"
+            >
+            <mat-option *ngFor="let n of [].constructor(12); let i = index" value="{{i+1}}">{{i+1}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="requestedMonths.invalid">{{
+              formService.getErrorMessage(requestedMonths)
+            }}</mat-error>
+          </mat-form-field>
+          <span class="pt-4 pl-2">months</span>
+        </div>
+        <div class="col-12 d-flex">
+          <mat-radio-group class="radio-group" formControlName="untilDate">
+            <mat-radio-button class="mr-2 pt-4" color="primary" [value]="true" (click)="updateDurationSelection('untilDate')">Send until</mat-radio-button>
+          </mat-radio-group>
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              [matDatepicker]="expirationDatePicker"
+              formControlName="expirationDate"
+              placeholder="MM/DD/YYYY"
+              [min]="today"
+              [required]="untilDate.value === true"
+            />
+            <mat-datepicker-toggle matSuffix [for]="expirationDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #expirationDatePicker></mat-datepicker>
+            <mat-error *ngIf="expirationDate.invalid">{{
+              formService.getErrorMessage(expirationDate)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-header>
+      <mat-card-title>
+        Report Delivery Preferences
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-12">
+          <p>We will email your report to the specified address, at the frequency requested.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Email Address</mat-label>
+            <input
+              matInput
+              placeholder="Email@example.com"
+              name="email"
+              id="email"
+              formControlName="email"
+              required
+            >
+            <mat-error *ngIf="email.invalid">{{
+              formService.getErrorMessage(email)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>File Format</mat-label>
+            <mat-select
+              focus="true"
+              name="format"
+              id="format"
+              formControlName="format"
+              required
+            >
+              <mat-option [value]="'XLS'">Excel Worksheet File (*.xls)</mat-option>
+              <mat-option [value]="'CSV'">Text/CSV File (*.csv)</mat-option>
+              <mat-option [value]="'PDF'">Portable Document Format (*.pdf)</mat-option>
+              <mat-option [value]="'TXT'">Tab Delimited Text File (*.txt)</mat-option>
+            </mat-select>
+            <mat-error *ngIf="format.invalid">{{
+              formService.getErrorMessage(format)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row pt-3">
+        <div class="col-12">
+          <lib-feedback [message]="errorMessages"></lib-feedback>
+        </div>
+        <div class="col-12">
+          <button
+            class="btn btn-primary mr-3"
+            type="submit"
+          >
+            Submit<i class="fas fa-sync-alt fa-spin ml-2" *ngIf="loading"></i>
+          </button>
+          <button
+            class="btn btn-default"
+            (click)="reset()"
+            type="button"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</form>

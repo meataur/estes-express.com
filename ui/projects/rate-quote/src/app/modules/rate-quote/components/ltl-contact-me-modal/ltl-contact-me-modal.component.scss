@@ -1,0 +1,14 @@
+@import '../../../../../../../../node_modules/bootstrap/scss/functions';
+@import '../../../../../../../common/src/assets/scss/variables';
+@import '../../../../../../../../node_modules/bootstrap/scss/mixins';
+
+
+.commodity-container:not(:last-child) {
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid $black;
+}
+
+.mat-checkbox {
+  vertical-align: sub;
+}

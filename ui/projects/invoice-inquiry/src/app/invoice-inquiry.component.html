@@ -1,0 +1,220 @@
+<lib-routable-component-header>Invoice Inquiry</lib-routable-component-header>
+<p>
+  View your open invoices. You can search by days outstanding or by entering one or more PRO, statement, purchase order or Bill of Lading numbers.
+</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      View Invoices
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content [libOverlay]="loadingBuckets || loadingInvoiceDetails">
+    <div class="row">
+      <!-- Search For Invoices Section -->
+      <div class="col-12 col-md-5">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmitSearch()">
+          <div class="row mb-3">
+            <div class="col-12">
+              <h5>Search for an invoice.</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Search By</mat-label>
+                  <mat-select formControlName="searchType" required>
+                    <!-- <mat-option *ngFor="let option in searchTypeOptions" [value]="option.value">{{option.viewValue}}</mat-option> -->
+                    <mat-option value="F">PRO Number</mat-option>
+                    <mat-option value="S">Statement Number</mat-option>
+                    <mat-option value="P">PO Number</mat-option>
+                    <mat-option value="B">BOL Number</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="searchType.invalid">{{
+                    formService.getErrorMessage(searchType)
+                  }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <label>Enter one or more numbers (one per line) *</label>
+              <mat-form-field appearance="outline">
+                <textarea matInput formControlName="criteria" rows="4" required></textarea>
+                <mat-error *ngIf="criteria.invalid">{{
+                  formService.getErrorMessage(criteria)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div *ngIf="errorMessages[1].length > 0" class="row mt-3">
+              <div class="col-12">
+                <lib-feedback [message]="errorMessages"></lib-feedback>
+              </div>
+            </div>
+          <div class="row mt-3 mb-4">
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Search<i *ngIf="searchingInvoiceDetails" class="fas fa-sync-alt fa-spin ml-2"></i></button>
+              <button type="button" (click)="clearSearch()" class="btn btn-default ml-2">Clear</button>
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="d-none d-md-flex flex-column col-1 align-items-center">
+        <div style="width: 1px; background-color: black; height: 45%;"></div>
+         <div>OR</div>
+         <div style="width: 1px; background-color: black; height: 45%;"></div>
+      </div>
+      <!-- Select an Open Amount Section -->
+      <div class="col-12 col-md-6">
+        <div class="row mb-3">
+          <div class="col-12">
+            <h5>Select an open amount.</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <table *ngIf="agingSummaryBuckets" class="table table-bordered">
+              <tbody>
+                <tr *ngFor="let bucket of agingSummaryBuckets; let i = index">
+                  <td>{{agingSummaryBucketLabels[i]}}</td>
+                  <td><a *ngIf="bucket != 0" (click)="searchByAgingBucket(i+1, 1, {reset: true})">{{bucket | currency}}</a><span *ngIf="bucket == 0">{{bucket}}</span></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><a (click)="searchByAgingBucket(0, 1, {reset: true})">View All Open Invoices</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row mb-2" *ngIf="agingRefreshDate">
+          <div class="col-12">
+            <strong>Last Refresh:</strong> {{agingRefreshDate | displayDate}}
+          </div>
+        </div>
+        <lib-feedback [message]="noAgingSummaryResultsMessage"></lib-feedback>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<div #resultsTableAnchor id="resultsTableAnchor"></div>
+<mat-card [hidden]="!(invoiceDetailsTotalRows > 0)" class="mat-card--table">
+  <mat-card-header class="d-flex flex-column">
+    <mat-card-title>{{searchTableTitle}}</mat-card-title>
+    <p class="m-0">
+      Retrieve invoices, along with Delivery Receipt (DR) and Bill of Lading (BOL) images when available. You can also make full or partial payments via bank draft by checking the box beside the invoice(s) you want to pay and clicking Pay Selected.
+    </p>
+</mat-card-header>
+  <mat-card-content class="p-0">
+    <div class="pl-3 pt-3">
+      <button [disabled]="!invoiceDetailsSelections.hasValue()" (click)="navigateToPayments()" class="btn btn-default">Pay Selected</button>
+      <button [disabled]="!invoiceDetailsSelections.hasValue()" (click)="openEmailModal()" class="ml-2 btn btn-default">Email Selected</button>
+    </div>
+    <mat-table #table [dataSource]="invoiceDetails" matSort matSortActive="0" matSortDirection="asc" multiTemplateDataRows [libOverlay]="loadingInvoiceDetails">
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox color="primary"
+                        (change)="$event ? masterToggle() : null"
+                        [checked]="invoiceDetailsSelections.hasValue() && isAllSelected()"
+                        [indeterminate]="invoiceDetailsSelections.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox color="primary"
+                        (click)="$event.stopPropagation()"
+                        (change)="$event ? invoiceDetailsSelections.toggle(row) : null"
+                        [checked]="isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="pro">
+        <mat-header-cell class="d-flex" *matHeaderCellDef mat-sort-header="0">
+          PRO Number
+        </mat-header-cell>
+        <mat-cell class="d-flex" *matCellDef="let element">
+          {{ element.pro }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="pickupDate">
+        <mat-header-cell class="d-none d-md-flex" *matHeaderCellDef mat-sort-header="1">
+          Pickup Date
+        </mat-header-cell>
+        <mat-cell class="d-none d-md-flex" *matCellDef="let element">
+          {{element.pickupDate | displayDate}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="deliveryDate">
+        <mat-header-cell class="d-none d-lg-flex" *matHeaderCellDef mat-sort-header="2">
+          Delivery Date
+        </mat-header-cell>
+        <mat-cell class="d-none d-lg-flex" *matCellDef="let element">
+          {{ element.deliveryDate | displayDate }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="invoiceDate">
+        <mat-header-cell class="d-none d-lg-flex" *matHeaderCellDef mat-sort-header="3">
+          Invoice Date
+        </mat-header-cell>
+        <mat-cell class="d-none d-lg-flex" *matCellDef="let element">
+          {{element.invoiceDate | displayDate}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="bol">
+        <mat-header-cell class="d-none d-lg-flex" *matHeaderCellDef mat-sort-header="4">
+          BOL #
+        </mat-header-cell>
+        <mat-cell class="d-none d-lg-flex" *matCellDef="let element">
+          {{element.bol}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="poNum">
+        <mat-header-cell class="d-none d-lg-flex" *matHeaderCellDef mat-sort-header="5">
+          PO #
+        </mat-header-cell>
+        <mat-cell class="d-none d-lg-flex" *matCellDef="let element">
+          {{element.poNum}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="statementNum">
+        <mat-header-cell class="d-none d-md-flex" *matHeaderCellDef mat-sort-header="6">
+          Statement Number
+        </mat-header-cell>
+        <mat-cell class="d-none d-md-flex" *matCellDef="let element">
+          <a *ngIf="element.statementNum != 0" (click)="navigateToStatementDetails(element.statementNum)">{{element.statementNum}}</a>
+          <span *ngIf="element.statementNum == 0">EDI</span>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="openAmount">
+        <mat-header-cell class="d-flex" *matHeaderCellDef mat-sort-header="7">
+          Open Amount
+        </mat-header-cell>
+        <mat-cell class="d-flex" *matCellDef="let element">
+          {{element.openAmount | currency}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="pendingPayAmount">
+        <mat-header-cell class="d-flex" *matHeaderCellDef mat-sort-header="8">
+          Pending Pay
+        </mat-header-cell>
+        <mat-cell class="d-flex" *matCellDef="let element">
+          {{element.pendingPayAmount | currency}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="imageLink">
+        <mat-header-cell class="d-flex" *matHeaderCellDef>
+        </mat-header-cell>
+        <mat-cell class="d-flex" *matCellDef="let element">
+          <invoice-image-fetch [proNumber]="element.pro"></invoice-image-fetch>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns" class="d-flex"></mat-header-row>
+      <mat-row *matRowDef="let element; columns: displayedColumns" class="d-flex detail-row"></mat-row>
+    </mat-table>
+    <div *ngIf="agingBucketIndex && agingBucketIndex != 0" class="pl-3 pt-3"><strong>Total Open Amount:</strong> {{agingSummaryBuckets[agingBucketIndex-1] | currency}}</div>
+    <div *ngIf="agingBucketIndex == 0" class="pl-3 pt-3"><strong>Total Open Amount:</strong> {{agingSummaryTotal| currency}}</div>
+
+    <div *ngIf="invoiceDetails.data.length === 0" class="no-results">There were no results for this query.</div>
+    <mat-paginator [length]="invoiceDetailsTotalRows" [pageSize]="25" [pageSizeOptions]="[25, 50, 75, 100]"></mat-paginator>
+  </mat-card-content>
+</mat-card>

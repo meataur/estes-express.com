@@ -1,0 +1,14 @@
+<div class="quick-links-container">
+  <div class="quick-link quick-link--header">
+    <i class="link-icon fas fa-clipboard-check"></i>Quick Links
+  </div>
+  <div class="quick-link" *ngFor="let l of (quickLinks$ | async)">
+    <a *ngIf="l.isApplication" [href]="getAppRoute(l.appName)">
+      <div class="quick-link-content"><span><i [ngClass]="getClasses(l.appName)"></i>{{ l.description }}</span><i class="fas fa-chevron-right"></i></div>
+    </a>
+    <a *ngIf="!l.isApplication" [routerLink]="getAppRoute(l.appName)">
+      <div class="quick-link-content"><span><i [ngClass]="getClasses(l.appName)"></i>{{ l.description }}</span><i class="fas fa-chevron-right"></i></div>
+    </a>
+  </div>
+</div>
+<a class="customize" *ngIf="auth.isLoggedIn" [routerLink]="['/links']">Customize</a>

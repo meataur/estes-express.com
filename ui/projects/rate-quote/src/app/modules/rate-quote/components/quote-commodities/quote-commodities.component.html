@@ -1,0 +1,61 @@
+<lib-form-header [color]="'red'">Commodities</lib-form-header>
+<div class="detail-desc">
+  <table class="table table-bordered table-striped table-hover table-sm detail">
+    <thead>
+      <tr>
+        <th scope="col">
+          Commodity Description
+        </th>
+        <th scope="col">
+          Class
+        </th>
+        <th *ngIf="showPieces" scope="col">
+          Pieces
+        </th>
+        <th scope="col">
+          Weight
+        </th>
+        <th *ngIf="showDimensions" scope="col">
+          Length
+        </th>
+        <th *ngIf="showDimensions" scope="col">
+          Width
+        </th>
+        <th *ngIf="showDimensions" scope="col">
+          Height
+        </th>
+        <th *ngIf="showRateChargse" scope="col">
+          Rate
+        </th>
+        <th *ngIf="showRateChargse" scope="col">
+          Charge
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of quote.commodities">
+        <td>{{ c.commodity.description }}</td>
+        <td>
+          <ng-container *ngIf="!c.deficitRate">{{ c.commodity.shipClass }}</ng-container>
+        </td>
+        <td *ngIf="showPieces">
+          <ng-container *ngIf="!c.deficitRate">{{ c.commodity.pieces }}</ng-container>
+        </td>
+        <td>{{ c.commodity.weight }}</td>
+        <td *ngIf="showDimensions">
+          <ng-container *ngIf="!c.deficitRate">{{ c.commodity.dimensions.length }}</ng-container>
+        </td>
+        <td *ngIf="showDimensions">
+          <ng-container *ngIf="!c.deficitRate">{{ c.commodity.dimensions.width }}</ng-container>
+        </td>
+        <td *ngIf="showDimensions">
+          <ng-container *ngIf="!c.deficitRate">{{ c.commodity.dimensions.height }}</ng-container>
+        </td>
+        <td *ngIf="showRateChargse">
+          <ng-container *ngIf="!c.deficitRate">{{ c.rate }}</ng-container>
+        </td>
+        <td *ngIf="showRateChargse">{{ c.charge | currency: 'USD' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

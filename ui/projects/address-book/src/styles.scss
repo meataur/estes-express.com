@@ -1,0 +1,28 @@
+@import "../../common/src/assets/scss/estes-material";
+@import "../../common/src/assets/scss/estes";
+
+.estes-app {
+  .roles-checkbox {
+    padding-bottom: 0.5rem;
+    i {
+      color: $green;
+    }
+    label {
+      font-size: 12px;
+    }
+  }
+  .circled-step-number {
+    border: 2px $black solid;
+    border-radius: 4rem;
+    padding: 0.5rem 1rem;
+    width: fit-content;
+    color: $black;
+  }
+}
+
+.mat-menu-content {
+  .menu-header {
+    border-bottom: 1px solid $gray-300;
+    font-weight: bold;
+  }
+}

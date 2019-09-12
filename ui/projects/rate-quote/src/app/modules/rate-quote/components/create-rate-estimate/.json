@@ -1,0 +1,27 @@
+// {
+//   "commodities": [
+//     {
+//       "dimensions": { "length": null, "width": null, "height": null },
+//       "description": "asdf",
+//       "shipClass": "50",
+//       "weight": "23"
+//     }
+//   ],
+//   "accessorials": [],
+//   "origin": { "country": "US", "city": "MIDLOTHIAN", "state": "VA", "zip": "23113" },
+//   "dest": { "country": "US", "city": "PUEBLO", "state": "CO", "zip": "81001" },
+//   "app": "VTL",
+//   "contactName": "testy",
+//   "declaredValue": "350"
+// }
+{
+  "commodities": [{ "description": "adsf", "shipClass": "50", "weight": "23" }],
+  "accessorials": [],
+  "origin": { "country": "US", "city": "RICHMOND", "state": "VA", "zip": "23220" },
+  "dest": { "country": "US", "city": "PUEBLO", "state": "CO", "zip": "81001" },
+  "app": "LTL",
+  "terms": null,
+  "role": null,
+  "contactName": "testy",
+  "declaredValue": "350"
+}

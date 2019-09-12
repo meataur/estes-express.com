@@ -1,0 +1,11 @@
+@import '~bootstrap/scss/functions';
+@import '../../../../common/src/assets/scss/variables';
+
+.information-caption {
+  font-style: italic;
+}
+
+.radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}

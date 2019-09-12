@@ -1,0 +1,120 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../common/src/assets/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
+
+.estes-app {
+  tr.detail-row {
+    height: 0;
+  }
+
+  tr.element-row:not(.expanded-row):hover {
+    background: $gray-100;
+  }
+
+  tr.element-row:not(.expanded-row):active {
+    background: #efefef;
+  }
+
+  .element-row td {
+    border-bottom-width: 0;
+  }
+
+  .element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+
+  table.mat-table {
+    width: 100%;
+    thead {
+      tr {
+        th.mat-header-cell {
+          padding: $table-cell-padding-sm .5rem;
+          background-color: $table-head-bg;
+          color: $black;
+          label {
+            margin: 0;
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        &.mat-row {
+          &.detail-row {
+            height: auto;
+            td.mat-cell {
+              background-color: $table-accent-bg;
+              border-bottom: none;
+            }
+          }
+          &.element-row {
+            cursor: pointer;
+            td.mat-cell {
+              padding: $table-cell-padding-sm .5rem;
+              font-size: .75rem;
+              label {
+                margin: 0;
+              }
+              .fal {
+                font-size: 1.3rem;
+                &.fa-chevron-up {
+                  display: none;
+                }
+                &.fa-chevron-down {
+                  display: inline-block;
+                }
+              }
+            }
+            &.expanded-row {
+              td.mat-cell {
+                border-bottom-color: #FFF;
+                background-color: $table-accent-bg;
+                .fal {
+                  &.fa-chevron-up {
+                    display: inline-block;
+                  }
+                  &.fa-chevron-down {
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .detail-desc {
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    table.detail {
+      tbody {
+        th {
+          display: block;
+          width: 100%;
+          @include media-breakpoint-up(sm) {
+            display: table-cell;
+            width: 10%;
+            white-space: nowrap;
+            padding-right: 1rem;
+          }
+        }
+        td {
+          display: block;
+          width: 100%;
+          @include media-breakpoint-up(sm) {
+            display: table-cell;
+          }
+          .disclaimer {
+            font-size: 0.75rem;
+            color: $gray-700;
+          }
+        }
+      }
+    }
+  }
+}

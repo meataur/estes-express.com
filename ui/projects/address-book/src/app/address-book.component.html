@@ -1,0 +1,308 @@
+<h1><span>Address Book</span></h1>
+<p>Maintain a list of your frequently used shipper, consignee, third party and COD addresses here.
+    You can choose from this list when you are creating a BOL by clicking on the "Address Lookup" link provided on the Bill of Lading application.</p>
+<mat-card class="mat-card--table mat-elevation-z8">
+  <mat-card-header class="row d-flex justify-content-between p-3">
+      <div *ngIf="addressListResponse.data.length > 0" class="col-12 col-xl-4 p-2">
+          <input *ngIf="!expandSearch && !advancedSearchCriteria.valid" matInput class="table-search" (keyup)="applyFilter($event.target.value)" placeholder="&#xf002;">
+      </div>
+      <div class="col-12 col-xl-8 p-0 header-buttons d-flex justify-content-end">
+        <div class="button-wrapper p-2">
+            <button class="btn btn-default" (click)="expandSearch = !expandSearch" [ngClass]="{'btn-expanded-advanced-search': expandSearch, 'btn-active-advanced-search': activeAdvancedSearch}"><i class="fas fa-filter mr-2"></i>Advanced Search</button>
+        </div>
+        <div class="button-wrapper p-2" *ngIf="activeAdvancedSearch && !expandSearch">
+           <button class="btn btn-default" (click)="clearAdvancedSearch()">Clear<i *ngIf="loadingReset" class="ml-2 fas fa-sync-alt fa-spin"></i></button>
+        </div>
+        <div class="button-wrapper p-2">
+            <button class="btn btn-default" (click)="openNewAddress()"><i class="fal fa-plus" aria-hidden="true"></i> Add New Address</button>
+        </div>
+        <div class="button-wrapper p-2">
+          <button class="btn btn-default" routerLink="/upload"><i class="fal fa-upload" aria-hidden="true"></i> Upload</button>
+        </div>
+      </div>
+    </mat-card-header>
+
+  <mat-card-content class="p-0">
+    <div *ngIf="addressListResponse" class="searchExpand p-4" [@searchExpand]="expandSearch ? 'expanded' : 'collapsed'">
+      <form [formGroup]="advancedSearchCriteria">
+        <div class="row">
+          <div class="col-8 col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Company Name</mat-label>
+              <input matInput placeholder="Company Name" id="company" name="company" formControlName="company" >
+            </mat-form-field>
+          </div>
+          <div class="col-4 pt-1">
+            <mat-radio-group formControlName="companyExact">
+              <mat-radio-button class="pr-3" color="primary" [value]="true">Exact</mat-radio-button>
+              <mat-radio-button  color="primary" [value]="false" >Contains</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8 col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Location Number</mat-label>
+              <input matInput placeholder="Location Number" id="locationNumber" name="locationNumber" formControlName="locationNumber" >
+            </mat-form-field>
+          </div>
+          <div class="col-4 pt-1">
+            <mat-radio-group formControlName="locExact">
+              <mat-radio-button class="pr-3" color="primary" [value]="true">Exact</mat-radio-button>
+              <mat-radio-button color="primary" [value]="false" >Contains</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8 col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Street Address</mat-label>
+              <input matInput placeholder="Street Address" id="streetAddress" name="streetAddress" formControlName="streetAddress" >
+            </mat-form-field>
+          </div>
+          <div class="col-4 pt-1">
+            <mat-radio-group formControlName="streetExact">
+              <mat-radio-button class="pr-3" color="primary" [value]="true">Exact</mat-radio-button>
+              <mat-radio-button color="primary" [value]="false" >Contains</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8 col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>City</mat-label>
+              <input matInput placeholder="City" id="city" name="city" formControlName="city" >
+            </mat-form-field>
+          </div>
+          <div class="col-4 pt-1">
+            <mat-radio-group formControlName="cityExact">
+              <mat-radio-button class="pr-3" color="primary" [value]="true">Exact</mat-radio-button>
+              <mat-radio-button color="primary" [value]="false" >Contains</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8 col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>State</mat-label>
+              <input matInput placeholder="State" id="state" name="state" formControlName="state" >
+            </mat-form-field>
+          </div>
+          <div class="col-4 pt-1">
+            <mat-radio-group formControlName="stateExact">
+              <mat-radio-button class="pr-3" color="primary" [value]="true">Exact</mat-radio-button>
+              <mat-radio-button color="primary" [value]="false" >Contains</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8 col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>ZIP</mat-label>
+              <input matInput placeholder="ZIP" id="zip" name="zip" formControlName="zip" >
+            </mat-form-field>
+          </div>
+          <div class="col-4 pt-1">
+            <mat-radio-group formControlName="zipExact">
+              <mat-radio-button class="pr-3" color="primary" [value]="true">Exact</mat-radio-button>
+              <mat-radio-button color="primary" [value]="false" >Contains</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button type="button" (click)="advancedSearch()" class="btn btn-primary"><i class="fas fa-sync-alt fa-spin mr-2" *ngIf="loadingSearch"></i>Search</button>
+            <button type="button" (click)="clearAdvancedSearch()" class="btn btn-default ml-3"><i class="fas fa-sync-alt fa-spin mr-2" *ngIf="loadingReset"></i>Reset</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="table-container">
+      <mat-table #table matSort [dataSource]="addressListResponse" multiTemplateDataRows>
+        <!-- Company Name Column -->
+        <ng-container matColumnDef="company">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Company Name </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-md-flex" (click)="openAddressDetails(element, 'read')">
+            <a *ngIf="element.company">{{element.company}}</a>
+          </mat-cell>
+        </ng-container>
+        <!-- Address Column -->
+        <ng-container matColumnDef="address">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-md-flex"> Address </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-md-flex">
+            <lib-address [address]="element.address"></lib-address>
+          </mat-cell>
+        </ng-container>
+        <!-- Shipper Column -->
+        <ng-container matColumnDef="shipper">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-xl-flex"> Shipper </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-xl-flex">
+            <i *ngIf="element.shipper" class="fa fa-check" aria-hidden="true"></i>
+          </mat-cell>
+        </ng-container>
+        <!-- Consignee Column -->
+        <ng-container matColumnDef="consignee">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-xl-flex">Consignee </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-xl-flex">
+            <i *ngIf="element.consignee" class="fa fa-check" aria-hidden="true"></i>
+          </mat-cell>
+        </ng-container>
+        <!-- Third Party Column -->
+        <ng-container matColumnDef="thirdParty">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-xl-flex"> Third Party </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-xl-flex">
+            <i *ngIf="element.thirdParty" class="fa fa-check" aria-hidden="true"></i>
+          </mat-cell>
+        </ng-container>
+        <!-- COD Column -->
+        <ng-container matColumnDef="cod">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-xl-flex"> COD </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-xl-flex">
+            <i *ngIf="element.cod" class="fa fa-check" aria-hidden="true"></i>
+          </mat-cell>
+        </ng-container>
+        <!-- Contact Name Column -->
+        <ng-container matColumnDef="contact">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-md-flex"> Contact Name </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-md-flex">
+            <span>
+              <span *ngIf="element.firstName">{{element.firstName}}&nbsp;</span>
+              <span *ngIf="element.lastName">{{element.lastName}}</span>
+            </span>
+          </mat-cell>
+        </ng-container>
+        <!-- Location # Column -->
+        <ng-container matColumnDef="locationNumber">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-md-flex text-nowrap"> Location # </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-md-flex">
+            <span *ngIf="element.locationNumber">{{element.locationNumber}}</span>
+          </mat-cell>
+        </ng-container>
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef class="d-none d-md-flex"></mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-md-flex table-cell-actions">
+            <button mat-icon-button title="Edit Address" (click)="openAddressDetails(element, 'edit')">
+              <mat-icon fontSet="fa" fontIcon="fa-pencil-alt" aria-hidden="true"></mat-icon>
+            </button>
+            <button mat-icon-button title="Delete Address" (click)="deleteAddress(element)">
+              <mat-icon fontSet="fa" fontIcon="fa-trash-alt" aria-hidden="true"></mat-icon>
+            </button>
+            <button mat-icon-button title="More Actions" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu" (mouseenter)="openAddressMenu(menuTrigger)">
+              <mat-icon fontSet="fa" fontIcon="fa-ellipsis-h" aria-hidden="true"></mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" >
+              <div (mouseleave)="closeAddressMenu()">
+                <div class="menu-header d-flex p-2">
+                  <mat-icon fontSet="fa" fontIcon="fa-file"></mat-icon>
+                  Create Bill of Lading
+                </div>
+                <a [href]="'/myestes/bill-of-lading/bol/create?populate=consignee&street1=' + element.address.streetAddress + '&street2=' + element.address.streetAddress2 + '&city=' + element.address.city + '&state=' + element.address.state + '&zip=' + element.address.zip + '&country=' + element.address.country" target="_blank" mat-menu-item>
+                  <span>Ship To This Address</span>
+                </a>
+                <a [href]="'/myestes/bill-of-lading/bol/create?populate=shipper&street1=' + element.address.streetAddress + '&street2=' + element.address.streetAddress2 + '&city=' + element.address.city + '&state=' + element.address.state + '&zip=' + element.address.zip + '&country=' + element.address.country" target="_blank" mat-menu-item>
+                  <span>Ship From This Address</span>
+                </a>
+                <div class="menu-header d-flex p-2">
+                    <mat-icon fontSet="fa" fontIcon="fa-usd-circle"></mat-icon>
+                  Get Rate Quote
+                </div>
+                <a [href]="'/myestes/rate-quote/estimate?dzip=' + element.address.zip + '&dcity=' + element.address.city + '&dstate=' + element.address.state + '&dcountry=' + element.address.country" target="_blank" mat-menu-item>
+                  <span>Rate To This Address</span> 
+                </a>
+                <a [href]="'/myestes/rate-quote/estimate?ozip=' + element.address.zip + '&ocity=' + element.address.city + '&ostate=' + element.address.state + '&ocountry=' + element.address.country" target="_blank" mat-menu-item>
+                  <span>Rate From This Address</span>
+                </a>
+                <div class="menu-header d-flex p-2">
+                    <mat-icon fontSet="fa" fontIcon="fa-clock"></mat-icon>
+                  Calculate Transit Time
+                </div>
+                <a [href]="'/myestes/transit-time-calculator?dzip=' + element.address.zip" target="_blank" mat-menu-item>
+                  <span>Calculate To This Address</span>
+                </a>
+                <a [href]="'/myestes/transit-time-calculator?ozip=' + element.address.zip" target="_blank" mat-menu-item>
+                  <span>Calculate From This Address</span>
+                </a>
+              </div>
+            </mat-menu>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="mobileView">
+          <mat-header-cell *matHeaderCellDef class="d-none"></mat-header-cell>
+          <mat-cell *matCellDef="let element" class="mobile-table-view d-flex d-md-none">
+            <div class="row w-100">
+              <div class="col p-0" (click)="openAddressDetails(element, 'read')">
+                  <a *ngIf="element.company">{{element.company}}</a>
+              </div>
+              <div class="col p-0 table-cell-actions">
+                <button mat-icon-button title="Edit Address" (click)="openAddressDetails(element, 'edit')">
+                  <mat-icon fontSet="fa" fontIcon="fa-pencil-alt" aria-hidden="true"></mat-icon>
+                </button>
+                <button mat-icon-button title="Delete Address" (click)="deleteAddress(element)">
+                  <mat-icon fontSet="fa" fontIcon="fa-trash-alt" aria-hidden="true"></mat-icon>
+                </button>
+                <button mat-icon-button title="More Actions" [matMenuTriggerFor]="menu">
+                  <mat-icon fontSet="fa" fontIcon="fa-ellipsis-h" aria-hidden="true"></mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <div class="menu-header d-flex p-2">
+                    <mat-icon fontSet="fa" fontIcon="fa-file"></mat-icon>
+                    Create Bill of Lading
+                  </div>
+                  <a [href]="'/myestes/bill-of-lading/bol/create?populate=consignee&street1=' + element.address.streetAddress + '&street2=' + element.address.streetAddress2 + '&city=' + element.address.city + '&state=' + element.address.state + '&zip=' + element.address.zip + '&country=' + element.address.country" target="_blank" mat-menu-item>
+                    <span>Ship To This Address</span>
+                  </a>
+                  <a [href]="'/myestes/bill-of-lading/bol/create?populate=shipper&street1=' + element.address.streetAddress + '&street2=' + element.address.streetAddress2 + '&city=' + element.address.city + '&state=' + element.address.state + '&zip=' + element.address.zip + '&country=' + element.address.country" target="_blank" mat-menu-item>
+                    <span>Ship From This Address</span>
+                  </a>
+                  <div class="menu-header d-flex p-2">
+                      <mat-icon fontSet="fa" fontIcon="fa-usd-circle"></mat-icon>
+                    Get Rate Quote
+                  </div>
+                  <a [href]="'/myestes/rate-quote/estimate?dzip=' + element.address.zip + '&dcity=' + element.address.city + '&dstate=' + element.address.state + '&dcountry=' + element.address.country" target="_blank" mat-menu-item>
+                    <span>Rate To This Address</span>
+                  </a>
+                  <a [href]="'/myestes/rate-quote/estimate?ozip=' + element.address.zip + '&ocity=' + element.address.city + '&ostate=' + element.address.state + '&ocountry=' + element.address.country" target="_blank" mat-menu-item>
+                    <span>Rate From This Address</span>
+                  </a>
+                  <div class="menu-header d-flex p-2">
+                      <mat-icon fontSet="fa" fontIcon="fa-clock"></mat-icon>
+                    Calculate Transit Time
+                  </div>
+                  <a [href]="'/myestes/transit-time-calculator?dzip=' + element.address.zip" target="_blank" mat-menu-item>
+                    <span>Calculate To This Address</span>
+                  </a>
+                  <a [href]="'/myestes/transit-time-calculator?ozip=' + element.address.zip" target="_blank" mat-menu-item>
+                    <span>Calculate From This Address</span>
+                  </a>
+                </mat-menu>
+              </div>
+            </div>
+            <div class="row w-100">
+              <div class="col p-0">
+                <lib-address [address]="element.address"></lib-address>
+              </div>
+            </div>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let element; columns: displayedColumns;" class="d-flex">
+        </mat-row>
+      </mat-table>
+      <mat-card *ngIf="!loading && addressListResponse.data.length == 0" class="table-loading">
+        <mat-card-content>
+            <p>Maintain a list of your frequently used Shipper, Consignee, Third Party and COD addresses here.
+                You can choose from this list when you are creating a BOL by clicking on the "Address Lookup" link provided on the Bill of Lading form.</p>
+        </mat-card-content>
+
+      </mat-card>
+      <mat-card *ngIf="loading" class="table-loading">
+        <mat-progress-spinner
+          color="primary"
+          mode="indeterminate">
+        </mat-progress-spinner>
+      </mat-card>
+    </div>
+    <mat-paginator *ngIf="addressListResponse.data" [length]="addressListResponse.data.length" [pageSize]="25" [pageSizeOptions]="[25, 50, 75, 100]"></mat-paginator>
+  </mat-card-content>
+</mat-card>

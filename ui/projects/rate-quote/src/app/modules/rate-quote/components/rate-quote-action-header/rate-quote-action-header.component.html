@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-lg-8 rate-quote-title">
+    <h4 class="">Rate Quote Number: {{ quote.quoteID }}</h4>
+  </div>
+  <div class="col-lg-4">
+    <div class="d-flex mb-3 quote-actions">
+      <button type="button" class="btn btn-default mr-3" (click)="emailQuote()">
+        <i class="fas fa-envelope mr-2"></i>Email Quote
+      </button>
+      <button type="button" class="btn btn-default" (click)="viewQuote()">
+        <i class="fas fa-file-pdf mr-2"></i>View Quote
+      </button>
+    </div>
+  </div>
+</div>

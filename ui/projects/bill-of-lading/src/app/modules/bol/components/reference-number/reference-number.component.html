@@ -1,0 +1,66 @@
+<ng-container [formGroup]="referenceNumberForm">
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Reference #</mat-label>
+        <input
+          id="referenceNumber{{ index }}"
+          matInput
+          formControlName="referenceNumber"
+          [required]="referenceNumberForm.hasError('referenceNumberRequired')"
+          [errorStateMatcher]="referenceNumberMatcher"
+        />
+        <mat-error *ngIf="referenceNumberForm.hasError('referenceNumberRequired')">
+          This field is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-md-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Type</mat-label>
+        <mat-select
+          focus="true"
+          id="referenceType{{ index }}"
+          formControlName="referenceType"
+          [required]="referenceNumberForm.hasError('referenceTypeRequired')"
+          [errorStateMatcher]="referenceTypeMatcher"
+        >
+          <mat-option></mat-option>
+          <mat-option [value]="c.value" *ngFor="let c of referenceTypes">{{ c.text }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="referenceNumberForm.hasError('referenceTypeRequired')">
+          This field is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group col-md-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Cartons</mat-label>
+        <input id="cartoon{{ index }}" matInput formControlName="cartoon" />
+        <mat-error *ngIf="referenceNumberForm.controls['cartoon'].invalid">{{
+          formService.getErrorMessage(referenceNumberForm.controls['cartoon'])
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-md-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Weight (lbs)</mat-label>
+        <input id="weight{{ index }}" matInput formControlName="weight" />
+        <mat-error *ngIf="referenceNumberForm.controls['weight'].invalid">{{
+          formService.getErrorMessage(referenceNumberForm.controls['weight'])
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end w-100">
+    <button
+      *ngIf="canDelete"
+      (click)="delete()"
+      id="removeCommodity{{ index }}"
+      class="btn btn-default"
+    >
+      Remove
+    </button>
+  </div>
+</ng-container>

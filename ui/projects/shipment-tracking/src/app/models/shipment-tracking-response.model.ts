@@ -1,0 +1,77 @@
+import { Address } from 'common';
+import { ImageResponse } from './image-response.model';
+import { ShipmentServiceResponse } from './shipment-service-response.model';
+import { ShipmentImageResponse } from './shipment-image-response.model';
+
+export class ShipmentTrackingResponse {
+	apptDate: string;
+	apptStatus: string;
+	apptTime: string;
+	billTo: string;
+	bol: string;
+	charges: string;
+	cons: string;
+	consAddress: Address[];
+	consName: string;
+	consRefnum: string;
+	control: string;
+	delDateDisc: string;
+	delTimeDisc: string;
+	deliveryDate: string;
+	deliveryTime: string;
+	destTerminalAddress: Address[];
+	destTerminalFax: string;
+	destTerminalName: string;
+	destTerminalNum: string;
+	destTerminalPhone: string;
+	dimWeight: string;
+	error: string;
+	errorInfo: ShipmentServiceResponse;
+	estArrivalTime: string;
+	estDelDate: string;
+	estDelDateDisc: string;
+	expanded: boolean;
+	firstDeliveryAttempt: string;
+	freightChargeAudit: string;
+	freightChargeDisc: string;
+	ilName: string;
+	ilScac: string;
+	ilType: string;
+	ilfb: string;
+	isParty: string;
+	isPayor: string;
+	lastChanged: string;
+	loadNum: string;
+	masterOT: string;
+	masterProNum: string;
+	payor: string;
+	pickupDate: string;
+	pickupTime: string;
+	pieces: string;
+	poNum: string;
+	pro: string;
+	receivedBy: string;
+	serviceType: string;
+	shipper: string;
+	shipperAddress: Address[];
+	shipperName: string;
+	shipperRefnum: string;
+	sortCompare: string;
+	status: string;
+	statusTime: string;
+	terms: string;
+	thirdPartyAddress: Address[];
+	thirdPartyName: string;
+	thirdPartyRefnum: string;
+	type: string;
+	weight: string;
+  bolImageLoaded: boolean;
+  drImageLoaded: boolean;
+  wrImageLoaded: boolean;
+	bolImages: ShipmentImageResponse[];
+	wrCertificateImages: ShipmentImageResponse[];
+	deliveryReceiptImages: ShipmentImageResponse[];
+
+	constructor() {
+  }
+}

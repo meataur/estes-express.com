@@ -1,0 +1,12 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../common/src/assets/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
+
+.estes-app {
+	.errors {
+		padding-bottom: 1rem;
+		.inner {
+			padding: 1.5rem;
+		}
+	}
+}

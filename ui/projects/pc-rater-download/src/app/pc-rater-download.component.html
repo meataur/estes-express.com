@@ -1,0 +1,205 @@
+<lib-routable-component-header>PC Rater Download</lib-routable-component-header>
+<mat-card>
+  <mat-card-content [libOverlay]="loading">
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" *ngIf="!successMessage">
+      <div>
+        <div class="row">
+          <div class="col-12 col-md-9 col-lg-5 form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input type="text" matInput required formControlName="contactName">
+              <mat-error *ngIf="contactName.invalid">{{
+                formService.getErrorMessage(contactName)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-md-9 col-lg-5 form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Company Name</mat-label>
+              <input type="text" matInput required formControlName="companyName">
+              <mat-error *ngIf="companyName.invalid">{{
+                formService.getErrorMessage(companyName)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngIf="!isAuthenticatedGroup" class="col-12 col-md-9 col-lg-4 form-group--tooltip form-group">
+            <mat-form-field appearance="outline" class="form-group--tooltip__form-field">
+              <mat-label>Account Number</mat-label>
+              <input type="text" matInput required formControlName="accountCode">
+              <mat-error *ngIf="accountCode.invalid">{{
+                formService.getErrorMessage(accountCode)
+              }}</mat-error>
+            </mat-form-field>
+            <lib-tooltip
+            role="button"
+            [attr.aria-roledescription]="'Clicking this button will open a detailed description for Account Number input'"
+            class="form-group--tooltip__tooltip"
+            (click)="$event.preventDefault(); $event.stopPropagation(); openInfoModal('', accountNumberTooltipHtml)"></lib-tooltip>
+          </div>
+          <div *ngIf="isAuthenticatedGroup" class="col-12 col-md-3 form-group--tooltip p-0 form-group">
+            <lib-account-select
+              class="form-group--tooltip__form-field"
+              [fc]="accountCode"
+              [label]="'Account Number'">
+            </lib-account-select>
+            <lib-tooltip
+            role="button"
+            [attr.aria-roledescription]="'Clicking this button will open a detailed description for Account Number input'"
+            class="form-group--tooltip__tooltip"
+            (click)="$event.preventDefault(); $event.stopPropagation(); openInfoModal('', accountNumberTooltipHtml)"></lib-tooltip>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-12 col-md-9 col-lg-5">
+            <mat-form-field appearance="outline">
+              <mat-label>Address</mat-label>
+              <input
+                matInput
+                required
+                formControlName="customerAddress"
+              />
+              <mat-error *ngIf="customerAddress.invalid">{{
+                formService.getErrorMessage(customerAddress)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8 col-md-6 col-lg-3 form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>City</mat-label>
+              <input
+                matInput
+                required
+                formControlName="customerCity"
+              />
+              <mat-error *ngIf="customerCity.invalid">{{
+                formService.getErrorMessage(customerCity)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-4 col-md-3 col-lg-2 form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>State</mat-label>
+              <input
+                matInput
+                required
+                formControlName="customerState"
+              />
+              <mat-error *ngIf="customerState.invalid">{{
+                formService.getErrorMessage(customerState)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-6 col-md-6 col-lg-3 form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>ZIP</mat-label>
+              <input
+                matInput
+                required
+                formControlName="customerZip"
+              />
+              <mat-error *ngIf="customerZip.invalid">{{
+                formService.getErrorMessage(customerZip)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <span class="zip-dash">&#8212;</span>
+          <div class="col-6 col-md-3 col-lg-2 form-group">
+            <mat-form-field appearance="outline">
+              <input
+                matInput
+                formControlName="z4"
+              />
+              <mat-error *ngIf="z4.invalid">{{
+                formService.getErrorMessage(z4)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-9 col-md-6 col-lg-3 form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Phone Number</mat-label>
+              <input type="text" matInput placeholder="(888) 888-8888" required [textMask]="{mask: phoneMask, guide: false}" formControlName="customerPhone">
+              <mat-error *ngIf="customerPhone.invalid">{{
+                formService.getErrorMessage(customerPhone)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-3 col-md-3 col-lg-2 form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Extension</mat-label>
+              <input type="text" matInput formControlName="extension">
+              <mat-error *ngIf="extension.invalid">{{
+                formService.getErrorMessage(extension)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-9 col-lg-5 form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Email Address</mat-label>
+              <input
+                matInput
+                required
+                formControlName="email"
+                placeholder="Email@example.com"
+              />
+              <mat-error *ngIf="email.invalid">{{
+                formService.getErrorMessage(email)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-12 mt-2 mb-2">
+            <mat-label>Would you like to be e-mailed concerning updates?</mat-label>
+            <mat-radio-group class="radio-group d-flex flex-column mt-2" formControlName="emailReceptive">
+              <mat-radio-button class="mr-3" color="primary" [value]="true">Yes
+              </mat-radio-button>
+              <mat-radio-button class="mr-3" color="primary" [value]="false">No
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-12 mt-2 mb-2">
+            <mat-label>Would you like to be contacted by a salesperson?</mat-label>
+            <mat-radio-group class="radio-group d-flex flex-column mt-2" formControlName="salespersonReceptive">
+              <mat-radio-button class="mr-3" color="primary" [value]="true">Yes
+              </mat-radio-button>
+              <mat-radio-button class="mr-3" color="primary" [value]="false">No
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <lib-feedback [message]="errorMessages"></lib-feedback>
+        <div class="row form-group">
+          <div class="col-sm-12">
+            <button type="submit" [disabled]="loading" class="btn btn-primary">
+              Submit <i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div *ngIf="downloadUrl">
+      <div class="row">
+        <lib-feedback [message]="successMessage"></lib-feedback>
+      </div>
+      <div class="row">
+        <div class="col-10">
+          <strong>{{ downloadMessage }}</strong>
+        </div>
+        <div class="col-10">
+          <a [href]="downloadUrl">Rating Software Download</a>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<p class="pt-3 disclaimer"><strong>Program Requirements:</strong> Windows 95 or higher, 16 megabytes of RAM, and 12 megabytes of free hard drive space.</p>
+<p class="pt-1 disclaimer">For technical support for the program, please call SMC3 at <a href="tel:8002723425">(800) 272-3425</a> or send them an e-mail at <a href="mailto:support@smc3.com">support@smc3.com</a>.</p>

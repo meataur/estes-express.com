@@ -1,0 +1,83 @@
+<mat-card>
+  <mat-card-header class="row justify-content-between align-items-stretch"
+    ><mat-card-title>Commodities</mat-card-title>
+    <button
+      *ngIf="!isRateEstimate"
+      type="button"
+      class="btn btn-default"
+      (click)="openCommodityLibrary()"
+    >
+      Add from Commodity Library
+    </button></mat-card-header
+  >
+  <mat-card-content>
+    <form [formGroup]="formGroup">
+      <div class="form-row mb-3">
+        <div class="form-group col-12" formArrayName="commodities">
+          <div
+            class="commodity-container"
+            *ngFor="
+              let c of formGroup.get('commodities')['controls'];
+              let i = index
+            "
+            [formGroupName]="i"
+          >
+            <app-commodity
+              [index]="i"
+              (deleteCommodity)="deleteCommodity($event)"
+              [commodityForm]="c"
+              [canDelete]="formGroup.get('commodities')['controls'].length > 1"
+              [rateQuoteType$]="rateQuoteType$"
+            ></app-commodity>
+          </div>
+        </div>
+        <button
+          class="btn btn-primary"
+          (click)="addCommodity()"
+          *ngIf="commodityCount < MAX_COMMODITIES"
+        >
+          Add Commodity
+        </button>
+      </div>
+      <ng-container
+        *ngIf="
+          (rateQuoteTypeService.rateQuoteType$ | async).volumeAndTruckload ===
+            false &&
+          (rateQuoteTypeService.rateQuoteType$ | async).timeCritical ===
+            false &&
+          shipmentWeight >= 12000
+        "
+      >
+        <lib-feedback
+          [message]="[
+            'error',
+            'To receive rates for a shipment weighing more than 11,999 lbs., please select the Volume and Truckload option in the Quote Type section above.'
+          ]"
+        ></lib-feedback>
+      </ng-container>
+      <ng-container
+        *ngIf="
+          (rateQuoteTypeService.rateQuoteType$ | async).volumeAndTruckload ===
+            false &&
+          (rateQuoteTypeService.rateQuoteType$ | async).timeCritical === true &&
+          shipmentWeight > 42500
+        "
+      >
+        <lib-feedback
+          [message]="[
+            'error',
+            'Your commodity weight exceeds the max of 42,500 lbs. If your shipment exceeds maximum weight, give us a call at 1-800-645-3952'
+          ]"
+        ></lib-feedback>
+      </ng-container>
+      <div class="form-row">
+        <div class="form-group col-12">
+          <label class="">Total Commodities: {{ commodityCount }}</label>
+        </div>
+        <div class="form-group col-12">
+          <label>Total Shipment Weight: {{ shipmentWeight }} lbs</label>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

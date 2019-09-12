@@ -1,0 +1,23 @@
+@import "../../../../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../../../common/src/assets/scss/variables";
+@import "../../../../../../../../node_modules/bootstrap/scss/mixins";
+
+.accessorial-block {
+  display: block;
+}
+
+.selected-container {
+  padding: .5rem;
+  background-color: $gray-100;
+}
+
+.selected {
+  display: inline-block;
+  border-radius: 2rem;
+  font-size: .875rem;
+  white-space: normal;
+
+  &:not(:last-child) {
+    margin-right: .25rem;
+  }
+}

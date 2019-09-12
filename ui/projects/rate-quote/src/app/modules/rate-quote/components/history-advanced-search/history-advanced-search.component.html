@@ -1,0 +1,113 @@
+<div class="advanced-search-container" [@searchExpand]="expand ? 'expanded' : 'collapsed'">
+  <div class="form-container p-3" [formGroup]="formGroup">
+    <form [formGroup]="formGroup" (ngSubmit)="search()">
+      <lib-form-header [color]="'red'">Search Options</lib-form-header>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Quote Number</mat-label>
+            <input matInput formControlName="quoteID" />
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>From Date</mat-label>
+            <input
+              matInput
+              formControlName="fromDate"
+              placeholder="MM/DD/YYYY"
+              [matDatepicker]="fromDatePicker"
+              [max]="toDate.value || today"
+            />
+            <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromDatePicker></mat-datepicker>
+            <mat-error *ngIf="fromDate.invalid">{{
+              formService.getErrorMessage(fromDate)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>To Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="toDatePicker"
+              formControlName="toDate"
+              placeholder="MM/DD/YYYY"
+              [min]="fromDate.value"
+              [max]="today"
+            />
+            <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #toDatePicker></mat-datepicker>
+            <mat-error *ngIf="toDate.invalid">{{ formService.getErrorMessage(toDate) }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-group">
+        <mat-checkbox
+          color="primary"
+          (change)="toggleFilters($event)"
+          [checked]="showAdditionalOptions"
+          >Show All Filters</mat-checkbox
+        >
+      </div>
+      <ng-container *ngIf="showAdditionalOptions === true">
+        <lib-form-header [color]="'red'">Additional Filters</lib-form-header>
+        <div class="form-row">
+          <div class="form-group">
+            <lib-account-select [fc]="accountCode" [label]="'Account #'"></lib-account-select>
+          </div>
+        </div>
+        <lib-form-header [color]="'red'">Origin</lib-form-header>
+        <div class="form-row mb-3">
+          <app-point-control class="col w-100" formControlName="origin"></app-point-control>
+        </div>
+        <lib-form-header [color]="'red'">Destination</lib-form-header>
+        <div class="form-row mb-3">
+          <app-point-control class="col w-100" formControlName="destination"></app-point-control>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Service Level</mat-label>
+              <mat-select formControlName="serviceLevel">
+                <mat-option [value]="o.id" *ngFor="let o of (serviceLevels$ | async)">{{
+                  o.text
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <label>Min. & Max Charges</label>
+        <div class="form-row">
+          <div class="form-group col-6 col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Min.</mat-label>
+              <input matInput formControlName="minCharges" [errorStateMatcher]="matcher" />
+              <mat-error *ngIf="minCharges.invalid">{{
+                formService.getErrorMessage(minCharges)
+              }}</mat-error>
+              <mat-error *ngIf="formGroup.hasError('invalidMinMaxCharges')">
+                Invalid min/max range.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-6 col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Max</mat-label>
+              <input matInput formControlName="maxCharges" [errorStateMatcher]="matcher" />
+              <mat-error *ngIf="maxCharges.invalid">{{
+                formService.getErrorMessage(maxCharges)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </ng-container>
+
+      <div>
+        <button type="button" class="btn btn-primary mr-3" (click)="search()">Search</button>
+        <button type="button" class="btn btn-default" (click)="clear()">Clear</button>
+      </div>
+    </form>
+  </div>
+</div>

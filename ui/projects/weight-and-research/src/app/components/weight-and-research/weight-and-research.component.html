@@ -1,0 +1,286 @@
+<lib-routable-component-header
+  >Weight & Research Inquiry</lib-routable-component-header
+>
+<p>
+  Use this tool to retrieve weight & research certificates on your freight. For
+  other documents, be sure to check out our
+  <a href="/myestes/image-viewing" target="_blank">Image Retrieval & Viewing</a>
+  application.
+</p>
+<mat-card class="mb-3">
+  <mat-card-content>
+    <ng-container [formGroup]="formGroup">
+      <div class="form-row">
+        <div class="col-12">
+          <lib-account-select
+            class="form-row"
+            [fc]="accountNumber"
+            [label]="'Account Number'"
+          ></lib-account-select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-12">
+          <p>
+            Search by date range, PRO or other type of reference number
+            associated with your freight bill (PO, BOL, etc.).
+          </p>
+          <div><label>Search By:</label></div>
+          <mat-radio-group class="radio-group" formControlName="searchBy">
+            <mat-radio-button color="primary" [value]="'Date Range'"
+              >Date Range</mat-radio-button
+            >
+            <mat-radio-button color="primary" [value]="'PRO'"
+              >PRO</mat-radio-button
+            >
+            <mat-radio-button color="primary" [value]="'Other'"
+              >Other</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+      </div>
+      <div class="form-row" *ngIf="searchBy.value === 'Date Range'">
+        <div class="form-group col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Start Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="startDatePicker"
+              formControlName="startDate"
+              [min]="threeYearsPrior"
+              [max]="endDate.value || today"
+              [required]="formService.hasRequiredField(startDate)"
+              placeholder="MM/DD/YYYY"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="startDatePicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #startDatePicker></mat-datepicker>
+            <mat-error *ngIf="startDate.invalid">{{
+              formService.getErrorMessage(startDate)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>End Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="endDatePicker"
+              formControlName="endDate"
+              [max]="today"
+              [min]="startDate.value"
+              [required]="formService.hasRequiredField(endDate)"
+              placeholder="MM/DD/YYYY"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="endDatePicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #endDatePicker></mat-datepicker>
+            <mat-error *ngIf="endDate.invalid">{{
+              formService.getErrorMessage(endDate)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div
+        class="form-row"
+        *ngIf="searchBy.value === 'PRO' || searchBy.value === 'Other'"
+      >
+        <div class="form-group col-md-10">
+          <mat-form-field appearance="outline">
+            <mat-label>Search Items (one per line)</mat-label>
+            <textarea
+              matInput
+              rows="10"
+              name="searchTerm"
+              id="searchTerm"
+              formControlName="searchTerm"
+              [required]="formService.hasRequiredField(searchTerm)"
+            ></textarea>
+            <mat-error *ngIf="searchTerm.invalid">{{
+              formService.getErrorMessage(searchTerm)
+            }}</mat-error>
+            <mat-error *ngIf="searchTerm.errors">
+              <li
+                class="serverError"
+                *ngFor="let errorMessage of searchTerm.errors.serverError"
+              >
+                {{ errorMessage }}
+              </li>
+            </mat-error>
+          </mat-form-field>
+          <!-- Form control: {{ searchTerm }}
+          Errors: {{searchTerm.errors | json}} -->
+        </div>
+      </div>
+      <!-- Value: {{ formGroup.value | json }}<br />
+  Valid: {{ formGroup.valid }} -->
+      <lib-feedback [message]="feedback"></lib-feedback>
+      <!-- {{ results | async | json }} -->
+      <div class="form-group">
+        <button
+          class="btn btn-primary mr-3"
+          type="submit"
+          (click)="onSubmit()"
+          [disabled]="loading"
+        >
+          Search <i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i>
+        </button>
+        <button type="reset" class="btn btn-default" (click)="reset()">
+          Clear
+        </button>
+      </div>
+      <!-- value: {{ formGroup.value | json }} -->
+
+      <!-- <button class="btn btn-primary" (click)="getParsedTextArea()">calc textarea</button> -->
+      <!-- <br /> -->
+      <!-- <button class="btn btn-primary" (click)="docDetails()">Doc Details</button> -->
+    </ng-container>
+  </mat-card-content>
+</mat-card>
+<div class="row">
+  <div class="col-12 col-md-9">
+    <p>
+      View certificates by selecting the "View Document" link, which will open a
+      PDF that you can download. To get certificates via email, select the box
+      beside the PRO number for your document(s), click "Email Selected," and
+      follow the instructions.
+    </p>
+  </div>
+  <div class="col-12">
+    <div class="d-flex justify-content-end mb-3">
+      <button
+        class="btn btn-primary"
+        [disabled]="!selection.selected.length"
+        (click)="emailSelected()"
+      >
+        Email Selected
+      </button>
+    </div>
+  </div>
+</div>
+
+<mat-card class="mat-card--table" [libOverlay]="loading" [hidden]="!showTable">
+  <mat-card-header class="p-3 d-flex justify-content-between row">
+    <mat-card-title>Results</mat-card-title>
+    <div class="col-6 d-flex justify-content-end">
+      <input
+        class="table-search"
+        matInput
+        (keyup)="applyFilter($event.target.value)"
+        name="filter"
+        id="filter"
+        placeholder="&#xf002;"
+      />
+    </div>
+  </mat-card-header>
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    matSortActive="proNumber"
+    matSortDirection="asc"
+  >
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          color="primary"
+          (change)="$event ? masterToggle() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
+        >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox
+          color="primary"
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="proNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>PRO Number</th>
+      <td mat-cell *matCellDef="let element">{{ element.proNumber }}</td>
+    </ng-container>
+    <ng-container matColumnDef="bolNumber">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="d-none d-md-table-cell"
+      >
+        BOL Number
+      </th>
+      <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
+        {{ element.bolNumber }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="poNumber">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="d-none d-md-table-cell"
+      >
+        PO Number
+      </th>
+      <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
+        {{ element.poNumber }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="correctionDate">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="d-none d-lg-table-cell"
+      >
+        Correction Date
+      </th>
+      <td mat-cell *matCellDef="let element" class="d-none d-lg-table-cell">
+        {{ element.correctionDate | displayDate }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="correctionType">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="d-none d-lg-table-cell"
+      >
+        Correction Type
+      </th>
+      <td mat-cell *matCellDef="let element" class="d-none d-lg-table-cell">
+        {{ element.correctionType }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element" class="text-right">
+        <app-image-fetch [proNumber]="element.proNumber"></app-image-fetch>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      class="element-row"
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="selection.toggle(row)"
+    ></tr>
+  </table>
+
+  <div *ngIf="noData | async" class="no-results">
+    There were no results for this query.
+  </div>
+
+  <mat-paginator
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[25, 50, 75, 100]"
+  ></mat-paginator>
+</mat-card>

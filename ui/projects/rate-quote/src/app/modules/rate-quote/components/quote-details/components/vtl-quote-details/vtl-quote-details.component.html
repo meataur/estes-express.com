@@ -1,0 +1,78 @@
+<div class="row d-flex flex-wrap">
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Quote Number</label>
+    {{ quote.quoteID }}
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Selected Service</label>
+    {{ quote.service.text }}
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Quote Date</label>
+    {{ quote.quoteDate }}
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Account</label>
+    {{ formattedAccount$ | async }}
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Role</label>
+    {{ getRole(quote.role) }}
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Terms</label>
+    {{ getTerms(quote.terms) }}
+  </div>
+  <!-- <div class="quote-item col-md-4">
+    <label class="quote-label">Full Value Coverage</label>
+    {{ quote.declaredValue | currency: 'USD' }}
+  </div> -->
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Warehouse or Dist. Center</label>
+    {{ foodWarehouse$ | async }}
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Freight Stackable</label>
+    {{ quote.stackable ? 'Yes' : 'No' }}
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Service Lane</label>
+    {{ quote.lane }} Days
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Origin</label>
+    <a (click)="openTerminalInformation(quote.origin)">
+      <lib-address [address]="generateAddressFromPoint(quote.origin)"></lib-address>
+    </a>
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Destination</label>
+    <a (click)="openTerminalInformation(quote.dest)">
+      <lib-address [address]="generateAddressFromPoint(quote.dest)"></lib-address>
+    </a>
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Pickup Date</label>
+    {{ quote.pickupDate }}
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Pickup Available</label>
+    {{ quote.pickupAvail | timeAMPM }}
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Pickup Close</label>
+    {{ quote.pickupClose | timeAMPM }}
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Delivery Date</label>
+    {{ getDeliveryDate() }}
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Delivery Time</label>
+    {{ getDeliveryTime() }}
+  </div>
+  <div *ngIf="quote.linearFeet" class="quote-item col-md-4">
+    <label class="quote-label">Total Linear Feet</label>
+    {{ quote.linearFeet }}
+  </div>
+</div>

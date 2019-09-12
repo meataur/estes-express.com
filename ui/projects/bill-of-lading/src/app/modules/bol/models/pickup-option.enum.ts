@@ -1,0 +1,8 @@
+export enum PickupOptionEnum {
+  LIFTGATE = 'LIFTGATE',
+  PALLET_STACK = 'PALLET_STACK',
+  FREEZE = 'FREEZE',
+  OVERSIZE = 'OVERSIZE',
+  FOOD = 'FOOD',
+  POISON = 'POISON'
+}

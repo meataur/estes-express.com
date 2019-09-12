@@ -1,0 +1,25 @@
+call ng build --prod common
+call ng build --prod account
+call ng build --prod header
+call ng build --aot --project="address-book" --base-href="/myestes/address-book/"
+call ng build --aot --project="bill-of-lading" --base-href="/myestes/bill-of-lading/"
+call ng build --aot --project="claims" --base-href="/myestes/claims/"
+call ng build --aot --project="commodity-library" --base-href="/myestes/commodity-library/"
+call ng build --aot --project="document-retrieval" --base-href="/myestes/document-retrieval/"
+call ng build --aot --project="edi-request" --base-href="/myestes/edi-request/"
+call ng build --aot --project="errors" --base-href="/myestes/errors/"
+call ng build --aot --project="home" --base-href="/myestes/home/"
+call ng build --aot --project="image-viewing" --base-href="/myestes/image-viewing/"
+call ng build --aot --project="invoice-inquiry" --base-href="/myestes/invoice-inquiry/"
+call ng build --aot --project="online-reporting" --base-href="/myestes/online-reporting/"
+call ng build --aot --project="pc-rater-download" --base-href="/myestes/pc-rater-download/"
+call ng build --aot --project="pickup-request" --base-href="/myestes/pickup-request/"
+call ng build --aot --project="points-download" --base-href="/myestes/points-download/"
+call ng build --aot --project="rate-quote" --base-href="/myestes/rate-quote/"
+call ng build --aot --project="request-additional-info" --base-href="/myestes/request-additional-info/"
+call ng build --aot --project="shipment-manifest" --base-href="/myestes/shipment-manifest/"
+call ng build --aot --project="shipment-tracking" --base-href="/myestes/shipment-tracking/"
+call ng build --aot --project="terminal-lookup" --base-href="/myestes/terminal-lookup/"
+call ng build --aot --project="transit-time-calculator" --base-href="/myestes/transit-time-calculator/"
+call ng build --aot --project="weight-and-research" --base-href="/myestes/weight-and-research/"
+

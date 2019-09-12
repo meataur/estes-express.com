@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-card-header> <mat-card-title>Select Quote Type</mat-card-title> </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="formGroup">
+      <div class="form-row">
+        <div class="form-group col-12 d-flex flex-column">
+          <div><label>Show quotes for:</label></div>
+          <mat-checkbox id="ltl" color="primary" formControlName="ltl" [disabled]="ltl.disabled">
+            Less than Truckload (incl. Guaranteed)
+          </mat-checkbox>
+          <mat-checkbox
+            id="volumeAndTruckload"
+            color="primary"
+            formControlName="volumeAndTruckload"
+            [disabled]="volumeAndTruckload.disabled"
+          >
+            Volume and Truckload (incl. Guaranteed)
+          </mat-checkbox>
+          <mat-checkbox
+            id="timeCritical"
+            color="primary"
+            formControlName="timeCritical"
+            [disabled]="timeCritical.disabled"
+          >
+            Time Critical/Expedited
+          </mat-checkbox>
+        </div>
+      </div>
+      <lib-feedback
+        *ngIf="showApplicationAccessFeedback"
+        [message]="['info', 'One or more quote types are restricted for this account.']"
+      ></lib-feedback>
+    </form>
+  </mat-card-content>
+</mat-card>

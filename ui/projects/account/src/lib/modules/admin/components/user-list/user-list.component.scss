@@ -1,0 +1,18 @@
+@import '../../../../../../../../node_modules/bootstrap/scss/functions';
+@import '../../../../../../../common/src/assets/scss/variables';
+@import '../../../../../../../../node_modules/bootstrap/scss/mixins';
+
+
+
+@include media-breakpoint-up(lg) {
+  .mat-column-lastName, .mat-column-firstName, .mat-column-username {
+    flex: 0 120px;
+  }
+  .mat-column-resetPassword {
+    flex: 0 90px;
+  }
+  .mat-column-createdDate, .mat-column-actions {
+    flex: 0 95px;
+  }
+}
+

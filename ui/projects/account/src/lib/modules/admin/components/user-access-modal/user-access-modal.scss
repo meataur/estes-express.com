@@ -1,0 +1,25 @@
+@import '../../../../../../../../node_modules/bootstrap/scss/functions';
+@import '../../../../../../../common/src/assets/scss/variables';
+@import '../../../../../../../../node_modules/bootstrap/scss/mixins';
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.link-container {
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $gray-300;
+  margin-bottom: 5px;
+}
+
+.mat-dialog-container {
+  padding: 0;
+}
+
+// .mat-card-content {
+//   max-height: 50rem;
+// } 

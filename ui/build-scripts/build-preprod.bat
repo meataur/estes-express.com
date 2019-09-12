@@ -1,0 +1,25 @@
+call ng build --prod common
+call ng build --prod account
+call ng build --prod header
+call ng build --configuration=preprod --project="address-book" --base-href="/myestes/address-book/"
+call ng build --configuration=preprod --project="bill-of-lading" --base-href="/myestes/bill-of-lading/"
+call ng build --configuration=preprod --project="claims" --base-href="/myestes/claims/"
+call ng build --configuration=preprod --project="commodity-library" --base-href="/myestes/commodity-library/"
+call ng build --configuration=preprod --project="document-retrieval" --base-href="/myestes/document-retrieval/"
+call ng build --configuration=preprod --project="edi-request" --base-href="/myestes/edi-request/"
+call ng build --configuration=preprod --project="errors" --base-href="/myestes/errors/"
+call ng build --configuration=preprod --project="home" --base-href="/myestes/home/"
+call ng build --configuration=preprod --project="image-viewing" --base-href="/myestes/image-viewing/"
+call ng build --configuration=preprod --project="invoice-inquiry" --base-href="/myestes/invoice-inquiry/"
+call ng build --configuration=preprod --project="online-reporting" --base-href="/myestes/online-reporting/"
+call ng build --configuration=preprod --project="pc-rater-download" --base-href="/myestes/pc-rater-download/"
+call ng build --configuration=preprod --project="points-download" --base-href="/myestes/points-download/"
+call ng build --configuration=preprod --project="rate-quote" --base-href="/myestes/rate-quote/"
+call ng build --configuration=preprod --project="request-additional-info" --base-href="/myestes/request-additional-info/"
+call ng build --configuration=preprod --project="shipment-manifest" --base-href="/myestes/shipment-manifest/"
+call ng build --configuration=preprod --project="shipment-tracking" --base-href="/myestes/shipment-tracking/"
+call ng build --configuration=preprod --project="terminal-lookup" --base-href="/myestes/terminal-lookup/"
+call ng build --configuration=preprod --project="transit-time-calculator" --base-href="/myestes/transit-time-calculator/"
+call ng build --configuration=preprod --project="pickup-request" --base-href="/myestes/pickup-request/"
+call ng build --configuration=preprod --project="weight-and-research" --base-href="/myestes/weight-and-research/"
+

@@ -1,0 +1,80 @@
+<mat-card>
+  <mat-card-header> <mat-card-title>Quote Details</mat-card-title> </mat-card-header>
+  <mat-card-content>
+    <p>
+      Enter a valid, unexpired quote number to prefill your BOL (optional). Indicating your
+      quote/request number is especially important to ensure accurate rating of volume/truckload and
+      time-critical shipments.
+    </p>
+    <form [formGroup]="formGroup">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Enter Quote #</mat-label>
+            <input matInput formControlName="quoteNumber" />
+            <mat-error *ngIf="quoteNumber.invalid">{{
+              formService.getErrorMessage(quoteNumber)
+            }}</mat-error>
+            <mat-error *ngIf="quoteNumber.invalid && quoteNumber.errors['invalidQuote']">
+              Invalid quote number.
+            </mat-error>
+            <mat-error *ngIf="quoteNumber.invalid && quoteNumber.errors['expiredQuote']">
+              Rate quote expired.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <p *ngIf="hasExpiredQuote" class="font-italic text-danger expired">
+        Please note the quote number you used has expired. Access and update your quote in
+        <a class="text-danger" [href]="rateQuoteHistoryUrl">Rate Quote History</a>, or call your
+        <a class="text-danger" [routerLink]="terminalLookupUrl">local terminal</a>. Otherwise, your
+        freight bill will be rated based on the information you supply in this BOL.
+      </p>
+      <lib-feedback
+        *ngIf="quoteNumber.value && quoteNumber.valid"
+        [message]="[
+          'info',
+          'Any updates made to the BOL that differ from the details of the quote will invalidate this quote.'
+        ]"
+      ></lib-feedback>
+      <lib-feedback
+        *ngIf="hasMexicoCountry"
+        [message]="['info', 'eBOL cannot be used for shipment to/from Mexico.']"
+      ></lib-feedback>
+      <div class="form-row">
+        <div class="form-group col-12">
+          <div><label class="d-block">Do you want to guarantee your shipment?</label></div>
+          <mat-slide-toggle color="primary" formControlName="guaranteed">
+            Guaranteed Service
+          </mat-slide-toggle>
+        </div>
+        <div *ngIf="guaranteed.value === true" class="form-group col-12 mt-2">
+          <p class="font-italic text-danger">
+            IMPORTANT: Please write the guaranteed service level (by 10, noon or 5 p.m. on the
+            standard transit date) on your printed Bill of Lading. For 10 a.m., noon, or an even
+            faster delivery time/date, you must contact our time-critical department
+            (solutions@estes-express.com or 1-800-645-3952) to obtain a quote/request number and to
+            confirm availability.
+          </p>
+          <div class="d-flex">
+            <mat-checkbox class="mr-2" id="tosChecked" color="primary" formControlName="tosChecked">
+            </mat-checkbox>
+            I have read and agree to the&nbsp;<span
+              class="a"
+              role="button"
+              aria-roledescription="Clicking this button will open the Guaranteed Terms of Service"
+              (click)="openTos()"
+              >Terms of Service</span
+            >.
+          </div>
+          <div
+            *ngIf="tosChecked.invalid && (tosChecked.touched || tosChecked.dirty)"
+            class="validation-error"
+          >
+            {{ formService.getErrorMessage(tosChecked) }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

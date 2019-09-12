@@ -1,0 +1,45 @@
+<lib-routable-component-header>Customize Quick Links</lib-routable-component-header>
+<p>
+  Customize your My Estes experience for added convenience. Select up to five Quick Links that will appear on the left sidebar whenever you are logged in. Add or remove Quick Links below.
+</p>
+<lib-feedback [message]="feedback"></lib-feedback>
+<div class="form-row">
+  <div class="form-group col-12 button-container">
+    <button type="button" class="btn btn-default" (click)="resetDefaults()">
+      Apply Defaults
+    </button>
+  </div>
+  <div class="form-group col-md-6">
+    <lib-form-header>Available Applications</lib-form-header>
+    <div [libOverlay]="loadingAvailableLinks">
+      <div class="link-container" *ngFor="let l of (availableLinks$ | async)">
+        {{ l.description }} &nbsp;<button
+          type="button"
+          (click)="addLink(l.appCategory, l.appName)"
+          class="btn btn-primary"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-md-6">
+    <lib-form-header>Quick Links</lib-form-header>
+    <div [libOverlay]="loadingAddedLinks">
+      <div class="link-container" *ngFor="let l of (addedLinks$ | async)">
+        {{ l.description }} &nbsp;<button
+          type="button"
+          (click)="removeLink(l.appCategory, l.appName)"
+          class="btn btn-primary"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+    <div class="button-container">
+      <button [routerLink]="['/myestes']" type="button" class="btn btn-default">
+        Return to Welcome Page
+      </button>
+    </div>
+  </div>
+</div>

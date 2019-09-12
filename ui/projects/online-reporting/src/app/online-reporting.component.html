@@ -1,0 +1,98 @@
+<lib-routable-component-header>Online Reporting</lib-routable-component-header>
+<strong>See your active and expired reports.</strong>
+<p> We make it easy for you to create regular reports — then save time by scheduling them to deliver directly to your inbox on a daily, weekly, or monthly basis. Available reports include shipment tracking, shipment manifests, and claims. Reports are run at 4 a.m. ET daily.</p>
+<mat-tab-group [(selectedIndex)]="tabSelectedIndex">
+  <mat-tab label="My Reports">
+    <p class="pt-3">
+      See your active and expired reports.
+    </p>
+    <div>
+      <mat-card *ngFor="let reportTable of reportTables; let i = index" class="mat-card--table">
+        <mat-card-header class="d-flex justify-content-between">
+          <mat-card-title>
+            {{reportTableTitles[i]}}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="p-0">
+          <div class="table-container mat-elevation-z8">
+
+            <mat-table #table matSort [dataSource]="reportTable" multiTemplateDataRows>
+              <!-- Report Name Column -->
+              <ng-container matColumnDef="reportName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Report Name</mat-header-cell>
+                <mat-cell *matCellDef="let element" >
+                  <span>{{element.reportName}}</span>
+                </mat-cell>
+              </ng-container>
+              <!-- Frequency Column -->
+              <ng-container matColumnDef="frequency">
+                <mat-header-cell *matHeaderCellDef mat-sort-header >Frequency</mat-header-cell>
+                <mat-cell *matCellDef="let element" >
+                  <span>{{frequencyStrings[element.frequency]}}</span>
+                </mat-cell>
+              </ng-container>
+              <!-- Format Column -->
+              <ng-container matColumnDef="format">
+                <mat-header-cell *matHeaderCellDef mat-sort-header >Format</mat-header-cell>
+                <mat-cell *matCellDef="let element" >
+                    <span>{{element.format}}</span>
+                </mat-cell>
+              </ng-container>
+              <!-- Date Created Column -->
+              <ng-container matColumnDef="startDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="dl-flex">Date Created</mat-header-cell>
+                <mat-cell *matCellDef="let element" >
+                  <span>{{element.startDate}}</span>
+                </mat-cell>
+              </ng-container>
+              <!-- Expiration Column -->
+              <ng-container matColumnDef="expirationDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header >Expiration</mat-header-cell>
+                <mat-cell *matCellDef="let element" >
+                  <span>{{element.expirationDate}}</span>
+                </mat-cell>
+              </ng-container>
+              <!-- Actions Column -->
+              <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef class="d-none d-md-table-cell"></mat-header-cell>
+                <mat-cell *matCellDef="let element" class="d-none d-md-flex table-cell-actions">
+                  <button mat-icon-button title="Modify Report" (click)="openEditReportModal(element)">
+                    <mat-icon fontSet="fa" fontIcon="fa-pencil-alt" aria-hidden="true"></mat-icon>
+                  </button>
+                  <button mat-icon-button title="Delete Report" (click)="deleteReport(element.scheduleId)">
+                    <mat-icon fontSet="fas" fontIcon="fa-times-circle" aria-hidden="true"></mat-icon>
+                  </button>
+                </mat-cell>
+              </ng-container>
+              <mat-header-row class="d-flex" *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row class="element-row d-flex" *matRowDef="let element; columns: displayedColumns;"></mat-row>
+            </mat-table>
+            <mat-card *ngIf="!loading && reportTable.data.length == 0" class="table-loading">
+              <mat-card-content>
+                  <p>You Have No {{reportTableTitles[i]}}</p>
+              </mat-card-content>
+            </mat-card>
+            <mat-card *ngIf="loading" class="table-loading">
+              <mat-progress-spinner
+                color="primary"
+                mode="indeterminate">
+              </mat-progress-spinner>
+            </mat-card>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <mat-card *ngIf="!loading && activeReports.data.length == 0 && expiredReports.data.length == 0" class="table-loading">
+      <mat-card-content>
+        <button class="btn btn-default" (click)="tabSelectedIndex = 1">Create a Report</button>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Create a Report">
+    <app-create-report (created)="tabSelectedIndex = 0; ngOnInit();"></app-create-report>
+  </mat-tab>
+  <mat-tab *ngIf="editReport">
+    <ng-template mat-tab-label><div class="d-flex justify-content-between"><span>Edit Report</span></div></ng-template>
+    <app-create-report (created)="tabSelectedIndex = 0; ngOnInit(); editReport = null;" [report]="editReport"></app-create-report>
+  </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,23 @@
+<div *ngIf="showDropdown === true" class="form-group col-12">
+  <div class="d-flex align-items-baseline flex-wrap">
+    <mat-form-field appearance="outline" class="mr-3">
+      <mat-label>{{ label }}</mat-label>
+      <input
+        id="addressSelect"
+        matInput
+        [formControl]="fc"
+        [required]="formService.hasRequiredField(fc)"
+        [matAutocomplete]="auto"
+        autocomplete="disabled"
+        maxlength="7"
+      />
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of (filteredAccounts | async)" [value]="option.accountNumber">
+          {{ option.accountNumber }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="fc.invalid">{{ formService.getErrorMessage(fc) }}</mat-error>
+    </mat-form-field>
+    <lib-button-link (clicked)="openAccountDialog()" [text]="'Account Search'"></lib-button-link>
+  </div>
+</div>

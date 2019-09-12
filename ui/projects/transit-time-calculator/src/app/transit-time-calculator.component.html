@@ -1,0 +1,365 @@
+<h1><span>Transit Time Calculator</span></h1>
+<p>We offer more than 750 million one- and two-day points. Using our transit calculator, find the transit time between your freight’s origin and destination below.</p>
+<mat-card class="mat-card--table">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <mat-card-header>
+      <div class="row">
+        <h3 class="col">Routing Information</h3>
+      </div>
+    </mat-card-header>
+    <mat-card-content class="m-0">
+      <!-- Origin Point Section -->
+      <div class="row">
+        <div class="col h6">
+          <i class="fa fa-dot-circle float-left pr-2 red"></i>
+          <h6 class="m-0">ORIGIN</h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <hr>
+        </div>
+      </div>
+      <div formGroupName="originpoint" class="row">
+        <div class="col-12 col-md-3">
+          <mat-form-field appearance="outline">
+            <mat-label>Select Country</mat-label>
+            <mat-select
+              required
+              name="country"
+              id="country"
+              formControlName="country">
+              <mat-option *ngFor="let option of countries" [value]="option.value">
+                {{ option.viewValue }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="originCountry.invalid">{{
+              formService.getErrorMessage(originCountry)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 col-md-2">
+          <mat-form-field appearance="outline">
+            <mat-label>Enter ZIP/Postal Code</mat-label>
+            <input
+              type="text"
+              matInput
+              required
+              id="zip"
+              name="zip"
+              formControlName="zip"
+              (change)="originZip.setValue($event.target.value)"
+              autocomplete="disabled"
+              [matAutocomplete]="autoOrigin1"
+              (keyup)="reloadOriginSuggestions(originpoint, $event)"/>
+            <mat-autocomplete #autoOrigin1="matAutocomplete" panelWidth="auto">
+              <mat-option
+                *ngFor="let point of (originPointSuggestions | async)"
+                (onSelectionChange)="autofillPoint(point, originpoint)"
+                [value]="point.zip">
+                <span>{{ point.city }}, {{ point.state }} {{ point.zip }}</span>
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="originZip.invalid">{{
+              formService.getErrorMessage(originZip)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 col-md-3">
+          <mat-form-field appearance="outline">
+            <mat-label>Origin City</mat-label>
+            <input
+              type="text"
+              matInput
+              required
+              id="city"
+              name="city"
+              formControlName="city"
+              (change)="originCity.setValue($event.target.value)"
+              autocomplete="disabled"
+              [matAutocomplete]="autoOrigin2"
+              (keyup)="reloadOriginSuggestions(originpoint, $event)"/>
+            <mat-autocomplete #autoOrigin2="matAutocomplete" panelWidth="auto">
+              <mat-option
+                *ngFor="let point of (originPointSuggestions | async)"
+                (onSelectionChange)="autofillPoint(point, originpoint)"
+                [value]="point.city">
+                <span>{{ point.city }}, {{ point.state }} {{ point.zip }}</span>
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="originZip.invalid">{{
+              formService.getErrorMessage(originZip)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 col-md-2">
+          <mat-form-field appearance="outline">
+            <mat-label>State/Province</mat-label>
+            <input
+              type="text"
+              matInput
+              required
+              floatLabel="always"
+              id="state"
+              name="state"
+              formControlName="state"
+              (change)="originState.setValue($event.target.value)"
+              autocomplete="disabled"
+              [matAutocomplete]="autoOrigin3"
+              (keyup)="reloadOriginSuggestions(originpoint, $event)"/>
+            <mat-autocomplete #autoOrigin3="matAutocomplete" panelWidth="auto">
+              <mat-option
+                *ngFor="let point of (originPointSuggestions | async)"
+                (onSelectionChange)="autofillPoint(point, originpoint)"
+                [value]="point.state">
+                <span>{{ point.city }}, {{ point.state }} {{ point.zip }}</span>
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="originState.invalid">{{
+              formService.getErrorMessage(originState)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- Destination Points Section -->
+      <div formArrayName="destinationPoints">
+        <div class="row">
+          <div class="col h6">
+            <i class="fa fa-map-marker-alt float-left pr-2 red"></i>
+            <h6 class="m-0">DESTINATION</h6>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <hr>
+          </div>
+        </div>
+        <div *ngFor="let destination of destinationPoints.controls; index as i">
+          <div [formGroupName]="i">
+            <div class="row"  *ngIf="i > 0">
+              <div class="col">
+                <hr class="dashed">
+              </div>
+            </div>
+            <div class="row">
+              <div formGroupName="point" class="row col-12 col-md-9">
+                <div class="col-12 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Select Country</mat-label>
+                    <mat-select
+                      required
+                      name="country"
+                      id="country"
+                      formControlName="country">
+                      <mat-option *ngFor="let option of countries" [value]="option.value">
+                        {{ option.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="destination.get('point.country').invalid">{{
+                      formService.getErrorMessage(destination.get('point.country'))
+                    }}</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-12 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Enter ZIP/Postal Code</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      required
+                      id="zip"
+                      name="zip"
+                      formControlName="zip"
+                      (change)="destinationPoints.at(i).get('point.zip').setValue($event.target.value)"
+                      autocomplete="disabled"
+                      [matAutocomplete]="autoDestZip"
+                      (keyup)="reloadDestinationSuggestions(destinationPoints.at(i).get('point'), $event, i)"/>
+                    <mat-autocomplete #autoDestZip="matAutocomplete" panelWidth="auto">
+                      <mat-option
+                        *ngFor="let point of (destinationPointSuggestions[i] | async)"
+                        (onSelectionChange)="autofillPoint(point, destinationPoints.at(i).get('point'))"
+                        [value]="point.zip">
+                        <span>{{ point.city }}, {{ point.state }} {{ point.zip }}</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="destination.get('point.zip').invalid">{{
+                      formService.getErrorMessage(destination.get('point.zip'))
+                    }}</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-12 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Destination City</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      required
+                      id="city"
+                      name="city"
+                      formControlName="city"
+                      (change)="destinationPoints.at(i).get('point.city').setValue($event.target.value)"
+                      autocomplete="disabled"
+                      [matAutocomplete]="autoDestCity"
+                      (keyup)="reloadDestinationSuggestions(destinationPoints.at(i).get('point'), $event, i)"/>
+                    <mat-autocomplete #autoDestCity="matAutocomplete" panelWidth="auto">
+                      <mat-option
+                        *ngFor="let point of (destinationPointSuggestions[i] | async)"
+                        (onSelectionChange)="autofillPoint(point, destinationPoints.at(i).get('point'))"
+                        [value]="point.city">
+                        <span>{{ point.city }}, {{ point.state }} {{ point.zip }}</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="destination.get('point.city').invalid">{{
+                      formService.getErrorMessage(destination.get('point.city'))
+                    }}</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-12 col-md-2">
+                  <mat-form-field appearance="outline">
+                    <mat-label>State/Province</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      required
+                      id="state"
+                      name="state"
+                      formControlName="state"
+                      (change)="destinationPoints.at(i).get('point.state').setValue($event.target.value)"
+                      autocomplete="disabled"
+                      [matAutocomplete]="autoDestState"
+                      (keyup)="reloadDestinationSuggestions(destinationPoints.at(i).get('point'), $event, i)"/>
+                    <mat-autocomplete #autoDestState="matAutocomplete" panelWidth="auto">
+                      <mat-option
+                        *ngFor="let point of (destinationPointSuggestions[i] | async)"
+                        (onSelectionChange)="autofillPoint(point, destinationPoints.at(i).get('point'))"
+                        [value]="point.state">
+                        <span>{{ point.city }}, {{ point.state }} {{ point.zip }}</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="destination.get('point.state').invalid">{{
+                      formService.getErrorMessage(destination.get('point.state'))
+                    }}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-10 col-md-2">
+                <mat-form-field appearance="outline">
+                  <mat-label>Shipment Date</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="shipmentDatePicker"
+                    formControlName="shipmentDate"
+                    placeholder="MM/DD/YYYY" />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="shipmentDatePicker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #shipmentDatePicker></mat-datepicker>
+                  <mat-error *ngIf="destination.get('shipmentDate').invalid">{{
+                    formService.getErrorMessage(destination.get('shipmentDate'))
+                  }}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-1 pt-3">
+                <i *ngIf="i > 0" class="fa fa-times-circle pl-2" (click)="removeDestination(i)"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button *ngIf="destinationPoints.length < 10" type="button" class="btn btn-default" (click)="addDestination()"><i class="fas fa-plus pr-1"></i> Additional Destination</button>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions class="pl-4 pr-4 pb-4 pt-0">
+      <lib-feedback [message]="errorMessages"></lib-feedback>
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-primary mr-3" [disabled]="loading">Submit<i class="fas fa-sync-alt fa-spin ml-2" *ngIf="loading"></i></button>
+          <button type="button" (click)="resetTransitForm();" class="btn btn-default">Clear</button>
+        </div>
+      </div>
+    </mat-card-actions>
+  </form>
+</mat-card>
+<mat-card class="mat-card--table" *ngIf="results">
+  <mat-card-header>
+    <div class="row">
+      <h3 class="col">Transit Time Details</h3>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <div *ngFor="let terminal of results.destinationTerminals; index as i">
+      <div class="row">
+        <div class="col-12 col-md-4 col-lg-3 pb-3">
+          <div class="h6">
+            <i class="fa fa-dot-circle float-left pt-1 pr-2 red"></i>
+            <h6>ORIGIN</h6>
+          </div>
+          <hr>
+          <span>{{requestCopy.originpoint.city}}, {{requestCopy.originpoint.state}} {{requestCopy.originpoint.zip}}</span>
+          <hr>
+          <h6 class="pt-1">Supporting Terminal</h6>
+          <lib-address [address]="results.originTerminal.address"></lib-address>
+          <br>
+          <span *ngIf="results.originTerminal.phone">Phone: {{results.originTerminal.phone | phone}}</span><br>
+          <span *ngIf="results.originTerminal.fax">Fax: {{results.originTerminal.fax | phone}}</span>
+        </div>
+        <div class="col-12 col-md-3 col-lg-2">
+          <i class="fa fa-truck float-left pt-1 pr-2 red"></i>
+          <h6>SERVICE</h6>
+          <hr>
+
+          <p class="d-block d-md-flex justify-content-center m-0">{{results.destinationTerminals[i].serviceDays}} Day<span *ngIf="results.destinationTerminals[i].serviceDays > 1">s</span>*</p>
+          <h2 class="d-none d-md-flex justify-content-center"><i class="fa fa-long-arrow-alt-right" aria-hidden="true"></i></h2>
+          <hr>
+        </div>
+        <div class="col-12 col-md-5 col-lg-3 pb-3">
+          <div class="h6">
+            <i class="fa fa-map-marker-alt float-left pr-2 red"></i>
+            <h6>DESTINATION</h6>
+          </div>
+          <hr>
+          <span>{{requestCopy.destinationPoints[i].point.city}}, {{requestCopy.destinationPoints[i].point.state}} {{requestCopy.destinationPoints[i].point.zip}}</span>
+          <hr>
+          <h6 class="pt-1">Supporting Terminal</h6>
+          <lib-address [address]="results.destinationTerminals[i].destinationTerminal.address"></lib-address>
+          <br>
+          <span *ngIf="results.destinationTerminals[i].destinationTerminal.phone">Phone: {{results.destinationTerminals[i].destinationTerminal.phone | phone}}</span><br>
+          <span *ngIf="results.destinationTerminals[i].destinationTerminal.fax">Fax: {{results.destinationTerminals[i].destinationTerminal.fax | phone}}</span>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="call-to-action-box">
+            <a [href]="'/myestes/rate-quote/estimate?ozip=' + requestCopy.originpoint.zip + '&ocity=' + requestCopy.originpoint.city + '&ostate=' + requestCopy.originpoint.state + '&ocountry=' + requestCopy.originpoint.country + '&dzip=' + requestCopy.destinationPoints[i].point.zip + '&dcity=' + requestCopy.destinationPoints[i].point.city + '&dstate=' + requestCopy.destinationPoints[i].point.state + '&dcountry=' + requestCopy.destinationPoints[i].point.country" target="_blank" class="btn btn-default--action mb-2 w-100 text-left"><i class="fal fa-file-spreadsheet pr-1"></i> Rate Quote</a>
+            <a [href]="'/myestes/bill-of-lading/bol/create'" target="_blank" class="btn btn-default--action mb-2 w-100 text-left"><i class="fal fa-file-spreadsheet pr-1"></i> Create BOL</a>
+            <a [href]="'/myestes/pickup-request?dzip=' + requestCopy.destinationPoints[i].point.zip" target="_blank" class="btn btn-default--action mb-2 w-100 text-left"><i class="fal fa-truck pr-1"></i> Pickup Request</a>
+            <a *ngIf="results.originTerminal.nationalMap" target="_blank" [href]="results.originTerminal.nationalMap" class="btn btn-default--action mb-2 w-100 text-left"><i class="fal fa-map pr-1"></i> National Coverage Map</a>
+            <a *ngIf="results.originTerminal.serviceMap" target="_blank" [href]="results.originTerminal.serviceMap" class="btn btn-default--action w-100 text-left"><i class="fa fa-map pr-1"></i> Next Day Coverage Map</a>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="results.destinationTerminals[i].message">
+        <div class="col-12 col-md-8">
+          <p class="red m-0 pt-3">{{results.destinationTerminals[i].message}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <hr>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p class="red">*Transit times apply to standard Estes LTL shipments. Times are based on the actual date and time of the pickup, which may be different from the shipment date entered. Transit times for specialty services and custom solutions provided by other Estes operating entities may differ based on the services selected.</p>
+        </div>
+      </div>
+      <div class="row pb-3">
+          <div class="col">
+            <p>*Transit times obtained via www.estes-express.com are the primary source of information pertaining to Estes’ service. In the event of a discrepancy with data obtained from a non-Estes source, service standard information published on www.estes-express.com will take precedence.</p>
+          </div>
+        </div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,12 @@
+<button
+  [routerLink]="['/rate-quote/create/quote', quote.quoteID]"
+  class="w-100 btn btn-default--action d-flex justify-content-between"
+>
+  Revise Quote
+</button>
+<button
+  class="w-100 btn btn-default--action d-flex justify-content-between mt-2"
+  (click)="startNewQuote()"
+>
+  Start New Quote
+</button>

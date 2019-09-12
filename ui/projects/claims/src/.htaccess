@@ -1,0 +1,31 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  Options Indexes FollowSymLinks
+  RewriteBase /myestes/claims/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.html
+</IfModule>
+<IfModule mod_mime.c>
+  Addtype image/x-icon .ico
+  Addtype font/opentype .otf
+  Addtype font/eot .eot
+  Addtype font/truetype .ttf
+  Addtype font/truetype .ttf
+  Addtype application/font-woff .woff
+  Addtype application/font-woff2 .woff2
+  Addtype image/svg+xml .svg
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/plain text/xml text/css text/text text/html
+  AddOutputFilterByType DEFLATE application/x-javascript application/javascript application/json
+  AddOutputFilterByType DEFLATE font/opentype font/eot font/truetype
+  AddOutputFilterByType DEFLATE application/font-woff application/font-woff2
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+<IfModule mod_expires.c>
+	ExpiresActive On
+	<FilesMatch "\.(jpe?g|png|gif|js|css)$">
+		ExpiresDefault "access plus 1 week"
+	</FilesMatch>
+</IfModule>

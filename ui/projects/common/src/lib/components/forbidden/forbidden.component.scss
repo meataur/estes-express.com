@@ -1,0 +1,8 @@
+@import "../../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../assets/scss/variables";
+@import "../../../../../../node_modules/bootstrap/scss/mixins";
+
+.forbidden-icon {
+  color: $red;
+  font-size: 3rem;
+}

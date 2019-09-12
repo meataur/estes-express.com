@@ -1,0 +1,19 @@
+.shipment-type {
+  margin-right: 10px;
+}
+
+::ng-deep .results-filter .mat-form-field-wrapper {
+  padding: 0;
+}
+
+.span-action {
+  cursor: pointer;
+  color: #0052e0;
+  text-decoration: none;
+  background-color: transparent;
+
+  &:hover {
+    color: #003694;
+    text-decoration: underline;
+  }
+}

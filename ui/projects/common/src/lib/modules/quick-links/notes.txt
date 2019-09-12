@@ -1,0 +1,122 @@
+[
+    {
+        "appName": "EBG10O101",
+        "description": "Address Book",
+        "appCategory": "G05",
+        "linkOrder": 1
+    },
+    {
+        "appName": "BOL100",
+        "description": "Bill of Lading",
+        "appCategory": "Y01",
+        "linkOrder": 2
+    },
+    {
+        "appName": "CLAIMSFILE",
+        "description": "Claims Filing",
+        "appCategory": "D03",
+        "linkOrder": 3
+    },
+    {
+        "appName": "CLAIMIN",
+        "description": "Claims Inquiry",
+        "appCategory": "D01",
+        "linkOrder": 4
+    },
+    {
+        "appName": "EBG10O120",
+        "description": "Commodity Library",
+        "appCategory": "G08",
+        "linkOrder": 5
+    },
+    {
+        "appName": "DSN10O100",
+        "description": "Density Calculator",
+        "appCategory": "C07",
+        "linkOrder": 6
+    },
+    {
+        "appName": "EDITPROF",
+        "description": "Edit My Estes Profile",
+        "appCategory": "M01",
+        "linkOrder": 7
+    },
+    {
+        "appName": "PDN100",
+        "description": "Image Viewing",
+        "appCategory": "B01",
+        "linkOrder": 8
+    },
+    {
+        "appName": "INVINQUIRY",
+        "description": "Invoice Inquiry",
+        "appCategory": "J01",
+        "linkOrder": 9
+    },
+    {
+        "appName": "PKN200",
+        "description": "LTL Pickup Request",
+        "appCategory": "G01",
+        "linkOrder": 10
+    },
+    {
+        "appName": "QNN100",
+        "description": "My Estes",
+        "appCategory": "C09",
+        "linkOrder": 11
+    },
+    {
+        "appName": "ONL100",
+        "description": "Online Reporting",
+        "appCategory": "B02",
+        "linkOrder": 12
+    },
+    {
+        "appName": "PICKUPHIST",
+        "description": "Pickup History",
+        "appCategory": "G06",
+        "linkOrder": 13
+    },
+    {
+        "appName": "QUOTEHIST",
+        "description": "Rate Quote History",
+        "appCategory": "A65",
+        "linkOrder": 14
+    },
+    {
+        "appName": "RSG10O100",
+        "description": "Recent Shipments",
+        "appCategory": "ZZZ",
+        "linkOrder": 15
+    },
+    {
+        "appName": "REQUESTINFO",
+        "description": "Request Additional Info",
+        "appCategory": "K02",
+        "linkOrder": 16
+    },
+    {
+        "appName": "SHIPMAN",
+        "description": "Shipment Manifest",
+        "appCategory": "A04",
+        "linkOrder": 17
+    },
+    {
+        "appName": "TIMECRIT",
+        "description": "Time Critical Rate Quote",
+        "appCategory": "A55",
+        "linkOrder": 18
+    },
+    {
+        "appName": "VTLQUOTE",
+        "description": "V/TL Rate Quote",
+        "appCategory": "A70",
+        "linkOrder": 19
+    },
+    {
+        "appName": "WRVIEWING",
+        "description": "Weight & Research Inquiry",
+        "appCategory": "D02",
+        "linkOrder": 20
+    }
+]

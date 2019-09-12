@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-header><mat-card-title>Shipper and Consignee Details</mat-card-title></mat-card-header>
+  <mat-card-content>
+    <!-- Form Valid: {{ formGroup.valid }}<br />
+    Form Value: {{ formGroup.value | json }}<br>
+    Form Status: {{formGroup.status | json}} -->
+    <!-- {{formGroup.value | json}} -->
+    <div class="row">
+      <div class="col-md-6">
+        <app-address-details
+          [formGroupRef]="shipperInfo"
+          [myestesAddressSource]="true"
+          [headerTitle]="'Shipper Info'"
+          [hideAddressBook]="hideShipperAddressBook"
+        ></app-address-details>
+        <button type="button" class="btn btn-default" (click)="addAddress(shipperInfo)">
+          Save to Address Book
+        </button>
+      </div>
+      <div class="col-md-6">
+        <app-address-details
+          [formGroupRef]="consigneeInfo"
+          [myestesAddressSource]="true"
+          [headerTitle]="'Consignee Info'"
+        ></app-address-details>
+        <button type="button" class="btn btn-default" (click)="addAddress(consigneeInfo)">
+          Save to Address Book
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,150 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Requester Information</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p *ngIf="!(ltlOnly$ | async) && !isRateEstimate">
+      Use address from
+      <lib-inline-button
+        class="ml-1 font-weight-bold"
+        [faIcon]="'fa fa-address-book'"
+        (click)="openAddressDialog()"
+        >Address Book</lib-inline-button
+      >
+    </p>
+    <div *ngIf="!(ltlOnly$ | async) && !isRateEstimate" class="form-row">
+      <div class="form-group col-md-12">
+        <mat-checkbox color="primary" (change)="onAddressSourceChecked($event)">
+          Use My Estes Account Info<i
+            *ngIf="loadingAccountInfo"
+            class="fal fa-sync-alt fa-spin ml-2"
+          ></i>
+        </mat-checkbox>
+      </div>
+    </div>
+    <form [formGroup]="formGroup">
+      <div class="row">
+        <div *ngIf="!(ltlOnly$ | async) || isRateEstimate" class="col-md-6">
+          <div class="form-row">
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Contact Name</mat-label>
+                <input
+                  matInput
+                  id="contactName"
+                  formControlName="contactName"
+                  [required]="formService.hasRequiredField(contactName)"
+                />
+                <mat-error *ngIf="contactName.invalid">{{
+                  formService.getErrorMessage(contactName)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div *ngIf="isRateEstimate" class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Discount (%)</mat-label>
+                <input
+                  matInput
+                  id="discount"
+                  formControlName="discount"
+                  [required]="formService.hasRequiredField(discount)"
+                />
+                <mat-error *ngIf="discount.invalid">{{
+                  formService.getErrorMessage(discount)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div *ngIf="!isRateEstimate" class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Email Address</mat-label>
+                <input
+                  matInput
+                  id="contactEmail"
+                  formControlName="contactEmail"
+                  placeholder="Email@example.com"
+                  [required]="formService.hasRequiredField(contactEmail)"
+                />
+                <mat-error *ngIf="contactEmail.invalid">{{
+                  formService.getErrorMessage(contactEmail)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div *ngIf="!isRateEstimate" class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Phone Number</mat-label>
+                <input
+                  matInput
+                  id="contactPhone"
+                  formControlName="contactPhone"
+                  placeholder="(888) 888-8888"
+                  [required]="formService.hasRequiredField(contactPhone)"
+                  [textMask]="{ mask: phoneMask, guide: false }"
+                />
+                <mat-error *ngIf="contactPhone.invalid">{{
+                  formService.getErrorMessage(contactPhone)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div *ngIf="!isRateEstimate" class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Extension</mat-label>
+                <input
+                  matInput
+                  id="contactExtension"
+                  formControlName="contactExtension"
+                  maxlength="7"
+                  [required]="formService.hasRequiredField(contactExtension)"
+                />
+                <mat-error *ngIf="contactExtension.invalid">{{
+                  formService.getErrorMessage(contactExtension)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!isRateEstimate" class="col-md-6">
+          <lib-account-select
+            class="form-row"
+            [fc]="accountCode"
+            [label]="'Account #'"
+          ></lib-account-select>
+          <div class="form-row">
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Role</mat-label>
+                <mat-select
+                  formControlName="role"
+                  id="role"
+                  [required]="formService.hasRequiredField(role)"
+                >
+                  <mat-option [value]="'S'">Shipper</mat-option>
+                  <mat-option [value]="'C'">Consignee</mat-option>
+                  <mat-option [value]="'T'">Third Party</mat-option>
+                </mat-select>
+                <mat-error *ngIf="role.invalid">{{
+                  formService.getErrorMessage(role)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Terms</mat-label>
+                <mat-select
+                  formControlName="terms"
+                  id="terms"
+                  [required]="formService.hasRequiredField(terms)"
+                >
+                  <mat-option [value]="'PPD'">Prepaid</mat-option>
+                  <mat-option [value]="'COL'">Collect</mat-option>
+                </mat-select>
+                <mat-error *ngIf="terms.invalid">{{
+                  formService.getErrorMessage(terms)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

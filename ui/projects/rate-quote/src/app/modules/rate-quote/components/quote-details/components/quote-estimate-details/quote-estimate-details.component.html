@@ -1,0 +1,26 @@
+<div class="row d-flex flex-wrap">
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Selected Service</label>
+    {{ quote.service.text }}
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Quote Number</label>
+    {{ quote.quoteID }}
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Service Lane</label>
+    {{ quote.lane }} Days
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Origin</label>
+    <a (click)="openTerminalInformation(quote.origin)">
+      <lib-address [address]="generateAddressFromPoint(quote.origin)"></lib-address>
+    </a>
+  </div>
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Destination</label>
+    <a (click)="openTerminalInformation(quote.dest)">
+      <lib-address [address]="generateAddressFromPoint(quote.dest)"></lib-address>
+    </a>
+  </div>
+</div>

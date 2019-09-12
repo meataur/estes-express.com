@@ -1,0 +1,13 @@
+<div class="action-column">
+  <div class="action-column__header mb-2">
+    <i class="fa fa-arrow-circle-right mr-2"></i><span class="text-uppercase">Next Steps</span>
+  </div>
+  <p>
+    The act of shipping freight with Estes implies you have read and agree to our
+    <a (click)="openDisclosuresModal()">Rate Quote Disclosures and Terms of Service</a>.
+  </p>
+  <div class="action-column__header mb-2">
+    <i class="fa fa-arrow-circle-right mr-2"></i><span class="text-uppercase">Quote Options</span>
+  </div>
+  <app-quote-options [quote]="quote"></app-quote-options>
+</div>

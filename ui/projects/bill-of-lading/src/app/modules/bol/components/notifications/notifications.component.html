@@ -1,0 +1,338 @@
+<mat-card [formGroup]="formGroup">
+  <mat-card-header> <mat-card-title>Notifications</mat-card-title> </mat-card-header>
+  <mat-card-content>
+    <mat-slide-toggle
+      class="d-block mb-3"
+      color="primary"
+      formControlName="hasEmail"
+    >
+      Send Email Notifications
+    </mat-slide-toggle>
+    <ng-container *ngIf="hasEmail.value === true">
+      <div class="form-row mb-3">
+        <div class="form-group col-md-4">
+          <div class="form-row">
+            <div class="form-group col-12">
+              <lib-form-header [color]="'red'">Shipper</lib-form-header>
+              <mat-form-field appearance="outline">
+                <mat-label>Shipper Email Address</mat-label>
+                <input
+                  id="shipperEmail"
+                  matInput
+                  placeholder="Email@example.com"
+                  formControlName="shipperEmail"
+                  [required]="shipperEmail.errors && shipperEmail.errors['required'] === true"
+                />
+                <mat-error *ngIf="shipperEmail.invalid">{{
+                  formService.getErrorMessage(shipperEmail)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-12">
+              <mat-checkbox
+                id="shipperEmailBolUpdate"
+                color="primary"
+                formControlName="shipperEmailBolUpdate"
+              >
+                Bill of Lading
+              </mat-checkbox>
+            </div>
+            <div class="form-group col-12">
+              <mat-checkbox
+                id="shipperEmailTrackingUpdate"
+                color="primary"
+                formControlName="shipperEmailTrackingUpdate"
+              >
+                Tracking Updates
+              </mat-checkbox>
+            </div>
+            <div class="form-group col-12">
+              <mat-checkbox
+                id="shipperEmailShippingLabel"
+                color="primary"
+                formControlName="shipperEmailShippingLabel"
+              >
+                Shipping Labels
+              </mat-checkbox>
+            </div>
+            <div *ngIf="showPickupNotifications === true" class="form-group col-12">
+              <mat-checkbox
+                id="shipperEmailPickupNotice"
+                color="primary"
+                formControlName="shipperEmailPickupNotice"
+              >
+                Pickup Notifications
+              </mat-checkbox>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <div class="form-row">
+            <div class="form-group col-12">
+              <lib-form-header [color]="'red'">Consignee</lib-form-header>
+              <mat-form-field appearance="outline">
+                <mat-label>Consignee Email Address</mat-label>
+                <input
+                  id="consigneeEmail"
+                  matInput
+                  placeholder="Email@example.com"
+                  formControlName="consigneeEmail"
+                  [required]="consigneeEmail.errors && consigneeEmail.errors['required'] === true"
+                />
+                <mat-error *ngIf="consigneeEmail.invalid">{{
+                  formService.getErrorMessage(consigneeEmail)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-12">
+              <mat-checkbox
+                id="consigneeEmailBolUpdate"
+                color="primary"
+                formControlName="consigneeEmailBolUpdate"
+              >
+                Bill of Lading
+              </mat-checkbox>
+            </div>
+            <div class="form-group col-12">
+              <mat-checkbox
+                id="consigneeEmailTrackingUpdate"
+                color="primary"
+                formControlName="consigneeEmailTrackingUpdate"
+              >
+                Tracking Updates
+              </mat-checkbox>
+            </div>
+            <div class="form-group col-12">
+              <mat-checkbox
+                id="consigneeEmailShippingLabel"
+                color="primary"
+                formControlName="consigneeEmailShippingLabel"
+              >
+                Shipping Labels
+              </mat-checkbox>
+            </div>
+            <div *ngIf="showPickupNotifications === true" class="form-group col-12">
+              <mat-checkbox
+                id="consigneeEmailPickupNotice"
+                color="primary"
+                formControlName="consigneeEmailPickupNotice"
+              >
+                Pickup Notifications
+              </mat-checkbox>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <div class="form-row">
+            <div class="form-group col-12">
+              <lib-form-header [color]="'red'">Third Party</lib-form-header>
+              <mat-form-field appearance="outline">
+                <mat-label>Third Party Email Address</mat-label>
+                <input
+                  id="thirdPartyEmail"
+                  placeholder="Email@example.com"
+                  matInput
+                  formControlName="thirdPartyEmail"
+                  [required]="thirdPartyEmail.errors && thirdPartyEmail.errors['required'] === true"
+                />
+                <mat-error *ngIf="thirdPartyEmail.invalid">{{
+                  formService.getErrorMessage(thirdPartyEmail)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-12">
+              <mat-checkbox
+                id="thirdPartyEmailBolUpdate"
+                color="primary"
+                formControlName="thirdPartyEmailBolUpdate"
+              >
+                Bill of Lading
+              </mat-checkbox>
+            </div>
+            <div class="form-group col-12">
+              <mat-checkbox
+                id="thirdPartyEmailTrackingUpdate"
+                color="primary"
+                formControlName="thirdPartyEmailTrackingUpdate"
+              >
+                Tracking Updates
+              </mat-checkbox>
+            </div>
+            <div class="form-group col-12">
+              <mat-checkbox
+                id="thirdPartyEmailShippingLabel"
+                color="primary"
+                formControlName="thirdPartyEmailShippingLabel"
+              >
+                Shipping Labels
+              </mat-checkbox>
+            </div>
+            <div *ngIf="showPickupNotifications === true" class="form-group col-12">
+              <mat-checkbox
+                id="thirdPartyEmailPickupNotice"
+                color="primary"
+                formControlName="thirdPartyEmailPickupNotice"
+              >
+                Pickup Notifications
+              </mat-checkbox>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <div class="form-row">
+            <div class="form-group col-12">
+              <lib-form-header [color]="'red'">Other</lib-form-header>
+              <mat-form-field appearance="outline">
+                <mat-label>Other Email Address</mat-label>
+                <input
+                  id="otherEmail"
+                  matInput
+                  placeholder="Email@example.com"
+                  formControlName="otherEmail"
+                  [required]="otherEmail.errors && otherEmail.errors['required'] === true"
+                />
+                <mat-error *ngIf="otherEmail.invalid">{{
+                  formService.getErrorMessage(otherEmail)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-12">
+              <mat-checkbox
+                id="otherEmailBolUpdate"
+                color="primary"
+                formControlName="otherEmailBolUpdate"
+              >
+                Bill of Lading
+              </mat-checkbox>
+            </div>
+            <div class="form-group col-12">
+              <mat-checkbox
+                id="otherEmailTrackingUpdate"
+                color="primary"
+                formControlName="otherEmailTrackingUpdate"
+              >
+                Tracking Updates
+              </mat-checkbox>
+            </div>
+            <div class="form-group col-12">
+              <mat-checkbox
+                id="otherEmailShippingLabel"
+                color="primary"
+                formControlName="otherEmailShippingLabel"
+              >
+                Shipping Labels
+              </mat-checkbox>
+            </div>
+            <div *ngIf="showPickupNotifications === true" class="form-group col-12">
+              <mat-checkbox
+                id="otherEmailPickupNotice"
+                color="primary"
+                formControlName="otherEmailPickupNotice"
+              >
+                Pickup Notifications
+              </mat-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="showPickupNotifications === true" class="form-row mb-3">
+        <div class="form-group col-12">
+          <lib-form-header [color]="'red'">Pickup Notifications</lib-form-header>
+          <mat-checkbox color="primary" class="mat-checkbox--tooltip" id="acceptedNotify" formControlName="acceptedNotify"
+            >Accepted</mat-checkbox
+          >
+          <lib-tooltip
+            class="form-group--tooltip__tooltip mr-3"
+            [message]="'Once a pickup has been reviewed and accepted in our system, the parties selected for notification will receive an email indicating that we have approved the pickup.'"
+          ></lib-tooltip>
+          <mat-checkbox color="primary" class="mat-checkbox--tooltip" id="completedNotify" formControlName="completedNotify"
+            >Completed</mat-checkbox
+          >
+          <lib-tooltip
+            class="form-group--tooltip__tooltip mr-3"
+            [message]="'After the pickup has been completed, the parties selected for notification will receive a confirmation email.'"
+          ></lib-tooltip>
+          <mat-checkbox color="primary" class="mat-checkbox--tooltip" id="rejectedNotify" formControlName="rejectedNotify"
+            >Rejected</mat-checkbox
+          >
+          <lib-tooltip
+            class="form-group--tooltip__tooltip mr-3"
+            [message]="'A rejected email notification will be sent to the requester of the pickup by default as well as any additional parties selected to receive pickup notifications.'"
+          ></lib-tooltip>
+        </div>
+        <p>Pickup notifications selected here will be sent to all parties designated above as well as to the requester of the pickup.</p>
+      </div>
+    </ng-container>
+    <mat-slide-toggle
+      class="mb-3 d-block"
+      color="primary"
+      formControlName="hasFax"
+    >
+      Send Bill of Lading by Fax
+    </mat-slide-toggle>
+    <ng-container *ngIf="hasFax.value === true">
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Shipper Fax Number</mat-label>
+            <input
+              id="shipperFax"
+              placeholder="(888) 888-8888"
+              matInput
+              formControlName="shipperFax"
+              [textMask]="{ mask: phoneMask, guide: false }"
+            />
+            <mat-error *ngIf="shipperFax.invalid">{{
+              formService.getErrorMessage(shipperFax)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Consignee Fax Number</mat-label>
+            <input
+              id="consigneeFax"
+              matInput
+              placeholder="(888) 888-8888"
+              formControlName="consigneeFax"
+              [textMask]="{ mask: phoneMask, guide: false }"
+            />
+            <mat-error *ngIf="consigneeFax.invalid">{{
+              formService.getErrorMessage(consigneeFax)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Third Party Fax Number</mat-label>
+            <input
+              id="thirdPartyFax"
+              matInput
+              placeholder="(888) 888-8888"
+              formControlName="thirdPartyFax"
+              [textMask]="{ mask: phoneMask, guide: false }"
+            />
+            <mat-error *ngIf="thirdPartyFax.invalid">{{
+              formService.getErrorMessage(thirdPartyFax)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Other Fax Number</mat-label>
+            <input
+              id="otherFax"
+              matInput
+              placeholder="(888) 888-8888"
+              formControlName="otherFax"
+              [textMask]="{ mask: phoneMask, guide: false }"
+            />
+            <mat-error *ngIf="otherFax.invalid">{{
+              formService.getErrorMessage(otherFax)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

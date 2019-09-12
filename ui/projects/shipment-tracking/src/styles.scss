@@ -1,0 +1,227 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../common/src/assets/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
+
+.cdk-overlay-container {
+  z-index: $zindex-modal;
+  form[name="emailRequestForm"] {
+	.mat-form-field {
+	  width: 100%;
+	}
+  }
+}
+.estes-app {
+	.tool-tip {
+		cursor: pointer;
+	}
+	.shipment-tracking {
+		// padding-top: 1rem;
+		padding-bottom: 1rem;
+		.mat-card {
+			a.btn {
+				text-decoration: none;
+				&.btn-primary,
+				&.btn-default {
+					color: $black;
+				}
+			}
+			&.results {
+				margin-top: 1rem;
+			}
+			.mat-card-header-text {
+				justify-content: space-between;
+				width: 100%;
+				.btn {
+					margin-left: 1rem;
+				}
+			}
+			.mat-card-content {
+				margin-bottom: 0;
+				.messages {
+					margin-top: 1.5rem;
+					.alert {
+						margin-top: .25rem;
+						margin-bottom: 0;
+					}
+				}
+				.card {
+					border: none;
+					padding: 1.5rem;
+					height: 100%;
+					&.promo {
+						background-color: $gray-100;
+						box-shadow: none;
+					}
+				}
+				.order-md-last {
+					padding-bottom: 1rem;
+					@include media-breakpoint-up(md) {
+						padding-bottom: 0;
+					}
+				}
+			}
+			.mat-form-field {
+				width: 100%;
+			}
+			button[type="submit"].btn {
+				.fas {
+					display: none;
+				}
+				&:disabled {
+					.fas {
+						display: inline-block;
+					}
+				}
+			}
+		}
+		.email-box {
+			background-color: $gray-100;
+			padding: 1rem;
+			margin-bottom: 1rem;
+			@media print {
+				display: none;
+			}
+			.btn {
+				width: 100%;
+			}
+			> div {
+				margin-top: 1rem;
+				width: 100%;
+			}
+			@include media-breakpoint-up(md) {
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+				@media print {
+					display: none;
+				}
+				.btn {
+					width: auto;
+				}
+				> div {
+					margin-top: 0;
+					padding-left: 1rem;
+				}
+			}
+		}
+		table.mat-table {
+			width: 100%;
+			border-collapse: collapse;
+			thead {
+				tr {
+					th.mat-header-cell {
+						padding: $table-cell-padding-sm .5rem;
+						background-color: $table-head-bg;
+						color: $black;
+						border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+						label {
+							margin: 0;
+						}
+						&.cdk-column-pro,
+						&.cdk-column-pickupDate,
+						&.cdk-column-bol,
+						&.cdk-column-poNum {
+							white-space: nowrap;
+						}
+
+					}
+				}
+			}
+			tbody {
+				tr {
+					&.mat-row {
+						border-top: none;
+						&.detail-row {
+							height: auto;
+							td.mat-cell {
+								background-color: $table-accent-bg;
+								.element-detail {
+									border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+								}
+							}
+						}
+						&.element-row {
+							&:not(.expanded):hover {
+								background: $gray-100;
+							}
+							&:not(.expanded):active {
+								background: #efefef;
+							}
+							cursor: pointer;
+							td.mat-cell {
+								padding: $table-cell-padding-sm .5rem;
+								font-size: .75rem;
+								label {
+									margin: 0;
+								}
+								.fal {
+									font-size: 1.3rem;
+									&.fa-chevron-up {
+										display: none;
+									}
+									&.fa-chevron-down {
+										display: inline-block;
+									}
+								}
+							}
+							&.expanded {
+								td.mat-cell {
+									border-bottom-color: #FFF;
+									background-color: $table-accent-bg;
+									.fal {
+										&.fa-chevron-up {
+											display: inline-block;
+										}
+										&.fa-chevron-down {
+											display: none;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		.detail-desc {
+			padding: 1rem .5rem;;
+			.disclaimer {
+				font-size: .75rem;
+				color: $gray-700;
+				padding-top: .5rem;
+			}
+			table.detail {
+				tbody {
+					th {
+						display: block;
+						width: 100%;
+						@include media-breakpoint-up(sm) {
+							display: table-cell;
+							width: 10%;
+							white-space: nowrap;
+							padding-right: 1rem;
+						}
+					}
+					td {
+						display: block;
+						width: 100%;
+						@include media-breakpoint-up(sm) {
+							display: table-cell;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media print {
+	.estes-app .shipment-tracking .detail-desc table.detail tbody th {
+		width: 15% !important;
+		display: table-cell;
+	}
+	.estes-app .shipment-tracking .detail-desc table.detail tbody td {
+		width: 85% !important;
+		display: table-cell;
+	}
+}

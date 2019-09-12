@@ -1,0 +1,125 @@
+<lib-routable-component-header>Statement Details</lib-routable-component-header>
+<p>
+  View individual invoices associated with a statement number, along with Delivery Receipt (DR) and Bill of Lading (BOL) images when available. You can also make full or partial payments via bank draft by checking the box beside the invoice(s) you want to pay and clicking Pay Selected.
+</p>
+<p>
+  Upon selecting a PRO Number the invoices packet will contain delivery receipt and Bill of Lading documents if available.
+</p>
+<mat-card class="mat-card--table">
+    <mat-card-header>
+      <mat-card-title>Detail of Statement Number {{statementNumber}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="p-0" [libOverlay]="loading">
+      <div class="pl-3 pt-3">
+        <button [disabled]="!invoiceDetailsSelections.hasValue()" (click)="navigateToPayments()" class="btn btn-default">Pay Selected</button>
+        <button [disabled]="!invoiceDetailsSelections.hasValue()" (click)="openEmailModal()" class="ml-2 btn btn-default">Email Selected</button>
+
+      </div>
+      <mat-table #table [dataSource]="invoiceDetails" multiTemplateDataRows>
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox color="primary"
+                          (change)="$event ? masterToggle() : null"
+                          [checked]="invoiceDetailsSelections.hasValue() && isAllSelected()"
+                          [indeterminate]="invoiceDetailsSelections.hasValue() && !isAllSelected()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox color="primary"
+                          (click)="$event.stopPropagation()"
+                          (change)="$event ? invoiceDetailsSelections.toggle(row) : null"
+                          [checked]="isSelected(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="pro">
+          <mat-header-cell class="d-flex" *matHeaderCellDef>
+            PRO Number
+          </mat-header-cell>
+          <mat-cell class="d-flex" *matCellDef="let element">
+            {{ element.pro }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="pickupDate">
+          <mat-header-cell class="d-none d-md-flex" *matHeaderCellDef>
+            Pickup Date
+          </mat-header-cell>
+          <mat-cell class="d-none d-md-flex" *matCellDef="let element">
+            {{element.pickupDate | displayDate}}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="deliveryDate">
+          <mat-header-cell class="d-none d-lg-flex" *matHeaderCellDef>
+            Delivery Date
+          </mat-header-cell>
+          <mat-cell class="d-none d-lg-flex" *matCellDef="let element">
+            {{ element.deliveryDate | displayDate }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="invoiceDate">
+          <mat-header-cell class="d-none d-lg-flex" *matHeaderCellDef>
+            Invoice Date
+          </mat-header-cell>
+          <mat-cell class="d-none d-lg-flex" *matCellDef="let element">
+            {{element.invoiceDate | displayDate}}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="bol">
+          <mat-header-cell class="d-none d-lg-flex" *matHeaderCellDef>
+            BOL #
+          </mat-header-cell>
+          <mat-cell class="d-none d-lg-flex" *matCellDef="let element">
+            {{element.bol}}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="poNum">
+          <mat-header-cell class="d-none d-lg-flex" *matHeaderCellDef>
+            PO #
+          </mat-header-cell>
+          <mat-cell class="d-none d-lg-flex" *matCellDef="let element">
+            {{element.poNum}}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="statementNum">
+          <mat-header-cell *matHeaderCellDef>
+            Statement Number
+          </mat-header-cell>
+          <mat-cell class="d-none d-md-flex" *matCellDef="let element">
+            {{element.statementNum}}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="openAmount">
+          <mat-header-cell class="d-flex" *matHeaderCellDef>
+            Open Amount
+          </mat-header-cell>
+          <mat-cell class="d-flex" *matCellDef="let element">
+            {{element.openAmount | currency}}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="pendingPayAmount">
+          <mat-header-cell class="d-flex" *matHeaderCellDef>
+            Pending Pay
+          </mat-header-cell>
+          <mat-cell class="d-flex" *matCellDef="let element">
+            {{element.pendingPayAmount | currency}}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="imageLink">
+          <mat-header-cell class="d-flex" *matHeaderCellDef></mat-header-cell>
+          <mat-cell class="d-flex" *matCellDef="let element">
+            <invoice-image-fetch [proNumber]="element.pro"></invoice-image-fetch>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let element; columns: displayedColumns" class="d-flex detail-row"></mat-row>
+      </mat-table>
+      <div *ngIf="totalOpenAmount" class="pl-3 pt-3"><strong>Total Open Amount:</strong> {{totalOpenAmount | currency}}</div>
+      <div *ngIf="invoiceDetails.data.length === 0" class="no-results">There were no results for this query.</div>
+      <mat-paginator (page)="pageInvoices()" [length]="totalInvoices" [pageSize]="25" [pageSizeOptions]="[25, 50, 75, 100]"></mat-paginator>
+    </mat-card-content>
+  </mat-card>
+  <div class="row pt-3 pb-3">
+    <div class="col-12">
+      <a [routerLink]="['/']">Return to Invoice Inquiry</a>
+    </div>
+  </div>

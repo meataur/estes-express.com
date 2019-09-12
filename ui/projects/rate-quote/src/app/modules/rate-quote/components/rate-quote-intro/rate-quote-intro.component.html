@@ -1,0 +1,16 @@
+<div class="row d-flex align-items-baseline mt-3">
+  <div class="col flex-grow-1 flex-wrap order-last order-sm-first">
+    <p class="mt-3">
+      Retrieve {{ accountName$ | async }} rates for the U.S., Canada and Mexico. Simply select the
+      quote types you would like to receive, and input the requested information. To access former
+      quotes, be sure to visit the Rate Quote History tab above.
+    </p>
+    <p>
+      Your quote will be based upon Estes Express Lines rates in effect on
+      <b>{{ today | date: 'MM/dd/yyyy' }}</b>.
+    </p>
+  </div>
+  <app-need-service-help
+    class="d-flex justify-content-start justify-content-sm-end col-12 col-sm-auto mb-3 order-first order-sm-last"
+  ></app-need-service-help>
+</div>

@@ -1,0 +1,667 @@
+<div class="pt-3"><lib-feedback [message]="confirmationFeedback"></lib-feedback></div>
+<p class="pt-3">File a claim for lost or damaged freight. Before you begin, please note:</p>
+<ul>
+  <li class="pb-1">All claims must be filed within nine months of the date of delivery (or within a reasonable amount of time in the event of non-delivery).</li>
+  <li class="pb-1">You must retain salvaged or damaged items until disposition of the claim.</li>
+  <li class="pb-1">Documents needed:</li>
+  <li class="ml-3 pb-1">Original invoice (photostat or certified copy from vendor)</li>
+  <li class="ml-3 pb-1">Copies of all claim-related invoices for replacement parts, material, and labor incurred for repairs</li>
+  <li class="ml-3 pb-1">Original Bill of Lading (BOL) and paid freight bill</li>
+</ul>
+<button [hidden]="showClaimForm" class="btn btn-default mb-4" (click)="showClaimForm = true; confirmationFeedback = null;">File a Claim</button>
+<!-- File a Claim Form -->
+<form [hidden]="!showClaimForm" [formGroup]="formGroup" #ngForm="ngForm" (ngSubmit)="onSubmit()">
+  <mat-card>
+      <!-- Account Number Section -->
+      <div *ngIf="showAccountDropdown">
+        <div class="mat-card-header">
+          <mat-card-title>Select Account</mat-card-title>
+        </div>
+        <div class="row d-flex pt-4 pr-4 pl-4">
+          <div class="form-group col-12">
+            <lib-account-select
+            class="form-row"
+            [fc]="accountNumber"
+            [label]="'Account Number'"
+            ></lib-account-select>
+          </div>
+        </div>
+      </div>
+      <!-- PRO Number and Claim Type Section -->
+      <div class="mat-card-header">
+        <mat-card-title>Enter PRO Number and Claim Type</mat-card-title>
+      </div>
+      <mat-card-content>
+
+      <div class="row">
+        <div class="col-8" *ngIf="proFeedback"><lib-feedback [message]="proFeedback"></lib-feedback></div>
+        <div class="form-group col-8">
+          <mat-form-field appearance="outline">
+            <mat-label>PRO Number</mat-label>
+            <input
+              matInput
+              (blur)="fetchProInfo()"
+              required
+              name="otPro"
+              id="otPro"
+              formControlName="otPro"
+              [textMask]="{mask: proMask, guide: false}">
+            <mat-error *ngIf="otPro.invalid">{{
+              formService.getErrorMessage(otPro)
+            }}</mat-error>
+            <mat-hint>Entering a valid PRO will automatically populate the PRO date, BOL, and BOL date.</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-4">
+          <label>PRO Date</label><br>
+          <span *ngIf="proDate.value">{{proDate.value | displayDate}}</span><span *ngIf="!proDate.value">--</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-8">
+          <mat-form-field appearance="outline">
+            <mat-label>BOL Number</mat-label>
+            <input
+              matInput
+              focus="true"
+              type="text"
+              required
+              name="bol"
+              id="bol"
+              formControlName="bol">
+            <mat-error *ngIf="bol.invalid">{{
+              formService.getErrorMessage(bol)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-4">
+          <label>BOL Date</label><br>
+          <span *ngIf="bolDate.value">{{bolDate.value | displayDate}}</span><span *ngIf="!bolDate.value">--</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-8">
+          <mat-form-field appearance="outline">
+            <mat-label>Reference Number</mat-label>
+            <input
+              matInput
+              focus="true"
+              type="text"
+              name="referenceNumber"
+              id="referenceNumber"
+              formControlName="referenceNumber">
+            <mat-error *ngIf="referenceNumber.invalid">{{
+              formService.getErrorMessage(referenceNumber)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Claim Type</mat-label>
+            <mat-select
+              focus="true"
+              required
+              name="claimType"
+              id="claimType"
+              formControlName="claimType">
+              <mat-option
+                [value]="type"
+                *ngFor="let type of claimTypes">{{ type }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="claimType.invalid">{{
+              formService.getErrorMessage(claimType)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Freight Type</mat-label>
+            <mat-select
+              focus="true"
+              name="freightType"
+              id="freightType"
+              formControlName="freightType">
+              <mat-option
+                [value]="type.value"
+                *ngFor="let type of freightTypes">{{ type.viewValue }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="freightType.invalid">{{
+              formService.getErrorMessage(freightType)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- Claimant and Remittance Info -->
+    </mat-card-content>
+    <mat-card-header>
+      <mat-card-title>Enter Claimant and Remittance Info</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="form-group col-12 col-md-6">
+          <div class="horizon-line pb-3">Claimant Info<lib-tooltip [message]="'The Claimant is the party filing the claim.'" [class]="'fix-position'"></lib-tooltip></div>
+          <div class="row pb-3">
+            <div class="col-4"><a (click)="useMyInfo('claimant')" class="font-weight-bold"><i class="fa fa-user pr-2" aria-hidden="true"></i>My Info</a></div>
+            <div class="col-4"><a (click)="openAddressDialog('claimant')" class="font-weight-bold"><i class="fa fa-address-book pr-2" aria-hidden="true"></i>Address Book</a></div>
+          </div>
+          <mat-error *ngIf="showClaimantMyInfoError" class="pb-2">Please select an account number above.</mat-error>
+          <div class="row">
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Claimant Name</mat-label>
+                <input
+                  matInput
+                  focus="true"
+                  type="text"
+                  required
+                  name="name"
+                  id="name"
+                  formControlName="name">
+                <mat-error *ngIf="name.invalid">{{
+                  formService.getErrorMessage(name)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Address Line 1</mat-label>
+                <input
+                  matInput
+                  focus="true"
+                  type="text"
+                  required
+                  name="streetAddress1"
+                  id="streetAddress1"
+                  formControlName="streetAddress1">
+                <mat-error *ngIf="streetAddress1.invalid">{{
+                  formService.getErrorMessage(streetAddress1)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Address Line 2</mat-label>
+                <input
+                  matInput
+                  focus="true"
+                  type="text"
+                  name="streetAddress2"
+                  id="streetAddress2"
+                  formControlName="streetAddress2">
+                <mat-error *ngIf="streetAddress2.invalid">{{
+                  formService.getErrorMessage(streetAddress2)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>City</mat-label>
+                <input
+                  matInput
+                  required
+                  focus="true"
+                  type="text"
+                  name="city"
+                  id="city"
+                  formControlName="city">
+                <mat-error *ngIf="city.invalid">{{
+                  formService.getErrorMessage(city)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>State/Province</mat-label>
+                <mat-select required name="state" id="state" formControlName="state" >
+                  <mat-option *ngFor="let option of statesProvincesList" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="state.invalid">{{
+                  formService.getErrorMessage(state)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>ZIP/Postal Code</mat-label>
+                <input
+                matInput
+                required
+                focus="true"
+                type="text"
+                name="zip"
+                id="zip"
+                formControlName="zip">
+                <mat-error *ngIf="zip.invalid">{{
+                  formService.getErrorMessage(zip)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col">
+              <mat-form-field appearance="outline">
+                <mat-label>Phone Number</mat-label>
+                <input type="text" matInput required placeholder="(888) 888-8888" [textMask]="{mask: phoneMask, guide: false}" id="phone" name="phone" formControlName="phone">
+                <mat-error *ngIf="phone.invalid">{{
+                    formService.getErrorMessage(phone)
+                }} </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col">
+              <mat-form-field appearance="outline">
+                <mat-label>Fax</mat-label>
+                <input type="text" matInput placeholder="(888) 888-8888" [textMask]="{mask: phoneMask, guide: false}" id="fax" name="fax" formControlName="fax">
+                <mat-error *ngIf="fax.invalid">{{
+                    formService.getErrorMessage(fax)
+                }} </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col">
+              <mat-form-field appearance="outline">
+                <mat-label>Email Address</mat-label>
+                <input type="text" matInput required placeholder="Email@example.com" id="email" name="email" formControlName="email">
+                <mat-error *ngIf="email.invalid">{{
+                    formService.getErrorMessage(email)
+                }} </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-12 col-md-6">
+          <div class="horizon-line pb-3">Remittance Info<lib-tooltip [message]="'Remittance is the party that will be paid if the claim is approved.'" [class]="'fix-position'"></lib-tooltip></div>
+          <div class="row pb-3">
+            <div class="col-4"><a (click)="useMyInfo('remittance')" class="font-weight-bold"><i class="fa fa-user pr-2" aria-hidden="true"></i>My Info</a></div>
+            <div *ngIf="name.value || streetAddress1.value || streetAddress2.value || city.value || state.value || zip.value || phone.value" class="col-4">
+              <a (click)="useClaimantDataForRemittance()" class="font-weight-bold"><i class="fa fa-user" aria-hidden="true"></i>Same as Claimant</a>
+            </div>
+            <div class="col-4"><a (click)="openAddressDialog('remittance')" class="font-weight-bold"><i class="fa fa-address-book pr-2" aria-hidden="true"></i>Address Book</a></div>
+          </div>
+          <mat-error *ngIf="showRemitMyInfoError" class="pb-2">Please select an account number above.</mat-error>
+          <div class="row">
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Remit to</mat-label>
+                <input
+                  matInput
+                  focus="true"
+                  type="text"
+                  required
+                  name="remitName"
+                  id="remitName"
+                  formControlName="remitName">
+                <mat-error *ngIf="remitName.invalid">{{
+                  formService.getErrorMessage(remitName)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Address Line 1</mat-label>
+                <input
+                  matInput
+                  focus="true"
+                  type="text"
+                  required
+                  name="remitStreetAddress1"
+                  id="remitStreetAddress1"
+                  formControlName="remitStreetAddress1">
+                <mat-error *ngIf="remitStreetAddress1.invalid">{{
+                  formService.getErrorMessage(remitStreetAddress1)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Address Line 2</mat-label>
+                <input
+                  matInput
+                  focus="true"
+                  type="text"
+                  name="remitStreetAddress2"
+                  id="remitStreetAddress2"
+                  formControlName="remitStreetAddress2">
+                <mat-error *ngIf="remitStreetAddress2.invalid">{{
+                  formService.getErrorMessage(remitStreetAddress2)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>City</mat-label>
+                <input
+                  matInput
+                  required
+                  focus="true"
+                  type="text"
+                  name="remitCity"
+                  id="remitCity"
+                  formControlName="remitCity">
+                <mat-error *ngIf="remitCity.invalid">{{
+                  formService.getErrorMessage(remitCity)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>State/Province</mat-label>
+                <mat-select required name="state" id="remitState" formControlName="remitState" >
+                  <mat-option *ngFor="let option of statesProvincesList" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="remitState.invalid">{{
+                  formService.getErrorMessage(remitState)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>ZIP/Postal Code</mat-label>
+                <input
+                matInput
+                required
+                focus="true"
+                type="text"
+                name="remitZip"
+                id="remiZip"
+                formControlName="remitZip">
+                <mat-error *ngIf="remitZip.invalid">{{
+                  formService.getErrorMessage(remitZip)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col">
+              <mat-form-field appearance="outline">
+                <mat-label>Phone Number</mat-label>
+                <input type="text" matInput required placeholder="(888) 888-8888" [textMask]="{mask: phoneMask, guide: false}" id="remitPhone" name="remitPhone" formControlName="remitPhone">
+                <mat-error *ngIf="remitPhone.invalid">{{
+                    formService.getErrorMessage(remitPhone)
+                }} </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Shipper/Consignee Information -->
+    </mat-card-content>
+    <mat-card-header>
+      <mat-card-title>Shipper/Consignee Information</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="form-group col-6 col-md-3 p-3">
+          <label>Shipper Name</label><br>
+          <span *ngIf="shipperName">{{shipperName}}</span><span *ngIf="!shipperName">--</span>
+        </div>
+        <div class="form-group col-6 col-md-3 p-3">
+          <label>Shipper Address</label><br>
+          <lib-address *ngIf="shipperAddress" [address]="shipperAddress"></lib-address><span *ngIf="!shipperAddress">--</span>
+        </div>
+        <div class="form-group col-6 col-md-3 p-3">
+          <label>Consignee Name</label><br>
+          <span *ngIf="consigneeName">{{consigneeName}}</span><span *ngIf="!consigneeName">--</span>
+        </div>
+        <div class="form-group col-6 col-md-3 p-3">
+          <label>Consignee Address</label><br>
+          <lib-address *ngIf="consigneeAddress" [address]="consigneeAddress"></lib-address><span *ngIf="!consigneeAddress">--</span>
+        </div>
+      </div>
+      <!-- Upload Freight Documents -->
+    </mat-card-content>
+    <mat-card-header>
+      <mat-card-title>Upload Freight Documents</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <p>Attach your original BOL, original paid freight bill, original vendor invoice (or certified copy) and a copy of all invoices incurred for repairs. (Documents must be no larger than 10 MB. Accepted file types include .doc, .docx, .jpg, .jpeg, .tiff, .pdf, .png, .rtf, .txt, .xls and .xlsx.)</p>
+        </div>
+      </div>
+      <label class="small font-weight-bold">Vendor Invoice *</label>
+      <div class="row">
+        <div class="form-group col-6 m-0">
+          <div class="upload-file-component">
+            <mat-form-field floatLabel="never" appearance="outline">
+              <input placeholder="No file chosen" matInput readonly value="{{invoiceFile.value | displayFilename}}"/>
+            </mat-form-field>
+            <div class="upload-btn-wrapper">
+              <a *ngIf="!invoiceFile.value">Browse</a>
+              <i class="fa fa-times-circle d-flex flex-column justify-content-center" *ngIf="invoiceFile.value" (click)="invoiceFile.setValue(null); invoiceFile.enable();" aria-hidden="true"></i>
+              <input [hidden]="invoiceFile.value" type="file" required id="invoiceFile" name="invoiceFile" formControlName="invoiceFile" (change)="validateFile($event, invoiceFile)" accept="{{acceptedFileTypes}}" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-12">
+          <mat-error class="pl-3 pb-3" *ngIf="invoiceFile.invalid && invoiceFile.errors?.maxSize">{{
+            invoiceFile.errors.maxSize
+          }} </mat-error>
+          <mat-error class="pl-3 pb-3" *ngIf="invoiceFile.invalid && invoiceFile.errors?.fileType">{{
+            invoiceFile.errors.fileType
+          }} </mat-error>
+          <mat-error class="pl-3" *ngIf="invoiceFile.invalid &&  ngForm.submitted && invoiceFile.errors?.required"><small>File is Required</small></mat-error>
+
+        </div>
+      </div>
+      <label class="small font-weight-bold">BOL</label>
+      <div class="row">
+        <div class="form-group col-6 m-0">
+          <div class="upload-file-component">
+            <mat-form-field floatLabel="never" appearance="outline">
+              <input placeholder="No file chosen" matInput readonly value="{{bolFile.value | displayFilename}}"/>
+            </mat-form-field>
+            <div class="upload-btn-wrapper">
+              <a *ngIf="!bolFile.value">Browse</a>
+              <i class="fa fa-times-circle d-flex flex-column justify-content-center" *ngIf="bolFile.value" (click)="bolFile.setValue(null); bolFile.enable();" aria-hidden="true"></i>
+              <input [hidden]="bolFile.value" type="file" id="bolFile" name="bolFile" formControlName="bolFile" (change)="validateFile($event, bolFile)" accept="{{acceptedFileTypes}}" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-12">
+          <mat-error class="pl-3 pb-3" *ngIf="bolFile.invalid && bolFile.errors?.maxSize">{{
+            bolFile.errors.maxSize
+          }} </mat-error>
+          <mat-error class="pl-3 pb-3" *ngIf="bolFile.invalid && bolFile.errors?.fileType">{{
+            bolFile.errors.fileType
+          }} </mat-error>
+        </div>
+      </div>
+      <label class="small font-weight-bold">Estes Freight Bill/Invoice</label>
+      <div class="row">
+        <div class="form-group col-6 m-0">
+          <div class="upload-file-component">
+            <mat-form-field floatLabel="never" appearance="outline">
+              <input placeholder="No file chosen" matInput readonly value="{{fbFile.value | displayFilename}}"/>
+            </mat-form-field>
+            <div class="upload-btn-wrapper">
+              <a *ngIf="!fbFile.value">Browse</a>
+              <i class="fa fa-times-circle d-flex flex-column justify-content-center" *ngIf="fbFile.value" (click)="fbFile.setValue(null); fbFile.enable();" aria-hidden="true"></i>
+              <input [hidden]="fbFile.value" type="file" id="fbFile" name="fbFile" formControlName="fbFile" (change)="validateFile($event, fbFile)" accept="{{acceptedFileTypes}}" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-12">
+          <mat-error class="pl-3 pb-3" *ngIf="fbFile.invalid && fbFile.errors?.maxSize">{{
+            fbFile.errors.maxSize
+          }} </mat-error>
+          <mat-error class="pl-3 pb-3" *ngIf="fbFile.invalid && fbFile.errors?.fileType">{{
+            fbFile.errors.fileType
+          }} </mat-error>
+        </div>
+      </div>
+      <label class="small font-weight-bold">Other</label>
+      <div class="row">
+        <div class="form-group col-6 m-0">
+          <div class="upload-file-component">
+            <mat-form-field floatLabel="never" appearance="outline">
+              <input placeholder="No file chosen" matInput readonly value="{{otherFile.value | displayFilename}}"/>
+            </mat-form-field>
+            <div class="upload-btn-wrapper">
+              <a *ngIf="!otherFile.value">Browse</a>
+              <i class="fa fa-times-circle d-flex flex-column justify-content-center" *ngIf="otherFile.value" (click)="otherFile.setValue(null); otherFile.enable();" aria-hidden="true"></i>
+              <input [hidden]="otherFile.value" type="file" id="otherFile" name="otherFile" formControlName="otherFile" (change)="validateFile($event, otherFile)" accept="{{acceptedFileTypes}}" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-12">
+          <mat-error class="pl-3 pb-3" *ngIf="otherFile.invalid && otherFile.errors?.maxSize">{{
+            otherFile.errors.maxSize
+          }} </mat-error>
+          <mat-error class="pl-3 pb-3" *ngIf="otherFile.invalid && otherFile.errors?.fileType">{{
+            otherFile.errors.fileType
+          }} </mat-error>
+        </div>
+      </div>
+      <!-- Claim Details -->
+    </mat-card-content>
+    <mat-card-header>
+      <mat-card-title>Claim Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <p class="col">
+          Provide a description of the loss or damage, the quantity of goods, and the cost of the damage. You can upload up to 10 images or files to support your claim.
+        </p>
+      </div>
+      <div *ngFor="let detailIndex of additionalDetailIndices">
+        <div class="red-label">Item {{detailIndex}}</div>
+        <div class="row">
+          <div class="form-group col-12 col-md-6">
+            <label class="small font-weight-bold">Loss/Damage Description</label>
+            <mat-form-field appearance="outline">
+              <textarea matInput rows="8" id="descriptionDetails{{detailIndex}}" name="descriptionDetails{{detailIndex}}" formControlName="descriptionDetails{{detailIndex}}"></textarea>
+              <mat-error *ngIf="getFormControl('descriptionDetails' + detailIndex).invalid">{{
+                  formService.getErrorMessage(getFormControl('descriptionDetails' + detailIndex))
+              }} </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <div class="row">
+              <div class="col-6">
+                <label class="small font-weight-bold">QTY</label>
+                <mat-form-field appearance="outline">
+                  <input type="text" matInput id="qtyDetails{{detailIndex}}" name="qtyDetails{{detailIndex}}" formControlName="qtyDetails{{detailIndex}}">
+                  <mat-error *ngIf="getFormControl('qtyDetails' + detailIndex).invalid">{{
+                      formService.getErrorMessage(getFormControl('qtyDetails' + detailIndex))
+                  }} </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <label class="small font-weight-bold">Total Cost <span *ngIf="detailIndex == 1">*</span></label>
+                <mat-form-field appearance="outline">
+                  <input matInput [required]="detailIndex == 1" id="costDetails{{detailIndex}}" name="costDetails{{detailIndex}}" formControlName="costDetails{{detailIndex}}" (blur)="calculateAutoTotal()">
+                  <mat-error *ngIf="getFormControl('costDetails' + detailIndex).invalid">{{
+                      formService.getErrorMessage(getFormControl('costDetails' + detailIndex))
+                  }} </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-12 small font-weight-bold">Document {{detailIndex}}</label>
+              <div class="col-12 col-md-8 col-lg-12">
+                <div class="upload-file-component">
+                  <mat-form-field floatLabel="never" appearance="outline">
+                    <input placeholder="No file chosen" matInput readonly value="{{getFormControl('fileDetails' + detailIndex).value | displayFilename}}"/>
+                  </mat-form-field>
+                  <div class="upload-btn-wrapper">
+                    <a *ngIf="!getFormControl('fileDetails' + detailIndex).value">Browse</a>
+                    <i class="fa fa-times-circle d-flex flex-column justify-content-center" *ngIf="getFormControl('fileDetails' + detailIndex).value" (click)="getFormControl('fileDetails' + detailIndex).setValue(null); getFormControl('fileDetails' + detailIndex).enable();" aria-hidden="true"></i>
+                    <input [hidden]="getFormControl('fileDetails' + detailIndex).value" type="file" id="fileDetails{{detailIndex}}" name="fileDetails{{detailIndex}}" formControlName="fileDetails{{detailIndex}}" (change)="validateFile($event, getFormControl('fileDetails' + detailIndex))" accept="{{acceptedFileTypes}}" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <mat-error class="pl-3" *ngIf="getFormControl('fileDetails' + detailIndex).invalid && getFormControl('fileDetails' + detailIndex).errors?.maxSize">{{
+                    getFormControl('fileDetails' + detailIndex).errors.maxSize
+                }} </mat-error>
+                <mat-error class="pl-3" *ngIf="getFormControl('fileDetails' + detailIndex).invalid && getFormControl('fileDetails' + detailIndex).errors?.fileType">{{
+                    getFormControl('fileDetails' + detailIndex).errors.fileType
+                }} </mat-error>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 d-flex justify-content-end">
+                  <button class="btn btn-default" *ngIf="detailIndex > 4 && detailIndex == additionalDetailIndices.length" (click)="removeClaimDetail()">Remove</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="row justify-content-between">
+        <div class="form-group col-4">
+          <button type="button" class="btn btn-default" *ngIf="additionalDetailIndices.length < 10" (click)="addClaimDetail()"><i class="fa fa-plus" aria-hidden="true"></i> Add Detail</button>
+        </div>
+        <div class="form-group col-3">
+          <label>Grand Total</label><br>
+          <span *ngIf="autoTotal.value">${{autoTotal.value | number : '1.2-2'}}</span><span *ngIf="!autoTotal.value">--</span>
+        </div>
+      </div>
+      <!-- Additional Comments -->
+      <div class="row pt-2">
+        <div class="col-12">
+          <label>
+            Additional Comments
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-7">
+          <mat-form-field appearance="outline">
+            <textarea matInput id="additionalComments" rows="3" name="additionalComments" formControlName="additionalComments"></textarea>
+            <mat-error *ngIf="additionalComments.invalid">{{
+                formService.getErrorMessage(additionalComments)
+            }} </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 acknowledgment-section">
+          <label class="font-weight-bold">Certification of Correctness Acknowledgment *</label>
+          <p class="pt-3 pl-2 pr-2">THE MERCHANDISE CHECKING SHORT FOR WHICH THIS CLAIM HAS BEEN FILED HAS NEVER BEEN RECEIVED FROM ANY SOURCE. THIS CLAIM IS FILED BY THE OWNER OF THE MERCHANDISE WHO HAS LEGAL RIGHT TO COLLECT FOR THE LOSS OR DAMAGE THAT HAS OCCURRED TO THE SHIPMENT IN QUESTION.
+              ALL CLAIMS MUST BE FILED WITHIN 9 MONTHS OF DATE OF DELIVERY. CARRIER HAS 120 DAYS IN WHICH TO CONCLUDE FROM DATE CLAIM IS RECEIVED. YOU MUST RETAIN ALL SALVAGE ON DAMAGE CLAIMS UNTIL DISPOSITION OF THE CLAIM IS KNOWN.</p>
+        </div>
+        <div class="col-12 m-3 p-2">
+          <section>
+            <mat-checkbox formControlName="acknowledgement" id="acknowledgement" name="acknowledgement" required>I acknowledge that the foregoing statement of facts is hereby certified to be correct.</mat-checkbox>
+            <mat-error *ngIf="formGroup.controls['acknowledgement'].invalid && isSubmitted">{{
+                formService.getErrorMessage(formGroup.controls['acknowledgement'])
+              }}</mat-error>
+          </section>
+        </div>
+      </div>
+      <div class="row m-3" *ngIf="errorMessages">
+        <lib-feedback class="w-100" [message]="errorMessages"></lib-feedback>
+      </div>
+      <div class="row m-3">
+        <button type="submit" [disabled]="submitLoading" class="btn btn-primary mr-2">Submit <i class="fas fa-sync-alt fa-spin  ml-2" *ngIf="submitLoading"></i></button>
+        <button type="button" (click)="cancelClaim()" class="btn btn-default ml-2">Cancel</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</form>

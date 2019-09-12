@@ -1,0 +1,386 @@
+<mat-card [formGroup]="formGroup">
+  <mat-card-header class="d-flex justify-content-between">
+    <mat-card-title>Pickup Request</mat-card-title>
+    <div class="col-6 d-flex justify-content-end align-items-center">
+      <mat-slide-toggle color="primary" formControlName="pickupRequest">
+        Generate Pickup Request
+      </mat-slide-toggle>
+    </div>
+  </mat-card-header>
+  <mat-card-content *ngIf="pickupRequest.value === true">
+    <p>Pickups can be entered up to 30 days in advance.</p>
+    <lib-form-header [color]="'red'">Requester Info</lib-form-header>
+    <p>
+      Use address from
+      <lib-inline-button class="ml-1 font-weight-bold" [faIcon]="'fa fa-address-book'" (click)="openAddressDialog()"
+        >Address Book</lib-inline-button
+      >
+    </p>
+    <!-- <div class="form-row">
+      <div class="col-12">
+        <mat-checkbox
+          id="useAccountInfo"
+          color="primary"
+          (change)="onUseAccountInfoChanged($event)"
+        >
+          Use My Estes Account Info<i *ngIf="loading" class="fal fa-sync-alt fa-spin ml-2"></i>
+        </mat-checkbox>
+      </div>
+    </div> -->
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Contact Name</mat-label>
+          <input matInput formControlName="name" required />
+          <mat-error *ngIf="name.invalid">{{ formService.getErrorMessage(name) }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Email Address</mat-label>
+          <input matInput formControlName="email" placeholder="Email@example.com" required />
+          <mat-error *ngIf="email.invalid">{{ formService.getErrorMessage(email) }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Phone Number</mat-label>
+          <input
+            matInput
+            formControlName="phone"
+            placeholder="(888) 888-8888"
+            [textMask]="{ mask: phoneMask, guide: false }"
+            required
+          />
+          <mat-error *ngIf="phone.invalid">{{ formService.getErrorMessage(phone) }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Extension</mat-label>
+          <input matInput formControlName="phoneExt" />
+          <mat-error *ngIf="phoneExt.invalid">{{
+            formService.getErrorMessage(phoneExt)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Role</mat-label>
+          <mat-select focus="true" name="role" id="role" formControlName="role" required>
+            <mat-option [value]="r.value" *ngFor="let r of roles">{{ r.text }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="role.invalid">{{ formService.getErrorMessage(role) }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <lib-feedback
+      *ngIf="role.value === 'SHIPPER' && accountCodeValid"
+      [message]="[
+        'info',
+        'The Shipper Information section is going to be prefilled from your Estes account. If you have previously entered in a valid quote number and the origin address from the quote does not match the Estes account address, the Shipper information will be updated with your Estes account info.'
+      ]"
+    ></lib-feedback>
+    <div class="form-row">
+      <!-- <div>
+        account code valid: {{ accountCode.valid }}<br />
+        account code errors: {{ accountCode.errors | json }}<br />
+        account code value: {{ accountCode.value | json }}
+      </div> -->
+      <div [hidden]="!showAccountCode" class="form-group col-md-6">
+        <label [hidden]="showAccountCodeLabel === false">Enter local shipper account code:</label>
+        <lib-account-select
+          class="form-row"
+          [fc]="accountCode"
+          [label]="'Account Number'"
+        ></lib-account-select>
+        <i *ngIf="loadingAccount" class="fal fa-sync-alt fa-spin ml-2"></i>
+      </div>
+    </div>
+    <p>
+      Pickup Notifications: Requester will receive any rejected notifications by default. Other
+      types can be selected in the Notifications section below.
+    </p>
+    <lib-form-header [color]="'red'">Pickup Details</lib-form-header>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Pickup Date</mat-label>
+          <input
+            matInput
+            placeholder="MM/DD/YYYY"
+            [matDatepicker]="pickupDatePicker"
+            formControlName="pickupDate"
+            [min]="today"
+            [max]="thirtyDaysAway"
+            required
+          />
+          <mat-datepicker-toggle matSuffix [for]="pickupDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #pickupDatePicker></mat-datepicker>
+          <mat-error *ngIf="pickupDate.invalid">{{
+            formService.getErrorMessage(pickupDate)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-12 time-container">
+        <div><label>Available By *</label></div>
+        <mat-form-field appearance="outline">
+          <mat-select
+            focus="true"
+            name="availableByHour"
+            id="availableByHour"
+            formControlName="availableByHour"
+            required
+          >
+            <mat-option [value]="'01'">1</mat-option>
+            <mat-option [value]="'02'">2</mat-option>
+            <mat-option [value]="'03'">3</mat-option>
+            <mat-option [value]="'04'">4</mat-option>
+            <mat-option [value]="'05'">5</mat-option>
+            <mat-option [value]="'06'">6</mat-option>
+            <mat-option [value]="'07'">7</mat-option>
+            <mat-option [value]="'08'">8</mat-option>
+            <mat-option [value]="'09'">9</mat-option>
+            <mat-option [value]="'10'">10</mat-option>
+            <mat-option [value]="'11'">11</mat-option>
+            <mat-option [value]="'12'">12</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-select
+            focus="true"
+            name="availableByMinutes"
+            id="availableByMinutes"
+            formControlName="availableByMinutes"
+            required
+          >
+            <mat-option [value]="'00'">00</mat-option>
+            <mat-option [value]="'15'">15</mat-option>
+            <mat-option [value]="'30'">30</mat-option>
+            <mat-option [value]="'45'">45</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-select
+            focus="true"
+            name="availableByAmPm"
+            id="availableByAmPm"
+            formControlName="availableByAmPm"
+            required
+          >
+            <mat-option [value]="'AM'">AM</mat-option>
+            <mat-option [value]="'PM'">PM</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-row time-container">
+      <div class="form-group col-md-12">
+        <div><label>Closes By *</label></div>
+        <mat-form-field appearance="outline">
+          <mat-select
+            focus="true"
+            name="closesByHour"
+            id="closesByHour"
+            formControlName="closesByHour"
+            required
+          >
+            <mat-option [value]="'01'">1</mat-option>
+            <mat-option [value]="'02'">2</mat-option>
+            <mat-option [value]="'03'">3</mat-option>
+            <mat-option [value]="'04'">4</mat-option>
+            <mat-option [value]="'05'">5</mat-option>
+            <mat-option [value]="'06'">6</mat-option>
+            <mat-option [value]="'07'">7</mat-option>
+            <mat-option [value]="'08'">8</mat-option>
+            <mat-option [value]="'09'">9</mat-option>
+            <mat-option [value]="'10'">10</mat-option>
+            <mat-option [value]="'11'">11</mat-option>
+            <mat-option [value]="'12'">12</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-select
+            focus="true"
+            name="closesByMinutes"
+            id="closesByMinutes"
+            formControlName="closesByMinutes"
+            required
+          >
+            <mat-option [value]="'00'">00</mat-option>
+            <mat-option [value]="'15'">15</mat-option>
+            <mat-option [value]="'30'">30</mat-option>
+            <mat-option [value]="'45'">45</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-select
+            focus="true"
+            name="closesByAmPm"
+            id="closesByAmPm"
+            formControlName="closesByAmPm"
+            required
+          >
+            <mat-option [value]="'AM'">AM</mat-option>
+            <mat-option [value]="'PM'">PM</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span class="time-error text-danger" *ngIf="closesByHour.invalid"
+          >Closes By time must be after Available By time.</span
+        >
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6 checkbox-group d-inline-block">
+        <div>
+          <label>Pickup Accessorials (Check all that apply)</label>
+          <lib-tooltip
+            role="button"
+            [attr.aria-roledescription]="
+              'Clicking this button will open a detailed description for: Pickup Accessorials'
+            "
+            class="pickup-modal-tooltip"
+            (click)="$event.stopPropagation(); openInfoModal('Pickup Accessorials', pickupAccessorialsHtml)"
+          ></lib-tooltip>
+        </div>
+        <div>
+          <div class="d-flex align-items-center">
+            <mat-checkbox
+              id="freeze"
+              class="mr-1"
+              color="primary"
+              (change)="onPickupAccessorialSelected()"
+              formControlName="freeze"
+            >
+              Freeze
+            </mat-checkbox>
+          </div>
+          <lib-feedback
+            *ngIf="freeze.value === true"
+            [message]="['info', 'Select appropriate Protect from Freezing accessorial below.']"
+          ></lib-feedback>
+        </div>
+        <div>
+          <div class="d-flex align-items-center">
+            <mat-checkbox
+              id="liftgateRequired"
+              class="mr-1"
+              color="primary"
+              (change)="onPickupAccessorialSelected()"
+              formControlName="liftgateRequired"
+            >
+              Lift-Gate Service (Pickup)
+            </mat-checkbox>
+          </div>
+          <lib-feedback
+            *ngIf="liftgateRequired.value === true"
+            [message]="['info', 'Select appropriate Lift-Gate Service (Pickup) accessorial below.']"
+          ></lib-feedback>
+        </div>
+        <div>
+          <div class="d-flex align-items-center">
+            <mat-checkbox
+              id="oversize"
+              class="mr-1"
+              color="primary"
+              (change)="onPickupAccessorialSelected()"
+              formControlName="oversize"
+            >
+              Overlength
+            </mat-checkbox>
+          </div>
+          <lib-feedback
+            *ngIf="oversize.value === true"
+            [message]="['info', 'Select appropriate Overlength accessorial below.']"
+          ></lib-feedback>
+        </div>
+        <!-- <ng-container *ngFor="let o of pickupAccessorials.controls; let i = index">
+          <div class="d-flex align-items-center">
+            <mat-checkbox
+              id="pickupAccessorial{{ pickupAccessorialsList[i].value }}"
+              class="mr-1"
+              color="primary"
+              (change)="o.value = !o.value; onPickupAccessorialSelected()"
+              [checked]="o.value"
+              formArrayName="pickupAccessorials"
+            >
+              {{ pickupAccessorialsList[i].text }}
+            </mat-checkbox>
+            <lib-tooltip
+              role="button"
+              [attr.aria-roledescription]="
+                'Clicking this button will open a detailed description for the option: ' +
+                pickupAccessorialsList[i].text
+              "
+              class="pickup-modal-tooltip"
+              (click)="$event.stopPropagation(); openPickupOptionsModal(pickupAccessorialsList[i].html)"
+            ></lib-tooltip>
+          </div>
+          <lib-feedback
+            *ngIf="o.value === true"
+            [message]="['info', pickupAccessorialsList[i].message]"
+          ></lib-feedback>
+        </ng-container> -->
+      </div>
+      <div class="form-group col-md-6 checkbox-group">
+        <div>
+          <label>Services (Check all that apply)</label>
+          <lib-tooltip
+            role="button"
+            [attr.aria-roledescription]="
+              'Clicking this button will open a detailed description for: Pickup Accessorials'
+            "
+            class="pickup-modal-tooltip"
+            (click)="$event.stopPropagation(); openInfoModal('Services', pickupAccessorialsHtml)"
+          ></lib-tooltip>
+        </div>
+        <div>
+          <div class="d-flex align-items-center">
+            <mat-checkbox id="noStackPallet }}" color="primary" formControlName="noStackPallet">
+              Do not stack pallets
+            </mat-checkbox>
+          </div>
+        </div>
+        <div>
+          <div class="d-flex align-items-center">
+            <mat-checkbox id="food }}" color="primary" formControlName="food">
+              Food
+            </mat-checkbox>
+          </div>
+        </div>
+        <div>
+          <div class="d-flex align-items-center">
+            <mat-checkbox id="poison" color="primary" formControlName="poison">
+              Poison
+            </mat-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-12">
+        <mat-form-field appearance="outline">
+          <mat-label>Special Instructions</mat-label>
+          <textarea
+            matInput
+            rows="10"
+            name="specialInstruction"
+            id="specialInstruction"
+            formControlName="specialInstruction"
+          ></textarea>
+          <mat-error *ngIf="specialInstruction.invalid">{{
+            formService.getErrorMessage(specialInstruction)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

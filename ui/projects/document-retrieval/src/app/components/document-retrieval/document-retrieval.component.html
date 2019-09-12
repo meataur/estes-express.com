@@ -1,0 +1,177 @@
+<lib-routable-component-header>Image Retrieval</lib-routable-component-header>
+<p>
+  Quickly request a Bill of Lading or delivery receipt for a single shipment &#8212; no login required. We will send it to you via email or fax. For additional functionality and to view multiple imaged documents, <a [routerLink]="['/login']">sign in</a> or <a [routerLink]="['/sign-up']">sign up</a> for My Estes. 
+</p>
+<mat-card class="mb-3">
+  <mat-card-content>
+    <div class="row">
+      <div class="col-md-12">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+          <lib-form-header [color]="'red'">Shipment Information</lib-form-header>
+          <div class="form-row">
+            <div class="form-group col-lg-6 form-group--tooltip">
+              <mat-form-field
+                appearance="outline"
+                class="form-group--tooltip__form-field"
+              >
+                <mat-label>Tracking Number</mat-label>
+                <input matInput required formControlName="trackingNumber" />
+                <mat-error *ngIf="trackingNumber.invalid">{{
+                  formService.getErrorMessage(trackingNumber)
+                }}</mat-error>
+              </mat-form-field>
+              <lib-tooltip
+                class="form-group--tooltip__tooltip"
+                [message]="trackingNumberTooltip"
+              ></lib-tooltip>
+            </div>
+
+            <div class="form-group col-lg-6 form-group--tooltip">
+              <mat-form-field
+                appearance="outline"
+                class="form-group--tooltip__form-field"
+              >
+                <mat-label>Destination ZIP/Postal Code</mat-label>
+                <input matInput required formControlName="destinationZip" />
+                <mat-error *ngIf="destinationZip.invalid">{{
+                  formService.getErrorMessage(destinationZip)
+                }}</mat-error>
+              </mat-form-field>
+              <lib-tooltip
+                class="form-group--tooltip__tooltip"
+                [message]="destinationZipTooltip"
+              ></lib-tooltip>
+            </div>
+          </div>
+
+          <div class="form-row mb-3">
+            <div class="col-12">
+              <label class="form-row-label"
+                >Document Types *
+                <lib-tooltip [message]="docTypesTooltip"></lib-tooltip>
+              </label>
+            </div>
+            <div class="form-group col-md-6">
+              <mat-checkbox
+                id="docType{{docTypes[i].value}}"
+                color="primary"
+                (change)="
+                  type.value = !type.value;
+                  type.updateValueAndValidity({ onlySelf: false });
+                  type.markAsTouched({ onlySelf: false })
+                "
+                [checked]="type.value"
+                formArrayName="docType"
+                *ngFor="let type of docType.controls; let i = index"
+              >
+                {{ docTypes[i].text }}
+              </mat-checkbox>
+              <div
+                *ngIf="docType.invalid && (docType.touched || docType.dirty)"
+                class="validation-error"
+              >
+                {{ formService.getErrorMessage(docType) }}
+              </div>
+            </div>
+          </div>
+          <lib-form-header [color]="'red'" class="mt-4">Delivery Methods</lib-form-header>
+          <div class="form-row">
+            <div class="col-12">
+              <label class="form-row-label"
+                >Select your preferred delivery method: *</label
+              >
+            </div>
+            <div class="form-group col-12">
+              <mat-radio-group class="radio-group" formControlName="emailOrFax">
+                <mat-radio-button color="primary" [value]="'email'">Email</mat-radio-button>
+                <mat-radio-button color="primary" [value]="'fax'">Fax</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div *ngIf="emailOrFax.value === 'email'" class="form-row">
+            <div class="form-group col-12 form-group--tooltip">
+              <mat-form-field
+                appearance="outline"
+                class="form-group--tooltip__form-field"
+              >
+                <mat-label>Email Addresses (one per line)</mat-label>
+                <textarea
+                  matInput
+                  rows="10"
+                  name="email"
+                  id="email"
+                  required
+                  placeholder="Email@example.com"
+                  formControlName="email"
+                ></textarea>
+                <mat-error *ngIf="email.invalid">{{
+                  formService.getErrorMessage(email)
+                }}</mat-error>
+              </mat-form-field>
+              <lib-tooltip
+                class="form-group--tooltip__tooltip"
+                [message]="emailTooltip"
+              ></lib-tooltip>
+            </div>
+          </div>
+          <div *ngIf="emailOrFax.value === 'fax'" class="form-row">
+            <div class="form-group col-lg-6 form-group--tooltip">
+              <mat-form-field
+                appearance="outline"
+                class="form-group--tooltip__form-field"
+              >
+                <mat-label>Fax Number</mat-label>
+                <input
+                  matInput
+                  required
+                  placeholder="(888) 888-8888"
+                  formControlName="faxNumber"
+                  [textMask]="{ mask: mask, guide: false }"
+                />
+                <mat-error *ngIf="faxNumber.invalid">{{
+                  formService.getErrorMessage(faxNumber)
+                }}</mat-error>
+              </mat-form-field>
+              <lib-tooltip
+                class="form-group--tooltip__tooltip"
+                [message]="faxNumberTooltip"
+              ></lib-tooltip>
+            </div>
+            <div class="form-group col-lg-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Attention (optional)</mat-label>
+                <input matInput formControlName="attention" />
+                <mat-error *ngIf="attention.invalid">{{
+                  formService.getErrorMessage(attention)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <lib-feedback [message]="errorMessage"></lib-feedback>
+          <div>
+            <button type="submit" [disabled]="loading" class="btn btn-primary">
+              Submit
+              <i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i></button
+            >&nbsp;<button
+              type="button"
+              class="btn btn-default"
+              (click)="resetForm()"
+            >
+              Clear
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<p>
+  Note: By submitting a shipment document request through this service, you
+  hereby confirm that you are an authorized representative of a person who is
+  making or receiving a shipment, that the images and information obtained
+  through this service will not be used for an improper purpose, and that you
+  will not distribute, display, or otherwise make available the images or
+  information obtained through this service to any unauthorized person.
+</p>

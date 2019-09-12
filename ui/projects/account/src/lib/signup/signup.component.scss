@@ -1,0 +1,87 @@
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../common/src/assets/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+.signup.card {
+  padding: 1.5rem;
+  // font-size: 1rem;
+  .mat-radio-group {
+    display: block;
+    margin: .25rem 0;
+    span {
+      vertical-align: top;
+    }
+  }
+  
+  .mat-form-field {
+    // display: block;
+    // width: 100% !important;
+    // margin-bottom: .5rem;
+  }
+  .promo {
+    height: 100%;
+    padding: 1.5rem;
+    background-color: $gray-100;
+    ul li {
+      margin: .5rem 0;
+    }
+    strong {
+      display: block;
+    }
+    .fas {
+      color: $red;
+    }
+  }
+  .divider {
+    display: block;
+    position: relative;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 1rem 0;
+    span {
+      display: inline-block;
+      background-color: $white;
+      padding: 0 1rem;
+      z-index: 1;
+      position: relative;
+    }
+    &:after {
+      display: block;
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      z-index: 0;
+      height: 1px;
+      background-color: $gray-700;
+    }
+  }
+  .option {
+    .fas {
+      font-size: 2rem;
+      margin-right: 1.5rem;
+    }
+  }
+  hr {
+    border-top: 1px solid $gray-700;
+    margin: 1rem 0;
+  }
+  .path-form {
+    button.btn {
+      @include media-breakpoint-down(sm) {
+        width: 100%;
+      }
+    }
+  }
+  .btn {
+    .fas {
+      display: none;
+    }
+    &:disabled {
+      .fas {
+        display: inline-block;
+      }
+    }
+  }
+}

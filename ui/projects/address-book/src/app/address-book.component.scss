@@ -1,0 +1,68 @@
+@import "../styles.scss";
+
+.mat-card {
+  .mat-column-shipper, .mat-column-thirdParty, .mat-column-cod {
+    flex: 0 0 65px;
+    justify-content:center;
+  }
+  .mat-column-consignee, .mat-column-locationNumber {
+    flex: 0 0 85px;
+    justify-content: center;
+  }
+  .mat-column-actions {
+    flex: 0 0 100px;
+    justify-content:center;
+  }
+
+  @include media-breakpoint-down(lg) {
+    .mat-column-shipper, .mat-column-consignee, .mat-column-thirdParty, .mat-column-cod {
+      display: none;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    .mat-card-header {
+      .header-buttons {
+        justify-content: flex-end;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .button-wrapper {
+        width: 50%;
+        display: flex;
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+  @include media-breakpoint-down(xs) {
+    .mat-card-header {
+      .button-wrapper {
+        width: 100%;
+      }
+    }
+  }
+  .mat-card-header-text {
+    display: none;
+  }
+ 
+  .table-cell-actions {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      color: $gray-700;
+      font-size: 16px;
+      width: 1.75rem;
+    }
+  }
+  .mobile-table-view {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+.searchExpand {
+  overflow: hidden;
+}

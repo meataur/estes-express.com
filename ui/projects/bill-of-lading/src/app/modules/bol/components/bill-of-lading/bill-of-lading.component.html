@@ -1,0 +1,17 @@
+<lib-routable-component-header>Bill of Lading</lib-routable-component-header>
+<p>
+  A Bill of Lading (BOL) is required to ship freight and plays a crucial role in making sure your
+  shipment is transported quickly and efficiently. If you have a guaranteed or volume/truckload
+  shipment, be sure to indicate your service level and include your quote number on your printed
+  BOL. And, don’t forget you can save some time by requesting your pickup within our Bill of Lading
+  application. Another convenient feature allows you to save your work as a draft or template if you
+  get partially done with your BOL and need to come back later.
+</p>
+<app-router-tab>
+  <app-router-tab-item
+    *ngFor="let link of navLinks"
+    [routerLink]="link.path"
+    label="{{ link.label }}"
+  ></app-router-tab-item>
+</app-router-tab>
+<router-outlet></router-outlet>

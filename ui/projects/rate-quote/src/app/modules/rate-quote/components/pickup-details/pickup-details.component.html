@@ -1,0 +1,147 @@
+<mat-card *ngIf="!ltlOnly">
+  <mat-card-header> <mat-card-title>Pickup Details</mat-card-title> </mat-card-header>
+  <mat-card-content>
+    <p>
+      Enter your pickup details below to help determine the rate. This will not actually generate a
+      pickup request.
+    </p>
+    <form [formGroup]="formGroup">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Pickup Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="pickupDatePicker"
+              formControlName="pickupDate"
+              [min]="today"
+              [max]="thirtyDaysAway"
+              placeholder="MM/DD/YYYY"
+              [required]="formService.hasRequiredField(pickupDate)"
+            />
+            <mat-datepicker-toggle matSuffix [for]="pickupDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #pickupDatePicker></mat-datepicker>
+            <mat-error *ngIf="pickupDate.invalid">{{
+              formService.getErrorMessage(pickupDate)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12 time-container">
+          <div><label>Available By</label></div>
+          <mat-form-field appearance="outline">
+            <mat-select
+              focus="true"
+              name="availableByHour"
+              id="availableByHour"
+              formControlName="availableByHour"
+              [required]="formService.hasRequiredField(availableByHour)"
+              [errorStateMatcher]="matcher"
+            >
+              <mat-option [value]="'01'">1</mat-option>
+              <mat-option [value]="'02'">2</mat-option>
+              <mat-option [value]="'03'">3</mat-option>
+              <mat-option [value]="'04'">4</mat-option>
+              <mat-option [value]="'05'">5</mat-option>
+              <mat-option [value]="'06'">6</mat-option>
+              <mat-option [value]="'07'">7</mat-option>
+              <mat-option [value]="'08'">8</mat-option>
+              <mat-option [value]="'09'">9</mat-option>
+              <mat-option [value]="'10'">10</mat-option>
+              <mat-option [value]="'11'">11</mat-option>
+              <mat-option [value]="'12'">12</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-select
+              focus="true"
+              name="availableByMinutes"
+              id="availableByMinutes"
+              formControlName="availableByMinutes"
+              [required]="formService.hasRequiredField(availableByMinutes)"
+              [errorStateMatcher]="matcher"
+            >
+              <mat-option [value]="'00'">00</mat-option>
+              <mat-option [value]="'15'">15</mat-option>
+              <mat-option [value]="'30'">30</mat-option>
+              <mat-option [value]="'45'">45</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-select
+              focus="true"
+              name="availableByAmPm"
+              id="availableByAmPm"
+              formControlName="availableByAmPm"
+              [required]="formService.hasRequiredField(availableByAmPm)"
+              [errorStateMatcher]="matcher"
+            >
+              <mat-option [value]="'AM'">AM</mat-option>
+              <mat-option [value]="'PM'">PM</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12 time-container">
+          <div><label>Closes By</label></div>
+          <mat-form-field class="wrapper-padding-0" appearance="outline">
+            <mat-select
+              focus="true"
+              name="closesByHour"
+              id="closesByHour"
+              formControlName="closesByHour"
+              [required]="formService.hasRequiredField(closesByHour)"
+              [errorStateMatcher]="matcher"
+            >
+              <mat-option [value]="'01'">1</mat-option>
+              <mat-option [value]="'02'">2</mat-option>
+              <mat-option [value]="'03'">3</mat-option>
+              <mat-option [value]="'04'">4</mat-option>
+              <mat-option [value]="'05'">5</mat-option>
+              <mat-option [value]="'06'">6</mat-option>
+              <mat-option [value]="'07'">7</mat-option>
+              <mat-option [value]="'08'">8</mat-option>
+              <mat-option [value]="'09'">9</mat-option>
+              <mat-option [value]="'10'">10</mat-option>
+              <mat-option [value]="'11'">11</mat-option>
+              <mat-option [value]="'12'">12</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="wrapper-padding-0" appearance="outline">
+            <mat-select
+              focus="true"
+              name="closesByMinutes"
+              id="closesByMinutes"
+              formControlName="closesByMinutes"
+              [required]="formService.hasRequiredField(closesByMinutes)"
+              [errorStateMatcher]="matcher"
+            >
+              <mat-option [value]="'00'">00</mat-option>
+              <mat-option [value]="'15'">15</mat-option>
+              <mat-option [value]="'30'">30</mat-option>
+              <mat-option [value]="'45'">45</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="wrapper-padding-0" appearance="outline">
+            <mat-select
+              focus="true"
+              name="closesByAmPm"
+              id="closesByAmPm"
+              formControlName="closesByAmPm"
+              [required]="formService.hasRequiredField(closesByAmPm)"
+              [errorStateMatcher]="matcher"
+            >
+              <mat-option [value]="'AM'">AM</mat-option>
+              <mat-option [value]="'PM'">PM</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="validation-error" *ngIf="formGroup.hasError('invalidPickupRange')">
+            Invalid pickup range.
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

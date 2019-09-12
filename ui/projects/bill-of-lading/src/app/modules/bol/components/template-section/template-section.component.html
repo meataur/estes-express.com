@@ -1,0 +1,24 @@
+<mat-card [formGroup]="formGroup">
+  <mat-card-header class="d-flex justify-content-between">
+    <mat-card-title>Save BOL Template</mat-card-title>
+    <div class="col-6 d-flex justify-content-end align-items-center">
+      <mat-slide-toggle color="primary" formControlName="saveTemplate">
+        Save this BOL as template to use again.
+      </mat-slide-toggle>
+    </div>
+  </mat-card-header>
+  <mat-card-content *ngIf="saveTemplate.value === true">
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Template Name</mat-label>
+          <input id="templateName" matInput formControlName="templateName" required />
+          <mat-error *ngIf="templateName.invalid">{{
+            formService.getErrorMessage(templateName)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-card-content>
+  <!-- form group valid: {{ formGroup.valid }} <br />form group value: {{ formGroup.value | json }} -->
+</mat-card>

@@ -1,0 +1,59 @@
+<div
+  id="bolFormContainer"
+  [libOverlay]="loading || loadingFormSubmit || loadingSaveDraft || loadingSaveTemplateOnly"
+>
+  <h6 *ngIf="action === 2" class="mt-3">Edit Template - {{ templateName }}</h6>
+  <p class="mt-3">
+    Please complete the steps to create a Bill of Lading. You may also save the BOL as a draft or a
+    template.
+  </p>
+  <div #bolSource><app-bol-source [draft]="bolDraft"></app-bol-source></div>
+  <div #bolDetails><app-bol-details [draft]="bolDraft"></app-bol-details></div>
+  <div #quoteDetails><app-quote-details [draft]="bolDraft"></app-quote-details></div>
+  <div *ngIf="hasPickupRequestAccess" #pickupRequest><app-pickup-request [draft]="bolDraft"></app-pickup-request></div>
+  <div #accesorials><app-accessorials [draft]="bolDraft"></app-accessorials></div>
+  <div #shipperConsigneeDetails>
+    <app-shipper-consignee-details [draft]="bolDraft"></app-shipper-consignee-details>
+  </div>
+  <div #billingInfo><app-billing-information [draft]="bolDraft"></app-billing-information></div>
+  <div #commodityInfo>
+    <app-commodity-information [draft]="bolDraft"></app-commodity-information>
+  </div>
+  <div #referenceNumbers>
+    <app-reference-numbers-list [draft]="bolDraft"></app-reference-numbers-list>
+  </div>
+  <div #shippingLabels><app-shipping-labels [draft]="bolDraft"></app-shipping-labels></div>
+  <div #notifications><app-notifications [draft]="bolDraft"></app-notifications></div>
+  <div #templateSection>
+    <app-template-section [editTemplateName]="templateName"></app-template-section>
+  </div>
+  <lib-feedback [message]="feedback"></lib-feedback>
+  <div class="mt-3">
+    <button
+      id="bolSubmitButton"
+      class="btn btn-primary mr-3"
+      type="submit"
+      (click)="onSubmit()"
+      [disabled]="loadingFormSubmit"
+    >
+      {{ submitButtonText }}
+      <i class="fas fa-sync-alt fa-spin" *ngIf="loadingFormSubmit"></i></button
+    ><button
+      id="bolSaveDraftButton"
+      *ngIf="action !== 2"
+      class="btn btn-default mr-3"
+      (click)="save()"
+      [disabled]="loadingSaveDraft"
+    >
+      Save as Draft <i class="fas fa-sync-alt fa-spin" *ngIf="loadingSaveDraft"></i></button
+    ><button
+      id="bolSaveTemplateButton"
+      *ngIf="showSaveAsTemplateOnlyButton"
+      class="btn btn-default"
+      (click)="onSaveAsTemplateOnly()"
+      [disabled]="loadingSaveTemplateOnly"
+    >
+      Save as Template Only <i class="fas fa-sync-alt fa-spin" *ngIf="loadingSaveTemplateOnly"></i>
+    </button>
+  </div>
+</div>

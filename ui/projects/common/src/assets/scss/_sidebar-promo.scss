@@ -1,0 +1,16 @@
+.sidebar-promo {
+	padding: 1.5rem;
+	background-color: $white;
+	margin-top: 1.5rem;
+	@include media-breakpoint-up(md) {
+		box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 4px 5px 0 rgba(0, 0, 0, 0.14);
+	}
+	img {
+		width: 100% !important;
+		max-width: 100% !important;
+		height: auto !important;
+	}
+	p:last-of-type {
+		margin-bottom: 0;
+	}
+}

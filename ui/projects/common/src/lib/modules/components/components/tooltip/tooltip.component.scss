@@ -1,0 +1,25 @@
+@import '~bootstrap/scss/functions';
+@import '../../../../../assets/scss/variables';
+
+:host {
+  display: inline-block;
+}
+
+span {
+  color: $black;
+
+  .fa-circle {
+    color: $white;
+  }
+
+  &:hover,
+  &:focus {
+    .fa-circle {
+      color: $black;
+    }
+
+    .fa-question-circle {
+      color: $yellow;
+    }
+  }
+}

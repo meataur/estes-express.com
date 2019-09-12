@@ -1,0 +1,37 @@
+<mat-card>
+  <form name="emailRequestForm" #emailRequestForm="ngForm" novalidate>
+    <mat-card-header>
+      <mat-card-title class="d-flex flex-column justify-content-center">
+        {{data.dialogTitle}}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="m-0">
+      <div mat-dialog-content class="m-0">
+        <p>Select the PRO numbers for the shipment status updates you would like to receive:</p>
+        <!--<p>{{data.dialogMessage}}</p>-->
+        <div class="row">
+          <div class="col" *ngFor="let item of proList">
+            <mat-checkbox color="primary" #chk [checked]="true" (click)="setProNumbers(chk.checked, item.pro)" [value]="item.pro"> {{item.pro}} </mat-checkbox>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+        <mat-error class="small" *ngIf="(emailStatusRequest.pros && emailStatusRequest.pros.length == 0)">
+          At least one PRO is <b>required</b> </mat-error>
+
+        <p>Enter one or more email addresses (one per line) in the field below to have shipment status updates emailed to you automatically.</p>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email Addresses (one per line)</mat-label>
+          <textarea matInput rows="5" required placeholder="Email@example.com"
+                              id="inputShipmentTrackingBy" [formControl]="emailAddresses" ></textarea>
+          <mat-error *ngIf="emailAddresses.invalid">{{
+              formService.getErrorMessage(emailAddresses)
+            }}</mat-error>
+        </mat-form-field>
+      </div><!-- /mat-dialog-content -->
+    </mat-card-content>
+    <div mat-dialog-actions>
+      <button type="submit" class="btn btn-primary" (click)="postEmailRequest(emailRequestForm.valid)">Submit</button>&nbsp;
+      <button type="button" class="btn btn-default" (click)="onNoClick()">Cancel</button>
+    </div>
+  </form>
+</mat-card>

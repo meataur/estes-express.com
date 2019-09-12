@@ -1,0 +1,137 @@
+<h1 mat-dialog-title>Create Shipping Labels</h1>
+<mat-dialog-content [formGroup]="formGroup">
+    <div><label>Select your label type:</label></div>
+  <div class="form-row">
+    <div class="form-group col-12">
+      <mat-radio-group
+        class="label-type-radio-group"
+        id="radioGroupLabelType"
+        name="radioGroupLabelType"
+        formControlName="labelType"
+      >
+        <mat-radio-button id="labelType6" name="labelType6" color="primary" [value]="'6'">
+          <div class="d-flex flex-column">
+            <table border="1" cellpadding="2" cellspacing="2" width="90px" height="130px;">
+              <tbody>
+                <tr>
+                  <td align="center">1</td>
+                  <td align="center">2</td>
+                </tr>
+                <tr>
+                  <td align="center">3</td>
+                  <td align="center">4</td>
+                </tr>
+                <tr>
+                  <td align="center">5</td>
+                  <td align="center">6</td>
+                </tr>
+              </tbody>
+            </table>
+            <span class="d-flex align-items-center"
+              >4.5 X 3.33
+              <lib-tooltip
+                [message]="
+                  'Compatible with Avery Shipping Labels 5164, 5264, 5524, 8164, 8254, 8464, 48464, 55164, 58164'
+                "
+              ></lib-tooltip
+            ></span>
+          </div>
+        </mat-radio-button>
+        <mat-radio-button id="labelType4" name="labelType4" color="primary" [value]="'4'">
+          <div class="d-flex flex-column">
+            <table border="1" cellpadding="2" cellspacing="2" width="90px" height="130px;">
+              <tbody>
+                <tr>
+                  <td align="center">1</td>
+                  <td align="center">2</td>
+                </tr>
+                <tr>
+                  <td align="center">3</td>
+                  <td align="center">4</td>
+                </tr>
+              </tbody>
+            </table>
+            <span class="d-flex align-items-center"
+              >3.5 X 5
+              <lib-tooltip
+                [message]="'Compatible with Avery Shipping Labels 5168, 6878'"
+              ></lib-tooltip
+            ></span>
+          </div>
+        </mat-radio-button>
+        <mat-radio-button id="labelType2" name="labelType2" color="primary" [value]="'2'">
+          <div class="d-flex flex-column">
+            <table border="1" cellpadding="2" cellspacing="2" width="90px" height="130px;">
+              <tbody>
+                <tr>
+                  <td align="center">1</td>
+                </tr>
+                <tr>
+                  <td align="center">2</td>
+                </tr>
+              </tbody>
+            </table>
+            <span class="d-flex align-items-center"
+              >8.5 X 5
+              <lib-tooltip
+                [message]="'Compatible with Avery Shipping Labels 5126, 5526, 8126, 15516, 18126'"
+              ></lib-tooltip
+            ></span>
+          </div>
+        </mat-radio-button>
+        <mat-radio-button id="labelType1" name="labelType1" color="primary" [value]="'1'">
+          <div class="d-flex flex-column">
+            <table border="1" cellpadding="2" cellspacing="2" width="90px" height="130px;">
+              <tbody>
+                <tr>
+                  <td align="center">1</td>
+                </tr>
+              </tbody>
+            </table>
+            <span class="d-flex align-items-center"
+              >8.5 X 11
+              <lib-tooltip [message]="'Compatible with Avery Shipping Label 5264'"></lib-tooltip
+            ></span>
+          </div>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-5">
+      <mat-form-field appearance="outline">
+        <mat-label>Start Label Position</mat-label>
+        <mat-select focus="true" id="startLabel" formControlName="startLabel" required>
+          <mat-option></mat-option>
+          <mat-option [value]="l" *ngFor="let l of labelPositions">{{ l }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="startLabel.invalid">
+          {{ formService.getErrorMessage(startLabel) }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-md-5">
+      <mat-form-field appearance="outline" class="wrapper-padding-0">
+        <mat-label>Number of Labels</mat-label>
+        <input id="numberOfLabel" matInput formControlName="numberOfLabel" required />
+        <!-- <mat-error *ngIf="numberOfLabel.invalid">{{
+          formService.getErrorMessage(numberOfLabel)
+        }}</mat-error> -->
+      </mat-form-field>
+      <span class="help-block">Total number of labels to print.</span>
+      <div
+        *ngIf="numberOfLabel.invalid && (numberOfLabel.touched || numberOfLabel.dirty)"
+        class="validation-error"
+      >
+        {{ formService.getErrorMessage(numberOfLabel) }}
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="onSubmit()" class="btn btn-primary mr-3" [disabled]="loadingShippingLabel">
+    Create <i class="fas fa-sync-alt fa-spin" *ngIf="loadingShippingLabel"></i>
+  </button>
+  <button mat-dialog-close class="btn btn-default">Cancel</button>
+</mat-dialog-actions>

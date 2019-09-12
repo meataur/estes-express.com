@@ -1,0 +1,14 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../common/src/assets/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
+
+.estes-app {
+  .zip-dash {
+    margin: 0 -6px;
+    padding-top: 1rem;
+  }
+  .disclaimer {
+    font-size: 0.75rem;
+    color: $gray-700;
+  }
+}

@@ -1,0 +1,25 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { DocumentRetrievalComponent } from './document-retrieval.component';
+
+describe('DocumentRetrievalComponent', () => {
+  let component: DocumentRetrievalComponent;
+  let fixture: ComponentFixture<DocumentRetrievalComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ DocumentRetrievalComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(DocumentRetrievalComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

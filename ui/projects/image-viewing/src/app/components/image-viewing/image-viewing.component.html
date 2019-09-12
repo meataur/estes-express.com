@@ -1,0 +1,197 @@
+<lib-routable-component-header>Image Retrieval</lib-routable-component-header>
+<p>
+  See scanned images of delivery receipts, Bills of Lading and weight & research certificates. You will need your PRO number, Bill of Lading, or purchase order number.
+</p>
+
+<mat-card class="mb-3">
+  <mat-card-content>
+    <div class="row">
+      <div class="col-md-12">
+        <form id="imageViewingFormContainer" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Image Type</mat-label>
+                <mat-select
+                  focus="true"
+                  name="documentType"
+                  id="documentType"
+                  formControlName="documentType"
+                  required
+                >
+                  <mat-option
+                    [value]="imageType.name"
+                    *ngFor="let imageType of (imageTypes$ | async)"
+                    >{{ imageType.description }}</mat-option
+                  >
+                </mat-select>
+                <mat-error *ngIf="documentType.invalid">{{
+                  formService.getErrorMessage(documentType)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-12"><label class="form-row-label">Search By:</label></div>
+            <div class="form-group col-md-6">
+              <mat-radio-group class="radio-group" formControlName="searchType">
+                <mat-radio-button color="primary" [value]="t" *ngFor="let t of searchTypes">{{
+                  t.text
+                }}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Search Items (one per line)</mat-label>
+                <textarea
+                  matInput
+                  rows="10"
+                  name="searchItems"
+                  id="searchItems"
+                  formControlName="searchItems"
+                  required
+                ></textarea>
+                <mat-error *ngIf="searchItems.invalid">{{
+                  formService.getErrorMessage(searchItems)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <p>Retrieving an image that is more than 90 days old will slow processing time.</p>
+          <div class="form-row">
+            <div class="form-group col-12">
+              <mat-radio-group class="radio-group" formControlName="viewOrFax">
+                <mat-radio-button color="primary" [value]="'V'">View</mat-radio-button>
+                <mat-radio-button color="primary" [value]="'F'">Fax</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div *ngIf="viewOrFax.value === 'F'">
+            <div class="form-row">
+              <div class="form-group col-12">
+                <mat-form-field appearance="outline">
+                  <mat-label>Fax Number</mat-label>
+                  <input
+                    matInput
+                    formControlName="faxNumber"
+                    [required]="viewOrFax.value === 'F'"
+                    [textMask]="{ mask: mask, guide: false }"
+                  />
+                  <mat-error *ngIf="faxNumber.invalid">{{
+                    formService.getErrorMessage(faxNumber)
+                  }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-12">
+                <mat-form-field appearance="outline">
+                  <mat-label>Company Name</mat-label>
+                  <input matInput formControlName="companyName" />
+                  <mat-error *ngIf="companyName.invalid">{{
+                    formService.getErrorMessage(companyName)
+                  }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-12">
+                <mat-form-field appearance="outline">
+                  <mat-label>Attention</mat-label>
+                  <input matInput formControlName="attention" />
+                  <mat-error *ngIf="attention.invalid">{{
+                    formService.getErrorMessage(attention)
+                  }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <lib-feedback [message]="errorMessage"></lib-feedback>
+          <div>
+            <button id="imageViewingSubmitButton" type="submit" [disabled]="loading" class="btn btn-primary">
+              {{ viewOrFax.value === 'V' ? 'Search' : 'Send' }}
+              <i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<mat-card [hidden]="showResults !== true" class="mb-3 mat-card--table" [libOverlay]="loading">
+  <mat-card-header class="p-3 d-flex justify-content-between row">
+    <mat-card-title>Results</mat-card-title>
+    <div class="col-6 d-flex justify-content-end">
+      <input
+        class="table-search"
+        matInput
+        (keyup)="applyFilter($event.target.value)"
+        name="filter"
+        id="filter"
+        placeholder="&#xf002;"
+      />
+    </div>
+    <div class="col-12 p-0 pt-3">
+      <button class="btn btn-default mr-3" (click)="openEmailModal()" [disabled]="!imageSelections || imageSelections.selected.length === 0">Email Selected</button>
+      <span>Email up to 5 available images selected below.</span>
+    </div>
+  </mat-card-header>
+  <!-- <div *ngIf="resultsLength === 0 && !loading" class="no-results">
+    There were no results for this query.
+  </div> -->
+  <table
+    [hidden]="noData | async"
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    matSortActive="searchData"
+    matSortDirection="asc"
+  >
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+    </th>
+    <td mat-cell *matCellDef="let row" class="text-center">
+      <mat-checkbox color="primary"
+                    *ngIf="row.status === 'AVAILABLE'"
+                    [disabled]="(!isSelected(row) && imageSelections.selected.length >= 5)"
+                    (click)="$event.stopPropagation()"
+                    (change)="$event ? imageSelections.toggle(row) : null"
+                    [checked]="isSelected(row)">
+      </mat-checkbox>
+    </td>
+  </ng-container>
+    <ng-container matColumnDef="searchData">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Search Data</th>
+      <td mat-cell *matCellDef="let element">{{ element.searchData }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="pro">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>PRO #</th>
+      <td mat-cell *matCellDef="let element">{{ element.key1 + '-' + element.key2 }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="docType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Image Type</th>
+      <td mat-cell *matCellDef="let element">{{ element.docType }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let element">
+        <app-image-fetch [image]="element"></app-image-fetch>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row class="element-row" *matRowDef="let element; columns: displayedColumns"></tr>
+  </table>
+
+  <div *ngIf="(noData | async)" class="no-results">
+    There are no results for the search criteria.
+  </div>
+  <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[25, 50, 75, 100]"></mat-paginator>
+</mat-card>
+
+<p>Find out more about Image Viewing by visiting our <a href="/resources/frequently-asked-questions">Frequently Asked Questions</a>.</p>

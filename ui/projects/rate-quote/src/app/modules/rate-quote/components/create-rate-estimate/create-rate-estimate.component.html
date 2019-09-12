@@ -1,0 +1,37 @@
+<lib-routable-component-header>Rate Quote Estimate</lib-routable-component-header>
+<div id="rateEstimateFormContainer" [hidden]="step !== 1">
+  <app-rate-estimate-intro></app-rate-estimate-intro>
+  <div #requestor><app-requestor [quote]="rateQuote"></app-requestor></div>
+  <div #routingInfo><app-routing-information [quote]="rateQuote"></app-routing-information></div>
+  <div #commmodityList><app-commodity-list [quote]="rateQuote"></app-commodity-list></div>
+  <div #accessorials><app-accessorials [quote]="rateQuote"></app-accessorials></div>
+  <lib-feedback [message]="feedback"></lib-feedback>
+  <div class="mt-3">
+    <button id="rateEstimateSubmitButton" class="btn btn-primary" type="submit" (click)="onSubmit()" [disabled]="loadingStep1">
+      Submit Request<i class="fas fa-sync-alt fa-spin ml-3" *ngIf="loadingStep1"></i>
+    </button>
+  </div>
+</div>
+<ng-container *ngIf="step === 2">
+  <p class="mt-3">
+    Select “Get Quote #” to view additional details and the quote number for a particular service
+    level. If you do not have a My Estes account and would like to ship with Estes, please contact
+    your <a [href]="terminalLookupUrl">local terminal</a> for assistance with arranging a pickup.
+  </p>
+  <p>
+    If you are interested in booking any selection faster than by 5 p.m. on the standard transit
+    date, please contact the Estes Solution Center (<a href="mailto:solutions@estes-express.com"
+      >solutions@estes-express.com</a
+    >
+    or 1-800-645-3952) to receive personal assistance and confirm availability.
+  </p>
+  <p>
+    If you have a larger shipment and are interested in a volume or truckload rate, please contact
+    us at volumetruckload@estes-express.com.
+  </p>
+  <app-rate-request-results
+    (reviseQuote)="reviseQuote()"
+    (startNewQuote)="startNewQuote()"
+    [quotes]="ratesQuotes"
+  ></app-rate-request-results>
+</ng-container>

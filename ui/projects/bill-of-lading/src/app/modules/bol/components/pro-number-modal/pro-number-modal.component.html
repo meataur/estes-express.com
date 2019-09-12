@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Select a PRO Number Option</h1>
+<mat-dialog-content class="form-row" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <div class="form-group col-md-12 d-flex align-items-center">
+    <mat-slide-toggle color="primary" formControlName="autoAssignPro">
+      Auto-assign PRO Number
+    </mat-slide-toggle>
+    <lib-tooltip
+      [message]="
+        'If you do not already have a PRO number, turn on this toggle to generate one with your Bill of Lading.'
+      "
+    ></lib-tooltip>
+  </div>
+  <div *ngIf="autoAssignPro.value === false" class="form-group col-md-12 form-group--tooltip">
+    <mat-form-field appearance="outline" class="form-group--tooltip__form-field">
+      <mat-label>Enter Reserved PRO Number</mat-label>
+      <input
+        matInput
+        formControlName="reservedPro"
+        [textMask]="{ mask: proNumberMask, guide: false }"
+        required
+      />
+      <mat-error *ngIf="reservedPro.invalid">{{
+        formService.getErrorMessage(reservedPro)
+      }}</mat-error>
+    </mat-form-field>
+    <lib-tooltip
+      class="form-group--tooltip__tooltip"
+      [message]="
+        'If you already have an Estes PRO number for this shipment, enter it here. If you have questions on how to obtain PROs, please call your local terminal.'
+      "
+    ></lib-tooltip>
+  </div>
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button type="submit" class="btn btn-primary" (click)="onSubmit()">Confirm</button>&nbsp;
+  <button type="button" class="btn btn-default" (click)="onNoClick()">Cancel</button>
+</div>

@@ -1,0 +1,13 @@
+@import '../../../../../../../../node_modules/bootstrap/scss/functions';
+@import '../../../../../../../common/src/assets/scss/variables';
+@import '../../../../../../../../node_modules/bootstrap/scss/mixins';
+
+.action-column {
+  padding: 1rem;
+  background-color: $gray-200;
+}
+
+:host ::ng-deep .action-column__header {
+  font-size: 1rem;
+  margin-left: 0.75rem;
+}

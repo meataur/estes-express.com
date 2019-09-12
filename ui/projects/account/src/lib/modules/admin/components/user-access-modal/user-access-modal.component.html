@@ -1,0 +1,56 @@
+<mat-card>
+  <mat-card-header mat-dialog-title class="row justify-content-between align-items-stretch">
+    <mat-card-title class="d-flex flex-column justify-content-center">
+      Edit User Access for {{username}}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content mat-dialog-content class="pb-0 m-0 mat-dialog-content">
+    <div>
+      <p>
+        You may customize the applications you would like this user to have access to below. You can return to this list to make additional changes at any time.
+      </p>
+      <div class="form-row">
+        <div class="form-group col-md-6 pr-4">
+          <lib-form-header>Authorized Applications</lib-form-header>
+          <div [libOverlay]="loadingAuthorizedApps">
+            <div class="link-container" *ngFor="let a of (authorizedApps$ | async)">
+              {{ a.description }} &nbsp;<button
+                type="button"
+                (click)="blockApp(a.name)"
+                class="btn btn-primary"
+              >
+                Block
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-md-6 pr-4">
+          <lib-form-header>Blocked Applications</lib-form-header>
+          <div [libOverlay]="loadingBlockedApps">
+            <div class="link-container" *ngFor="let a of (blockedApps$ | async)">
+              {{ a.description }} &nbsp;<button
+                type="button"
+                (click)="unblockApp(a.name)"
+                class="btn btn-primary"
+              >
+                Unblock
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions mat-dialog-actions class="pr-4 pl-4 pb-4">
+      <div class="row">
+        <div class="col-12">
+          <lib-feedback [message]="feedback"></lib-feedback>
+        </div>
+      </div>
+      <div mat-dialog-actions>
+        <div class="d-flex">
+          <button type="button" class="btn btn-default" (click)="onNoClick()">Close</button>
+        </div>
+      </div>
+    </mat-card-actions>
+</mat-card>

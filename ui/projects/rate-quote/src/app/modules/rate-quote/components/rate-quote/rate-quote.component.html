@@ -1,0 +1,25 @@
+<!-- <div class="d-flex justify-content-between"></div> -->
+
+  <!-- <lib-form-header class="col-auto flex-grow-1" [color]="'red'">Rate Request</lib-form-header> -->
+  <lib-routable-component-header>Rate Quote</lib-routable-component-header>
+  <!-- <app-need-service-help
+    class="d-flex justify-content-start justify-content-sm-end col-12 col-sm-auto mb-3"
+  ></app-need-service-help> -->
+  <!-- <div class="d-flex justify-content-start justify-content-sm-end col-12 col-sm-auto mb-3">
+      <button class="btn btn-default mr-1" (click)="reviseQuote()">Revise Quote</button>
+      <button class="btn btn-default" (click)="startNewQuote()">Start New Quote</button>
+    </div> -->
+
+<nav mat-tab-nav-bar>
+  <a
+    *ngFor="let link of navLinks"
+    mat-tab-link
+    [routerLink]="link.path"
+    routerLinkActive
+    #rla="routerLinkActive"
+    [active]="rla.isActive"
+  >
+    {{ link.label }}
+  </a>
+</nav>
+<router-outlet></router-outlet>

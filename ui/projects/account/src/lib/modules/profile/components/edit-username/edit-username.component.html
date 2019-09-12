@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Change Your Username.</h1>
+<div mat-dialog-content>
+  <lib-feedback [message]="editInfo"></lib-feedback>
+  <p>Current Username: {{ currentUsername }}</p>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group col-12">
+        <mat-form-field appearance="outline">
+          <mat-label>New Username</mat-label>
+          <input matInput formControlName="username" required />
+          <mat-error *ngIf="username.invalid">{{
+            formService.getErrorMessage(username)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <lib-feedback [message]="feedback"></lib-feedback>
+    <div mat-dialog-actions>
+      <button type="submit" [disabled]="loading" class="btn btn-primary" (click)="onSubmit()">
+        Submit <i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i></button
+      >&nbsp; <button type="button" class="btn btn-default" (click)="onNoClick()">Cancel</button>
+    </div>
+  </form>
+</div>

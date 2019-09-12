@@ -1,0 +1,16 @@
+@import "../../../../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../assets/scss/variables";
+@import "../../../../../../../../node_modules/bootstrap/scss/mixins";
+
+.mat-header-cell
+  .mat-sort-header-container.mat-sort-header-sorted
+  .mat-sort-header-arrow {
+  opacity: 1 !important;
+}
+
+// Matching height of container to height of form control so button is aligned with the control.
+.button-container {
+  @include media-breakpoint-up(md) {
+    height: 55.01px;
+  }
+}

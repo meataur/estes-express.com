@@ -1,0 +1,60 @@
+{
+  "quoteID": "LT3GLD7",
+  "quoteRefNum": "1517877",
+  "quoteDate": "04/05/2019",
+  "app": "LTL",
+  "accountCode": "5023958",
+  "accountName": "DIAMOND CRYSTAL BRANDS",
+  "contactName": "",
+  "contactPhone": "",
+  "contactPhoneExt": "",
+  "contactEmail": "",
+  "role": "S",
+  "terms": "PPD",
+  "lane": 3,
+  "origin": { "country": "US", "city": "MIDLOTHIAN", "state": "VA", "zip": "23113" },
+  "dest": { "country": "US", "city": "PUEBLO", "state": "CO", "zip": "81001" },
+  "transitMessage": "",
+  "pickupDate": "04/05/19",
+  "pickupAvail": "15:11:33",
+  "pickupClose": "00:00:00",
+  "delivery": { "date": "04/10/19", "time": "17:00:00" },
+  "service": { "id": 99, "text": "LTL Standard Transit" },
+  "declaredValue": 350.0,
+  "declaredValueWaived": false,
+  "foodWarehouseId": 0,
+  "foodWarehouse": "",
+  "stackable": false,
+  "linearFeet": 0,
+  "comments": "",
+  "pricing": { "display": "S", "discount": 0.0593, "totalDiscount": 7.26, "totalPrice": 138.0 },
+  "commodities": [
+    {
+      "commodity": {
+        "shipClass": 50.0,
+        "weight": 23,
+        "pieces": 23,
+        "pieceType": "BAG",
+        "dimensions": { "length": 23, "width": 23, "height": 23 },
+        "description": "adf"
+      },
+      "rate": 0.0,
+      "charge": 0.0
+    }
+  ],
+  "accessorials": [
+    {
+      "accessorial": {
+        "code": "FSC",
+        "appID": null,
+        "display": false,
+        "description": "Fuel Surcharge"
+      },
+      "charge": 99.0
+    }
+  ],
+  "info": [
+    "Please contact the Estes Solution Center at 1-800-645-3952, or your local servicing terminal to confirm driver availability for all pickups required after 3 p.m. local time."
+  ],
+  "disclaimers": []
+}

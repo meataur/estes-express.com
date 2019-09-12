@@ -1,0 +1,72 @@
+<form [formGroup]="formGroup" #ngForm="ngForm" (ngSubmit)="onSubmit()">
+
+  <h1><span>Upload Address Book</span></h1>
+  <p>Upload new addresses to your Address Book.</p>
+  <mat-card>
+    <mat-card-content>
+      <div class="row pb-3">
+        <div class="col-12 col-md-1"><h4 class="circled-step-number">1</h4></div>
+        <div class="col-12 col-md-11 pt-2">
+          <p>Download our Excel template, which will provide you with a properly formatted spreadsheet to enter (or copy/paste) your addresses.</p>
+          <a href="assets/AddressBook.csv" download>
+            <button type="button" class="btn btn-default"><i class="fa fa-download pr-2" aria-hidden="true"></i>Download Template</button>
+          </a>
+        </div>
+      </div>
+      <div class="row pt-3 pb-3">
+        <div class="col-12 col-md-1"><h4 class="circled-step-number">2</h4></div>
+        <div class="col-12 col-md-11 pt-2">
+          <p>Fill out the spreadsheet and save it as a .CSV file. Do not change or delete columns.</p>
+        </div>
+      </div>
+      <div class="row pt-3 pb-3">
+        <div class="col-12 col-md-1"><h4 class="circled-step-number">3</h4></div>
+        <div class="col-12 col-md-11 pt-2">
+          <p>Choose whether to:</p>
+          <mat-radio-group name="radioUploadType" formControlName="uploadType">
+            <mat-radio-button class="pt-2" value="append" color="primary" name="radioUploadType">Add address(es) to your current Address Book (append)</mat-radio-button><br>
+            <mat-radio-button class="pt-2" value="overwrite" color="primary" name="radioUploadType">Upload a new Address Book (overwrite)</mat-radio-button>
+          </mat-radio-group>
+          <div class="form-group col-11 pt-2">
+            <mat-error *ngIf="uploadType.invalid &&  ngForm.submitted && uploadType.errors?.required">Upload type is required</mat-error>
+          </div>
+        </div>
+      </div>
+      <div class="row pt-3">
+        <div class="col-12 col-md-1"><h4 class="circled-step-number">4</h4></div>
+        <div class="col-12 col-md-11 pt-2">
+          <p>Upload your .CSV file.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group offset-md-1 col-9 col-md-5">
+          <div class="upload-file-component">
+            <mat-form-field floatLabel="never" appearance="outline">
+              <input placeholder="No file chosen" matInput readonly value="{{addressFile.value | displayFilename}}"/>
+            </mat-form-field>
+            <div class="upload-btn-wrapper">
+              <a *ngIf="!addressFile.value">Browse</a>
+              <i class="fa fa-times-circle d-flex flex-column justify-content-center" *ngIf="addressFile.value" (click)="addressFile.setValue(null); addressFile.enable();" aria-hidden="true"></i>
+              <input [hidden]="addressFile.value" type="file" required id="addressFile" name="addressFile" formControlName="addressFile" (change)="validateFileSize($event, addressFile)" accept="{{acceptedFileTypes}}" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-11 offset-1">
+          <mat-error class="pl-3 pb-3" *ngIf="addressFile.invalid && addressFile.errors?.maxSize">{{
+            addressFile.errors.maxSize
+          }} </mat-error>
+          <mat-error class="pl-3 pb-3" *ngIf="addressFile.invalid && addressFile.errors?.fileType">{{
+            invoiceFile.errors.fileType
+          }} </mat-error>
+          <mat-error *ngIf="addressFile.invalid &&  ngForm.submitted && addressFile.errors?.required"><small>File is Required</small></mat-error>
+        </div>
+      </div>
+      <div class="row justify-content-end">
+        <div class="col-12">
+          <lib-feedback [message]="errorMessages"></lib-feedback>
+        </div>
+        <button type="submit" class="btn btn-primary mr-2">Upload<i class="fa fa-sync-alt fa-spin ml-2" *ngIf="submitLoading"></i></button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</form>

@@ -1,0 +1,150 @@
+<p class="mt-4 mb-4">Here is a history of your online pickup requests. Click the Request Number if you need to contact the servicing Estes terminal for any reason.
+</p>
+<mat-card class="mat-card--table">
+  <mat-card-header class="row d-flex justify-content-between">
+    <mat-card-title>
+      <h3 class="d-flex flex-column justify-content-center m-0 pl-3">Pickup Request History</h3>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-table #table [dataSource]="results" matSort matSortActive="requestNumber" matSortDirection="desc" multiTemplateDataRows [libOverlay]="loading">
+      <ng-container matColumnDef="requestNumber">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Request Number
+        </mat-header-cell>
+        <mat-cell class="d-none d-lg-flex" *matCellDef="let element">
+          <a (click)="openPickupModal(element)">{{ element.requestNumber }}</a>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="proNumber">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          PRO Number
+        </mat-header-cell>
+        <mat-cell class="d-none d-lg-flex" *matCellDef="let element">
+          <a [href]="getShipmentTrackingUrl(element.proNumber)" target="_blank">{{ element.proNumber }}</a>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="shipperCompany">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Shipper Company
+        </mat-header-cell>
+        <mat-cell class="d-none d-lg-flex" *matCellDef="let element">
+          {{element.shipperCompany}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="shipperCity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Shipper City
+        </mat-header-cell>
+        <mat-cell class="d-none d-lg-flex" *matCellDef="let element">
+          {{element.shipperCity}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="shipperState">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Shipper State
+        </mat-header-cell>
+        <mat-cell class="d-none d-lg-flex" *matCellDef="let element">
+          {{element.shipperState}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="submittedDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Date Submitted
+        </mat-header-cell>
+        <mat-cell class="d-none d-lg-flex" *matCellDef="let element">
+          {{element.submittedDate}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="pickupDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Pickup Date
+        </mat-header-cell>
+        <mat-cell class="d-none d-lg-flex" *matCellDef="let element">
+          {{element.pickupDate}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Status
+        </mat-header-cell>
+        <mat-cell class="d-none d-lg-flex" *matCellDef="let element">
+          {{element.status}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="mobileView">
+        <mat-header-cell *matHeaderCellDef class="d-none"></mat-header-cell>
+        <mat-cell *matCellDef="let element" class="mobile-table-view d-flex d-lg-none pt-2 pb-2">
+          <div class="row w-100 p-1">
+            <div class="col-6 font-weight-bold p-0">
+                Request Number
+            </div>
+            <div class="col-6 p-0">
+              <a (click)="openPickupModal(element)">{{ element.requestNumber }}</a>
+            </div>
+          </div>
+          <div class="row w-100 p-1">
+            <div class="col-6 font-weight-bold p-0">
+                PRO Number
+            </div>
+            <div class="col-6 p-0">
+              <a [href]="getShipmentTrackingUrl(element.proNumber)">{{ element.proNumber }}</a>
+            </div>
+          </div>
+          <div class="row w-100 p-1">
+            <div class="col-6 font-weight-bold p-0">
+                Shipper Company
+            </div>
+            <div class="col-6 p-0">
+                {{element.shipperCompany}}
+            </div>
+          </div>
+          <div class="row w-100 p-1">
+            <div class="col-6 font-weight-bold p-0">
+                Shipper City
+            </div>
+            <div class="col-6 p-0">
+                {{element.shipperCity}}
+            </div>
+          </div>
+          <div class="row w-100 p-1">
+            <div class="col-6 font-weight-bold p-0">
+                Shipper State
+            </div>
+            <div class="col-6 p-0">
+                {{element.shipperState}}
+            </div>
+          </div>
+          <div class="row w-100 p-1">
+            <div class="col-6 font-weight-bold p-0">
+                Date Submitted
+              </div>
+            <div class="col-6 p-0">
+                {{element.submittedDate}}
+            </div>
+          </div>
+          <div class="row w-100 p-1">
+            <div class="col-6 font-weight-bold p-0">
+                Pickup Date
+            </div>
+            <div class="col-6 p-0">
+                {{element.pickupDate}}
+            </div>
+          </div>
+          <div class="row w-100 p-1">
+            <div class="col-6 font-weight-bold p-0">
+                Status
+            </div>
+            <div class="col-6 p-0">
+                {{element.status}}
+            </div>
+          </div>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns" class="d-none d-lg-flex"></mat-header-row>
+      <mat-row *matRowDef="let element; columns: displayedColumns" class="d-flex"></mat-row>
+    </mat-table>
+    <div *ngIf="resultsLength === 0" class="no-results">There were no results for this query.</div>
+    <mat-paginator [length]="resultsLength" [pageSizeOptions]="[25, 50, 75, 100]"></mat-paginator>
+  </mat-card-content>
+</mat-card>

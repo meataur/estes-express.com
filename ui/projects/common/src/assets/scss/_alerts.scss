@@ -1,0 +1,39 @@
+.alert {
+	color: $white;
+	border: none;
+	&.alert-danger {
+		background-color: theme-color('danger');
+	}
+	&.alert-info {
+		background-color: theme-color('info');
+	}
+	&.alert-success {
+		background-color: theme-color('success');
+	}
+	a {
+		font-weight: 700;
+		&:link,
+		&:visited {
+			color: $white;
+			text-decoration: underline;
+		}
+		&:active,
+		&:focus,
+		&:hover {
+			color: $gray-100;
+			text-decoration: underline;
+		}
+	}
+	p:last-of-type {
+		margin-bottom: 0;
+	}
+	button.close {
+		font-size: $font-size-sm;
+		&:not(:disabled):not(.disabled):hover,
+		&:not(:disabled):not(.disabled):focus {
+			color: $white;
+			text-decoration: none;
+			opacity: 1;
+		}
+	}
+}

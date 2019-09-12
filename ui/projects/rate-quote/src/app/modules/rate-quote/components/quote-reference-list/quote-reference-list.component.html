@@ -1,0 +1,41 @@
+<lib-form-header [color]="'red'">Additional Service Level Options</lib-form-header>
+<p>The additional service level options below were generated on <b>{{ quote.quoteDate | date:'fullDate' }}</b>.</p>
+<p>
+  <a [routerLink]="['/rate-quote/create/quote', quote.quoteID]">Revise your quote</a> to generate updated service options.  <a [routerLink]="['/rate-quote/create']">Start a new quote</a> to generate new service options.
+</p>
+<div class="row mb-3">
+  <div class="col-lg-8">
+    <div class="detail-desc">
+      <table class="table table-bordered table-striped table-hover table-sm detail">
+        <thead>
+          <tr>
+            <th scope="col">
+              Service Level
+            </th>
+            <th scope="col">
+              Delivery Date
+            </th>
+            <th scope="col">
+              Delivery Time
+            </th>
+            <th scope="col">
+              Charges
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let q of rateQuoteReferences$ | async">
+            <td>{{ q.serviceLevel }}</td>
+            <td>{{ q.deliveryDate }}</td>
+            <td>{{ q.deliveryTime }}</td>
+            <td>{{ q.estCharges | currency: 'USD' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <app-quote-options class="d-block mb-3" [quote]="quote"></app-quote-options>
+    <a (click)="scrollTo()">View Selected Service Details</a>
+  </div>
+</div>

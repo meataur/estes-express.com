@@ -1,0 +1,161 @@
+﻿ng build --aot --project="address-book" --base-href="/myestes/address-book/"
+ng build --aot --project="bill-of-lading" --base-href="/myestes/bill-of-lading/"
+ng build --aot --project="claims" --base-href="/myestes/claims/"
+ng build --aot --project="commodity-library" --base-href="/myestes/commodity-library/"
+ng build --aot --project="document-retrieval" --base-href="/myestes/document-retrieval/"
+ng build --aot --project="edi-request" --base-href="/myestes/edi-request/"
+ng build --aot --project="home" --base-href="/myestes/home/"
+ng build --aot --project="image-viewing" --base-href="/myestes/image-viewing/"
+ng build --aot --project="invoice-inquiry" --base-href="/myestes/invoice-inquiry/"
+ng build --aot --project="online-reporting" --base-href="/myestes/online-reporting/"
+ng build --aot --project="pickup-request" --base-href="/myestes/pickup-request/"
+ng build --aot --project="points-download" --base-href="/myestes/points-download/"
+ng build --aot --project="rate-quote" --base-href="/myestes/rate-quote/"
+ng build --aot --project="shipment-manifest" --base-href="/myestes/shipment-manifest/"
+ng build --aot --project="shipment-tracking" --base-href="/myestes/shipment-tracking/"
+ng build --aot --project="terminal-lookup" --base-href="/myestes/terminal-lookup/"
+ng build --aot --project="transit-time-calculator" --base-href="/myestes/transit-time-calculator/"
+ng build --aot --project="weight-and-research" --base-href="/myestes/weight-and-research/"
+
+
+ng build --configuration=uat --project="address-book" --base-href="/myestes/address-book/"
+ng build --configuration=uat --project="bill-of-lading" --base-href="/myestes/bill-of-lading/"
+ng build --configuration=uat --project="claims" --base-href="/myestes/claims/"
+ng build --configuration=uat --project="commodity-library" --base-href="/myestes/commodity-library/"
+ng build --configuration=uat --project="document-retrieval" --base-href="/myestes/document-retrieval/"
+ng build --configuration=uat --project="edi-request" --base-href="/myestes/edi-request/"
+ng build --configuration=uat --project="home" --base-href="/myestes/home/"
+ng build --configuration=uat --project="image-viewing" --base-href="/myestes/image-viewing/"
+ng build --configuration=uat --project="invoice-inquiry" --base-href="/myestes/invoice-inquiry/"
+ng build --configuration=uat --project="online-reporting" --base-href="/myestes/online-reporting/"
+ng build --configuration=uat --project="pickup-request" --base-href="/myestes/pickup-request/"
+ng build --configuration=uat --project="points-download" --base-href="/myestes/points-download/"
+ng build --configuration=uat --project="rate-quote" --base-href="/myestes/rate-quote/"
+ng build --configuration=uat --project="shipment-manifest" --base-href="/myestes/shipment-manifest/"
+ng build --configuration=uat --project="shipment-tracking" --base-href="/myestes/shipment-tracking/"
+ng build --configuration=uat --project="terminal-lookup" --base-href="/myestes/terminal-lookup/"
+ng build --configuration=uat --project="transit-time-calculator" --base-href="/myestes/transit-time-calculator/"
+ng build --configuration=uat --project="weight-and-research" --base-href="/myestes/weight-and-research/"
+
+
+ng build --configuration=preprod --project="address-book" --base-href="/myestes/address-book/"
+ng build --configuration=preprod --project="bill-of-lading" --base-href="/myestes/bill-of-lading/"
+ng build --configuration=preprod --project="claims" --base-href="/myestes/claims/"
+ng build --configuration=preprod --project="commodity-library" --base-href="/myestes/commodity-library/"
+ng build --configuration=preprod --project="document-retrieval" --base-href="/myestes/document-retrieval/"
+ng build --configuration=preprod --project="edi-request" --base-href="/myestes/edi-request/"
+ng build --configuration=preprod --project="home" --base-href="/myestes/home/"
+ng build --configuration=preprod --project="image-viewing" --base-href="/myestes/image-viewing/"
+ng build --configuration=preprod --project="invoice-inquiry" --base-href="/myestes/invoice-inquiry/"
+ng build --configuration=preprod --project="online-reporting" --base-href="/myestes/online-reporting/"
+ng build --configuration=preprod --project="pickup-request" --base-href="/myestes/pickup-request/"
+ng build --configuration=preprod --project="points-download" --base-href="/myestes/points-download/"
+ng build --configuration=preprod --project="rate-quote" --base-href="/myestes/rate-quote/"
+ng build --configuration=preprod --project="shipment-manifest" --base-href="/myestes/shipment-manifest/"
+ng build --configuration=preprod --project="shipment-tracking" --base-href="/myestes/shipment-tracking/"
+ng build --configuration=preprod --project="terminal-lookup" --base-href="/myestes/terminal-lookup/"
+ng build --configuration=preprod --project="transit-time-calculator" --base-href="/myestes/transit-time-calculator/"
+ng build --configuration=preprod --project="weight-and-research" --base-href="/myestes/weight-and-research/"
+
+
+ng build --prod --project="address-book" --base-href="/myestes/address-book/"
+ng build --prod --project="bill-of-lading" --base-href="/myestes/bill-of-lading/"
+ng build --prod --project="claims" --base-href="/myestes/claims/"
+ng build --prod --project="commodity-library" --base-href="/myestes/commodity-library/"
+ng build --prod --project="document-retrieval" --base-href="/myestes/document-retrieval/"
+ng build --prod --project="edi-request" --base-href="/myestes/edi-request/"
+ng build --prod --project="home" --base-href="/myestes/home/"
+ng build --prod --project="image-viewing" --base-href="/myestes/image-viewing/"
+ng build --prod --project="invoice-inquiry" --base-href="/myestes/invoice-inquiry/"
+ng build --prod --project="online-reporting" --base-href="/myestes/online-reporting/"
+ng build --prod --project="pickup-request" --base-href="/myestes/pickup-request/"
+ng build --prod --project="points-download" --base-href="/myestes/points-download/"
+ng build --prod --project="rate-quote" --base-href="/myestes/rate-quote/"
+ng build --prod --project="shipment-manifest" --base-href="/myestes/shipment-manifest/"
+ng build --prod --project="shipment-tracking" --base-href="/myestes/shipment-tracking/"
+ng build --prod --project="terminal-lookup" --base-href="/myestes/terminal-lookup/"
+ng build --prod --project="transit-time-calculator" --base-href="/myestes/transit-time-calculator/"
+ng build --prod --project="weight-and-research" --base-href="/myestes/weight-and-research/"
+
+
+npm install -g @angular/cli@6.0.8
+ng new my-estes --style=scss
+
+ng build --prod common
+ng build --prod account
+ng build --prod header
+ng build --prod request-additional-info
+
+ng build --configuration=uat common
+ng serve --project="shipment-tracking" --configuration=uat
+ng build --project="shipment-tracking" --base-href="/myestes/shipment-tracking/" --configuration=uat
+
+ng generate library account --style=scss
+ng generate class service-response --type="model" --project="account"
+ng generate class login --type="model" --project="account"
+ng generate class forgot-password --type="model" --project="account"
+ng generate class signup --type="model" --project="account"
+ng generate class customer --type="model" --project="account"
+ng generate class request-account-number/request-account-number --type="model" --project="account"
+ng generate service authentication --project="account"
+ng generate service auth-interceptor --project="account"
+ng generate service login --project="account"
+ng generate service signup --project="account"
+ng generate service request-account-number/request-account-number --project="account"
+ng generate service information --project="account"
+ng generate component login --project="account" --style=scss
+ng generate component forgot-password --project="account" --style=scss
+ng generate component signup --project="account" --style=scss
+ng generate component profile --project="account" --style=scss
+ng generate component request-account-number --project="account" --style=scss
+ng generate module account-routing --project="account" --routing
+
+ng generate class alert --type="model" --project="common"
+ng build --prod --project="common"
+ng build --prod --project="quick-links"
+
+ng serve --project="shipment-tracking"
+ng build --prod --project="shipment-tracking" --base-href="/myestes/shipment-tracking/"
+ng generate application shipment-tracking --style=scss
+ng generate component email-dialog --project="shipment-tracking" --style=scss --flat
+ng generate class shipment-tracking-request --type="model" --project="shipment-tracking"
+ng generate class shipment-tracking-response --type="model" --project="shipment-tracking"
+ng generate class email-status-response --type="model" --project="shipment-tracking"
+ng generate class email-status-request --type="model" --project="shipment-tracking"
+ng generate service shipment-tracking --project="shipment-tracking"
+ng generate module app-routing --project="shipment-tracking" --routing
+
+ng serve --project="bill-of-lading"
+ng build --prod --project="bill-of-lading" --base-href="/myestes/bill-of-lading/"
+ng generate application bill-of-lading --style=scss
+ng generate module app-routing --project="bill-of-lading" --routing --flat
+ng generate component bill-of-lading --project="bill-of-lading" --style=scss --flat
+ng generate guard auth --project="bill-of-lading" --flat
+
+testlocal/testlocal
+testgroup/testgroup
+testnat/testnat
+
+If you need some PROs to test then log on as saweaver23/weaver777 and use these 2 Pros:
+
+001-4298767
+037-2001953
+037-9201161
+037-9201159
+037-9201154
+051-9994452
+
+username: saweaver23
+password: weaver777
+
+SVN
+https://svn-it-r001.estes.us.dom/svn/estes/SourceCode/projects/myestes/ui/trunk
+svn mkdir https://svn-it-r001.estes.us.dom/svn/estes/SourceCode/prodjects/myestes/ui/branches/captech -m"CapTech branch"
+svn checkout https://svn-it-r001.estes.us.dom/svn/estes/SourceCode/projects/myestes/ui/branches/captech myestes
+
+APACHE
+Doc root: /apps/www/myestes
+Vhost config: /opt/rh/httpd24/root/etc/httpd/conf.d/myestes.dev.estesinternal.com.conf
+
+User: www-user
+Pswd: Estes@123

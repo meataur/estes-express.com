@@ -1,0 +1,20 @@
+@import "../../../../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../../../common/src/assets/scss/variables";
+@import "../../../../../../../../node_modules/bootstrap/scss/mixins";
+
+.quote-item {
+  margin-bottom: 1rem;
+
+  .quote-label {
+    margin-bottom: .25rem;
+    display: block;
+    font-weight: bold;
+  }
+}
+
+
+
+tfoot {
+  font-weight: bold;
+  background-color: $white;
+}

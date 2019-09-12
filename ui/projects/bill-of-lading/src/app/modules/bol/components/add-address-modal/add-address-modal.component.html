@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>Save to Address Book</h1>
+<mat-dialog-content>
+  <div><label class="mb-0">Company Name:</label></div>
+  <div class="form-row mb-1">
+    <div class="form-group col">
+      <strong>{{ data.company }}</strong>
+    </div>
+  </div>
+  <!-- <hr> -->
+  <div><label>Company Roles (select all that apply):</label></div>
+  <div class="form-row" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="form-group col-12">
+      <mat-checkbox id="shipper" name="shipper" color="primary" formControlName="shipper">
+        Shipper
+      </mat-checkbox>
+    </div>
+    <div class="form-group col-12">
+      <mat-checkbox id="consignee" name="consignee" color="primary" formControlName="consignee">
+        Consignee
+      </mat-checkbox>
+    </div>
+    <div class="form-group col-12">
+      <mat-checkbox id="thirdParty" name="thirdParty" color="primary" formControlName="thirdParty">
+        Third Party
+      </mat-checkbox>
+    </div>
+    <div class="form-group col-12">
+      <mat-checkbox id="cod" name="cod" color="primary" formControlName="cod"> COD </mat-checkbox>
+    </div>
+  </div>
+  <div
+    *ngIf="
+      formGroup.invalid &&
+      (formGroup.dirty) &&
+      formGroup.hasError('atLeastOneChecked')
+    "
+    class="validation-error"
+  >
+    Please select at least one Role.
+  </div>
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button [disabled]="loading" type="submit" class="btn btn-primary" (click)="onSubmit()">
+    Save <i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i></button
+  >&nbsp; <button type="button" class="btn btn-default" (click)="onNoClick()">Cancel</button>
+</div>

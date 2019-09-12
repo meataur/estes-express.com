@@ -1,0 +1,31 @@
+@import "../../../../../assets/scss/estes";
+
+.mat-card {
+  .mat-column-shipper, .mat-column-thirdParty, .mat-column-cod {
+    flex: 0 0 65px;
+    justify-content:center;
+  }
+  .mat-column-consignee, .mat-column-locationNumber {
+    flex: 0 0 85px;
+    justify-content: center;
+  }
+  .mat-column-actions {
+    flex: 0 0 100px;
+    justify-content:center;
+  }
+
+  @include media-breakpoint-down(lg) {
+    .mat-column-shipper, .mat-column-consignee, .mat-column-thirdParty, .mat-column-cod {
+      display: none;
+    }
+  }
+  .mat-card-header-text {
+    display: none;
+  }
+  .mobile-table-view {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}

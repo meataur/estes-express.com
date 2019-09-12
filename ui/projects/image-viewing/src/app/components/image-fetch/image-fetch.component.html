@@ -1,0 +1,4 @@
+<span *ngIf="image.status !== 'AVAILABLE'" [ngClass]="{'text-danger' : image.status === 'ERROR'}" [innerHtml]="statusText"></span>
+<a (click)="openHtml()" *ngIf="image.status === 'AVAILABLE'"
+  >View Image</a
+>

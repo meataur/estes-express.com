@@ -1,0 +1,53 @@
+.card {
+    border: none;
+    font-size: .875rem;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 4px 5px 0 rgba(0, 0, 0, 0.14);
+	.card {
+		background-color: $gray-100;
+		box-shadow: none;
+	}
+}
+.nav-tabs {
+    border-bottom-color: rgba(0, 0, 0, 0.12);
+    .nav-item {
+        .nav-link {
+            border-left: none;
+            border-right: none;
+            border-top: none;
+            color: rgba(0, 0, 0, 0.6);
+            &.active {
+                border-bottom: 2px solid $red;
+                color: $black;
+                font-weight: 900;
+            }
+        }
+    }
+}
+.tab-content {
+    .tab-pane {
+        padding-top: $spacer;
+    }
+}
+.widget {
+    h2 {
+        color: $black;
+        font-size: 2.625rem;
+    }
+    @include media-breakpoint-down(sm) {
+        h2.widget-title {
+            font-size: 2rem;
+        }
+    }
+    .col-xs-12.wide {
+        @include media-breakpoint-down(sm) {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+    }
+    @include media-breakpoint-down(sm) {
+        .row.title {
+            border-bottom: 4px solid $red;
+        }
+    }
+}

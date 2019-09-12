@@ -1,0 +1,292 @@
+<h1><span>My Estes Signup</span></h1>
+<p>
+  My Estes is the ultimate in convenience. With this tool, account-specific applications are right
+  at your fingertips — in a secure environment.
+</p>
+<div id="signup-component" class="account signup card">
+  <div class="row d-flex align-items-stretch">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <div *ngIf="signupPath == 'start'">
+        <form class="path-form">
+          <h4>Ready to Sign Up?</h4>
+          <h6>Let's get started!</h6>
+          <p class="d-flex align-items-center">
+            Are you currently an Estes customer?<lib-tooltip
+              [message]="
+                'If your company has previously set up a shipping account with Estes then select one of the “Yes” options. If not, select “No” for next steps.'
+              "
+            ></lib-tooltip>
+          </p>
+          <mat-radio-group name="signup-path">
+            <div *ngFor="let path of paths">
+              <mat-radio-button
+                color="primary"
+                name="signup-path"
+                [value]="path.value"
+                [checked]="signupPath == path.value"
+                (click)="selectedSignupPath = path.value"
+                ></mat-radio-button><span>{{ path.display }}</span>
+            </div>
+          </mat-radio-group>
+          <div class="row">
+            <mat-error class="col" *ngIf="showSelectedSignupPathError">This field is required.</mat-error>
+          </div>
+          <button type="button" (click)="changePath()" class="btn btn-primary mt-4">
+            Next <i class="fas fa-chevron-right"></i>
+          </button>
+        </form>
+      </div>
+      <div *ngIf="signupPath == 'account'">
+        <h4>Not sure? No problem.</h4>
+        <p>You can request your information by:</p>
+        <p class="d-flex align-items-center justify-content-start option">
+          <i class="fas fa-laptop"></i>
+          <a routerLink="/request-account-number">Submitting your request online</a>
+        </p>
+        <p class="divider"><span>Or</span></p>
+        <p class="d-flex align-items-center justify-content-start option">
+          <i class="fas fa-phone"></i>
+          <span>Calling Estes Customer Care at <a href="tel:8772684555">877-268-4555</a></span>
+        </p>
+        <button class="btn btn-primary" (click)="setPath('start')">Back</button>
+      </div>
+      <div *ngIf="signupPath == 'contact'">
+        <h4>No account number, no worries.</h4>
+        <p>
+          Contact us and one of our account managers will be happy to assist you in setting up an
+          account.
+        </p>
+        <p class="d-flex align-items-center justify-content-start option">
+          <i class="fas fa-envelope"></i>
+          <span
+            >Contact us via email at
+            <a href="mailto:insidesales@estes-express.com">insidesales@estes-express.com</a></span
+          >
+        </p>
+        <p class="divider"><span>Or</span></p>
+        <p class="d-flex align-items-center justify-content-start option">
+          <i class="fas fa-phone"></i>
+          <span
+            >By phone at <a href="tel:8043531900">(804) 353-1900</a>, Ext. 2110, for
+            assistance.</span
+          >
+        </p>
+        <button class="btn btn-primary mt-4" (click)="setPath('start')">Back</button>
+      </div>
+      <div *ngIf="signupPath == 'signup'">
+        <form name="signupForm" [formGroup]="formGroup" (ngSubmit)="onSubmit()" novalidate>
+          <h4>Your Company Information</h4>
+          <div class="form-row">
+            <div class="col-12 col-md-11 col-lg-12 form-group form-group--tooltip">
+              <mat-form-field appearance="outline" class="form-group--tooltip__form-field w-100">
+                <mat-label>Company Account Number</mat-label>
+                <input
+                  matInput
+                  placeholder="Company Account Number"
+                  required
+                  id="inputAccountCode"
+                  name="inputAccountCode"
+                  formControlName="companyAccountNumber"
+                />
+                <mat-error *ngIf="companyAccountNumber.invalid"
+                  >{{ formService.getErrorMessage(companyAccountNumber) }}
+                </mat-error>
+              </mat-form-field>
+              <lib-tooltip
+                class="form-group--tooltip__tooltip"
+                [message]="
+                  'If you currently have an account with Estes Express, please enter your account number in the field provided. You can find your account number on any recent Estes invoice.'
+                "
+              ></lib-tooltip>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Company Name</mat-label>
+                <input
+                  matInput
+                  placeholder="Company Name"
+                  required
+                  id="inputCompany"
+                  name="inputCompany"
+                  formControlName="companyName"
+                />
+                <mat-error *ngIf="companyName.invalid"
+                  >{{ formService.getErrorMessage(companyName) }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <h4>Your Information</h4>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <mat-form-field appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input
+                  matInput
+                  placeholder="First Name"
+                  required
+                  id="inputFirstname"
+                  name="inputFirstname"
+                  formControlName="firstName"
+                />
+                <mat-error *ngIf="firstName.invalid"
+                  >{{ formService.getErrorMessage(firstName) }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input
+                  matInput
+                  placeholder="Last Name"
+                  required
+                  id="inputLastname"
+                  name="inputLastname"
+                  formControlName="lastName"
+                />
+                <mat-error *ngIf="lastName.invalid"
+                  >{{ formService.getErrorMessage(lastName) }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Email Address</mat-label>
+                <input
+                  matInput
+                  type="email"
+                  email="true"
+                  placeholder="Email@example.com"
+                  required
+                  id="inputEmail"
+                  name="inputEmail"
+                  formControlName="email"
+                />
+                <mat-error *ngIf="email.invalid">{{
+                  formService.getErrorMessage(email)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Phone Number</mat-label>
+                <input
+                  matInput
+                  placeholder="(888) 888-8888"
+                  [textMask]="{ mask: phoneMask, guide: false }"
+                  required
+                  id="inputPhone"
+                  name="inputPhone"
+                  formControlName="phone"
+                />
+                <mat-error *ngIf="phone.invalid">{{
+                  formService.getErrorMessage(phone)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input
+                  matInput
+                  placeholder="Username"
+                  required
+                  name="inputUsername"
+                  id="inputUsername"
+                  minlength="5"
+                  maxlength="10"
+                  formControlName="username"
+                />
+                <mat-error *ngIf="username.invalid"
+                  >{{ formService.getErrorMessage(username) }}
+                </mat-error>
+                <mat-hint>(between 5 and 10 characters)</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input
+                  matInput
+                  type="password"
+                  placeholder="Password"
+                  required
+                  id="inputPassword"
+                  name="inputPassword"
+                  minlength="5"
+                  maxlength="10"
+                  formControlName="password"
+                />
+                <mat-error *ngIf="password.invalid"
+                  >{{ formService.getErrorMessage(password) }}
+                </mat-error>
+                <mat-hint>(between 5 and 10 characters)</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Re-enter Password</mat-label>
+                <input
+                  matInput
+                  type="password"
+                  placeholder="Password"
+                  required
+                  id="inputConfirmPassword"
+                  name="inputConfirmPassword"
+                  minlength="5"
+                  maxlength="10"
+                  [errorStateMatcher]="matcher"
+                  formControlName="confirmPassword"
+                />
+                <mat-error *ngIf="formGroup.hasError('passwordMatch')">
+                  Passwords do not match.
+                </mat-error>
+                <mat-hint>(between 5 and 10 characters)</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+          <lib-feedback [message]="feedback"></lib-feedback>
+          <div class="d-flex justify-content-between mt-4">
+            <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+              Submit<i class="fas fa-sync-alt fa-spin"></i>
+            </button>
+            <button class="btn btn-default" [disabled]="isLoading" (click)="setPath('start')">
+              Back
+            </button>
+          </div>
+        </form>
+      </div>
+      <!-- <div class="messages mt-4">
+        <div *ngFor="let alert of messages">
+          <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
+        </div>
+      </div> -->
+      <!-- /.messages -->
+    </div>
+    <!-- /.col -->
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <div class="promo">
+        <lib-promo></lib-promo>
+        <!-- /.promo -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /#signup-component -->
+</div>

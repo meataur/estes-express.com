@@ -1,0 +1,478 @@
+#navigation {
+	padding: 0;
+	.container {
+		.navbar-brand {
+			padding: 0;
+			margin: 0 1rem 0 .5rem;
+			flex-grow: 1;
+			@include media-breakpoint-up(lg) {
+				margin-left: 0;
+				margin-right: 1.5rem;
+				flex-grow: unset;
+			}
+			img {
+				width: 86px;
+				height: 24px;
+				object-fit: contain;
+				margin-top: 20px;
+				margin-bottom: 20px;
+			}
+		}
+		.navbar-toggler {
+			border: none;
+			height: 64px;
+			outline: none;
+			.fa-bars {
+				display: none;
+			}
+			.fa-times {
+				display: inline-block;
+				color: theme-color("primary");
+			}
+			&.collapsed {
+				.fa-bars {
+					display: inline-block;
+				}
+				.fa-times {
+					display: none;
+				}
+			}
+			&.toggle-search {
+				padding-left: .75rem;
+				padding-right: .75rem;
+			}
+			&.toggle-my-estes {
+				padding-left: .75rem;
+				padding-right: 1.5rem;
+				@include media-breakpoint-down(md) {
+					padding-right: .75rem;
+				}
+			}
+			&.show {
+				outline: none;
+				background-color: theme-color("primary");
+				.fas {
+					color: $black;
+				}
+			}
+		}
+		#main-nav {
+			.navbar-nav {
+				> li.nav-item {
+					a.nav-link {
+						font-weight: bold;
+						&.active,
+						&:active,
+						&:focus,
+						&:hover {
+							color: $black;
+							background-color: theme-color("primary");
+						}
+						@include media-breakpoint-down(md) {
+							&:active,
+							&:focus,
+							&:hover {
+								background-color: transparent;
+								color: $white;
+							}
+						}
+						@include media-breakpoint-up(lg) {
+							padding: 1.25em .75rem;
+							font-size: $font-size-base;
+						}
+						@include media-breakpoint-up(xl) {
+							padding: 1.25em $spacer;
+						}
+						&.icon {
+							font-size: $font-size-base;
+							color: theme-color("primary");
+							@include media-breakpoint-up(md) {
+								padding: 1.25em $spacer;
+							}
+							&:active,
+							&:focus,
+							&:hover {
+								color: $navbar-dark-hover-color;
+							}
+						}
+						@include media-breakpoint-up(lg) {
+							&.dropdown-toggle:after {
+								display: none;
+							}
+						}
+						&.show {
+							a.nav-link {
+								color: $black;
+								background-color: theme-color("primary");
+							}
+						}
+					}
+					@include media-breakpoint-up(lg) {
+						&.active {
+							a.nav-link {
+								&:link,
+								&:visited {
+									color: theme-color('primary');
+								}
+								&.active,
+								&:active,
+								&:focus,
+								&:hover {
+									color: $black;
+									background-color: theme-color("primary");
+								}
+							}
+						}
+						&:hover {
+							.dropdown-menu {
+								display: initial;
+							}
+						}
+					}
+					@include media-breakpoint-down(md) {
+						.dropdown-menu {
+							background-color: transparent;
+							color: $white;
+							a.dropdown-item {
+								color: $white;
+								border-top: 1px solid $gray-400;
+							}
+						}
+					}
+				}
+				@include media-breakpoint-down(md) {
+					padding-bottom: 1rem;
+				}
+			}
+			@include media-breakpoint-up(lg) {
+				transform: none !important;
+				.dropdown-menu {
+					margin: 0;
+					border: none;
+					box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 4px 5px 0 rgba(0, 0, 0, 0.14);
+					.dropdown-item {
+						.fas, .fal {
+							color: rgba(0, 0, 0, 0.6);
+							margin-right: .5rem;
+						}
+						&:visited {
+							color: $black;
+						}
+					}
+					&.dropdown-menu-right {
+						right: 0 !important;
+						left: auto !important;
+					}
+				}
+			}
+			#my-estes-dropdown {
+				display: none;
+				@include media-breakpoint-up(md) {
+					display: block;
+				}
+				.fas, .fal {
+					color: theme-color('primary');
+					margin-right: .5rem;
+					&.fa-caret-down {
+						color: rgba(255, 255, 255, 0.7);
+						margin-left: .5rem;
+						margin-right: 0;
+					}
+				}
+				&.active,
+				&:active,
+				&:focus,
+				&:hover {
+					.fas, .fal {
+						color: $black;
+						&.fa-caret-down {
+							color: rgba(0, 0, 0, 0.7);
+						}
+					}
+				}
+			}
+			@include media-breakpoint-down(md) {
+				position: fixed;
+				top: 64px;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				display: block;
+				overflow-y: auto;
+				animation-name: color_up;
+				animation-duration: 250ms;
+				animation-timing-function: ease-in-out;
+				background: rgba(0, 0, 0, 0.5);
+				&.collapsed {
+					background: none;
+				}
+				.navbar-nav {
+					background-color: theme-color("primary");
+					width: 75%;
+					position: absolute;
+					top: 0;
+					left: 0;
+					bottom: 0;
+					@include media-breakpoint-up(sm) {
+						width: 50%;
+					}
+					> li.nav-item {
+						a.nav-link {
+							color: $black;
+							box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.12);
+							position: relative;
+							padding-left: 1.5rem;
+							padding-right: 1.5rem;
+							&:hover {
+								color: $black;
+								background-color: rgba(0 ,0, 0, 0.12);
+							}
+							&.dropdown-toggle::after {
+								font-family: 'Font Awesome 5 Pro';
+								font-weight: 300;
+								content: "\f107";
+								position: absolute;
+								right: 1.5rem;
+								top: 50%;
+								margin-top: -.75rem;
+								color: $black;
+								border: none;
+							}
+						}
+						.dropdown-menu {
+							margin: 0;
+							padding: 0;
+							color: $black;
+							border: none;
+							background-color: #e8c014;
+							box-shadow: none;
+							a.dropdown-item {
+								color: $black;
+								border: none;
+								box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.12);
+								font-size: .875rem;
+								&:active,
+								&:focus,
+								&:hover,
+								&:visited {
+									color: $black;
+									background-color: rgba(0 ,0, 0, 0.12);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+#my-estes-nav {
+	position: fixed;
+	top: 64px;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	display: none;
+	z-index: ($zindex-dropdown - 2);
+	background: rgba(0, 0, 0, 0.5);
+	&.closed {
+		display: none;
+	}
+	&.show {
+		display: block;
+	}
+	.inner {
+		.container {
+			padding-left: 0;
+			padding-right: 0;
+			.navbar-nav {
+				padding: .5rem 0;
+				background-color: $white;
+				a.nav-link {
+					background-color: $white;
+					color: $black;
+					padding-left: 1.5rem;
+					padding-right: 1.5rem;
+					&:active,
+					&:focus,
+					&:hover {
+						background-color: theme-color("primary");
+					}
+					.fas, .fal {
+						margin-right: .5rem;
+					}
+					&.auth {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}
+#search {
+	position: fixed;
+	top: 64px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: ($zindex-dropdown - 1);
+	background: rgba(0, 0, 0, 0.5);
+	display: none;
+	.inner {
+		background-color: theme-color("primary");
+		padding: 8px 0;
+		display: block;
+		form {
+			padding: 0;
+			margin: 0;
+			.input-group-text {
+				border-color: transparent;
+				background-color: transparent;
+				color: $black;
+			}
+			.form-control {
+				border-color: transparent;
+				background: transparent;
+				::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+					color: rgba(0, 0, 0, 0.6);
+				}
+				:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+					color: rgba(0, 0, 0, 0.6);
+					opacity:  1;
+				}
+				::-moz-placeholder { /* Mozilla Firefox 19+ */
+					color: rgba(0, 0, 0, 0.6);
+					opacity:  1;
+				}
+				:-ms-input-placeholder { /* Internet Explorer 10-11 */
+					color: rgba(0, 0, 0, 0.6);
+				}
+				::-ms-input-placeholder { /* Microsoft Edge */
+					color: rgba(0, 0, 0, 0.6);
+				}
+				::placeholder { /* Most modern browsers support this now. */
+					color: rgba(0, 0, 0, 0.6);
+				}
+			}
+		}
+	}
+	&.closed {
+		display: none;
+		-webkit-animation: none;
+		animation: none;
+	}
+	&.show {
+		display: block;
+		-webkit-animation: none;
+		animation: none;
+		.inner {
+			display: block;
+			-webkit-animation: swing-in-top-fwd 0.35s linear both;
+			animation: swing-in-top-fwd 0.35s linear both;
+		}
+	}
+	@include media-breakpoint-up(lg) {
+		bottom: auto;
+		background: none;
+		&.closed {
+			display: block;
+			-webkit-animation: swing-out-top-bck 0.35s linear both;
+			animation: swing-out-top-bck 0.35s linear both;
+			.inner {
+				-webkit-animation: none;
+				animation: none;
+			}
+		}
+		&.show {
+			display: block;
+			-webkit-animation: swing-in-top-fwd 0.35s linear both;
+			animation: swing-in-top-fwd 0.35s linear both;
+			.inner {
+				-webkit-animation: none;
+				animation: none;
+			}
+		}
+	}
+}
+@-webkit-keyframes swing-in-top-fwd {
+	0% {
+		-webkit-transform: rotateX(-100deg);
+				transform: rotateX(-100deg);
+		-webkit-transform-origin: top;
+				transform-origin: top;
+		opacity: 0;
+	}
+	100% {
+		-webkit-transform: rotateX(0deg);
+				transform: rotateX(0deg);
+		-webkit-transform-origin: top;
+				transform-origin: top;
+		opacity: 1;
+	}
+}
+@keyframes swing-in-top-fwd {
+	0% {
+		-webkit-transform: rotateX(-100deg);
+				transform: rotateX(-100deg);
+		-webkit-transform-origin: top;
+				transform-origin: top;
+		opacity: 0;
+	}
+	100% {
+		-webkit-transform: rotateX(0deg);
+				transform: rotateX(0deg);
+		-webkit-transform-origin: top;
+				transform-origin: top;
+		opacity: 1;
+	}
+}
+/* ----------------------------------------------
+ * Generated by Animista on 2018-11-14 14:13:7
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation swing-out-top-bck
+ * ----------------------------------------
+ */
+ @-webkit-keyframes swing-out-top-bck {
+	0% {
+		-webkit-transform: rotateX(0deg);
+				transform: rotateX(0deg);
+		-webkit-transform-origin: top;
+				transform-origin: top;
+		opacity: 1;
+	}
+	100% {
+		-webkit-transform: rotateX(-100deg);
+				transform: rotateX(-100deg);
+		-webkit-transform-origin: top;
+				transform-origin: top;
+		opacity: 0;
+	}
+}
+@keyframes swing-out-top-bck {
+	0% {
+		-webkit-transform: rotateX(0deg);
+				transform: rotateX(0deg);
+		-webkit-transform-origin: top;
+				transform-origin: top;
+		opacity: 1;
+	}
+	100% {
+		-webkit-transform: rotateX(-100deg);
+				transform: rotateX(-100deg);
+		-webkit-transform-origin: top;
+				transform-origin: top;
+		opacity: 0;
+	}
+}
+@keyframes color_up {
+	from {
+		background-color: rgba(0,0,0,0.0);
+	}
+	to {
+		background-color: rgba(0,0,0,0.5);
+	}
+}

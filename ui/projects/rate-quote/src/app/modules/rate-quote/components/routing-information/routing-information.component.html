@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-header> <mat-card-title>Routing Information</mat-card-title> </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="formGroup">
+      <lib-form-header [color]="'red'">Origin</lib-form-header>
+      <div class="form-row mb-3">
+        <!-- touched: {{ origin.touched }}<br />
+        valid: {{ origin.valid }}<br />
+        errors: {{ origin.errors | json }}<br />
+        value: {{ origin.value | json }}<br />
+        status: {{ origin.status }}<br /> -->
+        <app-point-control [touched]="origin.touched" class="w-100" formControlName="origin"></app-point-control>
+      </div>
+      <lib-form-header [color]="'red'">Destination</lib-form-header>
+      <div class="form-row mb-3">
+        <app-point-control
+          [touched]="destination.touched"
+          class="w-100"
+          formControlName="destination"
+        ></app-point-control>
+      </div></form></mat-card-content
+></mat-card>

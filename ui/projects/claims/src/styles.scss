@@ -1,0 +1,61 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../common/src/assets/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
+
+.estes-app {
+  //TODO remove below style when global styles updated
+  .mat-card {
+    padding: 0;
+
+    .mat-card-header {
+      padding: 24px;
+    }
+
+    .mat-card-content {
+      padding: 24px;
+    }
+  }
+
+  .mat-row.main-row:hover {
+    background: $gray-100;
+  }
+  .expanded-background {
+    background: $gray-100;
+  }
+
+  //Claims page specific styles
+  .quick-views {
+    background: $gray-100;
+    button {
+      white-space: normal;
+      width: 100%;
+    }
+  }
+  
+  a:hover {
+    cursor: pointer;
+  }
+  
+  .mat-card-header-text {
+    display: none;
+  }
+
+
+  //expand component styling
+  .expand-cell {
+    display: flex;
+    justify-content: flex-end;
+    flex: 0 0 32px;
+  }
+  .detail-row {
+    min-height: 0;
+    border: 0;
+    td {
+      width: 80%;
+    }
+    td:first-of-type {
+      font-weight: bold;
+      width: 20%;
+    }
+  }
+}

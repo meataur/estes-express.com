@@ -1,0 +1,231 @@
+<mat-card>
+  <form (ngSubmit)="onSubmit()" [ngClass]="{'read-only-form': readOnlyMode}" [formGroup]="formGroup" >
+    <mat-card-header class="row justify-content-between align-items-stretch">
+      <mat-card-title *ngIf="readOnlyMode" class="d-flex flex-column justify-content-center">
+        Address Detail
+      </mat-card-title>
+
+      <mat-card-title *ngIf="!readOnlyMode && requestType == 'edit'" class="d-flex flex-column justify-content-center">
+        Edit Address
+      </mat-card-title>
+      <mat-card-title *ngIf="!readOnlyMode && requestType == 'add'">
+        Add New Address
+      </mat-card-title>
+      <div>
+          <button class="btn btn-default mr-3" *ngIf="readOnlyMode" (click)="editBookAddress()"><i class="fa fa-pencil m-1" aria-hidden="true"></i><span class="d-none d-md-inline">Edit</span></button>
+
+          <a (click)="onNoClick()"><i class="fa fa-times m-1" aria-hidden="true"></i></a>
+      </div>
+    </mat-card-header>
+    <mat-card-content mat-dialog-content class="p-0">
+      <div>
+        <div class="row">
+          <div class="col-12" [ngClass]="readOnlyMode ? 'col-md-6' : 'col-md-8'">
+            <div class="row form-group">
+              <mat-form-field class="col-12"  appearance="outline">
+                <mat-label>Company Name</mat-label>
+                <input matInput [readonly]="readOnlyMode" required id="inputCompany" formControlName="company">
+                <mat-error *ngIf="company.invalid">{{
+                    formService.getErrorMessage(company)
+                  }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row form-group">
+              <mat-form-field *ngIf="!readOnlyMode || bookAddress.firstName"  class="col-12 col-md-6 md-input-has-placeholder" appearance="outline">
+                <mat-label>Contact First Name</mat-label>
+                <input matInput [readonly]="readOnlyMode" id="inputFirstName" formControlName="firstName">
+                <mat-error *ngIf="firstName.invalid">{{
+                    formService.getErrorMessage(firstName)
+                  }}</mat-error>
+              </mat-form-field>
+              <mat-form-field *ngIf="!readOnlyMode || bookAddress.lastName"  class="col-12 col-md-6 md-input-has-placeholder" appearance="outline">
+                <mat-label>Contact Last Name</mat-label>
+                <input matInput [readonly]="readOnlyMode" id="inputLastName" formControlName="lastName" >
+                <mat-error *ngIf="lastName.invalid">{{
+                    formService.getErrorMessage(lastName)
+                  }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row form-group" *ngIf="!readOnlyMode || bookAddress.email">
+              <mat-form-field class="col-12" appearance="outline">
+                <mat-label>Email Address</mat-label>
+                <input matInput [readonly]="readOnlyMode" placeholder="Email@example.com" id="inputEmail" formControlName="email">
+                <mat-error *ngIf="email.invalid">{{
+                    formService.getErrorMessage(email)
+                  }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row form-group" *ngIf="!readOnlyMode || bookAddress.locationNumber">
+              <mat-form-field class="col-12"  appearance="outline">
+                <mat-label>Location #</mat-label>
+                <input matInput [readonly]="readOnlyMode" id="inputLocationNumber" formControlName="locationNumber">
+                <mat-error *ngIf="locationNumber.invalid">{{
+                    formService.getErrorMessage(locationNumber)
+                  }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row roles-checkbox form-group" *ngIf="readOnlyMode && (bookAddress.shipper || bookAddress.consignee || bookAddress.cod || bookAddress.thirdParty)">
+              <label class="col-12">Company Roles</label>
+              <div *ngIf="bookAddress.shipper" class="col-12"><i class="fa fa-check m-2" aria-hidden="true"></i>Shipper</div>
+              <div *ngIf="bookAddress.consignee" class="col-12"><i class="fa fa-check m-2" aria-hidden="true"></i>Consignee</div>
+              <div *ngIf="bookAddress.cod" class="col-12"><i class="fa fa-check m-2" aria-hidden="true"></i>COD</div>
+              <div *ngIf="bookAddress.thirdParty" class="col-12"><i class="fa fa-check m-2" aria-hidden="true"></i>Third Party</div>
+            </div>
+            <div class="row roles-checkbox form-group" *ngIf="!readOnlyMode">
+              <mat-label class="col-12">Company Roles (check all that apply)</mat-label>
+              <mat-checkbox class="col-12 m-1" formControlName="shipper">Shipper</mat-checkbox>
+              <mat-checkbox class="col-12 m-1" formControlName="consignee">Consignee</mat-checkbox>
+              <mat-checkbox class="col-12 m-1" formControlName="cod">COD</mat-checkbox>
+              <mat-checkbox class="col-12 m-1" formControlName="thirdParty" >Third Party</mat-checkbox>
+            </div>
+            <div formGroupName="address">
+              <div class="row form-group" *ngIf="!readOnlyMode || country.value">
+                <mat-form-field class="col-12"  appearance="outline">
+                  <mat-label>Country</mat-label>
+                  <input *ngIf="readOnlyMode" matInput readonly [value]="country.value">
+                  <mat-select *ngIf="!readOnlyMode" required formControlName="country" (selectionChange)="countrySelected(country.value)">
+                    <mat-option *ngFor="let option of countries" [value]="option.value">
+                      {{option.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="country.invalid">{{
+                      formService.getErrorMessage(country)
+                    }}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="row form-group" *ngIf="!readOnlyMode || streetAddress.value">
+                <mat-form-field class="col-12"  appearance="outline">
+                  <mat-label>Address Line 1</mat-label>
+                  <input matInput [readonly]="readOnlyMode" required id="inputAddress1" name="inputAddress1" formControlName="streetAddress">
+                  <mat-error *ngIf="streetAddress.invalid">{{
+                      formService.getErrorMessage(streetAddress)
+                    }}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="row form-group" *ngIf="!readOnlyMode || streetAddress2.value">
+                <mat-form-field class="col-12"  appearance="outline">
+                  <mat-label>Address Line 2</mat-label>
+                  <input matInput [readonly]="readOnlyMode" id="inputAddress2" formControlName="streetAddress2">
+                  <mat-error *ngIf="streetAddress2.invalid">{{
+                      formService.getErrorMessage(streetAddress2)
+                    }}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="row form-group" *ngIf="!readOnlyMode || city.value">
+                <mat-form-field class="col-12" appearance="outline">
+                  <mat-label>City</mat-label>
+                  <input matInput [readonly]="readOnlyMode" required id="inputCity" formControlName="city" >
+                  <mat-error *ngIf="city.invalid">{{
+                      formService.getErrorMessage(city)
+                    }}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="row form-group">
+                <mat-form-field *ngIf="!readOnlyMode || state.value" class="col-6 col-md-4" appearance="outline">
+                  <mat-label>{{stateLabelText}}</mat-label>
+                  <input *ngIf="readOnlyMode" matInput readonly [value]="state.value"  >
+                  <mat-select *ngIf="!readOnlyMode" required id="selectState" formControlName="state">
+                    <mat-option *ngFor="let option of states" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="state.invalid">{{
+                      formService.getErrorMessage(state)
+                    }}</mat-error>
+                </mat-form-field>
+                <mat-form-field *ngIf="!readOnlyMode || zip.value" class="col-6" appearance="outline">
+                  <mat-label>{{zipLabelText}}</mat-label>
+                  <input matInput [readonly]="readOnlyMode" required id="inputZip" formControlName="zip">
+                  <mat-error *ngIf="zip.invalid">{{
+                      formService.getErrorMessage(zip)
+                    }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row form-group" >
+              <mat-form-field *ngIf="!readOnlyMode || phone.value" class="col-8 col-md-6" appearance="outline">
+                <mat-label>Phone Number</mat-label>
+                <input matInput [readonly]="readOnlyMode" required [textMask]="{mask: phoneMask, guide: false}" placeholder="(888) 888-8888" id="inputPhone" formControlName="phone">
+                <mat-error *ngIf="phone.invalid">{{
+                    formService.getErrorMessage(phone)
+                  }}</mat-error>
+              </mat-form-field>
+              <mat-form-field *ngIf="!readOnlyMode || phoneExt.value" class="col-4 col-md-6" appearance="outline">
+                <mat-label>Extension</mat-label>
+                <input matInput [readonly]="readOnlyMode" id="inputExtension" formControlName="phoneExt">
+                <mat-error *ngIf="phoneExt.invalid">{{
+                    formService.getErrorMessage(phoneExt)
+                  }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row form-group" *ngIf="!readOnlyMode || fax.value">
+              <mat-form-field class="col-12" appearance="outline">
+                <mat-label>Fax</mat-label>
+                <input matInput [readonly]="readOnlyMode" [textMask]="{mask: phoneMask, guide: false}"  placeholder="(888) 888-8888" id="inputFax" formControlName="fax">
+                <mat-error *ngIf="fax.invalid">{{
+                    formService.getErrorMessage(fax)
+                  }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="modal-action-box" *ngIf="readOnlyMode">
+              <div class="row">
+                <span class="col text-uppercase"><mat-icon fontSet="fa" fontIcon="fa-file"></mat-icon>create bill of lading</span>
+              </div>
+              <div class="row">
+                <a class="col btn btn-default--action d-flex justify-content-between" [href]="'/myestes/bill-of-lading/bol/create?populate=consignee&street1=' + streetAddress.value + '&street2=' +streetAddress2.value + '&city=' + city.value + '&state=' + state.value + '&zip=' + zip.value + '&country=' + country.value" target="_blank">
+                  <span>Ship To This Address</span>
+                </a>
+              </div>
+              <div class="row">
+                <a class="col btn btn-default--action d-flex justify-content-between" [href]="'/myestes/bill-of-lading/bol/create?populate=shipper&street1=' + streetAddress.value + '&street2=' +streetAddress2.value + '&city=' + city.value + '&state=' + state.value + '&zip=' + zip.value + '&country=' + country.value" target="_blank">
+                  <span>Ship From This Address</span>
+                </a>
+              </div>
+              <div class="row">
+                <span class="col text-uppercase"><mat-icon fontSet="fa" fontIcon="fa-usd-circle"></mat-icon>Get Rate Quote</span>
+              </div>
+              <div class="row">
+                <a class="col btn btn-default--action d-flex justify-content-between" [href]="'/myestes/rate-quote/estimate?dzip=' + zip.value + '&dcity=' + city.value + '&dstate=' + state.value + '&dcountry=' + country.value" target="_blank">
+                  <span>Rate To This Address</span>
+                </a>
+              </div>
+              <div class="row">
+                <a class="col btn btn-default--action d-flex justify-content-between" [href]="'/myestes/rate-quote/estimate?ozip=' + zip.value + '&ocity=' + city.value + '&ostate=' + state.value + '&ocountry=' + country.value" target="_blank">
+                  <span>Rate From This Address</span>
+                </a>
+              </div>
+              <div class="row">
+                <span class="col text-uppercase"><mat-icon fontSet="fa" fontIcon="fa-clock"></mat-icon>Calculate Transit Time</span>
+              </div>
+              <div class="row">
+                <a class="col btn btn-default--action d-flex justify-content-between" [href]="'/myestes/transit-time-calculator?dzip=' + zip.value" target="_blank">
+                  <span>Calculate To This Address</span>
+                </a>
+              </div>
+              <div class="row">
+                <a class="col btn btn-default--action d-flex justify-content-between" [href]="'/myestes/transit-time-calculator?ozip=' + zip.value" target="_blank">
+                  <span>Calculate From This Address</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="row pr-3 pl-3">
+        <div class="col-12">
+          <lib-feedback [message]="errorMessages"></lib-feedback>
+        </div>
+      </div>
+      <div mat-dialog-actions *ngIf="!readOnlyMode">
+        <div class="d-flex">
+          <button class="btn btn-primary mr-2" type="submit"><span *ngIf="!loading">Save</span><i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i></button>
+          <button type="button" class="btn btn-default" (click)="onNoClick()">Cancel</button>
+        </div>
+      </div>
+    </mat-card-actions>
+  </form>
+</mat-card>

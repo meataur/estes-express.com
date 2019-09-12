@@ -1,0 +1,25 @@
+<ng-container *ngIf="quote.pricing.display === 'S'">
+  <ng-container *ngIf="!quote.selected">
+    <button class="btn btn-primary" [disabled]="quote.isSelecting">
+      <span class="d-none d-md-inline">Get </span>Quote #&nbsp;&nbsp;<i
+        class="fas fa-sync-alt fa-spin"
+        *ngIf="quote.isSelecting"
+      ></i>
+    </button>
+  </ng-container>
+  <ng-container *ngIf="quote.selected">
+    <div class="d-flex">
+      <span class="mr-3" style="white-space: nowrap;">Quote Details</span>
+      <span class="fal fa-chevron-down"></span> <span class="fal fa-chevron-up"></span>
+    </div>
+  </ng-container>
+</ng-container>
+<ng-container *ngIf="quote.pricing.display === 'C'">
+  <span *ngIf="!contacted; else hasBeenContacted" class="contact-me">
+    <a (click)="contactMe($event)" class="mr-2">Contact Me</a>
+    <i class="fas fa-sync-alt fa-spin" *ngIf="loadingContactMe"></i>
+  </span>
+  <ng-template #hasBeenContacted>
+    <i class="fas fa-check-circle contacted"></i> Contact Me
+  </ng-template>
+</ng-container>

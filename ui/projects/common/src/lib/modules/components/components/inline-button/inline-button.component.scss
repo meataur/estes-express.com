@@ -1,0 +1,11 @@
+@import '~bootstrap/scss/functions';
+@import '../../../../../assets/scss/variables';
+
+:host {
+  display: inline-block;
+  color: $blue;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

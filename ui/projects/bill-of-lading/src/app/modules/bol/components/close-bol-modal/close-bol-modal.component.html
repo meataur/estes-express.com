@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Save Your Progress</h1>
+<mat-dialog-content
+  ><p>Are you sure you want to leave this page?</p>
+  <form [formGroup]="formGroup" *ngIf="!validBillOfLading">
+    <div><label>To save your progress, please provide a BOL Reference number:</label></div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>BOL Reference #</mat-label>
+          <input matInput formControlName="bolReferenceNumber" required />
+          <mat-error *ngIf="bolReferenceNumber.invalid">{{
+            formService.getErrorMessage(bolReferenceNumber)
+          }}</mat-error>
+        </mat-form-field>
+        <p>*Your company’s unique number for the shipment. This field accepts numeric or alpha-numeric data, 25 characters or less. If you do not have a number, simply list N/A.</p>
+      </div>
+    </div>
+  </form>
+  <lib-feedback [message]="feedback"> </lib-feedback
+></mat-dialog-content>
+<div mat-dialog-actions>
+  <button [disabled]="loading" type="submit" class="btn btn-primary mr-3" (click)="saveForm()">
+    Save <i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i></button
+  ><button type="button" class="btn btn-default mr-3" [mat-dialog-close]="true">Don't Save</button
+  ><button type="button" class="btn btn-default" (click)="onNoClick()">Cancel</button>
+</div>

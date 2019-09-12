@@ -1,0 +1,132 @@
+@import '../../../../../node_modules/@angular/material/theming';
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import 'variables';
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+$md-estesprimary: (
+    50 : #fff9e3,
+    100 : #fef1b9,
+    200 : #fee88b,
+    300 : #fddf5c,
+    400 : #fcd839,
+    500 : #fcd116,
+    600 : #fccc13,
+    700 : #fbc610,
+    800 : #fbc00c,
+    900 : #fab506,
+    A100 : #ffffff,
+    A200 : #fffaee,
+    A400 : #ffeabb,
+    A700 : #ffe2a2,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-estessecondary: (
+    50 : #e0eafb,
+    100 : #b3cbf6,
+    200 : #80a9f0,
+    300 : #4d86e9,
+    400 : #266ce5,
+    500 : #0052e0,
+    600 : #004bdc,
+    700 : #0041d8,
+    800 : #0038d3,
+    900 : #0028cb,
+    A100 : #f3f5ff,
+    A200 : #c0c8ff,
+    A400 : #8d9cff,
+    A700 : #7486ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-estesdanger: (
+    50 : #fae4e1,
+    100 : #f3bcb4,
+    200 : #ec8f82,
+    300 : #e46250,
+    400 : #de402b,
+    500 : #d81e05,
+    600 : #d41a04,
+    700 : #ce1604,
+    800 : #c81203,
+    900 : #bf0a01,
+    A100 : #ffe8e7,
+    A200 : #ffb5b4,
+    A400 : #ff8381,
+    A700 : #ff6a68,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+@include mat-core();
+
+$estes-app-primary: mat-palette($md-estessecondary);
+$estes-app-accent:  mat-palette($md-estesprimary);
+
+// The warn palette is optional (defaults to red).
+$estes-app-warn:    mat-palette($md-estesdanger);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$estes-app-theme: mat-light-theme($estes-app-primary, $estes-app-accent, $estes-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($estes-app-theme);
+
+.mat-card {
+  .mat-card-header {
+    background-color: $gray-200;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    .mat-card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0;
+    }
+  }
+}

@@ -1,0 +1,236 @@
+<mat-card>
+  <mat-card-content>
+    <ng-container *ngIf="bol$ | async as bol">
+      <div *ngIf="pickupErrors" class="alert alert-danger">
+        <p>An error has occurred within the Pickup Request application.</p>
+        <ul>
+          <li *ngFor="let msg of pickupErrors">
+            <span [innerHTML]="msg"></span>
+          </li>
+        </ul>
+        <p class="m-0">Please contact Customer Care for assistance.</p>
+      </div>
+      <p class="">Your Bill of Lading has been created.</p>
+      <div class="">
+        <button
+          (click)="openBol()"
+          type="button"
+          class="btn btn-default mr-3 mb-3"
+          [disabled]="loadingPdf"
+        >
+          <i class="fas fa-file-pdf mr-2"></i>View Bill of Lading<i
+            class="fas fa-sync-alt fa-spin ml-1"
+            *ngIf="loadingPdf"
+          ></i>
+        </button>
+
+        <button
+          type="button"
+          (click)="openShippingLabels()"
+          class="btn btn-default mb-3 mr-2"
+          *ngIf="hasShippingLabel === true"
+          [disabled]="loadingShippingLabel"
+        >
+          <i class="fas fa-file-pdf mr-2"></i>View Shipping Labels<i
+            class="fas fa-sync-alt fa-spin ml-1"
+            *ngIf="loadingShippingLabel"
+          ></i>
+        </button>
+      </div>
+      <lib-form-header [color]="'red'"
+        >BOL Number: {{ bol.generalInfo.bolNumber }}</lib-form-header
+      >
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label>BOL Date</label>
+              {{ bol.generalInfo.bolDate }}
+            </div>
+            <div class="form-group col-md-4">
+              <label>Account</label>
+              {{ formattedAccount }}
+            </div>
+            <div class="form-group col-md-4">
+              <label>PRO #</label>
+              {{ bol.generalInfo.proNumber }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <lib-form-header [color]="'red'">Shipping Summary</lib-form-header>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label>Name</label>
+              {{ profileName }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label>Shipper</label>
+              {{ bol.shipperInfo.companyName }}<br />
+              <lib-address [address]="shipperAddress"></lib-address>
+            </div>
+            <div class="form-group col-md-4">
+              <label>Shipper Phone</label>
+              {{ bol.shipperInfo.phone + " " + bol.shipperInfo.phoneExt }}<br />
+            </div>
+            <div class="form-group col-md-4">
+              <label>Shipper Email</label>
+              {{ bol.shipperInfo.email }}<br />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label>Consignee</label>
+              {{ bol.consigneeInfo.companyName }}<br />
+              <lib-address [address]="consigneeAddress"></lib-address>
+            </div>
+            <div class="form-group col-md-4">
+              <label>Consignee Phone</label>
+              {{ bol.consigneeInfo.phone + " " + bol.consigneeInfo.phoneExt
+              }}<br />
+            </div>
+            <div class="form-group col-md-4">
+              <label>Consignee Email</label>
+              {{ bol.consigneeInfo.email }}<br />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label>Total Commodities</label>
+              {{ totalCommodities }}
+            </div>
+            <div class="form-group col-md-4">
+              <label>Total Shipment Weight</label>
+              {{ totalShipmentWeight }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="bol.generalInfo.pickupRequest === true">
+        <lib-form-header [color]="'red'">Pickup Request</lib-form-header>
+        <p>Pickup request details submitted with Bill of Lading.</p>
+        <div class="row">
+          <div class="col-md-12">
+            <h5>Requestor Info</h5>
+            <div class="row">
+              <div class="form-group col-md-4">
+                <label>Contact Name</label>
+                {{ bol.pickupDetailInfo.name }}
+              </div>
+              <div class="form-group col-md-4">
+                <label>Phone</label>
+                {{
+                  bol.pickupDetailInfo.phone +
+                    " " +
+                    bol.pickupDetailInfo.phoneExt
+                }}
+              </div>
+              <div class="form-group col-md-4">
+                <label>Email</label>
+                {{ bol.pickupDetailInfo.email }}
+              </div>
+              <div class="form-group col-md-4">
+                <label>Role</label>
+                {{ bol.pickupDetailInfo.role }}
+              </div>
+            </div>
+            <h5>Pickup Info</h5>
+            <div class="row">
+              <div class="form-group col-md-3">
+                <label>Pickup Request Number</label>
+                {{ pickupRequestNumber }}
+              </div>
+              <div class="form-group col-md-2">
+                <label>Pickup Date</label>
+                {{ bol.pickupDetailInfo.pickupDate }}
+              </div>
+              <div class="form-group col-md-2">
+                <label>Available By</label>
+                {{ bol.pickupDetailInfo.startTime }}
+              </div>
+              <div class="form-group col-md-2">
+                <label>Closes By</label>
+                {{ bol.pickupDetailInfo.endTime }}
+              </div>
+              <div class="form-group col-md-3">
+                <label>Pickup Notifications</label>
+                <div *ngIf="bol.pickupDetailInfo.accepted">Accepted</div>
+                <div *ngIf="bol.pickupDetailInfo.rejected">Rejected</div>
+                <div *ngIf="bol.pickupDetailInfo.completed">Completed</div>
+              </div>
+              <div
+                *ngIf="bol.pickupDetailInfo.specialInstruction"
+                class="form-group col-md-4"
+              >
+                <label>Special Instructions</label>
+                {{ bol.pickupDetailInfo.specialInstruction }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-4 services-container">
+                <label>Services</label>
+                <span *ngIf="bol.pickupDetailInfo.food">Food</span>
+                <span *ngIf="bol.pickupDetailInfo.poision">Poison</span>
+                <span *ngIf="bol.pickupDetailInfo.noStackPallet"
+                  >Do not stack pallets</span
+                >
+              </div>
+              <div class="form-group col-md-4 services-container">
+                <label>Pickup Accessorials</label>
+                <span *ngIf="bol.pickupDetailInfo.freeze">Freeze</span>
+                <span *ngIf="bol.pickupDetailInfo.liftgateRequired"
+                  >Lift-Gate Service (Pickup)</span
+                >
+                <span *ngIf="bol.pickupDetailInfo.oversize">Overlength</span>
+              </div>
+            </div>
+            <h5>Commodity Info</h5>
+            <ng-container
+              *ngFor="let c of bol.commodityInfo.commodityList; let i = index"
+            >
+              <div class="row">
+                <div class="form-group col">
+                  <label>No.</label>
+                  {{ i + 1 }}
+                </div>
+                <div class="form-group col">
+                  <label>Pieces</label>
+                  {{ c.goodsUnit }}
+                </div>
+                <div class="form-group col">
+                  <label>Pieces Type</label>
+                  {{
+                    getFormattedCommodityPiecesType(c.goodsType.code) | async
+                  }}
+                </div>
+                <div class="form-group col">
+                  <label>Weight</label>
+                  {{ c.goodsWeight }}
+                </div>
+                <div class="form-group col">
+                  <label>Hazmat</label>
+                  {{ c.hazmat === true ? "Yes" : "No" }}
+                </div>
+                <div class="form-group col">
+                  <label>Description</label>
+                  {{ c.description }}
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </mat-card-content>
+</mat-card>
+<div class="mt-3">
+  <button [routerLink]="['../../create']" class="btn btn-primary mr-3">
+    Create New BOL
+  </button>
+</div>

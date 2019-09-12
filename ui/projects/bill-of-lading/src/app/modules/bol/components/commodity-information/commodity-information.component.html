@@ -1,0 +1,117 @@
+<mat-card>
+  <mat-card-header class="row justify-content-between align-items-stretch"
+    ><mat-card-title>Commodities</mat-card-title>
+    <button type="button" class="btn btn-default" (click)="openCommodityLibrary()">
+      Add from Commodity Library
+    </button></mat-card-header
+  >
+  <mat-card-content>
+    <p>
+      <a [href]="'/resources/hauling-exclusions'" target="_blank">View items Estes does not haul</a>
+    </p>
+    <form [formGroup]="formGroup">
+      <div class="form-row mb-3">
+        <div class="form-group col-12">
+          <div class="commodity-container" *ngFor="let c of commodities?.controls; let i = index">
+            <app-commodity
+              [index]="i"
+              (deleteCommodity)="deleteCommodity($event)"
+              (hazmatChanged)="onHazmatChanged($event)"
+              [commodityForm]="c"
+              [canDelete]="commodities?.controls?.length > 1"
+            ></app-commodity>
+          </div>
+        </div>
+        <button
+          class="btn btn-primary"
+          (click)="addCommodity()"
+          *ngIf="commodityCount < MAX_COMMODITIES"
+        >
+          Add Commodity
+        </button>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-12">
+          <label class="">Total Commodities: {{ commodityCount }}</label>
+        </div>
+        <div class="form-group col-12">
+          <label>Total Shipment Weight: {{ shipmentWeight }} lbs</label>
+        </div>
+        <div class="form-group col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Total Cube</mat-label>
+            <input id="totalCube" matInput formControlName="totalCube" />
+            <mat-error *ngIf="totalCube.invalid">{{
+              formService.getErrorMessage(totalCube)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Special Instructions</mat-label>
+            <textarea
+              matInput
+              rows="10"
+              name="specialIns"
+              id="specialIns"
+              formControlName="specialIns"
+            ></textarea>
+            <mat-error *ngIf="specialIns.invalid">{{
+              formService.getErrorMessage(specialIns)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Hazmat Contact Name</mat-label>
+            <input
+              id="contactName"
+              matInput
+              formControlName="contactName"
+              [required]="formService.hasRequiredField(contactName)"
+            />
+            <mat-error *ngIf="contactName.invalid">{{
+              formService.getErrorMessage(contactName)
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="form-row">
+            <div class="form-group col-md-7">
+              <mat-form-field appearance="outline">
+                <mat-label>Hazmat Contact Phone</mat-label>
+                <input
+                  id="phone"
+                  matInput
+                  formControlName="phone"
+                  placeholder="(888) 888-8888"
+                  [textMask]="{ mask: phoneMask, guide: false }"
+                  [required]="formService.hasRequiredField(phone)"
+                />
+                <mat-error *ngIf="phone.invalid">{{
+                  formService.getErrorMessage(phone)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-md-5">
+              <mat-form-field appearance="outline">
+                <mat-label>Extension</mat-label>
+                <input id="phoneExt" matInput formControlName="phoneExt" />
+                <mat-error *ngIf="phoneExt.invalid">{{
+                  formService.getErrorMessage(phoneExt)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

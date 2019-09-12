@@ -1,0 +1,11 @@
+<span
+  class="fa-stack"
+  matTooltip="{{message}}"
+  #tooltip="matTooltip"
+  [matTooltipClass]="class"
+  aria-label="Icon that displays a tooltip when hovered over"
+  (click)="onClick($event)"
+>
+  <i class="fas fa-circle fa-stack-1x"></i>
+  <i class="fas fa-question-circle fa-stack-1x"></i>
+</span>

@@ -1,0 +1,857 @@
+<lib-routable-component-header>Shipment Manifest</lib-routable-component-header>
+
+<p>
+  View all shipments picked up or delivered within a 30-day range, and get detailed tracking results for each.
+</p>
+<p *ngIf="!isLocalAccount">
+  You also have the option to put in a specific account number.
+</p>
+
+<mat-card class="mb-3">
+  <mat-card-content>
+    <div class="row">
+      <div class="col-md-6">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+          <div *ngIf="isLocalAccount === false" class="form-row">
+
+            <div class="col-12">
+                <div class="mb-2">
+                  <mat-checkbox color="primary" (change)="account.setValue($event.checked ? 'ALL' : '')">
+                    All Accounts
+                  </mat-checkbox>
+                </div>
+                <lib-account-select
+                *ngIf="account.value !== 'ALL'"
+                class="form-row"
+                [fc]="account"
+                [label]="'Account Number'"
+                ></lib-account-select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Shipment Type</mat-label>
+                <mat-select
+                  focus="true"
+                  name="shipmentType"
+                  id="shipmentType"
+                  formControlName="shipmentType"
+                >
+                  <mat-option [value]="'ALL'">All</mat-option>
+                  <mat-option [value]="'INBOUND'">Inbound</mat-option>
+                  <mat-option [value]="'OUTBOUND'">Outbound</mat-option>
+                  <mat-option [value]="'THIRDPARTY'">Third Party Bill-to</mat-option>
+                </mat-select>
+
+                <mat-error *ngIf="shipmentType.invalid">{{
+                  formService.getErrorMessage(shipmentType)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Search By</mat-label>
+                <mat-select focus="true" name="searchBy" id="searchBy" formControlName="searchBy">
+                  <mat-option [value]="'PICKUPDATE'">Pickup Date</mat-option>
+                  <mat-option [value]="'DELIVERYDATE'">Delivery Date</mat-option>
+                </mat-select>
+
+                <mat-error *ngIf="searchBy.invalid">{{
+                  formService.getErrorMessage(searchBy)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Sort By Date</mat-label>
+                <mat-select
+                  focus="true"
+                  name="sortByDate"
+                  id="sortByDate"
+                  formControlName="sortByDate"
+                >
+                  <mat-option [value]="'ASCENDING'">Ascending</mat-option>
+                  <mat-option [value]="'DESCENDING'">Descending</mat-option>
+                </mat-select>
+
+                <mat-error *ngIf="sortByDate.invalid">{{
+                  formService.getErrorMessage(sortByDate)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Dates</mat-label>
+                <mat-select
+                  focus="true"
+                  name="dateSelection"
+                  id="dateSelection"
+                  formControlName="dateSelection"
+                >
+                  <mat-option [value]="'TODAYYESTERDAY'">Today/Yesterday</mat-option>
+                  <mat-option [value]="'LAST7DAYS'">Last 7 Days</mat-option>
+                  <mat-option [value]="'LAST15DAYS'">Last 15 Days</mat-option>
+                  <mat-option [value]="'LAST30DAYS'">Last 30 Days</mat-option>
+                  <mat-option [value]="'CUSTOMDATE'">Custom Date</mat-option>
+                </mat-select>
+
+                <mat-error *ngIf="dateSelection.invalid">{{
+                  formService.getErrorMessage(dateSelection)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div *ngIf="dateSelection.value === 'CUSTOMDATE'" class="form-row">
+            <div class="col-12">
+              <label>Please select a date range up to thirty (30) days apart.</label>
+            </div>
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>From Date *</mat-label>
+                <input
+                  matInput
+                  placeholder="MM/DD/YYYY"
+                  [matDatepicker]="fromDatePicker"
+                  formControlName="fromDate"
+                  [max]="today"
+                />
+                <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #fromDatePicker></mat-datepicker>
+                <mat-error *ngIf="fromDate.invalid">{{
+                  formService.getErrorMessage(fromDate)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>To Date *</mat-label>
+                <input
+                  matInput
+                  placeholder="MM/DD/YYYY"
+                  [matDatepicker]="toDatePicker"
+                  formControlName="toDate"
+                  [min]="fromDate.value"
+                  [max]="thirtyDayWindow"
+                />
+                <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #toDatePicker></mat-datepicker>
+                <mat-error *ngIf="toDate.invalid">{{
+                  formService.getErrorMessage(toDate)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12">
+              <!-- <div><label>Sort</label></div> -->
+              <mat-radio-group class="radio-group" formControlName="viewOrEmail">
+                <mat-radio-button [value]="'VIEW'">View</mat-radio-button>
+                <mat-radio-button [value]="'EMAIL'">Email</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+
+          <div *ngIf="viewOrEmail.value === 'EMAIL'" class="form-row">
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>File Format</mat-label>
+                <mat-select
+                  focus="true"
+                  name="fileFormat"
+                  id="fileFormat"
+                  formControlName="fileFormat"
+                >
+                  <mat-option [value]="'XLS'">Excel Worksheet File (*.xls)</mat-option>
+                  <mat-option [value]="'CSV'">Text/CSV File (*.csv)</mat-option>
+                  <mat-option [value]="'TXT'">Text Delimited File (*.txt)</mat-option>
+                </mat-select>
+                <mat-error *ngIf="fileFormat.invalid">{{
+                  formService.getErrorMessage(fileFormat)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Email Addresses (one per line)</mat-label>
+                <textarea
+                  matInput
+                  rows="10"
+                  name="email"
+                  id="email"
+                  required
+                  placeholder="Email@example.com"
+                  formControlName="email"
+                ></textarea>
+                <mat-error *ngIf="email.invalid">{{
+                  formService.getErrorMessage(email)
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <lib-feedback [message]="errorMessage"></lib-feedback>
+          <div>
+            <button type="submit" [disabled]="loading" class="btn btn-primary">
+              Submit <i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="mb-3 mat-card--table" [libOverlay]="loading" [hidden]="!outboundResults && !inboundResults && !thirdPartyResults">
+  <mat-card-header class="p-3"> <mat-card-title>Results</mat-card-title> </mat-card-header>
+  <mat-card-content>
+    <div class="tab-container">
+      <div class="tab-nav">
+        <button
+          class="tab-nav-item"
+          [class.active]="selectedTab === 1"
+          (click)="selectedTab = 1"
+          [disabled]="!showOutboundManifest"
+        >
+          {{ 'Outbound (' + outboundResultsLength + ')' }}
+        </button>
+        <button
+          class="tab-nav-item"
+          [class.active]="selectedTab === 2"
+          (click)="selectedTab = 2"
+          [disabled]="!showInboundManifest"
+        >
+          {{ 'Inbound (' + inboundResultsLength + ')' }}
+        </button>
+        <button
+          class="tab-nav-item"
+          [class.active]="selectedTab === 3"
+          (click)="selectedTab = 3"
+          [disabled]="!showThirdPartyManifest"
+        >
+          {{ 'Third Party (' + thirdPartyResultsLength + ')' }}
+        </button>
+      </div>
+      <div class="tab-content">
+        <div [hidden]="selectedTab !== 1 || !showOutboundManifest">
+          <div *ngIf="outboundResultsLength === 0 && !loading" class="no-results">
+            There were no results for this query.
+          </div>
+          <div [hidden]="outboundResultsLength === 0">
+            <div class="email-options-container p-3 ">
+              <button class="btn btn-primary" (click)="openEmailDialog('OUTBOUND')">
+                Email Options
+              </button>
+            </div>
+            <table mat-table [dataSource]="outboundResults" multiTemplateDataRows>
+              <ng-container matColumnDef="proNumber">
+                <th mat-header-cell *matHeaderCellDef>
+                  PRO<span class="d-none d-sm-inline"> Number</span>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <a href="/myestes/shipment-tracking?type=PRO&query={{element.proNumber}}" (click)="$event.stopPropagation();">{{ element.proNumber }}</a>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="pickupDate">
+                <th mat-header-cell *matHeaderCellDef class="d-none d-sm-table-cell">
+                  Pickup Date
+                </th>
+                <td mat-cell *matCellDef="let element" class="d-none d-sm-table-cell">
+                  {{ element.pickupDate | displayDate }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="deliveryDate">
+                <th mat-header-cell *matHeaderCellDef class="d-none d-md-table-cell">
+                  Delivery Date
+                </th>
+                <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
+                  {{ element.deliveryDate }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef class="d-none d-md-table-cell">Status</th>
+                <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
+                  {{ element.status }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="bol">
+                <th mat-header-cell *matHeaderCellDef class="d-none d-md-table-cell">BOL #</th>
+                <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
+                  {{ element.bol }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="purchaseOrder">
+                <th mat-header-cell *matHeaderCellDef class="d-none d-md-table-cell">PO #</th>
+                <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
+                  {{ element.purchaseOrder }}
+                </td>
+              </ng-container>
+
+              <!--
+                <ng-container matColumnDef="destination">
+                  <th mat-header-cell *matHeaderCellDef>Destination</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.destination }}
+                  </td>
+                </ng-container>
+              -->
+
+              <ng-container matColumnDef="toggle">
+                <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+                <td mat-cell *matCellDef="let element">
+                  <span class="fal fa-chevron-down"></span> <span class="fal fa-chevron-up"></span>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                  <div
+                    class="element-detail"
+                    [@detailExpand]="element == expandedOutboundElement ? 'expanded' : 'collapsed'"
+                  >
+                    <div class="detail-desc">
+                      <table class="table table-bordered table-striped table-hover table-sm detail">
+                        <tbody>
+                          <tr>
+                            <th scope="row">PRO #</th>
+                            <td>{{ element.proNumber }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">BOL #</th>
+                            <td>{{ element.bol }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">PO #</th>
+                            <td>{{ element.purchaseOrder }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Status</th>
+                            <td>{{ element.status }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Pickup Date</th>
+                            <td>{{ element.pickupDate | displayDate }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Shipper</th>
+                            <td>
+                              <div *ngIf="element.shipper">{{ element.shipper }}</div>
+                              <lib-address [address]="element.shipperAddress"></lib-address>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Delivery Date</th>
+                            <td>{{ element.deliveryDate }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Delivery Time</th>
+                            <td>{{ element.deliveryTime }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Received By</th>
+                            <td>{{ element.receivedBy }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Consignee</th>
+                            <td>
+                              <div>{{ element.consignee }}</div>
+                              <lib-address [address]="element.consigneeAddress"></lib-address>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Appointment Date</th>
+                            <td>{{ element.appointmentDate }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Appointment Time</th>
+                            <td>{{ element.appointmentTime }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">First Delivery Attempt</th>
+                            <td>{{ element.firstDeliveryAttempt }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Origin</th>
+                            <td>{{ element.origin }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Destination</th>
+                            <td>{{ element.destination }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Pieces</th>
+                            <td>{{ element.pieces }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Weight</th>
+                            <td>{{ element.weight }}</td>
+                          </tr>
+                          <tr *ngIf="element.charges">
+                            <th scope="row">Charges</th>
+                            <td>{{ element.charges }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Destination Terminal</th>
+                            <td>{{ element.destinationTerminal }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Terminal Phone</th>
+                            <td>{{ element.phoneNumber }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Terminal Fax</th>
+                            <td>{{ element.faxNumber }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr
+                mat-row
+                class="element-row"
+                *matRowDef="let element; columns: displayedColumns"
+                [class.expanded-row]="expandedOutboundElement === element"
+                (click)="
+                  expandedOutboundElement = expandedOutboundElement === element ? null : element
+                "
+              ></tr>
+              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+            </table>
+
+            <mat-paginator
+              #outboundPaginator
+              [length]="outboundResultsLength"
+              [pageSize]="outboundPageSize"
+              [pageSizeOptions]="[25, 50, 75, 100]"
+            ></mat-paginator>
+          </div>
+        </div>
+        <div [hidden]="selectedTab !== 2 || !showInboundManifest">
+          <div *ngIf="inboundResultsLength === 0 && !loading" class="no-results">
+            There were no results for this query.
+          </div>
+          <div [hidden]="inboundResultsLength === 0">
+            <div class="email-options-container p-3 ">
+              <button class="btn btn-primary" (click)="openEmailDialog('INBOUND')">
+                Email Options
+              </button>
+            </div>
+            <table mat-table [dataSource]="inboundResults" multiTemplateDataRows>
+              <ng-container matColumnDef="proNumber">
+                <th mat-header-cell *matHeaderCellDef>
+                  PRO<span class="d-none d-sm-inline"> Number</span>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <a href="/myestes/shipment-tracking?type=PRO&query={{element.proNumber}}" (click)="$event.stopPropagation();">{{ element.proNumber }}</a>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="pickupDate">
+                <th mat-header-cell *matHeaderCellDef class="d-none d-sm-table-cell">
+                  Pickup Date
+                </th>
+                <td mat-cell *matCellDef="let element" class="d-none d-sm-table-cell">
+                  {{ element.pickupDate | displayDate }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="deliveryDate">
+                <th mat-header-cell *matHeaderCellDef class="d-none d-md-table-cell">
+                  Delivery Date
+                </th>
+                <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
+                  {{ element.deliveryDate }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef class="d-none d-md-table-cell">Status</th>
+                <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
+                  {{ element.status }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="bol">
+                <th mat-header-cell *matHeaderCellDef class="d-none d-md-table-cell">BOL #</th>
+                <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
+                  {{ element.bol }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="purchaseOrder">
+                <th mat-header-cell *matHeaderCellDef class="d-none d-md-table-cell">PO #</th>
+                <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
+                  {{ element.purchaseOrder }}
+                </td>
+              </ng-container>
+
+              <!--
+                <ng-container matColumnDef="destination">
+                  <th mat-header-cell *matHeaderCellDef>Destination</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.destination }}
+                  </td>
+                </ng-container>
+              -->
+
+              <ng-container matColumnDef="toggle">
+                <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+                <td mat-cell *matCellDef="let element">
+                  <span class="fal fa-chevron-down"></span> <span class="fal fa-chevron-up"></span>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                  <div
+                    class="element-detail"
+                    [@detailExpand]="element == expandedInboundElement ? 'expanded' : 'collapsed'"
+                  >
+                    <div class="detail-desc">
+                      <table class="table table-bordered table-striped table-hover table-sm detail">
+                        <tbody>
+                          <tr>
+                            <th scope="row">PRO #</th>
+                            <td>{{ element.proNumber }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">BOL #</th>
+                            <td>{{ element.bol }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">PO #</th>
+                            <td>{{ element.purchaseOrder }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Status</th>
+                            <td>{{ element.status }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Pickup Date</th>
+                            <td>{{ element.pickupDate | displayDate }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Shipper</th>
+                            <td>
+                              <div *ngIf="element.shipper">{{ element.shipper }}</div>
+                              <lib-address [address]="element.shipperAddress"></lib-address>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Delivery Date</th>
+                            <td>{{ element.deliveryDate }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Delivery Time</th>
+                            <td>{{ element.deliveryTime }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Received By</th>
+                            <td>{{ element.receivedBy }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Consignee</th>
+                            <td>
+                              <div>{{ element.consignee }}</div>
+                              <lib-address [address]="element.consigneeAddress"></lib-address>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Appointment Date</th>
+                            <td>{{ element.appointmentDate }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Appointment Time</th>
+                            <td>{{ element.appointmentTime }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">First Delivery Attempt</th>
+                            <td>{{ element.firstDeliveryAttempt }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Origin</th>
+                            <td>{{ element.origin }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Destination</th>
+                            <td>{{ element.destination }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Pieces</th>
+                            <td>{{ element.pieces }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Weight</th>
+                            <td>{{ element.weight }}</td>
+                          </tr>
+                          <tr *ngIf="element.charges">
+                            <th scope="row">Charges</th>
+                            <td>{{ element.charges }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Destination Terminal</th>
+                            <td>{{ element.destinationTerminal }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Terminal Phone</th>
+                            <td>{{ element.phoneNumber }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Terminal Fax</th>
+                            <td>{{ element.faxNumber }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr
+                mat-row
+                class="element-row"
+                *matRowDef="let element; columns: displayedColumns"
+                [class.expanded-row]="expandedInboundElement === element"
+                (click)="
+                  expandedInboundElement = expandedInboundElement === element ? null : element
+                "
+              ></tr>
+              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+            </table>
+
+            <mat-paginator
+              #inboundPaginator
+              [length]="inboundResultsLength"
+              [pageSize]="inboundPageSize"
+              [pageSizeOptions]="[25, 50, 75, 100]"
+            ></mat-paginator>
+          </div>
+        </div>
+        <div [hidden]="selectedTab !== 3 || !showThirdPartyManifest">
+          <div *ngIf="thirdPartyResultsLength === 0 && !loading" class="no-results">
+            There were no results for this query.
+          </div>
+          <div [hidden]="thirdPartyResultsLength === 0">
+            <div class="email-options-container p-3">
+              <button class="btn btn-primary" (click)="openEmailDialog('THIRDPARTY')">
+                Email Options
+              </button>
+            </div>
+            <table mat-table [dataSource]="thirdPartyResults" multiTemplateDataRows>
+              <ng-container matColumnDef="proNumber">
+                <th mat-header-cell *matHeaderCellDef>
+                  PRO<span class="d-none d-sm-inline"> Number</span>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <a href="/myestes/shipment-tracking?type=PRO&query={{element.proNumber}}" (click)="$event.stopPropagation();">{{ element.proNumber }}</a>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="pickupDate">
+                <th mat-header-cell *matHeaderCellDef class="d-none d-sm-table-cell">
+                  Pickup Date
+                </th>
+                <td mat-cell *matCellDef="let element" class="d-none d-sm-table-cell">
+                  {{ element.pickupDate | displayDate }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="deliveryDate">
+                <th mat-header-cell *matHeaderCellDef class="d-none d-md-table-cell">
+                  Delivery Date
+                </th>
+                <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
+                  {{ element.deliveryDate }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef class="d-none d-md-table-cell">Status</th>
+                <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
+                  {{ element.status }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="bol">
+                <th mat-header-cell *matHeaderCellDef class="d-none d-md-table-cell">BOL #</th>
+                <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
+                  {{ element.bol }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="purchaseOrder">
+                <th mat-header-cell *matHeaderCellDef class="d-none d-md-table-cell">PO #</th>
+                <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
+                  {{ element.purchaseOrder }}
+                </td>
+              </ng-container>
+
+              <!--
+                <ng-container matColumnDef="destination">
+                  <th mat-header-cell *matHeaderCellDef>Destination</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.destination }}
+                  </td>
+                </ng-container>
+              -->
+
+              <ng-container matColumnDef="toggle">
+                <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+                <td mat-cell *matCellDef="let element">
+                  <span class="fal fa-chevron-down"></span> <span class="fal fa-chevron-up"></span>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                  <div
+                    class="element-detail"
+                    [@detailExpand]="
+                      element == expandedThirdPartyElement ? 'expanded' : 'collapsed'
+                    "
+                  >
+                    <div class="detail-desc">
+                      <table class="table table-bordered table-striped table-hover table-sm detail">
+                        <tbody>
+                          <tr>
+                            <th scope="row">PRO #</th>
+                            <td>{{ element.proNumber }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">BOL #</th>
+                            <td>{{ element.bol }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">PO #</th>
+                            <td>{{ element.purchaseOrder }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Status</th>
+                            <td>{{ element.status }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Pickup Date</th>
+                            <td>{{ element.pickupDate | displayDate }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Shipper</th>
+                            <td>
+                              <div *ngIf="element.shipper">{{ element.shipper }}</div>
+                              <lib-address [address]="element.shipperAddress"></lib-address>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Delivery Date</th>
+                            <td>{{ element.deliveryDate }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Delivery Time</th>
+                            <td>{{ element.deliveryTime }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Received By</th>
+                            <td>{{ element.receivedBy }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Consignee</th>
+                            <td>
+                              <div>{{ element.consignee }}</div>
+                              <lib-address [address]="element.consigneeAddress"></lib-address>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Appointment Date</th>
+                            <td>{{ element.appointmentDate }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Appointment Time</th>
+                            <td>{{ element.appointmentTime }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">First Delivery Attempt</th>
+                            <td>{{ element.firstDeliveryAttempt }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Origin</th>
+                            <td>{{ element.origin }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Destination</th>
+                            <td>{{ element.destination }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Pieces</th>
+                            <td>{{ element.pieces }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Weight</th>
+                            <td>{{ element.weight }}</td>
+                          </tr>
+                          <tr *ngIf="element.charges">
+                            <th scope="row">Charges</th>
+                            <td>{{ element.charges }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Destination Terminal</th>
+                            <td>{{ element.destinationTerminal }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Terminal Phone</th>
+                            <td>{{ element.phoneNumber }}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Terminal Fax</th>
+                            <td>{{ element.faxNumber }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr
+                mat-row
+                class="element-row"
+                *matRowDef="let element; columns: displayedColumns"
+                [class.expanded-row]="expandedThirdPartyElement === element"
+                (click)="
+                  expandedThirdPartyElement = expandedThirdPartyElement === element ? null : element
+                "
+              ></tr>
+              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+            </table>
+
+            <mat-paginator
+              #thirdPartyPaginator
+              [length]="thirdPartyResultsLength"
+              [pageSize]="thirdPartyPageSize"
+              [pageSizeOptions]="[25, 50, 75, 100]"
+            ></mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<p>
+  *Freight charges are shown on shipments for which the logged-in user is the payor of the freight
+  charges.
+</p>

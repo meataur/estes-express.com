@@ -1,0 +1,123 @@
+<!-- <button class="btn btn-primary" (click)="openShippingLabelModal()">Create Shipping Labels</button> -->
+<p class="mt-3">
+  Use our BOL History application to copy, view or even cancel a submitted BOL. Please note that a Bill of Lading can only be cancelled if the BOL Date field contains a date later than today.  </p>
+<mat-card class="mat-card--table" [libOverlay]="loading">
+  <mat-card-header class="p-3 d-flex justify-content-between row">
+    <mat-card-title>History</mat-card-title>
+    <div class="col-6 d-flex justify-content-end align-items-center">
+      <lib-tooltip (click)="openHelpModal()"></lib-tooltip>
+      <button
+        class="btn btn-default"
+        (click)="expandSearch = !expandSearch"
+        [ngClass]="{
+          'btn-expanded-advanced-search': expandSearch,
+          'btn-active-advanced-search': activeAdvancedSearch
+        }"
+      >
+        <i class="fas fa-filter mr-2"></i>Advanced Search
+      </button>
+    </div>
+  </mat-card-header>
+  <app-draft-advanced-search
+    (filterChange)="onFilterChange($event)"
+    (closed)="expandSearch = false"
+    [expand]="expandSearch"
+  ></app-draft-advanced-search>
+  <table mat-table [dataSource]="dataSource" matSort matSortDisableClear>
+    <ng-container matColumnDef="bolNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        BOL Reference Number
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.bolNumber }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="bolDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        BOL Date
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.bolDate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="proNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-md-table-cell">
+        PRO #
+      </th>
+      <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
+        {{ element.proNumber }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="shipper">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-md-table-cell">
+        Shipper
+      </th>
+      <td mat-cell *matCellDef="let element" class="d-none d-md-table-cell">
+        {{ element.shipperCompanyName }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="consignee">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-lg-table-cell">
+        Consignee
+      </th>
+      <td mat-cell *matCellDef="let element" class="d-none d-lg-table-cell">
+        {{ element.consigneeCompanyName }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hasShippingLabel">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Shipping Labels</th>
+      <td mat-cell *matCellDef="let element">
+        <div class="d-flex">
+          <button
+            class="btn btn-default"
+            type="button"
+            (click)="
+              element.hasShippingLabel
+                ? viewShippingLabels(element.bolId)
+                : createShippingLabels(element)
+            "
+          >
+            {{ element.hasShippingLabel ? 'View Labels' : 'Create Labels' }}
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <div class="d-flex">
+          <button
+            mat-icon-button
+            title="Copy Bill of Lading"
+            [routerLink]="['../create/existing', element.bolId]"
+          >
+            <mat-icon fontSet="fa" fontIcon="fa-copy" aria-hidden="true"></mat-icon>
+          </button>
+          <button mat-icon-button title="View Bill of Lading" (click)="view(element)">
+            <mat-icon fontSet="fa" fontIcon="fa-file-pdf" aria-hidden="true"></mat-icon>
+          </button>
+          <button mat-icon-button title="Cancel Bill of Lading" (click)="cancel(element)">
+            <mat-icon fontSet="fa" fontIcon="fa-times-circle" aria-hidden="true"></mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row class="element-row" *matRowDef="let element; columns: displayedColumns"></tr>
+  </table>
+
+  <div *ngIf="(noData | async)" class="no-results">
+    There are no results for the given criteria.
+  </div>
+
+  <mat-paginator
+    [length]="resultsLength"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[25, 50, 75, 100]"
+  ></mat-paginator>
+</mat-card>

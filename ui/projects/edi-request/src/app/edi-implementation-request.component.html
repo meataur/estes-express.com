@@ -1,0 +1,977 @@
+<div id="print-section">
+  <lib-routable-component-header>EDI Request</lib-routable-component-header>
+  <p>Fill out the form to receive EDI implementation information.</p>
+  <form [formGroup]="formGroup" #myForm (ngSubmit)="onSubmit()">
+    <mat-card class="mat-card--table">
+      <mat-card-header>
+        <mat-card-title>
+          Customer Information
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="m-0">
+        <div class="row">
+          <div class="col-12">
+            <label>Is this a Level<sup>2</sup> Logistics Request?</label>
+          </div>
+          <mat-radio-group class="col-12 pb-3" name="isL2L" formControlName="isL2L">
+            <mat-radio-button color="primary" value="yes">Yes</mat-radio-button><br>
+            <mat-radio-button color="primary" value="no" checked>No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div formGroupName="customer">
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Company Name</mat-label>
+                <input
+                  matInput
+                  formControlName="name"
+                  [attr.value]="formGroup.get('customer.name').value"
+                  required
+                />
+                <mat-error *ngIf="formGroup.get('customer.name').invalid">{{
+                  formService.getErrorMessage(formGroup.get('customer.name'))
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Address</mat-label>
+                <input
+                  matInput
+                  formControlName="address"
+                  [attr.value]="formGroup.get('customer.address').value"
+                  required
+                />
+                <mat-error *ngIf="formGroup.get('customer.address').invalid">{{
+                  formService.getErrorMessage(formGroup.get('customer.address'))
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>City</mat-label>
+                <input
+                  matInput
+                  formControlName="city"
+                  [attr.value]="formGroup.get('customer.city').value"
+                  required
+                />
+                <mat-error *ngIf="formGroup.get('customer.city').invalid">{{
+                  formService.getErrorMessage(formGroup.get('customer.city'))
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4 col-md-2">
+              <mat-form-field appearance="outline">
+                <mat-label>State</mat-label>
+                <input
+                  matInput
+                  formControlName="state"
+                  [attr.value]="formGroup.get('customer.state').value"
+                  required
+                />
+                <mat-error *ngIf="formGroup.get('customer.state').invalid">{{
+                  formService.getErrorMessage(formGroup.get('customer.state'))
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-8 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>ZIP</mat-label>
+                <input
+                  matInput
+                  formControlName="zip"
+                  [attr.value]="formGroup.get('customer.zip').value"
+                  required
+                />
+                <mat-error *ngIf="formGroup.get('customer.zip').invalid">{{
+                  formService.getErrorMessage(formGroup.get('customer.zip'))
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Phone Number</mat-label>
+                <input matInput formControlName="phone" required placeholder="(888) 888-8888" [textMask]="{ mask: phoneMask, guide: false }" [attr.value]="formGroup.get('customer.phone').value"/>
+                <mat-error *ngIf="formGroup.get('customer.phone').invalid">{{
+                  formService.getErrorMessage(formGroup.get('customer.phone'))
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-4 col-md-2">
+              <mat-form-field appearance="outline">
+                <mat-label>Extension</mat-label>
+                <input matInput formControlName="extension" [attr.value]="formGroup.get('customer.extension').value"/>
+                <mat-error *ngIf="formGroup.get('customer.extension').invalid">{{
+                  formService.getErrorMessage(formGroup.get('customer.extension'))
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Fax</mat-label>
+                <input matInput formControlName="fax" placeholder="(888) 888-8888" [attr.value]="formGroup.get('customer.fax').value" [textMask]="{ mask: phoneMask, guide: false }" />
+
+                <mat-error *ngIf="formGroup.get('customer.fax').invalid">{{
+                  formService.getErrorMessage(formGroup.get('customer.fax'))
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Website</mat-label>
+                <input matInput formControlName="website" [attr.value]="formGroup.get('customer.website').value"/>
+
+                <mat-error *ngIf="formGroup.get('customer.website').invalid">{{
+                  formService.getErrorMessage(formGroup.get('customer.website'))
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Freight Payment Agency</mat-label>
+                <input matInput formControlName="freightPaymentAgency" [attr.value]="formGroup.get('customer.freightPaymentAgency').value"/>
+
+                <mat-error *ngIf="formGroup.get('customer.freightPaymentAgency').invalid">{{
+                  formService.getErrorMessage(formGroup.get('customer.freightPaymentAgency'))
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Freight Management Company</mat-label>
+                <input matInput formControlName="freightManagementCompany" [attr.value]="formGroup.get('customer.freightManagementCompany').value" />
+
+                <mat-error *ngIf="formGroup.get('customer.freightManagementCompany').invalid">{{
+                  formService.getErrorMessage(formGroup.get('customer.freightManagementCompany'))
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-header>
+        <mat-card-title>
+          Primary EDI Contact
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="m-0">
+        <div formGroupName="primaryEdiContact">
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input
+                  matInput
+                  formControlName="name"
+                  [attr.value]="formGroup.get('primaryEdiContact.name').value"
+                  required
+                />
+                <mat-error *ngIf="formGroup.get('primaryEdiContact.name').invalid">{{
+                  formService.getErrorMessage(formGroup.get('primaryEdiContact.name'))
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Title</mat-label>
+                <input
+                  matInput
+                  formControlName="title"
+                  [attr.value]="formGroup.get('primaryEdiContact.title').value"
+                  />
+                <mat-error *ngIf="formGroup.get('primaryEdiContact.title').invalid">{{
+                  formService.getErrorMessage(formGroup.get('primaryEdiContact.title'))
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Email Address</mat-label>
+                <input
+                  matInput
+                  formControlName="email"
+                  placeholder="Email@example.com"
+                  [attr.value]="formGroup.get('primaryEdiContact.email').value"
+                  required
+                />
+                <mat-error *ngIf="formGroup.get('primaryEdiContact.email').invalid">{{
+                  formService.getErrorMessage(formGroup.get('primaryEdiContact.email'))
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8 col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Phone Number</mat-label>
+                <input 
+                  matInput
+                  formControlName="phone"
+                  placeholder="(888) 888-8888"
+                  [attr.value]="formGroup.get('primaryEdiContact.phone').value"
+                  required
+                  [textMask]="{ mask: phoneMask, guide: false }" />
+
+                <mat-error *ngIf="formGroup.get('primaryEdiContact.phone').invalid">{{
+                  formService.getErrorMessage(formGroup.get('primaryEdiContact.phone'))
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-4 col-md-2">
+              <mat-form-field appearance="outline">
+                <mat-label>Extension</mat-label>
+                <input matInput formControlName="extension" [attr.value]="formGroup.get('primaryEdiContact.extension').value" />
+                <mat-error *ngIf="formGroup.get('primaryEdiContact.extension').invalid">{{
+                  formService.getErrorMessage(formGroup.get('primaryEdiContact.extension'))
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Fax</mat-label>
+                <input matInput formControlName="fax" placeholder="(888) 888-8888" [attr.value]="formGroup.get('primaryEdiContact.fax').value" [textMask]="{ mask: phoneMask, guide: false }" />
+
+                <mat-error *ngIf="formGroup.get('primaryEdiContact.fax').invalid">{{
+                  formService.getErrorMessage(formGroup.get('primaryEdiContact.fax'))
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+      <div *ngFor="let config of contactFormConfigList">
+        <mat-card-header class="d-flex justify-content-between">
+          <mat-card-title>
+            {{config.title}}
+          </mat-card-title>
+          <i *ngIf="config.expandable" (click)="config.expanded = !config.expanded" [ngClass]="config.expanded ? 'fa-minus-square' : 'fa-plus-square'" class="fas" ></i>
+        </mat-card-header>
+        <div [@expand]="(!config.expandable || config.expanded) ? 'expanded' : 'collapsed'">
+          <mat-card-content class="m-0">
+            <div formGroupName="{{config.key}}">
+              <div class="row pb-3">
+                <div class="col-12">
+                  <mat-checkbox
+                    color="primary"
+                    (change)="usePrimaryContact($event.checked, config.key)">
+                    Same as Primary Contact
+                  </mat-checkbox>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input
+                      matInput
+                      formControlName="name"
+                      [attr.value]="formGroup.get(config.key+'.name').value"
+                    />
+                    <mat-error *ngIf="formGroup.get(config.key+'.name').invalid">{{
+                      formService.getErrorMessage(formGroup.get(config.key+'.name'))
+                    }}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Title</mat-label>
+                    <input
+                      matInput
+                      formControlName="title"
+                      [attr.value]="formGroup.get(config.key+'.title').value"
+                    />
+                    <mat-error *ngIf="formGroup.get(config.key+'.title').invalid">{{
+                      formService.getErrorMessage(formGroup.get(config.key+'.title'))
+                    }}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Email Address</mat-label>
+                    <input
+                      matInput
+                      formControlName="email"
+                      placeholder="Email@example.com"
+                      [attr.value]="formGroup.get(config.key+'.email').value"
+                    />
+                    <mat-error *ngIf="formGroup.get(config.key+'.email').invalid">{{
+                      formService.getErrorMessage(formGroup.get(config.key+'.email'))
+                    }}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-8 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Phone Number</mat-label>
+                    <input matInput formControlName="phone" [attr.value]="formGroup.get(config.key+'.phone').value"
+                    [textMask]="{ mask: phoneMask, guide: false }" />
+            
+                    <mat-error *ngIf="formGroup.get(config.key+'.phone').invalid">{{
+                      formService.getErrorMessage(formGroup.get(config.key+'.phone'))
+                    }}</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-4 col-md-2">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Extension</mat-label>
+                    <input matInput formControlName="extension" [attr.value]="formGroup.get(config.key+'.extension').value"/>
+                    <mat-error *ngIf="formGroup.get(config.key+'.extension').invalid">{{
+                      formService.getErrorMessage(formGroup.get(config.key+'.extension'))
+                    }}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fax</mat-label>
+                    <input 
+                      matInput
+                      formControlName="fax"
+                      placeholder="(888) 888-8888"
+                      [attr.value]="formGroup.get(config.key+'.fax').value"
+                      [textMask]="{ mask: phoneMask, guide: false }" />
+                    <mat-error *ngIf="formGroup.get(config.key+'.fax').invalid">{{
+                      formService.getErrorMessage(formGroup.get(config.key+'.fax'))
+                    }}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </div>
+      </div>
+      <mat-card-header>
+        <mat-card-title>
+          Type of EDI billing required
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="m-0">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-select
+                focus="true"
+                name="ediBillingType"
+                id="ediBillingType"
+                formControlName="ediBillingType">
+                <mat-option selected value></mat-option>
+                <mat-option [value]="'PPO'">Prepaid/Outbound Bills Only</mat-option>
+                <mat-option [value]="'COL'">Collect/Inbound Bills Only</mat-option>
+                <mat-option [value]="'BPC'">Both Prepaid/Outbound and Collect/Inbound Bills Only</mat-option>
+                <mat-option [value]="'TPO'">Third Party Bills Only</mat-option>
+                <mat-option [value]="'ALL'">All Prepaid/Outbound, Collect/Inbound, Third Party</mat-option>
+              </mat-select>
+              <mat-error *ngIf="ediBillingType.invalid">{{
+                formService.getErrorMessage(ediBillingType)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>    
+      </mat-card-content>
+      <mat-card-header>
+        <mat-card-title>
+          Form: Please select desired document types.
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="m-0">
+        <div class="row">
+          <div class="col-12 col-md-6 pb-3">
+            <mat-checkbox
+            color="primary"
+            formControlName="form204">
+            204 Load Tender/Pickup Request
+          </mat-checkbox>
+          </div>
+          <div class="col-12 col-md-6 pb-3">
+            <label class="pr-3">Auto Accept?</label>
+            <mat-radio-group name="autoAccept" formControlName="autoAccept">
+              <mat-radio-button color="primary" value="Y" class="pr-3">Yes</mat-radio-button>
+              <mat-radio-button color="primary" value="N" checked>No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 pb-3">
+            <mat-checkbox
+            color="primary"
+            formControlName="form210">
+            210 Invoice
+            </mat-checkbox>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 pb-3">
+            <mat-checkbox
+            color="primary"
+            formControlName="form211">
+            211 Bill of Lading
+            </mat-checkbox>
+          </div>
+          <div class="col-12 col-md-6 pb-3">
+            <label class="pr-3">Use 211 as pickup request?</label>
+            <mat-radio-group name="use211AsPickupRequest" formControlName="use211AsPickupRequest">
+              <mat-radio-button color="primary" value="Y" class="pr-3">Yes</mat-radio-button>
+              <mat-radio-button color="primary" value="N" checked>No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 offset-md-6 pb-3">
+            <label class="pr-3">Are you able to send reserve PRO numbers in the BOL06?</label>
+            <mat-radio-group name="sendReserveProsInBOL06" formControlName="sendReserveProsInBOL06">
+              <mat-radio-button color="primary" value="Y" class="pr-3">Yes</mat-radio-button>
+              <mat-radio-button color="primary" value="N" checked>No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 offset-md-6 pb-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Comments</mat-label>
+              <input
+                matInput
+                formControlName="formComments"
+                [attr.value]="formComments.value"
+              />
+              <mat-error *ngIf="formComments.invalid">{{
+                formService.getErrorMessage(formComments)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 pb-3">
+            <mat-checkbox
+            color="primary"
+            formControlName="form212">
+            212 Trailer Manifest
+            </mat-checkbox>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 pb-3">
+            <mat-checkbox
+            color="primary"
+            formControlName="form214">
+            214 Shipment Status
+          </mat-checkbox>
+          </div>
+          <div class="col-12 col-md-6 pb-3">
+            <label class="pr-3">Can you provide a 214 report card to Estes Express?</label>
+            <mat-radio-group name="has214ReportCard" formControlName="has214ReportCard">
+              <mat-radio-button color="primary" value="Y" class="pr-3">Yes</mat-radio-button>
+              <mat-radio-button color="primary" value="N" checked>No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 pb-3">
+            <mat-checkbox
+            color="primary"
+            formControlName="form990">
+            990 Response to a load tender
+          </mat-checkbox>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 pb-3">
+            <mat-checkbox
+            color="primary"
+            formControlName="formOther">
+            Other
+          </mat-checkbox>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-header>
+        <mat-card-title>
+          Estes Account Number(s):
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="m-0">
+        <div class="row">
+          <div class="col-12 pl-3 pb-3">
+            <a routerLink="/request-account-number" target="_blank">Get Account Number</a>
+          </div>
+        </div>
+        <div class="row" formArrayName="estesAccountNumber" *ngFor="let accountNum of estesAccountNumber.controls; let i = index">
+          <div class="col-10 col-md-4">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Estes Account Number</mat-label>
+              <input
+                matInput
+                [formControlName]="i"
+                [attr.value]="estesAccountNumber.at(i).value"
+              />
+              <mat-error *ngIf="estesAccountNumber.at(i).invalid">{{
+                formService.getErrorMessage(estesAccountNumber.at(i))
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-2">
+            <i class="fa fa-times-circle pt-4 pr-4 pb-4" (click)="estesAccountNumber.removeAt(i)" *ngIf="i>0 && i == estesAccountNumber.controls.length-1"></i>
+          </div>
+        </div>
+        <button *ngIf="estesAccountNumber.length < 5" type="button" (click)="addAccountNumberControl()" class="btn btn-default">Add <i class="fal fa-plus ml-1"></i></button>
+      </mat-card-content>
+      <mat-card-header>
+        <mat-card-title>
+          Addresses for locations requesting EDI
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="m-0">
+        <div class="row" formArrayName="ediAddressLocation" *ngFor="let address of ediAddressLocation.controls; let i = index">
+          <div class="col-10 col-md-8">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Address</mat-label>
+              <input
+                matInput
+                [formControlName]="i"
+                [attr.value]="ediAddressLocation.at(i).value"
+              />
+              <mat-error *ngIf="ediAddressLocation.at(i).invalid">{{
+                formService.getErrorMessage(ediAddressLocation.at(i))
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-2">
+            <i class="fa fa-times-circle pt-4 pr-4 pb-4" (click)="ediAddressLocation.removeAt(i)" *ngIf="i>0 && i == ediAddressLocation.controls.length-1"></i>
+          </div>
+        </div>
+        <button *ngIf="ediAddressLocation.length < 5" type="button" (click)="addAddressControl()" class="btn btn-default">Add <i class="fal fa-plus ml-1"></i></button>
+      </mat-card-content>
+      <mat-card-header>
+        <mat-card-title>
+          Will reserved bills be used?
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="m-0">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <mat-radio-group name="willReservedBillsUsed" formControlName="willReservedBillsUsed">
+              <mat-radio-button color="primary" value="Y" class="pr-3">Yes</mat-radio-button>
+              <mat-radio-button color="primary" value="N" checked>No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-header>
+        <mat-card-title>
+          Third Party Networks for EDI Applications (EDI VAN)
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="m-0">
+        <div class="row">
+          <div class="col-12 col-md-6 pb-3">
+            <mat-checkbox
+              color="primary"
+              formControlName="thirdPartyNetworks"
+              (change)="otherThirdPartyCheck.setValue(false); otherThirdPartyValue.setValue('');">
+              Kleinschmidt
+            </mat-checkbox>
+            <lib-tooltip
+              [message]="'Kleinschmidt Inc. is the EC Gateway/EDI VAN we use to move data. Kleinschmidt supports all EDI standards as well as proprietary formats (flat files) and translation services between any of these formats. The company also supports many alternative means of communication and provides real-time interconnect to all major and many smaller VANs.'">
+            </lib-tooltip>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-2 pb-3">
+            <mat-checkbox
+              color="primary"
+              formControlName="otherThirdPartyCheck"
+              (change)="thirdPartyNetworks.setValue(false)">
+              Other
+            </mat-checkbox>
+          </div>
+          <div class="col-12 col-md-6">
+            <mat-form-field appearance="outline" class="pt-1">
+              <input
+                matInput
+                [required]="otherThirdPartyCheck.value"
+                formControlName="otherThirdPartyValue"
+                [attr.value]="otherThirdPartyValue.value"
+              />
+              <mat-error *ngIf="otherThirdPartyValue.invalid">{{
+                formService.getErrorMessage(otherThirdPartyValue)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-header>
+        <mat-card-title>
+          Type of EDI Header
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="m-0">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-select
+                focus="true"
+                formControlName="ediHeaderType">
+                <mat-option selected value></mat-option>
+                <mat-option value="ISA">ISA</mat-option>
+                <mat-option value="BG">BG</mat-option>
+              </mat-select>
+              <mat-error *ngIf="ediHeaderType.invalid">{{
+                formService.getErrorMessage(ediHeaderType)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>    
+      </mat-card-content>
+      <mat-card-header>
+        <mat-card-title>
+          If FTP is preferred method of communication, provide the following:
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="m-0">
+        <div class="row">
+          <div class="col-12 col-md-5">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Server Address</mat-label>
+              <input
+                matInput
+                formControlName="ftpServerAddress"
+                [attr.value]="ftpServerAddress.value"
+              />
+              <mat-error *ngIf="ftpServerAddress.invalid">{{
+                formService.getErrorMessage(ftpServerAddress)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-md-5">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Directory Path</mat-label>
+              <input
+                matInput
+                formControlName="ftpDirectoryPath"
+                [attr.value]="ftpDirectoryPath.value"
+              />
+              <mat-error *ngIf="ftpDirectoryPath.invalid">{{
+                formService.getErrorMessage(ftpDirectoryPath)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-5">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Username</mat-label>
+              <input
+                matInput
+                formControlName="ftpUsername"
+                [attr.value]="ftpUsername.value"
+              />
+              <mat-error *ngIf="ftpUsername.invalid">{{
+                formService.getErrorMessage(ftpUsername)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-md-5">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                formControlName="ftpPassword"
+                [attr.value]="ftpPassword.value"
+              />
+              <mat-error *ngIf="ftpPassword.invalid">{{
+                formService.getErrorMessage(ftpPassword)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-header>
+        <mat-card-title>
+          Header Information
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="m-0">
+        <div class="row">
+          <div class="col-12 col-md-5">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Production BG01 (Password)</mat-label>
+              <input
+                matInput
+                formControlName="prodBg01Password"
+                [attr.value]="prodBg01Password.value"
+              />
+              <mat-error *ngIf="prodBg01Password.invalid">{{
+                formService.getErrorMessage(prodBg01Password)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-md-5">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Test BG01 (Password)</mat-label>
+              <input
+                matInput
+                formControlName="testBg01Password"
+                [attr.value]="testBg01Password.value"
+              />
+              <mat-error *ngIf="testBg01Password.invalid">{{
+                formService.getErrorMessage(testBg01Password)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-5">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Production BG03 (Receiver ID)</mat-label>
+              <input
+                matInput
+                formControlName="prodBg03ReceiverId"
+                [attr.value]="prodBg03ReceiverId.value"
+              />
+              <mat-error *ngIf="prodBg03ReceiverId.invalid">{{
+                formService.getErrorMessage(prodBg03ReceiverId)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-md-5">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Test BG03 (Receiver ID)</mat-label>
+              <input
+                matInput
+                formControlName="testBg03ReceiverId"
+                [attr.value]="testBg03ReceiverId.value"
+              />
+              <mat-error *ngIf="testBg03ReceiverId.invalid">{{
+                formService.getErrorMessage(testBg03ReceiverId)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-5">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Production ISA Qualifier</mat-label>
+              <input
+                matInput
+                formControlName="prodISAQualifier"
+                [attr.value]="prodISAQualifier.value"
+              />
+              <mat-error *ngIf="prodISAQualifier.invalid">{{
+                formService.getErrorMessage(prodISAQualifier)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-md-5">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Test ISA Qualifier</mat-label>
+              <input
+                matInput
+                formControlName="testISAQualifier"
+                [attr.value]="testISAQualifier.value"
+              />
+              <mat-error *ngIf="testISAQualifier.invalid">{{
+                formService.getErrorMessage(testISAQualifier)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-5">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Production ISA Receiver ID</mat-label>
+              <input
+                matInput
+                formControlName="prodISAReceiverId"
+                [attr.value]="prodISAReceiverId.value"
+              />
+              <mat-error *ngIf="prodISAReceiverId.invalid">{{
+                formService.getErrorMessage(prodISAReceiverId)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-md-5">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Test ISA Receiver ID</mat-label>
+              <input
+                matInput
+                formControlName="testISAReceiverId"
+                [attr.value]="testISAReceiverId.value"
+              />
+              <mat-error *ngIf="testISAReceiverId.invalid">{{
+                formService.getErrorMessage(testISAReceiverId)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-5">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Production GS ID</mat-label>
+              <input
+                matInput
+                formControlName="prodGSId"
+                [attr.value]="prodGSId.value"
+              />
+              <mat-error *ngIf="prodGSId.invalid">{{
+                formService.getErrorMessage(prodGSId)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-md-5">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Test GS ID</mat-label>
+              <input
+                matInput
+                formControlName="testGSId"
+                [attr.value]="testGSId.value"
+              />
+              <mat-error *ngIf="testGSId.invalid">{{
+                formService.getErrorMessage(testGSId)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-10">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>TDCC/ANSI Version: 4010, 4030, etc.</mat-label>
+              <input
+                matInput
+                formControlName="tdccAnsiVersion"
+                [attr.value]="tdccAnsiVersion.value"
+              />
+              <mat-error *ngIf="tdccAnsiVersion.invalid">{{
+                formService.getErrorMessage(tdccAnsiVersion)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-header>
+        <mat-card-title>
+          Person Completing Form
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="m-0">
+        <div class="row pb-2">
+          <div class="col-12">
+            <mat-checkbox
+              color="primary"
+              (change)="fillersName.setValue($event.checked ? formGroup.get('primaryEdiContact.name').value : ''); fillersPhone.setValue($event.checked ? formGroup.get('primaryEdiContact.phone').value : ''); fillersExtn.setValue($event.checked ? formGroup.get('primaryEdiContact.extension').value : '')">
+              Same as Primary Contact
+            </mat-checkbox>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-7">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Name</mat-label>
+              <input
+                matInput
+                formControlName="fillersName"
+                [attr.value]="fillersName.value"
+              />
+              <mat-error *ngIf="fillersName.invalid">{{
+                formService.getErrorMessage(fillersName)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-9 col-md-5">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Phone Number</mat-label>
+              <input
+                matInput
+                formControlName="fillersPhone"
+                placeholder="(888) 888-8888"
+                [attr.value]="fillersPhone.value"
+                [textMask]="{ mask: phoneMask, guide: false }"
+              />
+              <mat-error *ngIf="fillersPhone.invalid">{{
+                formService.getErrorMessage(fillersPhone)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-3 col-md-2">
+            <mat-form-field appearance="outline" class="pt-1">
+              <mat-label>Extension</mat-label>
+              <input
+                matInput
+                formControlName="fillersExtn"
+                [attr.value]="fillersExtn.value"
+              />
+              <mat-error *ngIf="fillersExtn.invalid">{{
+                formService.getErrorMessage(fillersExtn)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <lib-feedback [message]="feedback"></lib-feedback>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button type="button" class="btn btn-default mr-3" (click)="printForm()">Print</button>
+            <button class="btn btn-primary" type="submit"><span>Submit</span><i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i></button>
+          </div>
+        </div>
+        <div class="row pt-4">
+          <div class="col-12">
+            <mat-checkbox
+              color="primary"
+              (change)="sendCopyInMailClick($event.checked)">
+              Select to send a copy of this request to your email address
+            </mat-checkbox>
+          </div>
+          <div class="col-12 pt-2">
+            <mat-form-field *ngIf="sendCopyInMail.value == 'Y'" appearance="outline">
+              <mat-label>Email Address</mat-label>
+              <input
+                matInput
+                required
+                formControlName="fillersEmail"
+                placeholder="Email@example.com"
+                [attr.value]="fillersEmail.value"
+              />
+              <mat-error *ngIf="fillersEmail.invalid">{{
+                formService.getErrorMessage(fillersEmail)
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>

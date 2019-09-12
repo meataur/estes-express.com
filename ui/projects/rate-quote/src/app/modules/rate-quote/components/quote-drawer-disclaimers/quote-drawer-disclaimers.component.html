@@ -1,0 +1,10 @@
+<p class="help-block">
+  If included in this quote details section, pickup and delivery data is for review purposes only.
+  You must officially <a [href]="pickupRequestUrl">Request a Pickup</a> to book your shipment.
+  Please refer to our <a (click)="openDisclosuresModal()">Rate Quote Disclosures</a> for additional
+  pickup and delivery information.
+</p>
+<p *ngIf="showVTLBasicDisclaimer()" class="help-block">
+  **Delivery date and time for Volume and Truckload Basic shipment will be based on standard transit
+  for the service lane plus capacity/ops conditions present at the time of booking.
+</p>

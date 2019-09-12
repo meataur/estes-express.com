@@ -1,0 +1,26 @@
+<h1 mat-dialog-title class="font-weight-bold">Bill of Lading History</h1>
+<mat-dialog-content>
+  <p>
+    BOL History shows all current Bills of Lading created for this My Estes account. 
+    You can sort the columns by clicking one of the arrows that appears when you hover 
+    over the column headers for BOL Reference #, BOL Date, PRO #, Shipper, Consignee, and Shipping Labels.
+  </p>
+  <p>
+    You can also view previously-created labels or create new labels for your BOLs. 
+    The "View Labels" link lets you view previously-created labels. The "Create Labels" link 
+    opens a pop-up window, where you can create new labels by selecting the label type and size, 
+    the starting label’s position and the number of labels you want to print.
+  </p>
+  <p>
+    You can work with a Bill of Lading from the list by selecting one of the icons next 
+    to the Shipping Labels option for that particular BOL. As an example, you can copy the 
+    report and use it to create a new report by clicking the copy icon. This takes you to the 
+    "Create BOL" section of the application, where you can edit the data and save it as your new BOL. 
+    Other icon options include the ability to view a .pdf and cancel the BOL if the BOL Date field is in the future.
+  </p>
+</mat-dialog-content>
+<div mat-dialog-actions cdkFocusRegionstart>
+  <button type="button" class="btn btn-default" (click)="onNoClick()">
+    Close
+  </button>
+</div>

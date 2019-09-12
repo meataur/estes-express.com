@@ -1,0 +1,36 @@
+<div *ngIf="address.streetAddress">
+  {{ address.streetAddress }}
+</div>
+<div *ngIf="address.streetAddress2">
+  {{ address.streetAddress2 }}
+</div>
+<div
+  *ngIf="
+    address.city ||
+    address.state ||
+    address.zip ||
+    address.zip4
+  "
+>
+  <span *ngIf="!address.state">
+    {{ address.city }}
+  </span>
+  <span *ngIf="address.state">
+    {{ address.city }}, {{ address.state }}
+  </span>
+  <span *ngIf="!address.zip4">
+    {{ address.zip }}
+  </span>
+  <span *ngIf="address.zip4">
+    {{ address.zip }}-{{ address.zip4 }}
+  </span>
+</div>
+<div
+  *ngIf="
+    address.city == '' &&
+    address.state == '' &&
+    address.zip == ''
+  "
+>
+
+</div>

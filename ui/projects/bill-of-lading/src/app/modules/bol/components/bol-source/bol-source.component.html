@@ -1,0 +1,39 @@
+<mat-card>
+  <mat-card-header> <mat-card-title>BOL Source</mat-card-title> </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="formGroup">
+      <div class="form-row">
+        <div class="col-12">
+          <div>
+            <label>Select a document type:</label>
+          </div>
+          <mat-radio-group class="radio-group" formControlName="documentType">
+            <mat-radio-button class="mr-3" color="primary" [value]="'E'"
+              >Blank Estes BOL</mat-radio-button
+            >
+            <mat-radio-button class="mr-3" color="primary" [value]="'V'"
+              >Blank VICS BOL</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+        <!-- <div *ngIf="showTemplateDropdown" class="form-group col-md-6">
+          <div><label>Use saved BOL template:</label></div>
+          <mat-form-field appearance="outline">
+            <mat-label>Search a template</mat-label>
+            <input type="text" matInput formControlName="templateName" [matAutocomplete]="auto" />
+            <mat-autocomplete
+              autoActiveFirstOption
+              #auto="matAutocomplete"
+              [displayWith]="displayFn"
+              (optionSelected)="onOptionSelected($event)"
+            >
+              <mat-option *ngFor="let option of (filterOptions | async)" [value]="option">
+                {{ option.templateName }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div> -->
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

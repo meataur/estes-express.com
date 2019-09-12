@@ -1,0 +1,10 @@
+<lib-routable-component-header>Claims</lib-routable-component-header>
+<p>File a claim for lost or damaged freight, or check the status of an existing claim. For more information about Claims, see our <a href="/resources/frequently-asked-questions">Frequently Asked Questions.</a> </p>
+<mat-tab-group [(selectedIndex)]="tabSelectedIndex">
+  <mat-tab *ngIf="hasClaimsInquiryAccess" label="Claims Inquiry">
+    <app-claims-inquiry></app-claims-inquiry>
+  </mat-tab>
+  <mat-tab *ngIf="hasClaimsFileAccess" label="File a Claim">
+    <app-file-claim (updateSelectedTabEvent)="updateSelectedTab($event)"></app-file-claim>
+  </mat-tab>
+</mat-tab-group>

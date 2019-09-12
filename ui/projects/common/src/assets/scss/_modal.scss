@@ -1,0 +1,90 @@
+//Use these styles by adding estes-app to your dialog's panelClass attribute
+.estes-app {
+  .mat-dialog-container {
+    height: inherit;
+    padding: 0;
+    overflow: initial;
+    .mat-dialog-actions, .estes-modal-header {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    .mat-dialog-actions {
+      margin: 0;
+    }
+    .mat-dialog-content {
+      margin: 1rem;
+      padding: 0;
+      overflow-x: hidden;
+
+    }
+    .estes-modal-header {
+      background-color: $gray-200;
+      padding-top: .5rem;
+      padding-bottom: .5rem;
+      h3 {
+        font-weight: bold;
+        margin: 0;
+      }
+      .btn {
+        height: 40px;
+        margin: 0 1.3rem;
+      }
+      a:hover {
+        cursor: pointer;
+      }
+    }
+
+    .modal-action-box {
+      background: $gray-200;
+      padding: 1rem;
+      margin-top: 0.3rem;
+      .row {
+        margin: 0;
+        padding-top: 0.5rem;
+      }
+      .btn i {
+        font-size: 20px;
+      }
+      a.btn {
+        color: initial !important;
+        text-decoration: none !important;
+      }
+    }
+  }
+}
+.estes-modal {
+  .mat-card {
+    .mat-card-content {
+      overflow: auto;
+      overflow-x: hidden;
+    }
+  }
+}
+
+.accessorial-dialog {
+  min-width: 465px;
+}
+
+.cdk-overlay-container {
+  z-index: $zindex-modal;
+}
+
+@include media-breakpoint-down(sm) {
+  .estes-modal {
+    width: 100vw;
+    max-width: none !important;
+    height: 100vh;
+    .mat-card {
+      height: 100%;
+    }
+    .mat-dialog-content {
+      max-height: 55vh;
+    }
+  }
+
+  .estes-app .mat-dialog-actions {
+    .row, button {
+      width: 100%;
+    }
+  }
+}

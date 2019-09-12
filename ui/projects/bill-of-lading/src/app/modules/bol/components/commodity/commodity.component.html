@@ -1,0 +1,144 @@
+<ng-container [formGroup]="commodityForm">
+  <div class="form-row">
+    <div class="form-group col-12">
+      <mat-checkbox
+        id="hazmat{{ index }}"
+        name="hazmat{{ index }}"
+        color="primary"
+        formControlName="hazmat"
+      >
+        Hazmat
+      </mat-checkbox>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Handling Units</mat-label>
+        <input id="goodsUnit{{ index }}" matInput formControlName="goodsUnit" required />
+        <mat-error *ngIf="commodityForm.controls['goodsUnit'].invalid">{{
+          formService.getErrorMessage(commodityForm.controls['goodsUnit'])
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Type</mat-label>
+        <mat-select
+          focus="true"
+          id="goodsType{{ index }}"
+          formControlName="goodsType"
+          [compareWith]="compareFn"
+          required
+        >
+          <mat-option [value]="o" *ngFor="let o of (filteredPackageTypes$ | async)">{{
+            o.description
+          }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="commodityForm.controls['goodsType'].invalid">{{
+          formService.getErrorMessage(commodityForm.controls['goodsType'])
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Total Weight (lbs.)</mat-label>
+        <input id="goodsWeight{{ index }}" matInput formControlName="goodsWeight" required />
+        <mat-error *ngIf="commodityForm.controls['goodsWeight'].invalid">{{
+          formService.getErrorMessage(commodityForm.controls['goodsWeight'])
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Class</mat-label>
+        <mat-select
+          focus="true"
+          id="shipmentClass{{ index }}"
+          formControlName="shipmentClass"
+          [compareWith]="compareFn"
+        >
+          <mat-option [value]="o" *ngFor="let o of (classes$ | async)">{{ o.code }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="commodityForm.controls['shipmentClass'].invalid">{{
+          formService.getErrorMessage(commodityForm.controls['shipmentClass'])
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-12 form-field-group">
+      <div><label>NMFC</label></div>
+      <mat-form-field appearance="outline" class="wrapper-padding-0">
+        <input id="nmfc{{ index }}" matInput formControlName="nmfc" /> </mat-form-field
+      >&nbsp;-&nbsp;<mat-form-field appearance="outline" class="wrapper-padding-0">
+        <input id="nmfcExt{{ index }}" matInput formControlName="nmfcExt" />
+      </mat-form-field>
+      <div *ngIf="nmfc.invalid && (nmfc.touched || nmfc.dirty)" class="validation-error">
+        {{ formService.getErrorMessage(nmfc) }}
+      </div>
+      <div *ngIf="nmfcExt.invalid && (nmfcExt.touched || nmfcExt.dirty)" class="validation-error">
+        {{ formService.getErrorMessage(nmfcExt) }}
+      </div>
+    </div>
+  </div>
+  <div [hidden]="!vicsBol" class="form-row">
+    <div class="col-md-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Packaging Type</mat-label>
+        <mat-select
+          focus="true"
+          id="packageType{{ index }}"
+          formControlName="packageType"
+          [required]="vicsBol"
+        >
+          <mat-option [value]="o.code" *ngFor="let o of (packageTypes$ | async)">{{
+            o.description
+          }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="commodityForm.controls['packageType'].invalid">{{
+          formService.getErrorMessage(commodityForm.controls['packageType'])
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">
+      <mat-form-field appearance="outline">
+        <mat-label># of Packages</mat-label>
+        <input
+          id="numberOfPackages{{ index }}"
+          matInput
+          formControlName="numberOfPackage"
+          [required]="vicsBol"
+        />
+        <mat-error *ngIf="numberOfPackage.invalid">{{
+          formService.getErrorMessage(numberOfPackage)
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <p [hidden]="hazmat.value !== true">
+    Please provide the supporting Hazmat shipment details in the following format: UN Number,
+    Shipping Name, Hazard Class and Packing Group.
+  </p>
+  <div class="form-row">
+    <div class="col-12">
+      <mat-form-field appearance="outline">
+        <mat-label>Description, Marks, Exceptions</mat-label>
+        <textarea
+          matInput
+          rows="10"
+          name="description{{ index }}"
+          id="description{{ index }}"
+          formControlName="description"
+          [required]="formService.hasRequiredField(description)"
+        ></textarea>
+        <mat-error *ngIf="description.invalid">{{
+          formService.getErrorMessage(description)
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div *ngIf="canDelete" class="d-flex justify-content-end w-100">
+    <button (click)="delete()" id="removeCommodity{{ index }}" class="btn btn-default">
+      Remove
+    </button>
+  </div>
+</ng-container>

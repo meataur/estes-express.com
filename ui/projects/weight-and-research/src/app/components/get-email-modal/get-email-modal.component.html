@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Email Weight & Research Documents</h1>
+<mat-dialog-content [formGroup]="formGroup">
+  <p>
+      To receive a PDF of a weight & research certificate, enter one or more email addresses in the form below (one address per line).
+  </p>
+  <div class="form-row">
+    <div class="form-group col-12">
+      <mat-form-field appearance="outline">
+        <mat-label>Email Addresses (one per line)</mat-label>
+        <textarea
+          matInput
+          rows="10"
+          name="emailAddresses"
+          id="emailAddresses"
+          placeholder="Email@example.com"
+          formControlName="emailAddresses"
+          [required]="formService.hasRequiredField(emailAddresses)"
+        ></textarea>
+        <mat-error *ngIf="emailAddresses.invalid">{{
+          formService.getErrorMessage(emailAddresses)
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <lib-feedback [message]="feedback"></lib-feedback>
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button type="button" class="btn btn-primary mr-3" (click)="onSubmit()" [disabled]="loading">
+    Send <i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i>
+  </button>
+  <button type="button" class="btn btn-default" (click)="onNoClick()">Cancel</button>
+</div>

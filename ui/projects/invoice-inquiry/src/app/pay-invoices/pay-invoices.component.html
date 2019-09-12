@@ -1,0 +1,143 @@
+<lib-routable-component-header>Pay Invoices</lib-routable-component-header>
+<p>
+  Your banking institution must allow ACH debits in order to process online payments. For your security, payments are processed through Western Union<sup>®</sup> Speedpay<sup>®</sup>. Please note that there will be a $3 service fee for each transaction up to $50,000. If you wish to pay more, you must submit more than one payment transaction.
+</p>
+<mat-card class="mat-card--table">
+    <!-- <mat-card-header>
+      <mat-card-title>Detail of Statement # {{statementNumber}}</mat-card-title>
+    </mat-card-header> -->
+    <mat-card-content class="p-0" [libOverlay]="loading">
+      <form>
+        <mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows>
+          <ng-container matColumnDef="pro">
+            <mat-header-cell class="d-flex" *matHeaderCellDef mat-sort-header>
+              PRO Number
+            </mat-header-cell>
+            <mat-cell class="d-flex" *matCellDef="let element">
+              <span>{{ element.pro }}</span>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="invoiceDate">
+            <mat-header-cell class="d-none d-md-flex" *matHeaderCellDef mat-sort-header>
+              Invoice Date
+            </mat-header-cell>
+            <mat-cell class="d-none d-md-flex" *matCellDef="let element">
+              <span>{{element.invoiceDate | displayDate}}</span>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="statementNum">
+            <mat-header-cell class="d-none d-md-flex" *matHeaderCellDef mat-sort-header>
+              Statement Number
+            </mat-header-cell>
+            <mat-cell class="d-none d-md-flex" *matCellDef="let element">
+              <span *ngIf="element.statementNum != 0">{{element.statementNum}}</span>
+              <span *ngIf="element.statementNum == 0">EDI</span>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="openAmount">
+            <mat-header-cell class="d-flex" *matHeaderCellDef mat-sort-header>
+              Open Amount
+            </mat-header-cell>
+            <mat-cell class="d-flex" *matCellDef="let element">
+              <span>{{element.openAmount | currency}}</span>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="pendingPayAmount">
+            <mat-header-cell class="d-flex" *matHeaderCellDef mat-sort-header>
+              Pending Pay
+            </mat-header-cell>
+            <mat-cell class="d-flex" *matCellDef="let element">
+              <span>{{element.pendingPayAmount | currency}}</span>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="payment">
+            <mat-header-cell class="d-flex"  *matHeaderCellDef mat-sort-header>
+              Payment Amount
+            </mat-header-cell>
+            <mat-cell class="d-flex" *matCellDef="let element">
+              <span>{{(element.fg.get('payment').value || 0) | currency}}</span>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <mat-header-cell class="d-flex" *matHeaderCellDef><span class="d-flex d-lg-none">Adjust Amount</span></mat-header-cell>
+            <mat-cell class="d-flex" *matCellDef="let element">
+              <mat-slide-toggle color="primary" [formControl]="element.adjustAmount" (change)="toggleAdjustAmount(element)">
+                <span class="d-none d-lg-flex">Adjust Amount</span>
+              </mat-slide-toggle>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="expandedDetail">
+            <mat-cell
+              *matCellDef="let element"
+              [attr.colspan]="displayedColumns.length"
+              [formGroup]="element.fg"
+              class="p-0">
+              <div class="w-100" [@detailExpand]="element.adjustAmount.value ? 'expanded' : 'collapsed'">
+                <div class="row pt-3 pr-3 pl-3">
+                  <div class="col-12 col-md-3">
+                    <mat-form-field floatLabel="always" appearance="outline" class="mr-1">
+                      <mat-label>Payment Amount</mat-label>
+                      <input
+                        matInput
+                        focus="true"
+                        type="number"
+                        (change)="recalculateTotalAmount()"
+                        formControlName="payment">
+                      <mat-error *ngIf="element.fg.get('payment').invalid">{{
+                        formService.getErrorMessage(element.fg.get('payment'))
+                      }}</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-12 col-md-3">
+                    <mat-form-field floatLabel="always" appearance="outline" class="mr-1">
+                      <mat-label>Reason</mat-label>
+                        <mat-select formControlName="reasonCode" [required]="element.adjustAmount.value">
+                          <mat-option *ngFor="let reason of paymentReasons" [value]="reason.code">{{reason.description}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="element.fg.get('reasonCode').invalid">{{
+                          formService.getErrorMessage(element.fg.get('reasonCode'))
+                        }}</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <mat-form-field floatLabel="always" appearance="outline">
+                      <mat-label>Comments</mat-label>
+                      <input
+                        matInput
+                        [required]="element.adjustAmount.value && element.fg.get('reasonCode').value == 'OTH'"
+                        focus="true"
+                        type="text"
+                        formControlName="explain">
+                      <mat-error *ngIf="element.fg.get('explain').invalid">{{
+                        formService.getErrorMessage(element.fg.get('explain'))
+                      }}</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let element; columns: displayedColumns; let i = index" class="d-flex" [ngClass]="{ 'expanded-background': element.adjustAmount.value }"></mat-row>
+          <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="adjust-payment-row p-0"></mat-row>
+        </mat-table>
+        <div *ngIf="totalPaymentAmount" class="pl-3 pt-3"><strong>Total Amount of Payment:</strong> {{totalPaymentAmount | currency}}</div>
+        <div *ngIf="dataSource.data.length === 0" class="no-results">There were no results for this query.</div>
+        <mat-paginator [length]="dataSource.data.length" [pageSizeOptions]="[25, 50, 75, 100]"></mat-paginator>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <div class="row mt-3" *ngIf="errorMessages">
+    <div class="col-12">
+      <lib-feedback [message]="errorMessages"></lib-feedback>
+    </div>
+  </div>
+  <div class="row p-3">
+    <div class="col-12 col-md-6 pb-3">
+      <button class="btn btn-primary mr-2" type="submit" (click)="verifyPayments()">Verify</button>
+      <button class="btn tbn-default" [routerLink]="['/']" type="button">Cancel</button>
+    </div>
+    <div class="col-12 col-md-6 d-flex justify-content-start justify-content-md-end">
+      <a class="d-" [routerLink]="['/']">Return to Invoice Inquiry</a>
+    </div>
+  </div>

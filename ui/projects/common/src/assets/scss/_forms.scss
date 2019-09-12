@@ -1,0 +1,253 @@
+.estes-app,
+.cdk-overlay-container {
+
+  .mat-focused .mat-form-field-required-marker {
+    color: currentColor;
+  }
+  .mat-form-field {
+    display: block;
+    font-size: 0.875rem !important;
+
+    &.wrapper-padding-0 {
+      .mat-form-field-wrapper {
+        padding-bottom: 0;
+      }
+    }
+  }
+  .mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon-button,
+  .mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button {
+    display: inline-block !important;
+  }
+  .mat-form-field:not(.mat-form-field-appearance-legacy)
+    .mat-form-field-prefix
+    .mat-datepicker-toggle,
+  .mat-form-field:not(.mat-form-field-appearance-legacy)
+    .mat-form-field-suffix
+    .mat-datepicker-toggle {
+    display: inline-block;
+    top: calc(0.59375em - 1px);
+    position: relative;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end,
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap,
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start,
+  .mat-form-field-appearance-outline .mat-form-field-outline-end,
+  .mat-form-field-appearance-outline .mat-form-field-outline-gap,
+  .mat-form-field-appearance-outline .mat-form-field-outline-start {
+    border-width: 1px;
+    border-radius: 0;
+    border-style: solid;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end,
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap,
+  .mat-form-field-appearance-outline .mat-form-field-outline-end,
+  .mat-form-field-appearance-outline .mat-form-field-outline-gap {
+    border-left: none;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start,
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap,
+  .mat-form-field-appearance-outline .mat-form-field-outline-start,
+  .mat-form-field-appearance-outline .mat-form-field-outline-gap {
+    border-right: none;
+  }
+
+  .read-only-form {
+    .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end,
+    .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap,
+    .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start,
+    .mat-form-field-appearance-outline .mat-form-field-outline-end,
+    .mat-form-field-appearance-outline .mat-form-field-outline-gap,
+    .mat-form-field-appearance-outline .mat-form-field-outline-start {
+      border-width: 1px;
+      border-radius: 0;
+      border-style: dashed;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end,
+    .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap,
+    .mat-form-field-appearance-outline .mat-form-field-outline-end,
+    .mat-form-field-appearance-outline .mat-form-field-outline-gap {
+      border-left: none;
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start,
+    .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap,
+    .mat-form-field-appearance-outline .mat-form-field-outline-start,
+    .mat-form-field-appearance-outline .mat-form-field-outline-gap {
+      border-right: none;
+    }
+  }
+
+  .mat-checkbox-layout {
+    white-space: normal !important;
+  }
+
+  .mat-checkbox--tooltip {
+    .mat-checkbox-layout {
+      margin-top: 0.5rem;
+    }
+  }
+
+  //
+  //  mat-select
+  //
+  .mat-select-panel {
+    .mat-option:hover:not(.mat-option-disabled),
+    .mat-option:focus:not(.mat-option-disabled) {
+      background: $yellow;
+      color: rgba(0, 0, 0, 0.87);
+    }
+
+    .mat-option.mat-selected:not(.mat-option-multiple),
+    .mat-option.mat-active,
+    .mat-option.mat-active:hover,
+    .mat-option.mat-active:focus {
+      background: $yellow-dark;
+      color: rgba(0, 0, 0, 0.87);
+    }
+  }
+
+  /**
+*   Mat Form Fields
+*/
+
+  .mat-form-field-outline {
+    background-color: $white;
+  }
+
+  .form-group {
+    // margin-bottom: 0.25rem;
+  }
+
+  .form-group--tooltip {
+    display: flex;
+
+    & .form-group--tooltip__form-field {
+      flex: 1;
+    }
+
+    & .form-group--tooltip__tooltip {
+      flex: 0 1 auto;
+    }
+  }
+
+  .validation-error {
+    font-size: 75%;
+    color: $red;
+  }
+}
+
+//upload file component styling
+.estes-app {
+  .roles-checkbox {
+    padding-bottom: 0.5rem;
+    i {
+      color: $green;
+    }
+    label {
+      font-size: 12px;
+    }
+  }
+  .circled-step-number {
+    border: 2px $black solid;
+    border-radius: 4rem;
+    padding: 0.5rem 1rem;
+    width: fit-content;
+    color: $black;
+  }
+}
+
+.mat-menu-content {
+  .menu-header {
+    border-bottom: 1px solid $gray-300;
+    font-weight: bold;
+  }
+}
+
+//upload file component styling
+.estes-app {
+  .upload-file-component {
+    display: flex;
+    .mat-form-field {
+      width: 100%;
+      margin-right: 5rem;
+    }
+    .mat-form-field-outline-thick > * {
+      border: none !important;
+    }
+    .mat-form-field-outline-thick {
+      border: 1px solid $gray-300;
+    }
+    .mat-form-field-outline {
+      height: 3.65rem;
+    }
+    .upload-btn-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 3.63rem;
+      border: solid 1px $gray-300;
+      background: white;
+      border-left: none;
+      padding: 0 0.75rem;
+      margin-top: 0.25rem;
+      margin-left: -5rem;
+      a {
+        font-weight: bold;
+        color: $blue;
+      }
+    }
+    .upload-btn-wrapper input[type='file'] {
+      position: absolute;
+      left: inherit;
+      top: 0;
+      height: 3.5rem;
+      width: 3.5em;
+      opacity: 0;
+    }
+    a,
+    i {
+      &:hover {
+        cursor: pointer !important;
+      }
+    }
+    i {
+      z-index: 2;
+    }
+    .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label,
+    .mat-form-field-empty.mat-form-field-label {
+      color: black;
+    }
+  }
+}
+
+.estes-app {
+  .acknowledgment-section {
+    label {
+      font-size: $font-size-base;
+    }
+    p {
+      font-size: $small-font-size;
+      max-height: 5rem;
+      overflow-y: scroll;
+      border: 1px solid $gray-200;
+    }
+  }
+}
+
+//time container for start and end times broken out by hour, minutes, and AM/PM dropdowns.
+.estes-app,
+.cdk-overlay-container {
+  .time-container {
+    .mat-form-field {
+      display: inline-block;
+      width: 75px;
+    }
+    .time-error {
+      display: flex;
+      margin-top: -1rem;
+      margin-bottom: 1.75rem;
+    }
+  }
+}

@@ -1,0 +1,383 @@
+<lib-routable-component-header>Shipment Tracking</lib-routable-component-header>
+<div class="noprint">
+	<p *ngIf="!isAuthenticated">
+		Get a high-level status on your freight,
+		including delivery date and time along with the name of the receiving party.
+		For more detailed information such as pickup dates,
+		freight charges and images associated with your freight,
+		<a [routerLink]="['/login']">log in</a> to My Estes today!
+		<span class="fas fa-question-circle pl-2 tool-tip" (click)="openShipmentTrackingHelpDialog()"></span>
+	</p>
+	<p *ngIf="isAuthenticated">
+		View the latest status on your freight.
+		From pickup and delivery times to images and freight charges,
+		My Estes gives you the details you need to manage your day.
+		Want to receive automatic email updates for undelivered shipments?
+		Simply select your PRO(s), and enter your email addresses.
+		It's that easy!
+		<span class="fas fa-question-circle pl-2 tool-tip" (click)="openShipmentTrackingHelpDialog()"></span>
+	</p>
+</div>
+<div class="shipment-tracking">
+	<form class="noprint" id="shipmentTrackingFormContainer" name="shipmentTrackingForm" [formGroup]="formGroup" (change)="resetMessages()">
+		<mat-card>
+			<mat-card-content>
+				<div class="row d-flex align-items-stretch">
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 col-xl-8 order-md-last">
+						<div class="card promo">
+							<lib-promo></lib-promo>
+						</div><!-- /.card -->
+					</div><!-- /.col -->
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5 col-xl-4 order-md-first">
+						<mat-form-field appearance="outline">
+							<mat-label>Search by *</mat-label>
+							<mat-select matInput focus="true" name="searchBy" id="searchBy" formControlName="searchBy">
+								<mat-option *ngFor="let option of searchByOptions" [value]="option.value">
+									{{option.viewValue}} Number
+								</mat-option>
+							</mat-select>
+								<mat-error *ngIf="searchBy.invalid">{{
+								formService.getErrorMessage(searchBy)
+							}}</mat-error>
+						</mat-form-field>
+						<label>Enter or copy/paste one or more {{ hintText }} numbers here. One per line.</label>
+						<mat-form-field appearance="outline">
+							<textarea
+								matInput
+								rows="10"
+								placeholder="Enter {{hintText}} Number."
+								name="criteria"
+								id="criteria"
+								formControlName="criteria"
+							></textarea>
+							<mat-error *ngIf="criteria.invalid">{{
+								formService.getErrorMessage(criteria)
+							}}</mat-error>
+						</mat-form-field>
+						<div class="d-flex justify-content-between">
+              <button
+              id="shipmentTrackingSubmitButton"
+								type="submit"
+								[disabled]="loading"
+								class="btn btn-primary"
+								(click)="searchShipments()">
+									Search <i class="fas fa-sync-alt fa-spin"></i>
+							</button>
+							<button
+								type="button"
+								[disabled]="loading"
+								class="btn btn-default"
+								(click)="resetResults()">
+									Clear
+							</button>
+						</div>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+				<div class="messages">
+					<div *ngFor="let alert of messages">
+						<ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{
+						alert.message
+						}}</ngb-alert>
+					</div>
+				</div><!-- /.messages -->
+			</mat-card-content>
+		</mat-card>
+	</form>
+
+	<mat-card class="results mat-card--table" [hidden]="!formSubmitted">
+		<mat-card-header class="p-3">
+			<mat-card-title>Tracking Results</mat-card-title>
+			<button (click)="collapseAll()" type="button" class="btn btn-default noprint" *ngIf="hasExpandedItems">Collapse All &nbsp;<span class="fas fa-minus-square"></span></button>
+			<button (click)="expandAll()" type="button" class="btn btn-default noprint" *ngIf="!hasExpandedItems">Expand All &nbsp;<span class="fas fa-plus-square"></span></button>
+		</mat-card-header>
+		<mat-card-content [hidden]="(!shipmentTrackingRes || shipmentTrackingRes.length === 0)">
+			<div class="email-box noprint" *ngIf="isAuthenticated && !hasOnlyDeliveredShipments">
+				<button
+				type="button"
+				class="btn btn-secondary"
+				[disabled]="!selection.hasValue()"
+				(click)="openDialog()"
+				>
+				Get Email Updates
+				</button>
+				<div>Get email updates for undelivered shipments selected below.</div>
+			</div>
+
+			<table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+				<ng-container matColumnDef="select">
+					<th mat-header-cell *matHeaderCellDef class="noprint">
+						<mat-checkbox
+							*ngIf="!hasOnlyDeliveredShipments && hasPartyShipments"
+							color="primary"
+							(change)="$event ? masterToggle() : null"
+							[checked]="selection.hasValue() && isAllSelected()"
+							[indeterminate]="selection.hasValue() && !isAllSelected()"
+						></mat-checkbox>
+					</th>
+					<td mat-cell *matCellDef="let element" class="noprint">
+						<mat-checkbox
+							*ngIf="!validDate(element.deliveryDate) && (element.isParty == 'Y')"
+							color="primary"
+							(click)="$event.stopPropagation()"
+							(change)="$event ? selection.toggle(element) : null"
+							[checked]="selection.isSelected(element)"
+						>
+						</mat-checkbox>
+					</td>
+				</ng-container>
+
+				<ng-container matColumnDef="pro">
+					<th mat-header-cell *matHeaderCellDef class="noprint">
+						PRO<span class="d-none d-sm-inline"> Number</span>
+					</th>
+					<td mat-cell *matCellDef="let element">
+						<span class="noprint" *ngIf="!element.error">{{ element.pro }}</span>
+						<span class="noprint" *ngIf="element.error">{{ element.errorInfo.badData }}</span>
+					</td>
+				</ng-container>
+
+				<ng-container matColumnDef="pickupDate">
+					<th mat-header-cell *matHeaderCellDef class="d-none d-sm-table-cell">
+            <span class="noprint" *ngIf="isAuthenticated">Pickup Date</span>
+          </th>
+					<td mat-cell *matCellDef="let element" class="d-none d-sm-table-cell">
+            <span class="noprint" *ngIf="isAuthenticated">{{ element.pickupDate | date }}</span>
+					</td>
+				</ng-container>
+
+				<ng-container matColumnDef="bol">
+					<th mat-header-cell *matHeaderCellDef class="d-none d-lg-table-cell"><span class="noprint">BOL Number</span></th>
+					<td mat-cell *matCellDef="let element" class="d-none d-lg-table-cell">
+						<span class="noprint">{{ element.bol }}</span>
+					</td>
+				</ng-container>
+
+				<ng-container matColumnDef="poNum">
+					<th mat-header-cell *matHeaderCellDef class="d-none d-lg-table-cell"><span class="noprint">PO Number</span></th>
+					<td mat-cell *matCellDef="let element" class="d-none d-lg-table-cell">
+						<span class="noprint">{{ element.poNum }}</span>
+					</td>
+					</ng-container>
+
+				<ng-container matColumnDef="status">
+					<th mat-header-cell *matHeaderCellDef class="noprint">Status</th>
+					<td mat-cell *matCellDef="let element" class="noprint">
+						<span *ngIf="!element.error">{{ element.status }}</span>
+						<span *ngIf="element.error" class="text-danger font-weight-bold" [innerHtml]="'ERROR: ' + element.error"></span>
+					</td>
+				</ng-container>
+
+				<ng-container matColumnDef="toggle">
+					<th mat-header-cell *matHeaderCellDef class="noprint">&nbsp;</th>
+					<td mat-cell *matCellDef="let element" class="noprint">
+						<div *ngIf="!element.error">
+							<span class="fal fa-chevron-down"></span> <span class="fal fa-chevron-up"></span>
+						</div>
+					</td>
+				</ng-container>
+
+				<ng-container matColumnDef="expandedDetail">
+					<td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+						<div class="element-detail" [@detailExpand]="element.expanded ? 'expanded' : 'collapsed'">
+							<div class="element-description">
+								<div class="detail-desc">
+									<table *ngIf="!element.error" class="table table-bordered table-striped table-hover table-sm detail">
+										<tbody>
+											<tr>
+												<th scope="row">PRO Number</th>
+												<td *ngIf="element.pro != ''">{{ element.pro }}</td>
+											</tr>
+											<tr *ngIf="element.bol != '' && (element.isParty == 'Y')">
+												<th scope="row">BOL Number</th>
+												<td>
+													{{ element.bol }}
+													<i *ngIf="!element.bolImageLoaded && !(element.bolImages && element.bolImages.length > 0)" class="fas fa-sync-alt fa-spin"></i>
+													<span *ngIf="element.bolImageLoaded && element.bolImages && element.bolImages.length == 0">(Image not available. BOL images typically take up to 48 hours to process after pickup.)</span>
+													<!-- <ng-container *ngFor="let image of element.bolImages; let i = index;">
+														<span *ngIf="i != 0">, </span><a href="{{servicesBaseURL}}{{image.path}}" target="_blank">View</a>
+                          </ng-container> -->
+                          <a *ngIf="element.bolImageLoaded && element.bolImages && element.bolImages.length > 0" (click)="openHtml(element.bolImages)">View</a>
+												</td>
+											</tr>
+											<tr *ngIf="element.poNum != '' && (element.isPayer == 'Y' || element.isParty == 'Y')">
+												<th scope="row">PO Number</th>
+												<td>{{ element.poNum }}</td>
+											</tr>
+											<tr>
+												<th scope="row">Status</th>
+												<td *ngIf="element.status != ''">{{ element.status }}</td>
+											</tr>
+											<tr *ngIf="element.isPayor == 'Y' && element.isParty == 'Y'">
+												<th scope="row">W&R Certificate</th>
+												<td>
+													<i *ngIf="!element.wrImageLoaded && !(element.wrCertificateImages && element.wrCertificateImages.length > 0)" class="fas fa-sync-alt fa-spin"></i>
+													<span *ngIf="element.wrImageLoaded && element.wrCertificateImages && element.wrCertificateImages.length == 0">Image not available. Weight & Research images typically take up to 48 hours to process after delivery.</span>
+													<ng-container *ngFor="let image of element.wrCertificateImages; let i = index;">
+														<span *ngIf="i != 0">, </span><app-image-fetch-weight-and-research [proNumber]="element.pro"></app-image-fetch-weight-and-research>
+													</ng-container>
+												</td>
+											</tr>
+											<tr *ngIf="element.pieces != ''">
+												<th scope="row">Pieces</th>
+												<td>{{ element.pieces }}</td>
+											</tr>
+											<tr *ngIf="element.weight != ''">
+												<th scope="row">Weight (lbs.)</th>
+												<td>{{ element.weight }}</td>
+											</tr>
+											<tr *ngIf="element.isPayor == 'Y' && element.isParty == 'Y'">
+												<th scope="row">Pickup Date</th>
+												<td>
+												<span *ngIf="element.pickupDate != '' && validTime(element.pickupTime)">{{
+													element.pickupDate + ' ' + element.pickupTime
+													| date: 'MM/dd/yyyy h:mm a'
+												}}</span>
+												<span
+													*ngIf="element.pickupDate != '' && !validTime(element.pickupTime)"
+													>{{ element.pickupDate | date: 'MM/dd/yyyy' }}</span
+												>
+												<span *ngIf="element.pickupDate == ''">Not picked up</span>
+												</td>
+											</tr>
+											<tr *ngIf="element.shipperName || element.shipperAddress.zip">
+												<th scope="row">Shipper</th>
+												<td>
+													<div *ngIf="element.shipperName">{{ element.shipperName }}</div>
+													<lib-address *ngIf="element.shipperAddress" [address]="element.shipperAddress"></lib-address>
+												</td>
+											</tr>
+											<tr *ngIf="element.deliveryDate != ''">
+												<th scope="row">Delivery Date</th>
+												<td>
+												<span>{{
+													element.deliveryDate | date: 'MM/dd/yyyy'
+												}}</span>
+												</td>
+											</tr>
+											<tr *ngIf="element.deliveryTime != ''">
+												<th scope="row">Delivery Time</th>
+												<td>
+												<span *ngIf="element.deliveryDate && validTime(element.deliveryTime)">{{ element.deliveryDate + 'T' + element.deliveryTime | date: 'h:mm a' }}</span>
+												<span *ngIf="!validTime(element.deliveryTime)">{{ element.deliveryTime }}</span>
+
+												<div class="disclaimer">Reported delivery time is subject to change based upon verification.</div>
+												</td>
+											</tr>
+
+											<tr *ngIf="element.estDelDate != ''">
+												<th scope="row">Estimated Delivery Date *</th>
+												<td>
+												<span>{{
+													 element.estDelDate
+													| date: 'MM/dd/yyyy'
+												}}</span>
+												<div class="disclaimer" *ngIf="element.estDelDateDisc">{{element.estDelDateDisc}}</div>
+												<!-- <div class="disclaimer">**Date based on Estes service standards and appt. info. It is NOT guaranteed unless guaranteed service was selected. (Guaranteed Service Inquiry: 1-866-ESTES-4U, Opt. 2) Day of pickup, weekends or holidays not included. RESIDENTIAL DELIVERIES MUST HAVE APPOINTMENT. CALL DEST. TERMINAL FOR TIME/DATE.</div> -->
+											</td>
+											</tr>
+											<tr *ngIf="element.receivedBy != ''">
+												<th scope="row">Received By</th>
+												<td>{{ element.receivedBy }}</td>
+											</tr>
+											<tr *ngIf="element.constName || (element.consAddress && element.consAddress.streetAddress)">
+												<th scope="row">Consignee</th>
+												<td>
+												<div *ngIf="element.consName">{{ element.consName }}</div>
+												<lib-address *ngIf="element.consAddress" [address]="element.consAddress"></lib-address>
+												</td>
+											</tr>
+											<tr *ngIf="element.isParty == 'Y'">
+												<th scope="row">Delivery Receipt</th>
+												<td>
+													<i *ngIf="!element.drImageLoaded && !(element.deliveryReceiptImages && element.deliveryReceiptImages.length > 0)" class="fas fa-sync-alt fa-spin"></i>
+													<div class="disclaimer" *ngIf="element.drImageLoaded && element.deliveryReceiptImages && element.deliveryReceiptImages.length == 0">Image not available. A Delivery Receipt typically takes up to 48 hours to process after delivery.</div>
+													<!-- <ng-container *ngFor="let image of element.deliveryReceiptImages; let i = index;">
+														<span *ngIf="i != 0">, </span><a href="{{servicesBaseURL}}{{image.path}}" target="_blank">View</a>
+                          </ng-container> -->
+                          <a *ngIf="element.drImageLoaded && element.deliveryReceiptImages && element.deliveryReceiptImages.length > 0" (click)="openHtml(element.deliveryReceiptImages)">View</a>
+												</td>
+											</tr>
+											<tr *ngIf="element.apptDate != ''">
+												<th scope="row">Appointment Date</th>
+												<td>
+													<div>{{element.apptDate | date: 'MM/dd/yyyy'}}</div>
+												</td>
+											</tr>
+											<tr *ngIf="element.apptTime != ''">
+												<th scope="row">
+													Appointment Time
+												</th>
+												<td>
+													<div *ngIf="element.apptDate && element.apptTime && validTime(element.apptTime)">{{element.apptDate + 'T' + element.apptTime | date: 'h:mm a'}}</div>
+													<div *ngIf="!validTime(element.apptTime)">{{element.apptTime}}</div>
+												</td>
+											</tr>
+											<tr *ngIf="element.apptStatus">
+												<th scope="row">Appointment Status</th>
+												<td>{{ element.apptStatus }}</td>
+											</tr>
+											<tr *ngIf="element.firstDeliveryAttempt != ''">
+												<th scope="row">First Delivery Date</th>
+												<td>{{ element.firstDeliveryAttempt | date: 'MM/dd/yyyy' }}</td>
+											</tr>
+											<tr *ngIf="element.destTerminalAddress && element.destTerminalAddress.streetAddress">
+												<th scope="row">Destination Terminal</th>
+												<td>
+												<div *ngIf="element.destTerminalName">{{ element.destTerminalName }}</div>
+												<lib-address *ngIf="element.destTerminalAddress" [address]="element.destTerminalAddress"></lib-address>
+												</td>
+											</tr>
+											<tr *ngIf="element.destTerminalPhone">
+												<th scope="row">Terminal Phone</th>
+												<td>{{ element.destTerminalPhone }}</td>
+											</tr>
+											<tr *ngIf="element.destTerminalFax">
+												<th scope="row">Terminal Fax</th>
+												<td>{{ element.destTerminalFax }}</td>
+											</tr>
+											<tr *ngIf="element.freightChargeAudit != '' && element.isPayor == 'Y'">
+												<th scope="row">Freight Charges</th>
+												<td>
+													<div>{{ element.charges | currency }}</div>
+													<div class="disclaimer" *ngIf="element.freightChargeDisc != ''">
+													{{ element.freightChargeDisc }}
+												</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="disclaimer noprint">
+										<p *ngIf="element.delDateDisc">{{element.delDateDisc}}</p>
+										<p *ngIf="!isAuthenticated">
+												Please note that certain shipment details are only available if you are logged in to <a routerLink="/login">My Estes</a> and are party to the shipment. For example: Freight charges and W&R certificates are only shown to the payor of the freight.
+										</p>
+										<p>
+											Still have some questions about this shipment? <a [href]="'/myestes/request-additional-info?pro=' + element.pro">Request Additional Information</a>.
+										</p>
+									</div>
+								</div><!-- /.detail-desc -->
+							</div><!-- /.element-description -->
+						</div><!-- /.element-detail -->
+					</td><!-- /.expanded-detail -->
+				</ng-container>
+
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				<tr
+				mat-row
+				*matRowDef="let element; columns: displayedColumns"
+				[ngClass]="element.expanded ? 'element-row expanded' : 'element-row'"
+				(click)="expandShipmentRow(element)"
+				></tr>
+				<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+			</table>
+
+			<mat-paginator
+				[length]="numSearchValues"
+				[pageSizeOptions]="this.pageSizeOptions">
+			</mat-paginator>
+		</mat-card-content>
+		<mat-card-content *ngIf="loading" class="d-flex justify-content-center">
+			<mat-spinner></mat-spinner>
+		</mat-card-content>
+	</mat-card>
+</div><!-- /.shipment-tracking -->

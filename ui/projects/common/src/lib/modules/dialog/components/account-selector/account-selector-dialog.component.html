@@ -1,0 +1,84 @@
+<mat-card class="mat-card--table">
+  <mat-card-header>
+    <div class="row w-100">
+      <mat-card-title class="pl-3">
+        Account Search
+      </mat-card-title>
+      <div class="col-12 col-lg-9 p-2">
+        <div class="row justify-content-end">
+          <div class="col-12 col-lg-7 p-0">        
+            <input
+              matInput
+              class=" table-search"
+              [formControl]="search"
+              placeholder="&#xf002;"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-header>
+  <mat-card-content [hidden]="loading" mat-dialog-content class="m-0 p-0">
+    <div class="table-container mat-elevation-z8">
+      <mat-table #table [dataSource]="subAccounts" matSort>
+        <!-- Account Number Column -->
+        <ng-container matColumnDef="accountNumber">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Account Number  </mat-header-cell>
+          <mat-cell *matCellDef="let element" (click)="selectAccount(element.accountNumber)">
+            <a *ngIf="element.accountNumber">{{element.accountNumber}}</a>
+          </mat-cell>
+        </ng-container>
+        <!-- Account Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Account Name </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngIf="element.name">{{element.name}}</span>
+          </mat-cell>
+        </ng-container>
+        <!-- Address Column -->
+        <ng-container matColumnDef="streetAddress">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-md-flex"> Address </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-md-flex">
+            <span *ngIf="element.address && element.address.streetAddress">{{element.address.streetAddress}}</span>
+            <span *ngIf="element.address && element.address.streetAddress2">{{element.address.streetAddress2}}</span>
+          </mat-cell>
+        </ng-container>
+        <!-- City Column -->
+        <ng-container matColumnDef="city">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-md-flex"> City </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-md-flex">
+            <span *ngIf="element.address && element.address.city">{{element.address.city}}</span>
+          </mat-cell>
+        </ng-container>
+        <!-- State Column -->
+        <ng-container matColumnDef="state">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-md-flex"> State </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-md-flex">
+            <span *ngIf="element.address && element.address.state">{{element.address.state}}</span>
+          </mat-cell>
+        </ng-container>
+        <!-- Zip Column -->
+        <ng-container matColumnDef="zip">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="d-none d-md-flex"> Zip </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-none d-md-flex">
+            <span *ngIf="element.address && element.address.zip">{{element.address.zip}}</span>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let element; columns: displayedColumns;" class="d-flex"></mat-row>
+      </mat-table>
+      <div *ngIf="subAccounts.data.length === 0" class="no-results">
+        <p *ngIf="!errorMessages">No accounts found.</p>
+        <lib-feedback [message]="errorMessages"></lib-feedback>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-content *ngIf="loading" class="d-flex justify-content-center">
+    <mat-spinner></mat-spinner>
+  </mat-card-content>
+  <div class="row pr-3">
+    <div class="col-3">
+      <button class="m-3 btn btn-default" (click)="onNoClick()">Close</button>
+    </div>
+    <mat-paginator class="col-9" [length]="totalSubAccounts" [pageSize]="pageSize" [pageSizeOptions]="[25, 50, 75, 100]"></mat-paginator>
+  </div>
+</mat-card>

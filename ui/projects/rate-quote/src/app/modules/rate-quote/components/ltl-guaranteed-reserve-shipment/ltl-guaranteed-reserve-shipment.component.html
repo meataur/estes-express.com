@@ -1,0 +1,33 @@
+<ng-container [formGroup]="formGroup">
+  <h1 matDialogTitle>Reserve Shipment</h1>
+  <mat-dialog-content>
+    <p>
+      Please provide your email address so we can confirm receipt of your guaranteed shipment
+      request. Remember it is vital to indicate your guaranteed service level and quote/request
+      number on your Bill of Lading to ensure correct service and pricing. Questions? Contact our
+      time-critical team at 1-800-645-3952.
+    </p>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            name="email"
+            [required]="formService.hasRequiredField(email)"
+            formControlName="email"
+            placeholder="Email@example.com"
+          />
+          <mat-error *ngIf="email.invalid">{{ formService.getErrorMessage(email) }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <lib-feedback [message]="errorFeedback"></lib-feedback>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button class="btn btn-primary mr-3" type="submit" (click)="onSubmit()" [disabled]="loading">
+      Reserve Shipment <i class="fas fa-sync-alt fa-spin ml-2" *ngIf="loading"></i>
+    </button>
+    <button class="btn btn-default" type="button" mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</ng-container>

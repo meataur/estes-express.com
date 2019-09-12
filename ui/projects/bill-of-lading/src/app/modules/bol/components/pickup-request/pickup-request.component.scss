@@ -1,0 +1,12 @@
+.checkbox-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.pickup-modal-tooltip {
+  margin-top: -.5rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

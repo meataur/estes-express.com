@@ -1,0 +1,39 @@
+<mat-card [formGroup]="formGroup">
+  <mat-card-header class="d-flex justify-content-between">
+    <mat-card-title>Reference Numbers</mat-card-title>
+    <div class="col-6 d-flex justify-content-end align-items-center">
+      <mat-slide-toggle color="primary" formControlName="hasReferenceNumbers">
+        Add Shipment Reference Numbers
+      </mat-slide-toggle>
+    </div>
+  </mat-card-header>
+  <mat-card-content *ngIf="hasReferenceNumbers.value === true">
+    <div class="form-row mb-3">
+      <div class="col-12">
+        <div
+          class="reference-number-container"
+          *ngFor="let c of referenceNumbers?.controls; let i = index"
+        >
+          <app-reference-number
+            [index]="i"
+            (deleteReferenceNumber)="deleteReferenceNumber($event)"
+            [referenceNumberForm]="c"
+            [canDelete]="referenceNumbers?.controls?.length > 1"
+          ></app-reference-number>
+        </div>
+      </div>
+      <button
+        class="btn btn-primary"
+        (click)="addReferenceNumber()"
+        *ngIf="referenceNumbers.controls.length < maxReferenceNumbers"
+      >
+        Add Reference Number
+      </button>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-12">
+        <label class="">Total Weight: {{ totalWeight }} lbs</label>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

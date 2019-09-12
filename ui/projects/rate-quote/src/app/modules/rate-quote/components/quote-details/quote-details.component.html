@@ -1,0 +1,7 @@
+<lib-form-header [color]="'red'">Quote Details</lib-form-header>
+<app-guaranteed-option-message
+  *ngIf="quote.guaranteed && showGuaranteedOptionMessage"
+  [quote]="quote"
+></app-guaranteed-option-message>
+<app-transit-message [quote]="quote"></app-transit-message>
+<ng-template appQuoteDetailsHost></ng-template>

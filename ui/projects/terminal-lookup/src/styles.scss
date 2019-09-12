@@ -1,0 +1,59 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../common/src/assets/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
+.estes-app {
+  .mat-column-expand {
+    justify-content: flex-end;
+    flex: 0 0 50px;
+  }
+  .terminal-row {
+    cursor: pointer;
+    &.expanded-background {
+      background: $gray-100;
+    }
+    &:not(.expanded-background):hover {
+      background: $gray-100;
+    }
+    &:not(.expanded-background):active {
+      background: #efefef;
+    }
+  }
+  .terminal-detail-row {
+    min-height: 0;
+    border: 0;
+    background: $gray-100;
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid $gray-300;
+      border-right: 1px solid $gray-300;
+      width: 80%;
+    }
+    td:first-of-type {
+      font-weight: bold;
+      width: 20%;
+    }
+  }
+  form {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .mat-header-row {
+    min-height: 2rem;
+  }
+  .terminal-row {
+    min-height: 3.5rem;
+  }
+
+  .google-maps-column {
+    min-height: 12rem;
+    display: block;
+    .google-maps {
+      height: 95%;
+      margin: 1rem;
+      @include media-breakpoint-down(md) {
+        margin: 0;
+      }
+    }
+  }
+
+}

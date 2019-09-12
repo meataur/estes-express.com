@@ -1,0 +1,76 @@
+<h1 mat-dialog-title>Email Results</h1>
+<div mat-dialog-content [libOverlay]="loading">
+  <!-- <p>{{ data.message }}</p> -->
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group col-12">
+        <mat-form-field appearance="outline">
+          <mat-label>File Format</mat-label>
+          <mat-select
+            focus="true"
+            name="fileFormat"
+            id="fileFormat"
+            formControlName="fileFormat"
+          >
+            <mat-option *ngFor="let item of fileFormats" [value]="item.value"
+              >{{item.viewValue}}</mat-option
+            >
+          </mat-select>
+
+          <mat-error *ngIf="fileFormat.invalid">{{
+            formService.getErrorMessage(fileFormat)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <mat-form-field appearance="outline">
+          <mat-label>Email Addresses (one per line)</mat-label>
+          <textarea
+            matInput
+            rows="5"
+            required
+            name="emailAddresses"
+            id="emailAddresses"
+            placeholder="Email@example.com"
+            formControlName="emailAddresses"
+          ></textarea>
+          <mat-error *ngIf="emailAddresses.invalid">{{
+            formService.getErrorMessage(emailAddresses)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row" *ngIf="data && data.bucket">
+      <div class="col-12">
+        <mat-radio-group
+        id="submitType"
+        name="submitType"
+        formControlName="submitType"
+        >
+          <mat-radio-button color="primary" [value]="'bucket'">Email all pages for this age break</mat-radio-button><br>
+          <mat-radio-button color="primary" [value]="'pros'">Email only the PRO numbers selected from this screen</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="row">
+  <div class="col-12">
+    <lib-feedback [message]="errorMessages"></lib-feedback>
+  </div>
+</div>
+<div mat-dialog-actions cdkFocusRegionstart>
+  <div class="row">
+    <div class="col-12">
+      <button type="submit" (click)="onSubmit()" [disabled]="loading" class="btn btn-primary">
+        Submit <i class="fas fa-sync-alt fa-spin" *ngIf="loading"></i></button
+      >&nbsp;
+      <button type="button" class="btn btn-default" (click)="onNoClick()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+      

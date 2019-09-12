@@ -1,0 +1,268 @@
+.estes-app,
+.cdk-overlay-container {
+  .table-responsive {
+    // display: block;
+    // width: 100%;
+    // overflow: auto;
+
+    // background-image: -webkit-gradient(
+    //     linear,
+    //     0% 50%,
+    //     100% 50%,
+    //     color-stop(0%, orange),
+    //     color-stop(100%, rgba(255, 255, 255, 0))
+    //   ),
+    //   -webkit-gradient(linear, 100% 50%, 0% 50%, color-stop(0%, orange), color-stop(100%, rgba(255, 255, 255, 0))),
+    //   -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, blue), color-stop(100%, rgba(195, 195, 197, 0))),
+    //   -webkit-gradient(linear, 100% 50%, 0% 50%, color-stop(0%, blue), color-stop(100%, rgba(195, 195, 197, 0)));
+    // background-image: -webkit-linear-gradient(left, orange, rgba(255, 255, 255, 0)),
+    //   -webkit-linear-gradient(right, orange, rgba(255, 255, 255, 0)),
+    //   -webkit-linear-gradient(left, blue, rgba(195, 195, 197, 0)),
+    //   -webkit-linear-gradient(right, blue, rgba(195, 195, 197, 0));
+    // background-image: -moz-linear-gradient(left, orange, rgba(255, 255, 255, 0)),
+    //   -moz-linear-gradient(right, orange, rgba(255, 255, 255, 0)),
+    //   -moz-linear-gradient(left, blue, rgba(195, 195, 197, 0)),
+    //   -moz-linear-gradient(right, blue, rgba(195, 195, 197, 0));
+    // background-image: -o-linear-gradient(left, orange, rgba(255, 255, 255, 0)),
+    //   -o-linear-gradient(right, orange, rgba(255, 255, 255, 0)),
+    //   -o-linear-gradient(left, blue, rgba(195, 195, 197, 0)),
+    //   -o-linear-gradient(right, blue, rgba(195, 195, 197, 0));
+    // background-image: linear-gradient(left, orange, rgba(255, 255, 255, 0)),
+    //   linear-gradient(right, orange, rgba(255, 255, 255, 0)),
+    //   linear-gradient(left, blue, rgba(195, 195, 197, 0)),
+    //   linear-gradient(right, blue, rgba(195, 195, 197, 0));
+
+    // background-position: 0 0, 100% 0, 0 0, 100% 0;
+    // background-repeat: no-repeat;
+    // background-color: white;
+    // background-size: 4em 100%, 4em 100%, 1em 100%, 1em 100%;
+    // background-attachment: local, local, scroll, scroll;
+
+    // background-image:
+
+    // /* Shadows */ linear-gradient(to right, white, white),
+    //   linear-gradient(to right, white, white),
+    //   /* Shadow covers */ linear-gradient(to right, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0)),
+    //   linear-gradient(to left, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0));
+
+    // background-position: left center, right center, left center, right center;
+    // background-repeat: no-repeat;
+    // background-color: white;
+    // background-size: 20px 100%, 20px 100%, 10px 100%, 10px 100%;
+
+    // /* Opera doesn't support this in the shorthand */
+    // background-attachment: local, local, scroll, scroll;
+
+    .mat-table {
+      background: transparent;
+    }
+
+    // background-image: linear-gradient(to right, white, white),
+    //   linear-gradient(to right, white, white),
+    //   linear-gradient(to right, rgba(0, 0, 20, 0.5), rgba(255, 255, 255, 0)),
+    //   linear-gradient(to left, rgba(0, 0, 20, 0.5), rgba(255, 255, 255, 0));
+    // /* Shadows */
+    // /* Shadow covers */
+    // background-position: left center, right center, left center, right center;
+    // background-repeat: no-repeat;
+    // background-color: white;
+    // background-size: 20px 100%, 20px 100%, 10px 100%, 10px 100%;
+    // background-attachment: local, local, scroll, scroll;
+
+    // background: linear-gradient(90deg, white 0%, rgba(255, 255, 255, 0)),
+    //   linear-gradient(-90deg, white 0%, rgba(255, 255, 255, 0)) 100% 0,
+    //   radial-gradient(farthest-side at 0% 50%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)),
+    //   radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 100% 0%;
+    // background-repeat: no-repeat;
+    // background-color: #fff;
+    // background-size: 100px 137px, 100px 137px, 14px 137px, 14px 137px;
+    // background-attachment: local, local, scroll, scroll;
+
+    // background:
+    // /*Shadow Covers*/ linear-gradient(white 30%, rgba(255, 255, 255, 0)),
+    //   linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%,
+    //   /*Shadows*/ radial-gradient(50% 0, farthest-side, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)),
+    //   radial-gradient(50% 100%, farthest-side, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
+
+    // background:
+
+    // linear-gradient(white 30%, rgba(255,255,255,0)),
+    // linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+
+    // radial-gradient(farthest-side at 50%, 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
+    // radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+
+    // background-repeat: no-repeat;
+    // background-color: white;
+    // background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+
+    // background-attachment: local, local, scroll, scroll;
+
+    .mat-table {
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 1rem;
+      display: table;
+      border-collapse: collapse;
+      margin: 0px;
+    }
+
+    .mat-row,
+    .mat-header-row {
+      display: table-row;
+    }
+
+    .mat-cell,
+    .mat-header-cell {
+      word-wrap: initial;
+      display: table-cell;
+      padding: 0px 5px;
+      line-break: unset;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      vertical-align: middle;
+    }
+  }
+
+  .mat-table {
+    .mat-header-cell {
+      font-weight: bold;
+    }
+    .mat-row,
+    .mat-header-row {
+      padding: 0.25rem 0.75rem;
+    }
+    .mat-cell,
+    .mat-header-cell {
+      color: $black;
+      padding: 0 0.25rem;
+    }
+    //This allows material table cell text and link content to wrap if it exceeds width of .mat-cell container
+    .mat-cell span,
+    .mat-cell a {
+      word-wrap: break-word;
+      width: 100%;
+    }
+    .fa-check {
+      color: $green;
+    }
+    a:hover {
+      cursor: pointer;
+    }
+    tr.element-row:not(.expanded-row):hover {
+      background: $gray-100;
+    }
+
+    tr.element-row:not(.expanded-row):active {
+      background: $gray-200;
+    }
+  }
+
+  .no-results {
+    padding: 15px;
+    text-align: center;
+  }
+
+  .table-cell-actions {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      color: $gray-700;
+      font-size: 16px;
+      width: 1.75rem;
+    }
+  }
+
+  table.mat-table {
+    width: 100%;
+    thead {
+      tr {
+        th.mat-header-cell {
+          padding: $table-cell-padding-sm 0.5rem;
+          background-color: $table-head-bg;
+          color: $black;
+          label {
+            margin: 0;
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        &.mat-row {
+          &.detail-row {
+            height: auto;
+            td.mat-cell {
+              background-color: $table-accent-bg;
+              border-bottom: none;
+            }
+          }
+          &.element-row {
+            cursor: pointer;
+            td.mat-cell {
+              padding: $table-cell-padding-sm 0.5rem;
+              // font-size: 0.75rem;
+              label {
+                margin: 0;
+              }
+              .fal {
+                font-size: 1.3rem;
+                &.fa-chevron-up {
+                  display: none;
+                }
+                &.fa-chevron-down {
+                  display: inline-block;
+                }
+              }
+            }
+            &.expanded-row {
+              td.mat-cell {
+                border-bottom-color: #fff;
+                background-color: $table-accent-bg;
+                .fal {
+                  &.fa-chevron-up {
+                    display: inline-block;
+                  }
+                  &.fa-chevron-down {
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .mat-card {
+    .table-loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: none;
+    }
+  }
+
+  .table-search {
+    font-family: Roboto, "Helvetica Neue", sans-serif, FontAwesome;
+    padding: 0 1rem;
+    height: 40px;
+    border-radius: 24px;
+    background: $white;
+    border: 1px solid $gray-300;
+    i {
+      font-weight: bold;
+    }
+    font-size: $font-size-sm;
+    @include placeholder {
+      color: $blue;
+      font-family: 'Font Awesome 5 pro';
+      font-weight: bold;
+    }
+    @include media-breakpoint-down(md) {
+      width: 100%;
+    }
+  }
+}

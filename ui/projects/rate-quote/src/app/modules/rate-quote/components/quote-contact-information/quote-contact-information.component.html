@@ -1,0 +1,15 @@
+<lib-form-header [color]="'red'">Contact Information</lib-form-header>
+<div class="row d-flex flex-wrap">
+  <div class="quote-item col-md-4">
+    <label class="quote-label">Name</label>
+    {{ quote.contactName }}
+  </div>
+  <div *ngIf="auth.isLoggedIn" class="quote-item col-md-4">
+    <label class="quote-label">Phone</label>
+    {{ quote.contactPhone + ' ' + quote.contactPhoneExt }}
+  </div>
+  <div *ngIf="auth.isLoggedIn" class="quote-item col-md-4">
+    <label class="quote-label">Email</label>
+    {{ quote.contactEmail }}
+  </div>
+</div>

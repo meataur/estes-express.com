@@ -1,0 +1,16 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../common/src/assets/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
+
+.estes-pickup-modal {
+  width: 500px;
+}
+
+
+//potential global fix for form field validation error cutoff
+.mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
+  position: static;
+}
+.mat-form-field-wrapper {
+  padding-bottom: 0.75rem;
+}

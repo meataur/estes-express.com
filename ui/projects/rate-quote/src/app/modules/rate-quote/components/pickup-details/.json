@@ -1,0 +1,79 @@
+{
+  "quoteID": "2GGV2YH",
+  "quoteRefNum": "1513564",
+  "quoteDate": "04/04/2019",
+  "app": "LTL",
+  "accountCode": "5023958",
+  "accountName": "DIAMOND CRYSTAL BRANDS",
+  "contactName": "",
+  "contactPhone": "",
+  "contactPhoneExt": "",
+  "contactEmail": "",
+  "role": "T",
+  "terms": "Pre-paid",
+  "lane": 4,
+  "origin": { "country": "US", "city": "LOS ANGELES", "state": "CA", "zip": "90001" },
+  "dest": { "country": "US", "city": "RICHMOND", "state": "VA", "zip": "23230" },
+  "transitMessage": "",
+  "pickupDate": "04/04/19",
+  "pickupAvail": "06:30:12",
+  "pickupClose": "00:00:00",
+  "delivery": { "date": "04/10/19", "time": "12:00:00" },
+  "service": { "id": 96, "text": "Guaranteed LTL Standard Transit: 12PM" },
+  "declaredValue": 0.0,
+  "declaredValueWaived": true,
+  "foodWarehouseId": 0,
+  "foodWarehouse": "",
+  "stackable": false,
+  "linearFeet": 0,
+  "comments": "",
+  "pricing": { "display": "S", "discount": 0.5, "totalDiscount": 228.15, "totalPrice": 464.3 },
+  "commodities": [
+    {
+      "commodity": {
+        "shipClass": 50.0,
+        "weight": 975,
+        "pieces": 0,
+        "pieceType": "0",
+        "dimensions": { "length": 0, "width": 0, "height": 0 },
+        "description": ""
+      },
+      "rate": 45.63,
+      "charge": 444.89
+    },
+    {
+      "commodity": {
+        "shipClass": 50.0,
+        "weight": 25,
+        "pieces": 0,
+        "pieceType": "0",
+        "dimensions": { "length": 0, "width": 0, "height": 0 },
+        "description": "Added weight to provide next lower rate"
+      },
+      "rate": 45.63,
+      "charge": 11.41
+    }
+  ],
+  "accessorials": [
+    {
+      "accessorial": {
+        "code": "CAL",
+        "appID": null,
+        "display": false,
+        "description": "CALIFORNIA COMPLIANCE SURCHARGE"
+      },
+      "charge": 96.0
+    },
+    {
+      "accessorial": {
+        "code": "FSC",
+        "appID": null,
+        "display": false,
+        "description": "Fuel Surcharge"
+      },
+      "charge": 96.0
+    }
+  ],
+  "info": [],
+  "disclaimers": []
+}

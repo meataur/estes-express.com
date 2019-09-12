@@ -1,0 +1,19 @@
+<div class="p-3">
+  <app-rate-quote-action-header [quote]="rateQuote"></app-rate-quote-action-header>
+  <div class="row mb-3">
+    <div class="col-lg-8">
+      <app-quote-details [formattedAccount$]="formattedAccount$" [quote]="rateQuote"></app-quote-details>
+    </div>
+    <div class="col-lg-4">
+      <app-quote-side-panel [quote]="rateQuote"></app-quote-side-panel>
+    </div>
+  </div>
+  <app-quote-comments *ngIf="rateQuote.comments" [quote]="rateQuote"></app-quote-comments>
+  <app-quote-contact-information
+    *ngIf="hasContactInformation()"
+    [quote]="rateQuote"
+  ></app-quote-contact-information>
+  <app-quote-drawer-disclaimers [quote]="rateQuote"></app-quote-drawer-disclaimers>
+  <app-quote-commodities [quote]="rateQuote"></app-quote-commodities>
+  <app-quote-charge-items [quote]="rateQuote"></app-quote-charge-items>
+</div>
